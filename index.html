@@ -955,7 +955,7 @@ function randomSalt(len=16){
 }
 
 /* =========================================================
-   API — только JSONP (быстро и надёжно для Apps Script)
+   API — только JSONP
    ========================================================= */
 let jsonpCounter = 0;
 function api(action, payload={}){
@@ -2227,7 +2227,7 @@ function uploadPostFile(e, type){
 }
 
 /* =========================================================
-   ADMIN v3 — починенный
+   ADMIN v4 — ИСПРАВЛЕННЫЙ
    ========================================================= */
 $('sbAdmin').onclick=()=>{ Sound.click(); openAdminPanel(); };
 $('adminClose').onclick=()=>{ $('adminOverlay').classList.remove('show'); Sound.close(); };
@@ -2242,6 +2242,10 @@ function openAdminPanel(){
   const p = s.profile || {};
   const canAdmin = p.isAdmin || p.isOwner || s.username.toLowerCase()==='medy3a';
   if(!canAdmin){ alert('Нет доступа'); return; }
+  
+  // КРИТИЧНО: сброс флага при открытии
+  adminBusy = false;
+  
   $('adminOverlay').classList.add('show');
   Sound.open();
   const token = sessionStorage.getItem('zv_admin_token');
@@ -2276,16 +2280,23 @@ function renderAdminLogin(){
     const password=$('admPass').value;
     const code=$('admCode').value;
     $('admMsg').textContent='';
-    const r=await api('adminLogin',{username:s.username, password, code});
-    adminBusy=false;
-    if(r.ok){
-      sessionStorage.setItem('zv_admin_token', r.adminToken);
-      Sound.success();
-      adminFetchUsers();
-    }else{
+    try {
+      const r=await api('adminLogin',{username:s.username, password, code});
+      if(r.ok){
+        sessionStorage.setItem('zv_admin_token', r.adminToken);
+        Sound.success();
+        adminFetchUsers();
+      }else{
+        Sound.error();
+        $('admMsg').textContent = r.error||'Ошибка';
+        $('admMsg').className='modal-msg err';
+      }
+    } catch(err) {
       Sound.error();
-      $('admMsg').textContent = r.error||'Ошибка';
+      $('admMsg').textContent = 'Ошибка сети';
       $('admMsg').className='modal-msg err';
+    } finally {
+      adminBusy=false;
     }
   };
   $('admLoginBtn').onclick = submit;
@@ -2295,6 +2306,9 @@ function renderAdminLogin(){
 }
 
 async function adminFetchUsers(){
+  // КРИТИЧНО: сброс флага
+  adminBusy = false;
+  
   const token=sessionStorage.getItem('zv_admin_token')||'';
   if(!token){ renderAdminLogin(); return; }
   $('adminWrap').innerHTML = `
@@ -2350,6 +2364,10 @@ function updateAdminStats(){
 function renderAdminGrid(){
   const body = $('admBody');
   if(!body) return;
+  
+  // КРИТИЧНО: сброс флага при каждом рендере
+  adminBusy = false;
+  
   let users = adminUsersCache;
   if(adminSearchQuery){
     users = users.filter(u =>
@@ -2366,133 +2384,197 @@ function renderAdminGrid(){
 
   body.innerHTML = `<div class="admin-grid">${users.map(u=>adminCardHtml(u, allEmojis, allThemes)).join('')}</div>`;
 
-  // Единый делегированный обработчик — НЕ перепривязываем при каждом рендере
   body.querySelectorAll('.admin-card').forEach(card=>{
     const uname = card.dataset.u;
     const user = adminUsersCache.find(x=>x.username===uname);
     if(!user) return;
 
     // Сохранить визуал + эмодзи
-    card.querySelector('.adm-save').addEventListener('click', async ()=>{
-      if(adminBusy) return;
-      adminBusy=true;
-      const token=sessionStorage.getItem('zv_admin_token');
-      const visualName = card.querySelector('.adm-visual').value;
-      const emoji = card.querySelector('.adm-emoji-value').value;
-      const r=await api('adminUpdateUser',{adminToken:token, username:uname, visualName, emoji});
-      adminBusy=false;
-      if(r.ok){
-        Sound.success();
-        user.visualName=visualName;
-        user.emoji=emoji;
-        const nameEl = card.querySelector('.admin-card-name');
-        if(nameEl) nameEl.innerHTML = `${escapeHtml(visualName||uname)} <span class="emj">${emoji||''}</span>`;
-        const emjEl = card.querySelector('.adm-emoji-current');
-        if(emjEl) emjEl.textContent = emoji || '∅';
-      } else { Sound.error(); alert(r.error||'Ошибка'); }
-    });
+    const saveBtn = card.querySelector('.adm-save');
+    if(saveBtn) {
+      saveBtn.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        if(adminBusy) return;
+        adminBusy=true;
+        const token=sessionStorage.getItem('zv_admin_token');
+        const visualName = card.querySelector('.adm-visual').value;
+        const emoji = card.querySelector('.adm-emoji-value').value;
+        try {
+          const r=await api('adminUpdateUser',{adminToken:token, username:uname, visualName, emoji});
+          if(r.ok){
+            Sound.success();
+            user.visualName=visualName;
+            user.emoji=emoji;
+            const nameEl = card.querySelector('.admin-card-name');
+            if(nameEl) nameEl.innerHTML = `${escapeHtml(visualName||uname)} <span class="emj">${emoji||''}</span>`;
+            const emjEl = card.querySelector('.adm-emoji-current');
+            if(emjEl) emjEl.textContent = emoji || '∅';
+          } else { Sound.error(); alert(r.error||'Ошибка'); }
+        } catch(err) {
+          Sound.error();
+          alert('Ошибка сети');
+        } finally {
+          adminBusy=false;
+        }
+      });
+    }
 
     // Выдать обезьян
-    card.querySelector('.adm-give').addEventListener('click', async ()=>{
-      if(adminBusy) return;
-      const inp = card.querySelector('.adm-give-amount');
-      const amt = parseInt(inp.value||'0',10);
-      if(!amt) return;
-      adminBusy=true;
-      const token=sessionStorage.getItem('zv_admin_token');
-      const r=await api('adminGive',{adminToken:token, username:uname, amount:amt});
-      adminBusy=false;
-      if(r.ok){
-        Sound.success();
-        user.monkeys=r.monkeys;
-        inp.value='';
-        card.querySelector('.adm-monkeys-val').textContent = r.monkeys;
-        updateAdminStats();
-      } else { Sound.error(); alert(r.error||'Ошибка'); }
-    });
+    const giveBtn = card.querySelector('.adm-give');
+    if(giveBtn) {
+      giveBtn.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        if(adminBusy) return;
+        const inp = card.querySelector('.adm-give-amount');
+        const amt = parseInt(inp.value||'0',10);
+        if(!amt) return;
+        adminBusy=true;
+        const token=sessionStorage.getItem('zv_admin_token');
+        try {
+          const r=await api('adminGive',{adminToken:token, username:uname, amount:amt});
+          if(r.ok){
+            Sound.success();
+            user.monkeys=r.monkeys;
+            inp.value='';
+            const monEl = card.querySelector('.adm-monkeys-val');
+            if(monEl) monEl.textContent = r.monkeys;
+            updateAdminStats();
+          } else { Sound.error(); alert(r.error||'Ошибка'); }
+        } catch(err) {
+          Sound.error();
+          alert('Ошибка сети');
+        } finally {
+          adminBusy=false;
+        }
+      });
+    }
 
     // Быстрые кнопки
     card.querySelectorAll('.adm-quick').forEach(b=>{
-      b.addEventListener('click', async ()=>{
+      b.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
         if(adminBusy) return;
         const delta = parseInt(b.dataset.delta,10);
+        if(!delta) return;
         adminBusy=true;
         const token=sessionStorage.getItem('zv_admin_token');
-        const r=await api('adminGive',{adminToken:token, username:uname, amount:delta});
-        adminBusy=false;
-        if(r.ok){
-          Sound.click();
-          user.monkeys=r.monkeys;
-          card.querySelector('.adm-monkeys-val').textContent = r.monkeys;
-          updateAdminStats();
-        } else Sound.error();
+        try {
+          const r=await api('adminGive',{adminToken:token, username:uname, amount:delta});
+          if(r.ok){
+            Sound.click();
+            user.monkeys=r.monkeys;
+            const monEl = card.querySelector('.adm-monkeys-val');
+            if(monEl) monEl.textContent = r.monkeys;
+            updateAdminStats();
+          } else Sound.error();
+        } catch(err) {
+          Sound.error();
+        } finally {
+          adminBusy=false;
+        }
       });
     });
 
     // Точное значение
-    card.querySelector('.adm-set').addEventListener('click', async ()=>{
-      if(adminBusy) return;
-      const val = parseInt(card.querySelector('.adm-set-val').value||'0',10);
-      const delta = val - (user.monkeys||0);
-      if(delta===0) return;
-      adminBusy=true;
-      const token=sessionStorage.getItem('zv_admin_token');
-      const r=await api('adminGive',{adminToken:token, username:uname, amount:delta});
-      adminBusy=false;
-      if(r.ok){
-        Sound.success();
-        user.monkeys=r.monkeys;
-        card.querySelector('.adm-monkeys-val').textContent = r.monkeys;
-        updateAdminStats();
-      } else Sound.error();
-    });
+    const setBtn = card.querySelector('.adm-set');
+    if(setBtn) {
+      setBtn.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        if(adminBusy) return;
+        const val = parseInt(card.querySelector('.adm-set-val').value||'0',10);
+        const delta = val - (user.monkeys||0);
+        if(delta===0) return;
+        adminBusy=true;
+        const token=sessionStorage.getItem('zv_admin_token');
+        try {
+          const r=await api('adminGive',{adminToken:token, username:uname, amount:delta});
+          if(r.ok){
+            Sound.success();
+            user.monkeys=r.monkeys;
+            const monEl = card.querySelector('.adm-monkeys-val');
+            if(monEl) monEl.textContent = r.monkeys;
+            updateAdminStats();
+          } else Sound.error();
+        } catch(err) {
+          Sound.error();
+        } finally {
+          adminBusy=false;
+        }
+      });
+    }
 
     // Выбор эмодзи
     const emojiValueEl = card.querySelector('.adm-emoji-value');
-    card.querySelectorAll('.adm-emoji-picker button').forEach(b=>{
-      b.addEventListener('click', ()=>{
-        const e = b.dataset.e;
-        emojiValueEl.value = e;
-        card.querySelectorAll('.adm-emoji-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.e===e));
-        card.querySelector('.adm-emoji-current').textContent = e || '∅';
+    if(emojiValueEl) {
+      card.querySelectorAll('.adm-emoji-picker button').forEach(b=>{
+        b.addEventListener('click', (e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          const eVal = b.dataset.e;
+          emojiValueEl.value = eVal;
+          card.querySelectorAll('.adm-emoji-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.e===eVal));
+          const curEl = card.querySelector('.adm-emoji-current');
+          if(curEl) curEl.textContent = eVal || '∅';
+        });
       });
-    });
+    }
 
     // Выбор темы
     const themeValueEl = card.querySelector('.adm-theme-value');
-    card.querySelectorAll('.adm-theme-picker button').forEach(b=>{
-      b.addEventListener('click', async ()=>{
-        if(adminBusy) return;
-        const th = b.dataset.t;
-        adminBusy=true;
-        const token=sessionStorage.getItem('zv_admin_token');
-        const r = await api('adminUpdateUser',{adminToken:token, username:uname, theme: th});
-        adminBusy=false;
-        if(r.ok){
-          Sound.success();
-          user.theme=th;
-          themeValueEl.value = th;
-          card.querySelectorAll('.adm-theme-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.t===th));
-        }
-        else Sound.error();
+    if(themeValueEl) {
+      card.querySelectorAll('.adm-theme-picker button').forEach(b=>{
+        b.addEventListener('click', async (e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          if(adminBusy) return;
+          const th = b.dataset.t;
+          adminBusy=true;
+          const token=sessionStorage.getItem('zv_admin_token');
+          try {
+            const r = await api('adminUpdateUser',{adminToken:token, username:uname, theme: th});
+            if(r.ok){
+              Sound.success();
+              user.theme=th;
+              themeValueEl.value = th;
+              card.querySelectorAll('.adm-theme-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.t===th));
+            }
+            else Sound.error();
+          } catch(err) {
+            Sound.error();
+          } finally {
+            adminBusy=false;
+          }
+        });
       });
-    });
+    }
 
     // Выдать админку
     const admBtn = card.querySelector('.adm-toggle-admin');
     if(admBtn){
-      admBtn.addEventListener('click', async ()=>{
+      admBtn.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
         if(adminBusy) return;
         adminBusy=true;
         const token=sessionStorage.getItem('zv_admin_token');
         const makeAdmin = !user.isAdmin;
-        const r=await api('adminSetAdmin',{adminToken:token, username:uname, isAdmin: makeAdmin});
-        adminBusy=false;
-        if(r.ok){
-          Sound.success();
-          user.isAdmin = makeAdmin;
-          renderAdminGrid();
-        } else { Sound.error(); alert(r.error||'Ошибка'); }
+        try {
+          const r=await api('adminSetAdmin',{adminToken:token, username:uname, isAdmin: makeAdmin});
+          if(r.ok){
+            Sound.success();
+            user.isAdmin = makeAdmin;
+            renderAdminGrid();
+          } else { Sound.error(); alert(r.error||'Ошибка'); }
+        } catch(err) {
+          Sound.error();
+          alert('Ошибка сети');
+        } finally {
+          adminBusy=false;
+        }
       });
     }
   });

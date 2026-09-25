@@ -459,21 +459,20 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .skeleton-card{height:120px;margin-bottom:12px}
 
 /* ===== WHEEL ===== */
-.wheel-section{display:none;flex-direction:column;gap:20px;align-items:center;padding:10px 0}
+.wheel-section{display:none;flex-direction:column;gap:22px;padding:10px 0;width:100%}
 .wheel-section.active{display:flex;animation:fadeUp .6s var(--ease)}
-.wheel-hero{text-align:center;max-width:640px}
+.wheel-hero{text-align:center;max-width:640px;margin:0 auto}
 .wheel-hero h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-1.2px;margin-bottom:10px;background:linear-gradient(135deg,#fbbf24,#ef4444,#a855f7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .wheel-hero p{color:var(--muted);font-size:14px;line-height:1.55}
-.wheel-hero .legend{display:flex;justify-content:center;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:12.5px}
-.wheel-hero .legend span{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
-.wheel-hero .legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+
+.wheel-layout{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start;width:100%}
+.wheel-main{display:flex;flex-direction:column;gap:22px;align-items:center;min-width:0}
 
 .wheel-stage{position:relative;width:min(440px,86vw);height:min(440px,86vw);margin:0 auto;display:flex;align-items:center;justify-content:center}
 .wheel-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid #fbbf24;filter:drop-shadow(0 6px 10px rgba(251,191,36,.6));z-index:5}
 .wheel-pointer::after{content:'';position:absolute;top:-30px;left:-10px;width:20px;height:20px;border-radius:50%;background:#fbbf24;box-shadow:0 0 16px rgba(251,191,36,.9)}
 .wheel-rotor{width:100%;height:100%;border-radius:50%;position:relative;box-shadow:0 0 0 10px #1a1a22,0 0 0 14px #2a2a35,0 0 60px rgba(168,85,247,.35),inset 0 0 40px rgba(0,0,0,.6);transition:transform 6s cubic-bezier(.15,.9,.2,1);background:#0e0e11}
-.wheel-seg{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;transform-origin:50% 50%;pointer-events:none}
-.wheel-seg span{position:absolute;top:14px;font-size:13px;font-weight:800;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.9);letter-spacing:.5px}
+.wheel-svg{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:50%}
 .wheel-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26%;height:26%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3a4a,#0e0e11);border:3px solid #fbbf24;display:flex;align-items:center;justify-content:center;z-index:4;box-shadow:0 0 24px rgba(251,191,36,.5),inset 0 0 12px rgba(0,0,0,.8)}
 .wheel-hub span{font-size:clamp(18px,3.6vw,26px);font-weight:900;color:#fbbf24;text-shadow:0 0 12px rgba(251,191,36,.8)}
 .wheel-glow{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.25),transparent 65%);pointer-events:none;z-index:-1;animation:wheelGlow 3s ease-in-out infinite}
@@ -492,7 +491,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .wheel-bet-row .btn.max{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.35)}
 .wheel-bet-row .btn.max:hover{background:rgba(251,191,36,.22)}
 .wheel-bet-input{flex:1;position:relative}
-.wheel-bet-input input{width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border2);border-radius:10px;color:var(--fg);font-size:16px;font-weight:800;font-family:inherit;outline:none;text-align:center;font-variant-numeric:tabular-nums;transition:border-color .3s var(--ease)}
+.wheel-bet-input input{width:100%;padding:12px 40px 12px 14px;background:var(--bg);border:1px solid var(--border2);border-radius:10px;color:var(--fg);font-size:16px;font-weight:800;font-family:inherit;outline:none;text-align:center;font-variant-numeric:tabular-nums;transition:border-color .3s var(--ease)}
 .wheel-bet-input input:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.15)}
 .wheel-bet-input .suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none}
 
@@ -511,6 +510,37 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 @keyframes jackpotPulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}50%{box-shadow:0 0 0 12px rgba(251,191,36,0)}}
 .wheel-result .big{font-size:20px;font-weight:900}
 
+/* ===== Wheel history ===== */
+.wheel-history{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:0;overflow:hidden;display:flex;flex-direction:column;max-height:min(660px,80vh);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.wh-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);background:var(--bg)}
+.wh-title{font-size:13px;font-weight:800;color:var(--fg);letter-spacing:.3px}
+.wh-refresh{cursor:pointer;color:var(--muted);font-size:18px;line-height:1;padding:2px 6px;border-radius:6px;transition:background .3s var(--ease),color .3s var(--ease),transform .4s var(--ease);user-select:none}
+.wh-refresh:hover{background:var(--bg3);color:var(--fg);transform:rotate(180deg)}
+.wh-list{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin}
+.wh-list::-webkit-scrollbar{width:6px}
+.wh-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.wh-empty{color:var(--muted);font-size:12.5px;text-align:center;padding:30px 10px}
+.wh-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:var(--bg);border:1px solid var(--border);animation:fadeUp .35s var(--ease) both}
+.wh-item.win{border-color:rgba(74,222,128,.35);background:linear-gradient(90deg,rgba(74,222,128,.08),transparent)}
+.wh-item.lose{border-color:rgba(248,113,113,.25);background:linear-gradient(90deg,rgba(248,113,113,.06),transparent)}
+.wh-item.jackpot{border-color:rgba(251,191,36,.5);background:linear-gradient(90deg,rgba(251,191,36,.12),transparent)}
+.wh-av{width:34px;height:34px;border-radius:50%;background:var(--av-bg);border:1px solid var(--av-border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--av-fg);text-transform:uppercase;overflow:hidden;flex-shrink:0}
+.wh-av img{width:100%;height:100%;object-fit:cover}
+.wh-info{flex:1;min-width:0}
+.wh-name{font-size:12.5px;font-weight:700;color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:4px}
+.wh-name .emj{font-size:13px}
+.wh-sub{font-size:10.5px;color:var(--muted);margin-top:2px}
+.wh-sub b{color:var(--fg);font-weight:700}
+.wh-res{font-size:12.5px;font-weight:900;font-variant-numeric:tabular-nums;flex-shrink:0;text-align:right}
+.wh-res.win{color:#4ade80}
+.wh-res.lose{color:#f87171}
+.wh-res.jackpot{color:#fbbf24}
+.wh-res .lbl{display:block;font-size:9px;color:var(--muted);font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin-top:2px}
+
+@media(max-width:1000px){
+  .wheel-layout{grid-template-columns:1fr}
+  .wheel-history{max-height:420px}
+}
 @media(max-width:640px){
   .wheel-stage{width:min(340px,88vw);height:min(340px,88vw)}
   .wheel-panel{padding:16px}
@@ -627,44 +657,54 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
       <div class="wheel-hero">
         <h1>🎡 КОЛЕСО ФОРТУНЫ</h1>
         <p>Поставь обезьян на кон. Крути колесо и испытай удачу!<br>Минимальная ставка — <b>100</b> 🐵, максимальная — <b>5000</b> 🐵.</p>
-        <div class="legend">
-          <span><i style="background:#22c55e;box-shadow:0 0 8px #22c55e"></i> Зелёный — x3 (шанс 1%)</span>
-          <span><i style="background:#ef4444;box-shadow:0 0 8px #ef4444"></i> Красный — x1.5 (шанс 30%)</span>
-          <span><i style="background:#1a1a1a;border:1px solid #444"></i> Чёрный — проигрыш (69%)</span>
-        </div>
       </div>
 
-      <div class="wheel-stage">
-        <div class="wheel-pointer"></div>
-        <div class="wheel-glow"></div>
-        <div class="wheel-rotor" id="wheelRotor">
-          <div class="wheel-hub"><span>ZV</span></div>
-        </div>
-      </div>
-
-      <div class="wheel-panel">
-        <div class="wheel-balance">
-          <span class="lbl">Твой баланс</span>
-          <span class="val"><span class="ico">🐵</span><span id="wheelBalance">0</span></span>
-        </div>
-
-        <div class="wheel-bet-row">
-          <button class="btn min" id="wheelMinBtn">МИН.</button>
-          <div class="wheel-bet-input">
-            <input type="number" id="wheelBetInput" min="100" max="5000" step="50" value="100">
-            <span class="suffix">🐵</span>
+      <div class="wheel-layout">
+        <div class="wheel-main">
+          <div class="wheel-stage">
+            <div class="wheel-pointer"></div>
+            <div class="wheel-glow"></div>
+            <div class="wheel-rotor" id="wheelRotor">
+              <svg class="wheel-svg" viewBox="0 0 400 400" id="wheelSvg"></svg>
+              <div class="wheel-hub"><span>ZV</span></div>
+            </div>
           </div>
-          <button class="btn max" id="wheelMaxBtn">МАКС.</button>
-        </div>
-        <div class="wheel-limits">
-          Мин: <b>100</b> 🐵 &nbsp;•&nbsp; Макс: <b>5000</b> 🐵
+
+          <div class="wheel-panel">
+            <div class="wheel-balance">
+              <span class="lbl">Твой баланс</span>
+              <span class="val"><span class="ico">🐵</span><span id="wheelBalance">0</span></span>
+            </div>
+
+            <div class="wheel-bet-row">
+              <button class="btn min" id="wheelMinBtn">МИН.</button>
+              <div class="wheel-bet-input">
+                <input type="number" id="wheelBetInput" min="100" max="5000" step="50" value="100">
+                <span class="suffix">🐵</span>
+              </div>
+              <button class="btn max" id="wheelMaxBtn">МАКС.</button>
+            </div>
+            <div class="wheel-limits">
+              Мин: <b>100</b> 🐵 &nbsp;•&nbsp; Макс: <b>5000</b> 🐵
+            </div>
+
+            <button class="wheel-spin-btn" id="wheelSpinBtn">🎡 Крутить колесо</button>
+
+            <div class="wheel-result" id="wheelResult">
+              <span>Поставь ставку и крути!</span>
+            </div>
+          </div>
         </div>
 
-        <button class="wheel-spin-btn" id="wheelSpinBtn">🎡 Крутить колесо</button>
-
-        <div class="wheel-result" id="wheelResult">
-          <span>Поставь ставку и крути!</span>
-        </div>
+        <aside class="wheel-history">
+          <div class="wh-head">
+            <span class="wh-title">🏆 Последние выигрыши</span>
+            <span class="wh-refresh" id="whRefresh" title="Обновить">⟳</span>
+          </div>
+          <div class="wh-list" id="whList">
+            <div class="wh-empty">Загрузка…</div>
+          </div>
+        </aside>
       </div>
     </section>
   </div>
@@ -954,17 +994,16 @@ const THEME_LIST = [
 ];
 const SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
 
-// 8 секторов колеса: 1 зелёный (x3), 3 красных (x1.5), 4 чёрных (x0)
-// Индексы: 0 = зелёный, 1,3,5 = красные, 2,4,6,7 = чёрные
+// 8 секторов: индексы [0]=зелёный, [1,3,5]=красные, [2,4,6,7]=чёрные
 const WHEEL_SEGMENTS = [
-  { color:'#22c55e', type:'green',  mult:3,   label:'x3' },
+  { color:'#22c55e', type:'green',  mult:3,   label:'x3'   },
   { color:'#ef4444', type:'red',    mult:1.5, label:'x1.5' },
-  { color:'#15151a', type:'black',  mult:0,   label:'x0' },
+  { color:'#15151a', type:'black',  mult:0,   label:'x0'   },
   { color:'#ef4444', type:'red',    mult:1.5, label:'x1.5' },
-  { color:'#15151a', type:'black',  mult:0,   label:'x0' },
+  { color:'#15151a', type:'black',  mult:0,   label:'x0'   },
   { color:'#ef4444', type:'red',    mult:1.5, label:'x1.5' },
-  { color:'#15151a', type:'black',  mult:0,   label:'x0' },
-  { color:'#15151a', type:'black',  mult:0,   label:'x0' }
+  { color:'#15151a', type:'black',  mult:0,   label:'x0'   },
+  { color:'#15151a', type:'black',  mult:0,   label:'x0'   }
 ];
 const WHEEL_MIN_BET = 100;
 const WHEEL_MAX_BET = 5000;
@@ -1216,6 +1255,7 @@ let currentProfileUsername=null;
 let tempProfile=null;
 let tempProfileChanged=false;
 let wheelSpinning=false;
+let whTimer=null;
 
 function applyTheme(theme){
   const cls = document.body.className.split(' ').filter(c=>!c.startsWith('theme-')).join(' ');
@@ -1490,7 +1530,8 @@ function switchView(name){
   $('dashTitle').textContent=titles[name].t;
   $('dashSub').textContent=titles[name].s;
   if(name==='friends') loadUsers();
-  if(name==='wheel') updateWheelBalance();
+  if(name==='wheel'){ updateWheelBalance(); loadWheelHistory(); startWhTimer(); }
+  else stopWhTimer();
 }
 $('sbHome').onclick=()=>{Sound.click();switchView('home');};
 $('sbFriends').onclick=()=>{Sound.click();switchView('friends');};
@@ -1513,55 +1554,64 @@ document.querySelectorAll('.dash-card').forEach(card=>{
    WHEEL
    ========================================================= */
 function buildWheel(){
-  const rotor = $('wheelRotor');
-  if(!rotor) return;
-  // Убираем старые сегменты (оставляем hub)
-  rotor.querySelectorAll('.wheel-seg').forEach(el=>el.remove());
+  const svg = $('wheelSvg');
+  if(!svg) return;
+  svg.innerHTML = '';
   const N = WHEEL_SEGMENTS.length;
   const segAngle = 360 / N;
-  for(let i=0;i<N;i++){
-    const seg = WHEEL_SEGMENTS[i];
-    const a1 = i*segAngle;
-    const a2 = (i+1)*segAngle;
-    // SVG-конус через conic-gradient — проще и надёжнее
-    // Но чтобы был красивый пирог с разделителями — используем clip-path на диве
-    const div = document.createElement('div');
-    div.className = 'wheel-seg';
-    div.style.transform = `rotate(${a1}deg)`;
-    div.innerHTML = `<div style="
-      position:absolute;inset:0;
-      background:${seg.color};
-      clip-path:polygon(50% 50%, 50% 0, ${50 + 50*Math.tan(segAngle*Math.PI/180)}% 0);
-      transform-origin:50% 50%;
-    "></div>
-    <span style="transform:rotate(${segAngle/2}deg);transform-origin:50% ${rotor.offsetWidth/2}px;top:14px;left:50%;margin-left:-14px;width:28px;text-align:center">${seg.label}</span>`;
-    rotor.appendChild(div);
-  }
-  // Перерисуем через conic-gradient — точнее
-  const stops = [];
-  for(let i=0;i<N;i++){
-    const start = i*segAngle;
-    const end = (i+1)*segAngle;
-    stops.push(`${WHEEL_SEGMENTS[i].color} ${start}deg ${end}deg`);
-  }
-  rotor.style.background = `conic-gradient(from -${segAngle/2}deg, ${stops.join(',')})`;
-  rotor.querySelectorAll('.wheel-seg').forEach(el=>el.remove());
+  const cx = 200, cy = 200, r = 198;
 
-  // Подписи
+  // фон
+  const bg = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r);
+  bg.setAttribute('fill', '#0e0e11');
+  svg.appendChild(bg);
+
   for(let i=0;i<N;i++){
     const seg = WHEEL_SEGMENTS[i];
-    const mid = i*segAngle + segAngle/2 - segAngle/2; // центр сектора относительно 0
-    const span = document.createElement('div');
-    span.className='wheel-seg';
-    span.style.transform = `rotate(${i*segAngle + segAngle/2}deg)`;
-    span.innerHTML = `<span style="
-      position:absolute;top:18px;left:50%;transform:translateX(-50%);
-      font-size:13px;font-weight:900;color:#fff;
-      text-shadow:0 2px 6px rgba(0,0,0,.95);
-      letter-spacing:.5px;pointer-events:none;
-    ">${seg.label}</span>`;
-    rotor.appendChild(span);
+    // Указатель сверху (-90°). Начинаем с верхнего края, идём по часовой.
+    const a1 = -90 + i*segAngle;
+    const a2 = -90 + (i+1)*segAngle;
+    const rad1 = a1 * Math.PI / 180;
+    const rad2 = a2 * Math.PI / 180;
+    const x1 = cx + r * Math.cos(rad1);
+    const y1 = cy + r * Math.sin(rad1);
+    const x2 = cx + r * Math.cos(rad2);
+    const y2 = cy + r * Math.sin(rad2);
+    const large = segAngle > 180 ? 1 : 0;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`);
+    path.setAttribute('fill', seg.color);
+    path.setAttribute('stroke', '#0e0e11');
+    path.setAttribute('stroke-width', '2');
+    svg.appendChild(path);
+
+    // Подпись — в центре сектора
+    const midA = -90 + i*segAngle + segAngle/2;
+    const midRad = midA * Math.PI / 180;
+    const lr = r * 0.68;
+    const lx = cx + lr * Math.cos(midRad);
+    const ly = cy + lr * Math.sin(midRad);
+
+    const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+    text.setAttribute('x', lx);
+    text.setAttribute('y', ly);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('dominant-baseline', 'middle');
+    text.setAttribute('font-size', '26');
+    text.setAttribute('font-weight', '900');
+    text.setAttribute('fill', '#ffffff');
+    text.setAttribute('style', 'text-shadow:0 2px 6px rgba(0,0,0,.9);paint-order:stroke;stroke:#000;stroke-width:2px;stroke-linejoin:round');
+    text.textContent = seg.label;
+    svg.appendChild(text);
   }
+
+  // Внутренний обод
+  const rim = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  rim.setAttribute('cx', cx); rim.setAttribute('cy', cy); rim.setAttribute('r', r-1);
+  rim.setAttribute('fill','none'); rim.setAttribute('stroke','rgba(255,255,255,0.08)'); rim.setAttribute('stroke-width','2');
+  svg.appendChild(rim);
 }
 
 function updateWheelBalance(){
@@ -1581,7 +1631,7 @@ function setBet(val){
   let v = parseInt(val,10);
   if(isNaN(v)) v = WHEEL_MIN_BET;
   v = Math.max(WHEEL_MIN_BET, Math.min(WHEEL_MAX_BET, v));
-  if(v > bal) v = Math.max(0, bal); // если денег меньше — ставим все
+  if(v > bal) v = Math.max(0, bal);
   $('wheelBetInput').value = v;
 }
 
@@ -1595,18 +1645,6 @@ $('wheelBetInput').addEventListener('input', ()=>{
   if(v > bal) $('wheelBetInput').value = bal;
 });
 
-function pickWheelSegment(){
-  const r = Math.random() * 100;
-  // зелёный 1% (индекс 0), красный 30% (индексы 1,3,5), чёрный 69% (2,4,6,7)
-  if(r < 1) return 0;
-  if(r < 31){
-    const reds = [1,3,5];
-    return reds[Math.floor(Math.random()*reds.length)];
-  }
-  const blacks = [2,4,6,7];
-  return blacks[Math.floor(Math.random()*blacks.length)];
-}
-
 $('wheelSpinBtn').onclick = async ()=>{
   if(wheelSpinning) return;
   const s=Session.get(); if(!s||!s.token){ Sound.error(); return; }
@@ -1615,7 +1653,7 @@ $('wheelSpinBtn').onclick = async ()=>{
   if(isNaN(bet)) bet = WHEEL_MIN_BET;
   if(bet < WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Минимальная ставка — 100 🐵</span>'; $('wheelResult').className='wheel-result lose'; return; }
   if(bal < WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Недостаточно обезьян (мин. 100)</span>'; $('wheelResult').className='wheel-result lose'; return; }
-  if(bet > bal) bet = bal; // если денег меньше — ставим все
+  if(bet > bal) bet = bal;
   if(bet > WHEEL_MAX_BET) bet = WHEEL_MAX_BET;
 
   wheelSpinning = true;
@@ -1625,7 +1663,6 @@ $('wheelSpinBtn').onclick = async ()=>{
   $('wheelResult').innerHTML = '<span>Крутится...</span>';
   Sound.click();
 
-  // 1. Списываем ставку
   const res = await api('spinWheel', { username:s.username, token:s.token, bet });
   if(!res.ok){
     wheelSpinning=false;
@@ -1637,24 +1674,25 @@ $('wheelSpinBtn').onclick = async ()=>{
     return;
   }
 
-  // 2. Обновляем баланс сразу (ставка списана)
   const cur = Session.get();
   cur.profile.monkeys = res.monkeysAfterBet;
   Session.save(cur);
   updateWheelBalance();
   updateMonkeysWidget();
 
-  // 3. Крутим колесо к выбранному сектору
   const segIdx = res.segment;
   const N = WHEEL_SEGMENTS.length;
   const segAngle = 360 / N;
-  // указатель сверху (-90° от начала conic-gradient)
-  const targetAngle = 360*6 + (360 - (segIdx*segAngle + segAngle/2)) + (Math.random()*segAngle*0.6 - segAngle*0.3);
+  // Центр сектора в системе "верх=0" — i*segAngle + segAngle/2
+  // Колесо стартует с указателем на верхнем крае 1-го сектора
+  // Нужно повернуть так, чтобы центр победного сектора оказался под указателем (сверху)
+  const midOfSeg = segIdx*segAngle + segAngle/2;
+  const jitter = (Math.random()*segAngle*0.6 - segAngle*0.3);
+  const targetAngle = 360*6 - midOfSeg + jitter;
   const rotor = $('wheelRotor');
   rotor.style.transition = 'transform 6s cubic-bezier(.15,.9,.2,1)';
   rotor.style.transform = `rotate(${targetAngle}deg)`;
 
-  // Тики во время вращения
   let tickCount = 0;
   const tickInterval = setInterval(()=>{
     Sound.wheelTick();
@@ -1664,7 +1702,6 @@ $('wheelSpinBtn').onclick = async ()=>{
 
   setTimeout(()=>{
     clearInterval(tickInterval);
-    // 4. Показываем результат
     const seg = WHEEL_SEGMENTS[segIdx];
     const winAmount = Math.floor(bet * seg.mult);
     const profit = winAmount - bet;
@@ -1695,8 +1732,70 @@ $('wheelSpinBtn').onclick = async ()=>{
     wheelSpinning=false;
     $('wheelSpinBtn').disabled=false;
     $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+    loadWheelHistory();
   }, 6200);
 };
+
+/* =========================================================
+   WHEEL HISTORY
+   ========================================================= */
+function timeAgo(ts){
+  const d = Date.now() - ts;
+  const s = Math.floor(d/1000);
+  if(s < 60) return s+' сек назад';
+  const m = Math.floor(s/60);
+  if(m < 60) return m+' мин назад';
+  const h = Math.floor(m/60);
+  if(h < 24) return h+' ч назад';
+  const dd = Math.floor(h/24);
+  return dd+' дн назад';
+}
+
+async function loadWheelHistory(){
+  const list = $('whList');
+  if(!list) return;
+  const res = await api('getWheelHistory', { limit: 50 });
+  if(!res.ok){
+    list.innerHTML = '<div class="wh-empty">Не удалось загрузить</div>';
+    return;
+  }
+  const items = res.history || [];
+  if(!items.length){
+    list.innerHTML = '<div class="wh-empty">Пока никто не играл</div>';
+    return;
+  }
+  list.innerHTML = items.map(h=>{
+    const visual = h.visualName || h.username;
+    const initial = visual.charAt(0).toUpperCase();
+    const av = h.avatar ? `<img src="${h.avatar}" alt="">` : escapeHtml(initial);
+    const emj = h.emoji ? `<span class="emj">${h.emoji}</span>` : '';
+    const cls = h.type === 'green' ? 'jackpot' : (h.type === 'red' ? 'win' : 'lose');
+    let resHtml;
+    if(h.winAmount > 0){
+      resHtml = `<span class="wh-res ${cls}">+${h.winAmount}<span class="lbl">${h.type==='green'?'x3':'x1.5'}</span></span>`;
+    } else {
+      resHtml = `<span class="wh-res lose">−${h.bet}<span class="lbl">проигрыш</span></span>`;
+    }
+    const when = h.createdAt ? timeAgo(h.createdAt) : '';
+    return `<div class="wh-item ${cls}">
+      <div class="wh-av">${av}</div>
+      <div class="wh-info">
+        <div class="wh-name">${escapeHtml(visual)}${emj}</div>
+        <div class="wh-sub">Ставка: <b>${h.bet}</b> 🐵 · ${escapeHtml(when)}</div>
+      </div>
+      ${resHtml}
+    </div>`;
+  }).join('');
+}
+
+function startWhTimer(){
+  stopWhTimer();
+  whTimer = setInterval(()=>{ loadWheelHistory(); }, 15000);
+}
+function stopWhTimer(){
+  if(whTimer){ clearInterval(whTimer); whTimer=null; }
+}
+$('whRefresh').onclick = ()=>{ Sound.click(); loadWheelHistory(); };
 
 /* =========================================================
    USERS / PROFILE / SETTINGS / ADMIN
@@ -3034,7 +3133,7 @@ window.addEventListener('beforeunload',()=>{
   const token=s?.token||g;
   try{ navigator.sendBeacon(API_URL, JSON.stringify({action:'offline', token})); }catch(e){}
 });
-document.addEventListener('visibilitychange',()=>{ if(!document.hidden) Online.beat(); });
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) Online.heartbeat && Online.beat(); });
 </script>
 </body>
 </html>

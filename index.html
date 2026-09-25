@@ -12,9 +12,6 @@
   --fg:#e8e9ec;--muted:#7c7f8a;--muted2:#5a5d68;
   --border:#26282f;--border2:#32353d;
   --ok:#4ade80;--danger:#f87171;
-  --accent-a:#7c5cff;--accent-b:#22d3ee;
-
-  /* Управляемые переменные темы */
   --header-bg:rgba(20,20,24,.72);
   --sidebar-bg:rgba(20,20,24,.72);
   --btn-primary-bg:#e8e9ec;
@@ -23,12 +20,10 @@
   --av-bg:linear-gradient(135deg,#3a3d47,#2a2d35);
   --av-fg:#e8e9ec;
   --av-border:#32353d;
+  --banner-default:#1d1e24;
   --shader-opacity:.85;
-
   --sidebar-w:68px;--sidebar-w-open:220px;
 }
-
-/* ===== ТЕМЫ ===== */
 body.theme-dark{
   --bg:#0e0e11;--bg2:#16171b;--bg3:#1d1e24;--bg4:#242630;
   --fg:#e8e9ec;--muted:#7c7f8a;--muted2:#5a5d68;
@@ -37,6 +32,7 @@ body.theme-dark{
   --sidebar-bg:rgba(20,20,24,.72);
   --btn-primary-bg:#e8e9ec;--btn-primary-fg:#0e0e11;--btn-primary-bg-hover:#ffffff;
   --av-bg:linear-gradient(135deg,#3a3d47,#2a2d35);--av-fg:#e8e9ec;--av-border:#32353d;
+  --banner-default:#1d1e24;
   --shader-opacity:.85;
 }
 body.theme-light{
@@ -47,6 +43,7 @@ body.theme-light{
   --sidebar-bg:rgba(255,255,255,.78);
   --btn-primary-bg:#0e0e11;--btn-primary-fg:#ffffff;--btn-primary-bg-hover:#1a1a22;
   --av-bg:linear-gradient(135deg,#e9ebef,#dde0e6);--av-fg:#0e0e11;--av-border:#c2c6ce;
+  --banner-default:#e9ebef;
   --shader-opacity:.25;
 }
 body.theme-moon{
@@ -57,6 +54,7 @@ body.theme-moon{
   --sidebar-bg:rgba(22,24,35,.78);
   --btn-primary-bg:#e8eaf4;--btn-primary-fg:#161823;--btn-primary-bg-hover:#ffffff;
   --av-bg:linear-gradient(135deg,#3d4358,#2f3446);--av-fg:#e8eaf4;--av-border:#3d4358;
+  --banner-default:#262a3a;
   --shader-opacity:.7;
 }
 body.theme-ocean{
@@ -67,6 +65,7 @@ body.theme-ocean{
   --sidebar-bg:rgba(8,22,28,.78);
   --btn-primary-bg:#22d3ee;--btn-primary-fg:#08161c;--btn-primary-bg-hover:#4ee0f6;
   --av-bg:linear-gradient(135deg,#1c4252,#0f2832);--av-fg:#dff4ff;--av-border:#1c4252;
+  --banner-default:#122834;
   --shader-opacity:.6;
 }
 body.theme-toxic{
@@ -77,6 +76,7 @@ body.theme-toxic{
   --sidebar-bg:rgba(13,26,13,.78);
   --btn-primary-bg:#4ade80;--btn-primary-fg:#0d1a0d;--btn-primary-bg-hover:#6cee9a;
   --av-bg:linear-gradient(135deg,#204520,#132a13);--av-fg:#dcffdc;--av-border:#204520;
+  --banner-default:#183018;
   --shader-opacity:.5;
 }
 body.theme-scarlet{
@@ -87,6 +87,7 @@ body.theme-scarlet{
   --sidebar-bg:rgba(26,14,14,.78);
   --btn-primary-bg:#f87171;--btn-primary-fg:#1a0e0e;--btn-primary-bg-hover:#ff8a8a;
   --av-bg:linear-gradient(135deg,#4a2020,#2a1212);--av-fg:#ffe4e4;--av-border:#4a2020;
+  --banner-default:#331818;
   --shader-opacity:.55;
 }
 body.theme-divine{
@@ -100,6 +101,7 @@ body.theme-divine{
   --btn-primary-bg:linear-gradient(135deg,#60a5fa,#a5b4fc);
   --btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#7cb1fb,#b9c5fd);
   --av-bg:linear-gradient(135deg,#a5d8ff,#fff8dc);--av-fg:#0a2540;--av-border:#a8c8e0;
+  --banner-default:#e6f2ff;
   --shader-opacity:.25;
 }
 @keyframes divineShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
@@ -114,21 +116,23 @@ body.theme-obsidian{
   --btn-primary-bg:linear-gradient(135deg,#a855f7,#6366f1);
   --btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#b975ff,#7c7cf5);
   --av-bg:linear-gradient(135deg,#3a1f4a,#22102e);--av-fg:#e8d8ff;--av-border:#3a1f4a;
+  --banner-default:#1e0f2a;
   --shader-opacity:.5;
 }
 @keyframes obsShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 body.theme-rgb{
   background:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8b00ff,#ff0000);
   background-size:400% 400%;animation:rgbShift 10s linear infinite;
-  --bg:rgba(10,10,15,.6);--bg2:rgba(20,20,30,.82);--bg3:rgba(30,30,45,.85);--bg4:rgba(45,45,65,.9);
+  --bg:rgba(10,10,15,.6);--bg2:rgba(20,20,30,.85);--bg3:rgba(30,30,45,.88);--bg4:rgba(45,45,65,.92);
   --fg:#ffffff;--muted:#e0e0f0;--muted2:#b0b0c0;
   --border:rgba(255,255,255,.3);--border2:rgba(255,255,255,.5);
-  --header-bg:rgba(10,10,15,.7);
-  --sidebar-bg:rgba(10,10,15,.7);
+  --header-bg:rgba(10,10,15,.72);
+  --sidebar-bg:rgba(10,10,15,.72);
   --btn-primary-bg:linear-gradient(135deg,#ff0000,#00ff00,#0000ff);
   --btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#ff00ff,#00ffff,#ffff00);
   --av-bg:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff);
   --av-fg:#ffffff;--av-border:rgba(255,255,255,.5);
+  --banner-default:rgba(30,30,45,.8);
   --shader-opacity:0;
 }
 @keyframes rgbShift{0%{background-position:0% 50%}100%{background-position:400% 50%}}
@@ -142,7 +146,6 @@ html,body{
 #bg-shader{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;
   opacity:var(--shader-opacity);transition:opacity .4s}
 
-/* ===== HEADER ===== */
 .header{
   position:fixed;top:0;left:0;right:0;height:56px;
   display:flex;align-items:center;justify-content:space-between;
@@ -163,8 +166,7 @@ body.logged-in .header{left:var(--sidebar-w)}
 .logo-text .c{color:var(--muted)}
 
 .online{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;
-  background:var(--bg2);border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--fg);
-  transition:background .4s,border-color .4s,color .4s}
+  background:var(--bg2);border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--fg)}
 .online .dot{position:relative;width:8px;height:8px;border-radius:50%;
   background:var(--ok);box-shadow:0 0 8px rgba(74,222,128,.8)}
 .online .dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;
@@ -175,30 +177,21 @@ body.logged-in .header{left:var(--sidebar-w)}
 .online.err .dot{background:var(--muted2);box-shadow:none}
 .online.err .dot::after{display:none}
 
-/* ===== КНОПКИ ===== */
 .btn{border:none;border-radius:9px;padding:9px 16px;font-size:13.5px;font-weight:600;
   cursor:pointer;transition:background .2s,border-color .2s,transform .12s,color .2s,opacity .2s;
   font-family:inherit;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-.btn-primary{
-  background:var(--btn-primary-bg);color:var(--btn-primary-fg);
-  border:1px solid transparent;
-}
+.btn-primary{background:var(--btn-primary-bg);color:var(--btn-primary-fg);border:1px solid transparent}
 .btn-primary:hover{background:var(--btn-primary-bg-hover)}
-
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
 .btn-ghost:hover{color:var(--fg);border-color:var(--border2);background:var(--bg2)}
-
 .btn-danger{background:var(--danger);color:#fff;border:1px solid var(--danger)}
 .btn-danger:hover{opacity:.9}
-
 .btn-lg{padding:12px 22px;font-size:14.5px;border-radius:10px}
 .btn-block{width:100%;justify-content:center}
 
-/* ===== SIDEBAR ===== */
 .sidebar{position:fixed;top:56px;left:0;bottom:0;width:var(--sidebar-w);
   background:var(--sidebar-bg);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -221,7 +214,7 @@ body.logged-in .sidebar{display:flex}
 .sidebar-item.admin{border-color:rgba(255,200,50,.3)}
 .sidebar-item.admin:hover{background:rgba(255,200,50,.08);border-color:rgba(255,200,50,.5);color:#ffcc33}
 
-/* ===== АККАУНТ ===== */
+/* ===== АККАУНТ (справа сверху) ===== */
 .user-wrap{position:relative}
 .avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;
   background:var(--bg2);border:1px solid var(--border);cursor:pointer;
@@ -230,32 +223,46 @@ body.logged-in .sidebar{display:flex}
 .avatar-btn .av{width:26px;height:26px;border-radius:50%;
   background:var(--av-bg);border:1px solid var(--av-border);
   display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;
-  color:var(--av-fg);text-transform:uppercase;overflow:hidden;
-  transition:background .4s,color .4s,border-color .4s}
+  color:var(--av-fg);text-transform:uppercase;overflow:hidden}
 .avatar-btn .av img{width:100%;height:100%;object-fit:cover}
-.avatar-btn .nick{font-size:13px;font-weight:500;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--fg)}
+.avatar-btn .nick{font-size:13px;font-weight:500;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .avatar-btn .emoji{margin-left:2px;font-size:14px}
 .avatar-btn .chev{width:12px;height:12px;stroke:var(--muted);fill:none;stroke-width:2.2;
   stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
 .avatar-btn.open .chev{transform:rotate(180deg)}
 
-.user-menu{position:absolute;top:calc(100% + 8px);right:0;width:240px;
+.user-menu{position:absolute;top:calc(100% + 8px);right:0;width:260px;
   background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;
   box-shadow:0 12px 40px rgba(0,0,0,.5);opacity:0;transform:translateY(-6px) scale(.97);
   pointer-events:none;transition:opacity .18s,transform .18s,background .4s,border-color .4s;z-index:150}
 .user-menu.show{opacity:1;transform:none;pointer-events:auto}
-.user-menu-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px}
-.user-menu-head .av-lg{width:38px;height:38px;border-radius:50%;
-  background:var(--av-bg);border:1px solid var(--av-border);
-  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;
-  text-transform:uppercase;color:var(--av-fg);flex-shrink:0;overflow:hidden;
-  transition:background .4s,color .4s,border-color .4s}
-.user-menu-head .av-lg img{width:100%;height:100%;object-fit:cover}
-.user-menu-head .info{min-width:0;flex:1}
-.user-menu-head .info .name{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--fg)}
-.user-menu-head .info .status{font-size:11px;color:var(--ok);margin-top:2px;display:flex;align-items:center;gap:5px}
-.user-menu-head .info .status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ok)}
-.user-menu-body{padding:6px}
+
+/* Кликабельный мини-профиль внутри меню */
+.user-menu-profile{position:relative;cursor:pointer;transition:background .15s}
+.user-menu-profile:hover{background:var(--bg3)}
+.user-menu-banner{height:52px;background:var(--banner-default);transition:background .3s}
+.user-menu-av{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--av-bg);border:3px solid var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;font-weight:700;text-transform:uppercase;
+  color:var(--av-fg);overflow:hidden;flex-shrink:0;
+  margin-top:-24px;margin-left:14px;position:relative;z-index:1
+}
+.user-menu-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.user-menu-info{padding:6px 14px 12px}
+.user-menu-name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:5px;color:var(--fg);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.user-menu-name .emj{font-size:15px}
+.user-menu-login{font-size:11.5px;color:var(--muted);margin-top:1px}
+.user-menu-stats{display:flex;gap:12px;margin-top:8px;font-size:11px;color:var(--muted)}
+.user-menu-stats b{color:var(--fg);font-weight:700}
+.user-menu-hint{
+  font-size:10.5px;color:var(--muted2);padding:5px 14px 0;
+  text-align:center;letter-spacing:.3px
+}
+
+.user-menu-body{padding:6px;border-top:1px solid var(--border)}
 .menu-item{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:8px;font-size:13.5px;
   color:var(--fg);cursor:pointer;transition:background .15s,color .15s;border:none;background:none;
   width:100%;text-align:left;font-family:inherit}
@@ -267,7 +274,6 @@ body.logged-in .sidebar{display:flex}
 .menu-item.danger:hover svg{stroke:var(--danger)}
 .menu-divider{height:1px;background:var(--border);margin:5px 6px}
 
-/* ===== MAIN ===== */
 .main{min-height:100vh;display:flex;align-items:center;justify-content:center;
   padding:90px 30px 80px;position:relative;z-index:1;transition:padding .3s}
 body.logged-in .main{padding-left:calc(var(--sidebar-w) + 30px);align-items:flex-start;justify-content:flex-start}
@@ -307,8 +313,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .user-card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-2px)}
 .user-card .av{width:42px;height:42px;border-radius:50%;background:var(--av-bg);
   border:1px solid var(--av-border);flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:700;text-transform:uppercase;color:var(--av-fg);overflow:hidden;
-  transition:background .4s,color .4s}
+  font-size:15px;font-weight:700;text-transform:uppercase;color:var(--av-fg);overflow:hidden}
 .user-card .av img{width:100%;height:100%;object-fit:cover}
 .user-card .info{min-width:0;flex:1}
 .user-card .info .name{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;
@@ -316,12 +321,11 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .user-card .info .name .emj{font-size:14px}
 .user-card .info .login{font-size:11px;color:var(--muted);margin-top:2px}
 
-/* ===== HOVER CARD ===== */
 .hover-card{position:fixed;width:280px;background:var(--bg2);border:1px solid var(--border2);
   border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);
   opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .18s,transform .18s;z-index:400}
 .hover-card.show{opacity:1;transform:none;pointer-events:auto}
-.hover-banner{height:64px;background:var(--bg3)}
+.hover-banner{height:64px;background:var(--banner-default);transition:background .3s}
 .hover-body{padding:0 14px 14px;margin-top:-26px}
 .hover-av{width:52px;height:52px;border-radius:50%;background:var(--av-bg);
   border:3px solid var(--bg2);display:flex;align-items:center;justify-content:center;
@@ -345,15 +349,11 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
   display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
 .modal-overlay.show{display:flex;animation:fadeIn .18s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-/* ВАЖНО: конфликтные модалки выше по стеку */
-#unsavedOverlay{z-index:600 !important}
-#respectOverlay{z-index:600 !important}
-#buyOverlay{z-index:600 !important}
+#unsavedOverlay,#respectOverlay,#buyOverlay{z-index:600}
 
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:30px 28px;
   width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative;
-  animation:modalIn .28s cubic-bezier(.2,.9,.3,1.2);
-  transition:background .4s,border-color .4s}
+  animation:modalIn .28s cubic-bezier(.2,.9,.3,1.2)}
 .modal.wide{max-width:900px;padding:0;overflow:hidden}
 .modal.profile{max-width:820px;padding:0;overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
 @keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
@@ -371,7 +371,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
   margin:0 auto 16px}
 .confirm-icon svg{width:24px;height:24px;stroke:var(--danger);fill:none;stroke-width:2}
 .confirm-icon.blue{background:rgba(124,92,255,.1);border-color:rgba(124,92,255,.25)}
-.confirm-icon.blue svg{stroke:var(--accent-a)}
+.confirm-icon.blue svg{stroke:#7c5cff}
 .confirm-title{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--fg)}
 .confirm-text{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:22px}
 .confirm-actions{display:flex;gap:10px}
@@ -412,10 +412,9 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .modal-msg.err{color:var(--danger)}
 .modal-msg.ok{color:var(--ok)}
 
-/* ===== SETTINGS ===== */
 .settings-layout{display:flex;min-height:560px;max-height:85vh}
 .settings-nav{width:200px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);
-  padding:24px 14px;overflow-y:auto;transition:background .4s,border-color .4s}
+  padding:24px 14px;overflow-y:auto}
 .settings-nav h3{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;
   font-weight:700;padding:0 10px;margin-bottom:12px}
 .settings-nav-item{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:8px;
@@ -424,7 +423,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .settings-nav-item:hover{background:var(--bg2);color:var(--fg)}
 .settings-nav-item.active{background:var(--bg3);color:var(--fg)}
 .settings-nav-item svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
-.settings-content{flex:1;padding:28px 28px;overflow-y:auto;background:var(--bg2);transition:background .4s}
+.settings-content{flex:1;padding:28px 28px;overflow-y:auto;background:var(--bg2)}
 .settings-content h2{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--fg)}
 .settings-content .section-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px}
 
@@ -453,12 +452,11 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .color-custom input[type=text]{width:100px;padding:8px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-family:ui-monospace,monospace;font-size:12.5px;outline:none;text-transform:uppercase}
 
 .preview-panel{width:280px;flex-shrink:0;background:var(--bg);border-left:1px solid var(--border);
-  padding:24px 18px;display:flex;flex-direction:column;align-items:center;overflow-y:auto;
-  transition:background .4s,border-color .4s}
+  padding:24px 18px;display:flex;flex-direction:column;align-items:center;overflow-y:auto}
 .preview-panel h3{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;
   font-weight:700;margin-bottom:16px;text-align:center}
 .preview-card{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5)}
-.preview-banner{height:80px}
+.preview-banner{height:80px;background:var(--banner-default);transition:background .3s}
 .preview-body{padding:0 16px 16px;margin-top:-32px;text-align:center}
 .preview-av{width:64px;height:64px;border-radius:50%;background:var(--av-bg);
   border:3px solid var(--bg2);margin:0 auto;display:flex;align-items:center;justify-content:center;
@@ -487,11 +485,10 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .settings-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .settings-toast.err{background:var(--danger)}
 
-/* ===== MONKEYS ===== */
 .monkeys-widget{position:fixed;bottom:20px;right:20px;z-index:95;
   background:var(--bg2);border:1px solid var(--border);border-radius:14px;
   padding:14px 16px;min-width:200px;box-shadow:0 8px 30px rgba(0,0,0,.4);
-  display:none;flex-direction:column;gap:10px;transition:background .4s,border-color .4s}
+  display:none;flex-direction:column;gap:10px}
 body.logged-in .monkeys-widget{display:flex}
 .mw-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .mw-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
@@ -520,7 +517,6 @@ body.logged-in .monkeys-widget{display:flex}
 .reward-popup .rp-label{display:block;font-size:13px;text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:6px;opacity:.7}
 .reward-popup .rp-val{display:flex;align-items:center;justify-content:center;gap:10px}
 
-/* ===== RESPECT ===== */
 .respect-btn{
   padding:10px 22px;border-radius:999px;border:1px solid var(--border);
   background:var(--bg2);color:var(--fg);font-weight:700;font-size:14px;cursor:pointer;
@@ -533,26 +529,41 @@ body.logged-in .monkeys-widget{display:flex}
 .respect-btn .ico{font-size:16px;transition:transform .3s}
 .respect-btn.active .ico{transform:scale(1.2) rotate(-10deg)}
 
-/* ===== PROFILE ===== */
-.profile-header{padding:0;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
-.profile-banner{height:120px;position:relative}
+/* ===== PROFILE (полный) ===== */
+.profile-header{padding:0;background:var(--bg2);flex-shrink:0;position:relative;border-bottom:1px solid var(--border)}
+.profile-banner{height:140px;position:relative;background:var(--banner-default);transition:background .3s}
+.profile-banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.25) 100%)}
 .profile-close{position:absolute;top:12px;right:12px;z-index:5;background:rgba(0,0,0,.5);
   border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;
   display:flex;align-items:center;justify-content:center}
 .profile-close:hover{background:rgba(0,0,0,.7)}
 .profile-close svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
-.profile-head{padding:0 24px 20px;margin-top:-40px;display:flex;align-items:flex-end;gap:18px}
-.profile-av{width:88px;height:88px;border-radius:50%;background:var(--av-bg);
-  border:4px solid var(--bg2);flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-size:32px;font-weight:800;text-transform:uppercase;color:var(--av-fg);overflow:hidden}
+
+.profile-head{padding:0 24px 18px;margin-top:-56px;display:flex;align-items:flex-end;gap:18px;position:relative;z-index:1}
+.profile-av{width:104px;height:104px;border-radius:50%;background:var(--av-bg);
+  border:5px solid var(--bg2);flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:38px;font-weight:800;text-transform:uppercase;color:var(--av-fg);overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.35)}
 .profile-av img{width:100%;height:100%;object-fit:cover}
-.profile-info{flex:1;min-width:0;padding-bottom:6px}
-.profile-name{font-size:22px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--fg)}
-.profile-name .emj{font-size:22px}
-.profile-login{font-size:13px;color:var(--muted);margin-top:2px}
-.profile-stats{display:flex;gap:20px;margin-top:10px;font-size:12px;color:var(--muted)}
-.profile-stats b{color:var(--fg);font-size:13px;font-weight:700}
-.profile-actions{padding-bottom:8px}
+
+.profile-info{flex:1;min-width:0;padding-bottom:2px;padding-top:60px}
+.profile-name{font-size:24px;font-weight:800;display:flex;align-items:center;gap:8px;
+  line-height:1.15;color:var(--fg);flex-wrap:wrap}
+.profile-name .emj{font-size:22px;line-height:1}
+.profile-login{font-size:13px;color:var(--muted);margin-top:3px}
+.profile-bio{margin-top:10px;font-size:13px;color:var(--fg);line-height:1.55;max-width:600px;
+  word-wrap:break-word;white-space:pre-wrap}
+.profile-bio a{color:var(--fg);text-decoration:none;display:inline-flex;align-items:center;gap:3px;
+  padding:1px 6px;border-radius:6px;background:var(--bg3);font-size:12px;margin:2px 0}
+.profile-bio a:hover{background:var(--bg4)}
+
+.profile-stats-row{display:flex;gap:22px;margin-top:14px;flex-wrap:wrap}
+.profile-stat{display:flex;flex-direction:column}
+.profile-stat .v{font-size:17px;font-weight:800;color:var(--fg);line-height:1.2}
+.profile-stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+.profile-actions{display:flex;gap:8px;padding-bottom:6px;align-items:flex-end}
+
 .profile-tabs{padding:0 24px;border-bottom:1px solid var(--border);display:flex;gap:4px;flex-shrink:0}
 .profile-tab{padding:12px 16px;font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;
   border:none;background:none;font-family:inherit;position:relative;transition:color .15s}
@@ -583,7 +594,6 @@ body.logged-in .monkeys-widget{display:flex}
 .post-card audio{width:100%;margin-top:6px}
 .post-empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:13px}
 
-/* ===== EMOJI/THEME GRIDS ===== */
 .emoji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px}
 .emoji-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 8px;
   display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;
@@ -608,7 +618,6 @@ body.logged-in .monkeys-widget{display:flex}
 .theme-item .theme-secret{position:absolute;top:8px;right:8px;font-size:10px;padding:2px 6px;
   background:rgba(255,200,50,.15);border:1px solid rgba(255,200,50,.3);border-radius:999px;color:#fbbf24}
 
-/* toggle */
 .toggle-row{display:flex;align-items:center;justify-content:space-between;
   padding:12px 14px;background:var(--bg);border:1px solid var(--border);
   border-radius:9px;margin-bottom:10px}
@@ -621,7 +630,6 @@ body.logged-in .monkeys-widget{display:flex}
 .toggle.on{background:var(--ok)}
 .toggle.on::after{transform:translateX(16px)}
 
-/* ===== ADMIN ===== */
 .admin-wrap{padding:24px;color:var(--fg)}
 .admin-login{max-width:340px;margin:40px auto}
 .admin-login h2{text-align:center;font-size:20px;margin-bottom:20px}
@@ -635,15 +643,16 @@ body.logged-in .monkeys-widget{display:flex}
 .admin-user input:focus{border-color:var(--border2)}
 .admin-user .btn{padding:6px 10px;font-size:11.5px}
 
-/* ===== RESPONSIVE ===== */
 @media(max-width:800px){
   .settings-layout{flex-direction:column}
   .settings-nav{width:100%;border-right:none;border-bottom:1px solid var(--border);
     display:flex;gap:6px;overflow-x:auto;padding:12px}
   .settings-nav h3{display:none}
   .preview-panel{width:100%;border-left:none;border-top:1px solid var(--border)}
-  .profile-head{flex-direction:column;align-items:flex-start}
-  .profile-av{width:72px;height:72px}
+  .profile-head{flex-direction:column;align-items:flex-start;margin-top:-50px}
+  .profile-av{width:84px;height:84px}
+  .profile-info{padding-top:0}
+  .profile-actions{width:100%;padding-left:0}
 }
 @media(max-width:640px){
   .header{padding:0 14px}
@@ -655,10 +664,12 @@ body.logged-in .monkeys-widget{display:flex}
   .online .lbl{display:none}
   .hero-actions{flex-direction:column;width:100%}
   .btn-lg{width:100%;justify-content:center}
-  .user-menu{right:-4px}
+  .user-menu{right:-4px;width:240px}
   .dash-grid,.users-grid{grid-template-columns:1fr}
   .monkeys-widget{left:20px;right:20px;bottom:20px}
   .settings-content{padding:20px}
+  .profile-head{padding:0 18px 16px}
+  .profile-av{width:84px;height:84px}
 }
 </style>
 </head>
@@ -959,6 +970,7 @@ body.logged-in .monkeys-widget{display:flex}
   <div class="modal profile" id="profileModal">
     <div class="profile-header">
       <div class="profile-banner" id="profileBanner">
+        <div class="profile-banner-overlay"></div>
         <button class="profile-close" id="profileClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
       <div class="profile-head">
@@ -966,10 +978,11 @@ body.logged-in .monkeys-widget{display:flex}
         <div class="profile-info">
           <div class="profile-name" id="profileName">—</div>
           <div class="profile-login" id="profileLogin">@—</div>
-          <div class="profile-stats">
-            <span><b id="profileRespects">0</b> уважают</span>
-            <span><b id="profilePosts">0</b> постов</span>
-            <span><b id="profileMonkeys">0</b> обезьян</span>
+          <div class="profile-bio" id="profileBio"></div>
+          <div class="profile-stats-row">
+            <div class="profile-stat"><div class="v" id="profileRespects">0</div><div class="l">уважают</div></div>
+            <div class="profile-stat"><div class="v" id="profilePosts">0</div><div class="l">постов</div></div>
+            <div class="profile-stat"><div class="v" id="profileMonkeys">0</div><div class="l">обезьян</div></div>
           </div>
         </div>
         <div class="profile-actions" id="profileActions"></div>
@@ -1033,9 +1046,6 @@ const THEME_LIST = [
 ];
 const SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
 
-/* =========================================================
-   ЗВУКИ
-   ========================================================= */
 const Sound = (() => {
   let ctx = null;
   let enabled = localStorage.getItem('zv_sound') !== 'off';
@@ -1065,9 +1075,6 @@ const Sound = (() => {
   };
 })();
 
-/* =========================================================
-   УТИЛИТЫ
-   ========================================================= */
 function $(id){ return document.getElementById(id); }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
@@ -1119,9 +1126,6 @@ function randomSalt(len=16){
   return [...a].map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
-/* =========================================================
-   API
-   ========================================================= */
 let jsonpCounter = 0;
 function jsonpRequest(params){
   return new Promise((resolve, reject) => {
@@ -1160,9 +1164,6 @@ async function api(action, payload={}){
   return await jsonpRequest(params);
 }
 
-/* =========================================================
-   СЕССИЯ / RATE
-   ========================================================= */
 const Session = {
   save(s){ localStorage.setItem('zv_session', JSON.stringify(s)); },
   get(){ try{ return JSON.parse(localStorage.getItem('zv_session')||'null'); }catch(e){ return null; } },
@@ -1195,9 +1196,6 @@ const Rate = (()=>{
   };
 })();
 
-/* =========================================================
-   AUTH
-   ========================================================= */
 const Auth = {
   async register(username,password,password2){
     const eU=validateUsername(username); if(eU) return {ok:false,error:eU};
@@ -1245,9 +1243,6 @@ const Auth = {
   }
 };
 
-/* =========================================================
-   ОНЛАЙН
-   ========================================================= */
 const Online = {
   timer:null,
   async beat(){
@@ -1272,9 +1267,6 @@ const Online = {
   }
 };
 
-/* =========================================================
-   SERVICES
-   ========================================================= */
 function detectService(url){
   try{
     const u=new URL(url);
@@ -1297,9 +1289,6 @@ function renderBio(text){
   return safe.replace(/\n/g,'<br>');
 }
 
-/* =========================================================
-   STATE
-   ========================================================= */
 let mode='login';
 let captchaAnswer=0;
 let menuOpen=false;
@@ -1311,28 +1300,21 @@ let currentProfileUsername=null;
 let tempProfile=null;
 let tempProfileChanged=false;
 
-/* =========================================================
-   ТЕМА
-   ========================================================= */
 function applyTheme(theme){
   const cls = document.body.className.split(' ').filter(c=>!c.startsWith('theme-')).join(' ');
   document.body.className = (cls + ' theme-' + (theme||'dark')).trim();
 }
 
-/* =========================================================
-   ICO
-   ========================================================= */
 const ICO = {
   chev:'<svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>',
   settings:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
   logout:'<svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
   login:'<svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>',
-  register:'<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>'
+  register:'<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>',
+  eye:'<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  eyeOff:'<svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
 };
 
-/* =========================================================
-   RENDER AUTH STATE
-   ========================================================= */
 function renderAuthState(){
   const s=Session.get();
   const logged = !!(s && s.username && s.token);
@@ -1355,6 +1337,7 @@ function renderAuthState(){
     const initial = visual.charAt(0).toUpperCase();
     const emojiHtml = p.emoji ? `<span class="emoji">${p.emoji}</span>` : '';
 
+    // Кнопка + выпадающее меню с мини-профилем
     $('userArea').innerHTML = `
       <div class="user-wrap" id="userWrap">
         <button class="avatar-btn" id="avatarBtn">
@@ -1363,12 +1346,20 @@ function renderAuthState(){
           ${ICO.chev}
         </button>
         <div class="user-menu" id="userMenu">
-          <div class="user-menu-head">
-            <div class="av-lg" id="menuAv">${escapeHtml(initial)}</div>
-            <div class="info">
-              <div class="name">${escapeHtml(visual)}${emojiHtml}</div>
-              <div class="status">в сети</div>
+          <!-- Кликабельный мини-профиль -->
+          <div class="user-menu-profile" id="menuProfile" title="Открыть профиль">
+            <div class="user-menu-banner" id="menuBanner"></div>
+            <div class="user-menu-av" id="menuAv">${escapeHtml(initial)}</div>
+            <div class="user-menu-info">
+              <div class="user-menu-name">${escapeHtml(visual)}${emojiHtml}</div>
+              <div class="user-menu-login">@${escapeHtml(s.username)}</div>
+              <div class="user-menu-stats">
+                <span><b>${p.respects||0}</b> уважают</span>
+                <span><b>${p.posts||0}</b> постов</span>
+                <span><b>${p.monkeys||0}</b> 🐵</span>
+              </div>
             </div>
+            <div class="user-menu-hint">Нажми, чтобы открыть профиль →</div>
           </div>
           <div class="user-menu-body">
             <button class="menu-item" id="menuSettings">${ICO.settings} Настройки аккаунта</button>
@@ -1382,18 +1373,22 @@ function renderAuthState(){
       $('topAv').innerHTML = `<img src="${p.avatar}" alt="">`;
       $('menuAv').innerHTML = `<img src="${p.avatar}" alt="">`;
     }
+    // Баннер в меню
+    $('menuBanner').style.background = p.bannerColor || 'var(--banner-default)';
+
     $('greetName').textContent = visual;
 
     const wrap=$('userWrap'), btn=$('avatarBtn'), menu=$('userMenu');
     btn.onclick=(e)=>{e.stopPropagation();menuOpen=!menuOpen;menu.classList.toggle('show',menuOpen);btn.classList.toggle('open',menuOpen);Sound.click();};
     document.addEventListener('click',(e)=>{ if(menuOpen&&wrap&&!wrap.contains(e.target)){menuOpen=false;menu.classList.remove('show');btn.classList.remove('open');} });
-    $('menuSettings').onclick=()=>{Sound.click();closeMenu();openAccountSettings();};
-    $('menuLogout').onclick=()=>{Sound.click();closeMenu();openConfirmLogout();};
+    $('menuSettings').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openAccountSettings();};
+    $('menuLogout').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openConfirmLogout();};
+    // Клик по мини-профилю → открыть свой профиль
+    $('menuProfile').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openProfile(s.username);};
 
     $('sbAdmin').style.display = (s.username.toLowerCase()==='medy3a') ? 'flex' : 'none';
     $('dashboard').style.display = 'flex';
     $('hero').style.display = 'none';
-
     updateMonkeysWidget();
   } else {
     document.body.classList.remove('logged-in');
@@ -1416,9 +1411,6 @@ function closeMenu(){
   if(m)m.classList.remove('show'); if(b)b.classList.remove('open');
 }
 
-/* =========================================================
-   AUTH MODAL
-   ========================================================= */
 function openModal(m){
   mode=m;
   if(m==='login'){
@@ -1461,9 +1453,7 @@ $('logo').onclick=()=>{Sound.click();switchView('home');};
 $('passToggle').onclick=()=>{
   const t=$('password'); const showing=t.type==='text';
   t.type=showing?'password':'text';
-  $('passToggle').innerHTML=showing?
-    '<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>':
-    '<svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+  $('passToggle').innerHTML=showing?ICO.eye:ICO.eyeOff;
   Sound.click();
 };
 
@@ -1525,9 +1515,6 @@ $('authForm').addEventListener('submit',async e=>{
   }
 });
 
-/* =========================================================
-   LOGOUT CONFIRM
-   ========================================================= */
 function openConfirmLogout(){
   $('cfTitle').textContent='Выйти из аккаунта?';
   $('cfText').textContent='Вы действительно хотите выйти? Придётся снова вводить логин и пароль.';
@@ -1540,9 +1527,6 @@ function openConfirmLogout(){
 $('confirmCancel').onclick=()=>{$('confirmOverlay').classList.remove('show');Sound.close();};
 $('confirmOverlay').onclick=e=>{if(e.target===$('confirmOverlay')){$('confirmOverlay').classList.remove('show');}};
 
-/* =========================================================
-   UNSAVED
-   ========================================================= */
 let unsavedCallback=null;
 function openUnsaved(saveCb){
   unsavedCallback = saveCb;
@@ -1562,9 +1546,6 @@ $('unsavedCancel').onclick=()=>{
   $('unsavedOverlay').classList.remove('show'); Sound.close();
 };
 
-/* =========================================================
-   RESPECT
-   ========================================================= */
 let respectCallback=null;
 function openRespectConfirm(cb){
   respectCallback=cb;
@@ -1577,9 +1558,6 @@ $('respectYes').onclick=async()=>{
   if(respectCallback) await respectCallback();
 };
 
-/* =========================================================
-   SWITCH VIEW
-   ========================================================= */
 function switchView(name){
   document.querySelectorAll('.sidebar-item').forEach(el=>el.classList.remove('active'));
   const btn={home:'sbHome',friends:'sbFriends'}[name];
@@ -1607,9 +1585,6 @@ document.querySelectorAll('.dash-card').forEach(card=>{
   };
 });
 
-/* =========================================================
-   USERS
-   ========================================================= */
 async function loadUsers(){
   const grid=$('usersGrid');
   grid.innerHTML='<div style="color:var(--muted);font-size:13px;padding:14px;">Загрузка…</div>';
@@ -1654,7 +1629,7 @@ function showHover(uname,anchor){
   clearTimeout(hoverTimer);
   const u=allUsers.find(x=>x.username===uname); if(!u) return;
   const hc=$('hoverCard');
-  $('hoverBanner').style.background=u.bannerColor||'#1d1e24';
+  $('hoverBanner').style.background=u.bannerColor||'var(--banner-default)';
   const visual=u.visualName||u.username;
   const av=$('hoverAv');
   if(u.avatar) av.innerHTML=`<img src="${u.avatar}" alt="">`; else av.textContent=visual.charAt(0).toUpperCase();
@@ -1676,9 +1651,6 @@ function hideHover(){ hoverTimer=setTimeout(()=>$('hoverCard').classList.remove(
 $('hoverCard').addEventListener('mouseenter',()=>clearTimeout(hoverTimer));
 $('hoverCard').addEventListener('mouseleave',hideHover);
 
-/* =========================================================
-   ACCOUNT SETTINGS
-   ========================================================= */
 const ACCOUNT_SECTIONS = { main: renderAccountMain, password: renderAccountPassword };
 
 function openAccountSettings(){
@@ -1976,9 +1948,6 @@ function renderAccountPassword(){
   };
 }
 
-/* =========================================================
-   SITE SETTINGS
-   ========================================================= */
 const SITE_SECTIONS = { main: renderSiteMain, themes: renderSiteThemes, extra: renderSiteExtra };
 
 function openSiteSettings(){
@@ -2168,9 +2137,6 @@ $('buyConfirm').onclick=async()=>{
   if(buyCallback) await buyCallback();
 };
 
-/* =========================================================
-   MONKEYS WIDGET
-   ========================================================= */
 function updateMonkeysWidget(){
   const s=Session.get(); if(!s||!s.profile) return;
   const p=s.profile;
@@ -2237,7 +2203,7 @@ function showReward(amount){
 }
 
 /* =========================================================
-   PROFILE MODAL
+   PROFILE
    ========================================================= */
 async function openProfile(username){
   Sound.open();
@@ -2267,12 +2233,13 @@ $('profileOverlay').onclick=e=>{if(e.target===$('profileOverlay'))closeProfile()
 
 function renderProfile(){
   const p=currentProfile;
-  $('profileBanner').style.background = p.bannerColor || '#1d1e24';
+  $('profileBanner').style.background = p.bannerColor || 'var(--banner-default)';
   const visual = p.visualName || p.username;
   const av = $('profileAv');
   if(p.avatar) av.innerHTML = `<img src="${p.avatar}" alt="">`; else av.textContent = visual.charAt(0).toUpperCase();
   $('profileName').innerHTML = escapeHtml(visual) + (p.emoji?` <span class="emj">${p.emoji}</span>`:'');
   $('profileLogin').textContent = '@' + p.username;
+  $('profileBio').innerHTML = p.bio ? renderBio(p.bio) : '';
   $('profileRespects').textContent = p.respects || 0;
   $('profilePosts').textContent = p.posts || 0;
   $('profileMonkeys').textContent = p.monkeys || 0;
@@ -2543,9 +2510,6 @@ async function renderAdminUsers(){
   frame();
 })();
 
-/* =========================================================
-   ESC
-   ========================================================= */
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
   if($('buyOverlay').classList.contains('show')) $('buyOverlay').classList.remove('show');
@@ -2559,9 +2523,6 @@ document.addEventListener('keydown',e=>{
   else if($('modalOverlay').classList.contains('show')) closeModal();
 });
 
-/* =========================================================
-   START
-   ========================================================= */
 renderAuthState();
 Online.start();
 switchView('home');
@@ -2574,7 +2535,12 @@ setInterval(async ()=>{
     cur.profile = { ...cur.profile, ...r.profile };
     Session.save(cur);
     updateMonkeysWidget();
-    $('monkeysCount').textContent = r.profile.monkeys || 0;
+    // Обновляем меню, чтобы баннер/статистика были свежими
+    if(document.body.classList.contains('logged-in')){
+      const p = cur.profile;
+      const banner = $('menuBanner');
+      if(banner) banner.style.background = p.bannerColor || 'var(--banner-default)';
+    }
   }
 }, 20000);
 

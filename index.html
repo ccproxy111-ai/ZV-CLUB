@@ -8,166 +8,358 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0b0d12;--bg2:#12151c;--fg:#e6e8ee;--muted:#8a90a0;
-  --accent:#7c5cff;--accent2:#22d3ee;--danger:#ff5470;--ok:#34d399;
-  --border:#232734;--radius:12px;--shadow:0 8px 32px rgba(0,0,0,.5);
+  --bg:#0e0e11;--bg2:#16171b;--bg3:#1d1e24;
+  --fg:#e8e9ec;--muted:#7c7f8a;--muted2:#5a5d68;
+  --border:#26282f;--border2:#32353d;
+  --ok:#4ade80;--danger:#f87171;
+  --radius:10px;
 }
 html,body{
   height:100%;
-  background:radial-gradient(1200px 600px at 80% -10%,#1a1f2e 0%,var(--bg) 60%);
+  background:var(--bg);
   color:var(--fg);
   font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
-/* HEADER */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(900px 500px at 15% -10%,rgba(120,120,140,.07),transparent 60%),
+    radial-gradient(700px 400px at 90% 110%,rgba(90,90,110,.05),transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* ===== HEADER ===== */
 .header{
-  position:fixed;top:0;left:0;right:0;height:64px;
+  position:fixed;top:0;left:0;right:0;height:56px;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;background:rgba(11,13,18,.7);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);z-index:100;
+  padding:0 20px;
+  background:rgba(14,14,17,.8);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  z-index:100;
 }
 .header-left{display:flex;align-items:center;gap:8px}
-.header-right{display:flex;align-items:center;gap:12px}
-.status-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);transition:background .3s}
-.status-dot.online{background:var(--ok);box-shadow:0 0 8px var(--ok)}
-.status-dot.offline{background:var(--danger)}
-.status-text{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.header-right{display:flex;align-items:center;gap:10px}
+
+/* онлайн-счётчик */
+.online{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 12px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--border);
+  font-size:13px;color:var(--fg);font-weight:500;
+  transition:border-color .2s;
+}
+.online:hover{border-color:var(--border2)}
+.online .dot{
+  position:relative;width:8px;height:8px;border-radius:50%;
+  background:var(--ok);box-shadow:0 0 6px rgba(74,222,128,.7);
+}
+.online .dot::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1px solid var(--ok);opacity:.6;
+  animation:pulse 2s ease-out infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(.7);opacity:.8}
+  100%{transform:scale(1.6);opacity:0}
+}
+.online.off .dot{background:var(--muted2);box-shadow:none}
+.online.off .dot::after{display:none}
+.online .count{color:var(--fg);font-variant-numeric:tabular-nums}
+.online .lbl{color:var(--muted);font-size:12px}
+
+/* логотип */
 .logo{
-  cursor:pointer;font-weight:800;font-size:20px;letter-spacing:1px;
-  padding:8px 14px;border-radius:var(--radius);transition:transform .2s,background .2s;
-  user-select:none;
+  cursor:pointer;font-weight:800;font-size:18px;letter-spacing:.5px;
+  padding:7px 12px;border-radius:8px;
+  transition:background .2s,transform .15s;
+  user-select:none;display:flex;align-items:center;gap:7px;
 }
-.logo:hover{background:var(--bg2);transform:scale(1.05)}
-.logo:active{transform:scale(.95)}
-.logo-z{color:var(--accent);text-shadow:0 0 12px rgba(124,92,255,.6)}
-.logo-c{color:var(--fg)}
-/* BUTTONS */
+.logo:hover{background:var(--bg2)}
+.logo:active{transform:scale(.96)}
+.logo svg{width:18px;height:18px;stroke:var(--fg);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.logo-text{color:var(--fg)}
+.logo-text .c{color:var(--muted)}
+
+/* ===== КНОПКИ ===== */
 .btn{
-  border:none;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:600;
-  cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s,opacity .2s;
-  font-family:inherit;position:relative;overflow:hidden;
+  border:none;border-radius:9px;padding:9px 16px;font-size:13.5px;font-weight:600;
+  cursor:pointer;transition:background .15s,border-color .15s,transform .12s,color .15s;
+  font-family:inherit;display:inline-flex;align-items:center;gap:7px;
+  white-space:nowrap;
 }
-.btn:active{transform:scale(.96)}
+.btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-primary{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
-  box-shadow:0 4px 16px rgba(124,92,255,.35);
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.btn-primary{background:var(--fg);color:var(--bg);border:1px solid var(--fg)}
+.btn-primary:hover{background:#fff;border-color:#fff}
+
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--fg);border-color:var(--border2);background:var(--bg2)}
+
+.btn-lg{padding:12px 22px;font-size:14.5px;border-radius:10px}
+.btn-block{width:100%;justify-content:center}
+
+/* ===== ИКОНКА АККАУНТА ===== */
+.user-wrap{position:relative}
+.avatar-btn{
+  display:flex;align-items:center;gap:9px;
+  padding:5px 12px 5px 5px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--border);
+  cursor:pointer;transition:border-color .2s,background .2s;
 }
-.btn-primary:hover{box-shadow:0 6px 24px rgba(124,92,255,.55);transform:translateY(-1px)}
-.btn-outline{background:transparent;color:var(--fg);border:1px solid var(--border)}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
-.btn-ghost{background:transparent;color:var(--muted)}
-.btn-ghost:hover{color:var(--fg)}
-.btn-lg{padding:14px 28px;font-size:16px}
-.btn-block{width:100%}
-/* HERO */
+.avatar-btn:hover{border-color:var(--border2);background:var(--bg3)}
+.avatar-btn .av{
+  width:26px;height:26px;border-radius:50%;
+  background:linear-gradient(135deg,#3a3d47,#2a2d35);
+  border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--fg);
+  text-transform:uppercase;letter-spacing:.3px;
+}
+.avatar-btn .nick{
+  font-size:13px;color:var(--fg);font-weight:500;
+  max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.avatar-btn .chev{
+  width:12px;height:12px;stroke:var(--muted);fill:none;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .2s;
+}
+.avatar-btn.open .chev{transform:rotate(180deg)}
+
+/* выпадающее меню */
+.user-menu{
+  position:absolute;top:calc(100% + 8px);right:0;
+  width:230px;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);
+  opacity:0;transform:translateY(-6px) scale(.97);
+  pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+  z-index:150;
+}
+.user-menu.show{opacity:1;transform:none;pointer-events:auto}
+.user-menu-head{
+  padding:14px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:11px;
+}
+.user-menu-head .av-lg{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,#3a3d47,#2a2d35);
+  border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;text-transform:uppercase;
+  color:var(--fg);flex-shrink:0;
+}
+.user-menu-head .info{min-width:0;flex:1}
+.user-menu-head .info .name{
+  font-size:14px;font-weight:600;color:var(--fg);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.user-menu-head .info .status{
+  font-size:11px;color:var(--ok);margin-top:2px;
+  display:flex;align-items:center;gap:5px;
+}
+.user-menu-head .info .status::before{
+  content:'';width:5px;height:5px;border-radius:50%;background:var(--ok);
+}
+.user-menu-body{padding:6px}
+.menu-item{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 11px;border-radius:8px;
+  font-size:13.5px;color:var(--fg);cursor:pointer;
+  transition:background .15s,color .15s;
+  text-decoration:none;border:none;background:none;width:100%;text-align:left;
+  font-family:inherit;
+}
+.menu-item:hover{background:var(--bg3)}
+.menu-item svg{
+  width:16px;height:16px;stroke:var(--muted);fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  transition:stroke .15s;
+}
+.menu-item:hover svg{stroke:var(--fg)}
+.menu-item.danger:hover{background:rgba(248,113,113,.08);color:var(--danger)}
+.menu-item.danger:hover svg{stroke:var(--danger)}
+.menu-divider{height:1px;background:var(--border);margin:5px 6px}
+
+/* ===== HERO ===== */
 .main{
   min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:100px 40px 60px;position:relative;z-index:1;
+  padding:90px 30px 60px;position:relative;z-index:1;
 }
-.hero{text-align:center;max-width:700px}
-.hero-title{font-size:clamp(48px,8vw,96px);font-weight:900;letter-spacing:-2px;margin-bottom:16px}
-.grad{
-  background:linear-gradient(135deg,var(--accent),var(--accent2),#ff6ec7);
-  background-size:200% 200%;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:gradShift 6s ease infinite;
+.hero{text-align:center;max-width:680px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 12px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--border);
+  font-size:12px;color:var(--muted);margin-bottom:26px;
+  animation:fadeUp .5s ease;
 }
-@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.hero-sub{color:var(--muted);font-size:18px;margin-bottom:40px}
-.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-/* LOG PANEL */
-.log-panel{
-  position:fixed;right:20px;bottom:20px;width:300px;max-height:340px;
-  background:rgba(18,21,28,.85);backdrop-filter:blur(12px);
-  border:1px solid var(--border);border-radius:var(--radius);
-  box-shadow:var(--shadow);display:flex;flex-direction:column;
-  overflow:hidden;z-index:90;
+.hero-badge .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--ok);
+  box-shadow:0 0 6px rgba(74,222,128,.7);
 }
-.log-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:10px 14px;border-bottom:1px solid var(--border);
-  font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.hero-title{
+  font-size:clamp(44px,7vw,84px);
+  font-weight:800;letter-spacing:-2.5px;
+  margin-bottom:16px;line-height:1;
+  color:var(--fg);
+  animation:fadeUp .6s ease;
 }
-.log-clear{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1}
-.log-clear:hover{color:var(--danger)}
-.log-body{
-  flex:1;overflow-y:auto;padding:8px 12px;
-  font-family:ui-monospace,'Courier New',monospace;font-size:11px;color:var(--muted);
-  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+.hero-title .accent{
+  color:var(--muted);
+  font-weight:300;
 }
-.log-body::-webkit-scrollbar{width:6px}
-.log-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-.log-entry{padding:4px 0;border-bottom:1px dashed rgba(35,39,52,.6);animation:logIn .3s ease;word-break:break-word}
-@keyframes logIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
-.log-entry .t{color:#555c70}
-.log-entry.info{color:var(--fg)}
-.log-entry.ok{color:var(--ok)}
-.log-entry.err{color:var(--danger)}
-.log-entry.warn{color:#fbbf24}
-/* MODAL */
+.hero-sub{
+  color:var(--muted);font-size:17px;margin-bottom:36px;
+  animation:fadeUp .7s ease;
+}
+.hero-sub .sv{
+  color:var(--fg);font-weight:700;letter-spacing:.3px;
+}
+.hero-actions{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp .8s ease;
+}
+
+/* ===== МОДАЛКА ===== */
 .modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);
-  display:none;align-items:center;justify-content:center;z-index:200;padding:20px;
+  position:fixed;inset:0;background:rgba(8,8,10,.75);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;
+  z-index:300;padding:20px;
 }
-.modal-overlay.show{display:flex;animation:fadeIn .2s}
+.modal-overlay.show{display:flex;animation:fadeIn .18s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .modal{
-  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
-  padding:32px;width:100%;max-width:420px;box-shadow:var(--shadow);
-  position:relative;animation:modalIn .35s cubic-bezier(.2,.9,.3,1.3);
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:16px;padding:30px 28px;
+  width:100%;max-width:400px;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  position:relative;
+  animation:modalIn .28s cubic-bezier(.2,.9,.3,1.2);
 }
-@keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(14px) scale(.97)}
+  to{opacity:1;transform:none}
+}
 .modal-close{
-  position:absolute;top:12px;right:14px;background:none;border:none;
-  color:var(--muted);font-size:26px;cursor:pointer;line-height:1;
-  transition:color .2s,transform .2s;
+  position:absolute;top:14px;right:14px;
+  background:none;border:none;color:var(--muted);
+  width:30px;height:30px;border-radius:8px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s;
 }
-.modal-close:hover{color:var(--danger);transform:rotate(90deg)}
-.modal-title{font-size:22px;margin-bottom:24px;text-align:center}
-/* FORM */
-.field{margin-bottom:16px}
+.modal-close:hover{background:var(--bg3);color:var(--fg)}
+.modal-close svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
+.modal-title{
+  font-size:20px;font-weight:700;margin-bottom:22px;
+  display:flex;align-items:center;gap:10px;
+}
+.modal-title svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* форма */
+.field{margin-bottom:15px}
 .field label{
-  display:block;font-size:12px;color:var(--muted);margin-bottom:6px;
-  text-transform:uppercase;letter-spacing:.5px;
+  display:block;font-size:11.5px;color:var(--muted);
+  margin-bottom:7px;text-transform:uppercase;
+  letter-spacing:.6px;font-weight:600;
+}
+.field .input-wrap{position:relative}
+.field .input-wrap svg.inp-ico{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;stroke:var(--muted);fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  pointer-events:none;transition:stroke .2s;
 }
 .field input{
-  width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);
-  border-radius:10px;color:var(--fg);font-size:15px;font-family:inherit;
-  transition:border-color .2s,box-shadow .2s;outline:none;
+  width:100%;padding:11px 13px 11px 38px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:9px;color:var(--fg);font-size:14px;
+  font-family:inherit;outline:none;
+  transition:border-color .2s,background .2s;
 }
-.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,92,255,.15)}
+.field input:focus{border-color:var(--border2);background:var(--bg3)}
+.field input:focus ~ svg.inp-ico{stroke:var(--fg)}
 .field input.err{border-color:var(--danger);animation:shake .3s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.hint{display:block;font-size:11px;color:var(--muted);margin-top:6px}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.pass-toggle{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  width:28px;height:28px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.pass-toggle:hover{background:var(--bg3)}
+.pass-toggle svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pass-toggle:hover svg{stroke:var(--fg)}
+
+.hint{display:block;font-size:11px;color:var(--muted2);margin-top:6px}
 .hint.err{color:var(--danger)}
 .hint.ok{color:var(--ok)}
-.pass-wrap{position:relative}
-.pass-toggle{
-  position:absolute;right:10px;top:50%;transform:translateY(-50%);
-  background:none;border:none;cursor:pointer;font-size:16px;opacity:.6;
+
+.strength-bar{
+  height:3px;background:var(--border);border-radius:2px;
+  margin-top:9px;overflow:hidden;
 }
-.pass-toggle:hover{opacity:1}
-.strength-bar{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
-.strength-fill{height:100%;width:0%;background:var(--danger);border-radius:2px;transition:width .3s,background .3s}
-.captcha-box{background:var(--bg);padding:12px;border-radius:10px;border:1px solid var(--border);margin-bottom:16px}
-.captcha-box label{display:block;font-size:13px;margin-bottom:8px;color:var(--fg)}
-.captcha-box input{width:100%;padding:8px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--fg)}
-.modal-actions{margin-top:8px}
-.modal-msg{margin-top:14px;font-size:13px;text-align:center;min-height:18px}
+.strength-fill{
+  height:100%;width:0;background:var(--danger);border-radius:2px;
+  transition:width .3s,background .3s;
+}
+
+.captcha-box{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:9px;padding:12px 14px;margin-bottom:15px;
+  display:flex;align-items:center;gap:12px;
+}
+.captcha-box .cap-ico{
+  width:22px;height:22px;stroke:var(--muted);fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;
+}
+.captcha-box .cap-body{flex:1}
+.captcha-box label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
+.captcha-box input{
+  width:100%;padding:7px 11px;background:var(--bg2);
+  border:1px solid var(--border);border-radius:7px;
+  color:var(--fg);font-size:14px;outline:none;font-family:inherit;
+}
+.captcha-box input:focus{border-color:var(--border2)}
+
+.modal-actions{margin-top:6px}
+.modal-msg{
+  margin-top:14px;font-size:12.5px;text-align:center;
+  min-height:17px;color:var(--muted);
+}
 .modal-msg.err{color:var(--danger)}
 .modal-msg.ok{color:var(--ok)}
-/* USER INFO */
-.user-badge{font-size:13px;color:var(--fg);margin-right:8px}
-/* PARTICLES */
-#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
-/* RESPONSIVE */
+
+/* ===== RESPONSIVE ===== */
 @media(max-width:640px){
-  .log-panel{width:calc(100% - 40px);right:20px;left:20px;max-height:180px}
-  .hero-actions{flex-direction:column}
-  .btn-lg{width:100%}
-  .logo{font-size:16px;padding:6px 10px}
+  .header{padding:0 14px}
+  .logo{font-size:16px;padding:6px 9px}
+  .logo-text .c{display:none}
+  .avatar-btn .nick{display:none}
+  .avatar-btn{padding:4px}
+  .online{padding:5px 9px;font-size:12px}
+  .online .lbl{display:none}
+  .hero-actions{flex-direction:column;width:100%}
+  .btn-lg{width:100%;justify-content:center}
+  .user-menu{right:-4px}
 }
 </style>
 </head>
@@ -175,86 +367,125 @@ html,body{
 
 <header class="header">
   <div class="header-left">
-    <span class="status-dot" id="statusDot" title="Статус соединения"></span>
-    <span class="status-text" id="statusText">offline</span>
+    <!-- Онлайн-счётчик -->
+    <div class="online" id="onlineBadge" title="Пользователей онлайн">
+      <span class="dot"></span>
+      <span class="count" id="onlineCount">—</span>
+      <span class="lbl">онлайн</span>
+    </div>
   </div>
+
   <div class="header-right">
+    <!-- Место для кнопок входа ИЛИ иконки аккаунта -->
     <div id="userArea"></div>
+
+    <!-- Логотип -->
     <div class="logo" id="logo" title="На главную">
-      <span class="logo-z">ZV</span><span class="logo-c">-CLUB</span>
+      <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+      <span class="logo-text">ZV<span class="c">-CLUB</span></span>
     </div>
   </div>
 </header>
 
 <main class="main" id="mainPage">
   <section class="hero">
-    <h1 class="hero-title"><span class="grad">ZV-CLUB</span></h1>
-    <p class="hero-sub">Закрытое сообщество. Только для своих.</p>
-    <div class="hero-actions">
-      <button class="btn btn-primary btn-lg" id="btnRegister">Создать аккаунт</button>
-      <button class="btn btn-outline btn-lg" id="btnLogin">Войти</button>
+    <div class="hero-badge"><span class="dot"></span> закрытое сообщество</div>
+
+    <h1 class="hero-title">
+      ZV<span class="accent">-CLUB</span>
+    </h1>
+
+    <p class="hero-sub">
+      Только <span class="sv">для СВОих</span>. Никакого лишнего.
+    </p>
+
+    <div class="hero-actions" id="heroActions">
+      <button class="btn btn-primary btn-lg" id="btnRegister">
+        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        Создать аккаунт
+      </button>
+      <button class="btn btn-ghost btn-lg" id="btnLogin">
+        <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Войти
+      </button>
     </div>
   </section>
 </main>
 
-<aside class="log-panel" id="logPanel">
-  <div class="log-header">
-    <span>📋 Лог событий</span>
-    <button class="log-clear" id="logClear" title="Очистить">×</button>
-  </div>
-  <div class="log-body" id="logBody"></div>
-</aside>
-
+<!-- МОДАЛКА -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modal">
-    <button class="modal-close" id="modalClose">×</button>
-    <h2 class="modal-title" id="modalTitle">Вход</h2>
+    <button class="modal-close" id="modalClose" title="Закрыть">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <h2 class="modal-title" id="modalTitle">
+      <svg id="modalTitleIcon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      <span id="modalTitleText">Вход</span>
+    </h2>
+
     <form id="authForm" autocomplete="off">
       <div class="field">
         <label for="username">Имя пользователя</label>
-        <input type="text" id="username" maxlength="20" required>
+        <div class="input-wrap">
+          <svg class="inp-ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <input type="text" id="username" maxlength="20" required placeholder="nickname">
+        </div>
         <small class="hint" id="hintUser">3–20 символов, латиница/цифры/_</small>
       </div>
+
       <div class="field">
         <label for="password">Пароль</label>
-        <div class="pass-wrap">
-          <input type="password" id="password" maxlength="64" required>
-          <button type="button" class="pass-toggle" id="passToggle">👁</button>
+        <div class="input-wrap">
+          <svg class="inp-ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="password" maxlength="64" required placeholder="••••••••">
+          <button type="button" class="pass-toggle" id="passToggle" title="Показать пароль">
+            <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
         </div>
         <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
         <small class="hint" id="hintPass">Минимум 8 символов</small>
       </div>
+
       <div class="field" id="confirmField" style="display:none;">
         <label for="password2">Повторите пароль</label>
-        <input type="password" id="password2" maxlength="64">
+        <div class="input-wrap">
+          <svg class="inp-ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="password2" maxlength="64" placeholder="••••••••">
+        </div>
       </div>
+
       <div class="captcha-box" id="captchaBox" style="display:none;">
-        <label id="captchaLabel"></label>
-        <input type="text" id="captchaInput" placeholder="Ответ" autocomplete="off">
+        <svg class="cap-ico" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div class="cap-body">
+          <label id="captchaLabel"></label>
+          <input type="text" id="captchaInput" placeholder="Ответ" autocomplete="off">
+        </div>
       </div>
+
       <div class="modal-actions">
-        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Войти</button>
+        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+          <span id="submitText">Войти</span>
+        </button>
       </div>
       <div class="modal-msg" id="modalMsg"></div>
     </form>
   </div>
 </div>
 
-<canvas id="particles"></canvas>
-
 <script>
 /* =========================================================
-   КОНФИГ — твой Apps Script Web App
+   КОНФИГ
    ========================================================= */
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 
 /* =========================================================
-   ЗВУКИ (Web Audio API — без внешних файлов)
+   ЗВУКИ
    ========================================================= */
 const Sound = (() => {
   let ctx = null;
   function c(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; }
-  function tone(freq, dur=0.08, type='sine', vol=0.06){
+  function tone(freq, dur=0.08, type='sine', vol=0.05){
     try{
       const a=c(), o=a.createOscillator(), g=a.createGain();
       o.type=type; o.frequency.setValueAtTime(freq,a.currentTime);
@@ -265,37 +496,17 @@ const Sound = (() => {
     }catch(e){}
   }
   return {
-    click:()=>tone(600,.05,'square',.05),
-    hover:()=>tone(900,.03,'sine',.02),
-    success:()=>{tone(523,.1);setTimeout(()=>tone(659,.1),90);setTimeout(()=>tone(784,.18),180)},
-    error:()=>{tone(200,.15,'sawtooth',.06);setTimeout(()=>tone(150,.2,'sawtooth',.06),120)},
-    open:()=>{tone(440,.06);setTimeout(()=>tone(660,.08),60)},
-    close:()=>{tone(660,.06);setTimeout(()=>tone(440,.08),60)},
-    type:()=>tone(1200+Math.random()*400,.02,'sine',.015)
+    click:()=>tone(500,.04,'sine',.04),
+    success:()=>{tone(523,.08);setTimeout(()=>tone(784,.14),80)},
+    error:()=>{tone(180,.14,'sawtooth',.05)},
+    open:()=>tone(660,.06),
+    close:()=>tone(440,.06),
+    type:()=>tone(1100+Math.random()*300,.015,'sine',.012)
   };
 })();
 
 /* =========================================================
-   ЛОГ
-   ========================================================= */
-const Log = (() => {
-  const body = document.getElementById('logBody');
-  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-  return {
-    add(msg,type='info'){
-      const t=new Date().toLocaleTimeString('ru-RU');
-      const d=document.createElement('div');
-      d.className='log-entry '+type;
-      d.innerHTML=`<span class="t">[${t}]</span> ${escapeHtml(msg)}`;
-      body.prepend(d);
-      while(body.children.length>100) body.lastChild.remove();
-    },
-    clear(){body.innerHTML=''}
-  };
-})();
-
-/* =========================================================
-   КРИПТО + УТИЛИТЫ
+   КРИПТО
    ========================================================= */
 async function sha256(text){
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
@@ -307,14 +518,14 @@ function randomSalt(len=16){
 }
 
 /* =========================================================
-   API — обёртка над Google Apps Script
+   API
    ========================================================= */
 async function api(action, payload={}){
   const res = await fetch(API_URL,{
     method:'POST',
     headers:{'Content-Type':'text/plain;charset=utf-8'},
     body: JSON.stringify({action, ...payload}),
-    redirect: 'follow'
+    redirect:'follow'
   });
   if(!res.ok) throw new Error('HTTP '+res.status);
   return res.json();
@@ -343,7 +554,8 @@ function validatePassword(p){
 }
 function passwordStrength(p){
   let s=0;
-  if(p.length>=8)s++; if(p.length>=12)s++;
+  if(p.length>=8)s++;
+  if(p.length>=12)s++;
   if(/[a-z]/.test(p)&&/[A-Z]/.test(p))s++;
   if(/\d/.test(p))s++;
   if(/[^a-zA-Z0-9]/.test(p))s++;
@@ -351,7 +563,7 @@ function passwordStrength(p){
 }
 
 /* =========================================================
-   RATE LIMIT (локальный)
+   RATE LIMIT
    ========================================================= */
 const Rate = (()=>{
   const MAX=5, LOCK=60_000;
@@ -389,7 +601,7 @@ const Session = {
 };
 
 /* =========================================================
-   AUTH — регистрация / вход
+   AUTH
    ========================================================= */
 const Auth = {
   async register(username,password,password2){
@@ -397,7 +609,6 @@ const Auth = {
     const eP=validatePassword(password); if(eP) return {ok:false,error:eP};
     if(password!==password2) return {ok:false,error:'Пароли не совпадают'};
     const rl=Rate.check('register'); if(!rl.ok) return {ok:false,error:rl.msg};
-
     try{
       const salt=randomSalt();
       const hash=await sha256(salt+password);
@@ -415,7 +626,6 @@ const Auth = {
     const eU=validateUsername(username); if(eU) return {ok:false,error:eU};
     if(!password) return {ok:false,error:'Введите пароль'};
     const rl=Rate.check('login'); if(!rl.ok) return {ok:false,error:rl.msg};
-
     try{
       const saltRes=await api('getSalt',{username});
       if(!saltRes.ok){Rate.record('login',false);return {ok:false,error:'Неверное имя или пароль'}};
@@ -433,75 +643,180 @@ const Auth = {
 };
 
 /* =========================================================
+   ОНЛАЙН (heartbeat)
+   ========================================================= */
+const Online = {
+  timer: null,
+  async beat(){
+    const s = Session.get();
+    const token = s?.token || ('guest_' + (localStorage.getItem('zv_guest') || (()=>{
+      const g = 'g_' + Math.random().toString(36).slice(2,12);
+      localStorage.setItem('zv_guest', g);
+      return g;
+    })()));
+    try{
+      const res = await api('heartbeat', {token});
+      if(res.ok){
+        document.getElementById('onlineCount').textContent = res.count;
+        document.getElementById('onlineBadge').classList.remove('off');
+      }else{
+        document.getElementById('onlineBadge').classList.add('off');
+      }
+    }catch(e){
+      document.getElementById('onlineBadge').classList.add('off');
+    }
+  },
+  start(){
+    this.beat();
+    this.timer = setInterval(()=>this.beat(), 15000);
+  },
+  async stop(){
+    clearInterval(this.timer);
+    const s = Session.get();
+    const token = s?.token || ('guest_' + (localStorage.getItem('zv_guest')||''));
+    try{ await api('offline',{token}); }catch(e){}
+  }
+};
+
+/* =========================================================
    UI
    ========================================================= */
 const $=id=>document.getElementById(id);
 const els={
-  statusDot:$('statusDot'),statusText:$('statusText'),
+  onlineBadge:$('onlineBadge'), onlineCount:$('onlineCount'),
   userArea:$('userArea'),
   logo:$('logo'),
   btnLogin:$('btnLogin'),btnRegister:$('btnRegister'),
+  heroActions:$('heroActions'),
   modalOverlay:$('modalOverlay'),modalClose:$('modalClose'),
-  modalTitle:$('modalTitle'),authForm:$('authForm'),
+  modalTitle:$('modalTitle'),modalTitleText:$('modalTitleText'),modalTitleIcon:$('modalTitleIcon'),
+  authForm:$('authForm'),
   username:$('username'),password:$('password'),password2:$('password2'),
-  confirmField:$('confirmField'),passToggle:$('passToggle'),
+  confirmField:$('confirmField'),passToggle:$('passToggle'),eyeIcon:$('eyeIcon'),
   strengthFill:$('strengthFill'),
   hintUser:$('hintUser'),hintPass:$('hintPass'),
   captchaBox:$('captchaBox'),captchaLabel:$('captchaLabel'),captchaInput:$('captchaInput'),
-  submitBtn:$('submitBtn'),modalMsg:$('modalMsg')
+  submitBtn:$('submitBtn'),submitText:$('submitText'),
+  modalMsg:$('modalMsg')
 };
 
 let mode='login';
 let captchaAnswer=0;
+let menuOpen=false;
 
-/* --- Лог панель --- */
-$('logClear').onclick=()=>{Log.clear();Sound.click();Log.add('Лог очищен','warn')};
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
-/* --- Проверка сервера --- */
-async function pingServer(){
-  try{
-    const r=await fetch(API_URL,{method:'GET', redirect:'follow'});
-    const ok=r.ok;
-    els.statusDot.className='status-dot '+(ok?'online':'offline');
-    els.statusText.textContent=ok?'online':'offline';
-    Log.add(ok?'Соединение установлено':'Сервер недоступен',ok?'ok':'err');
-  }catch(e){
-    els.statusDot.className='status-dot offline';
-    els.statusText.textContent='offline';
-    Log.add('Сервер недоступен','err');
-  }
-}
+/* ---- Иконки SVG ---- */
+const ICO = {
+  login:'<svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>',
+  register:'<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>',
+  chev:'<svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>',
+  settings:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+  logout:'<svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
+  eye:'<svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  eyeOff:'<svg id="eyeIcon" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+};
 
-/* --- Рендер состояния --- */
+/* ---- Рендер userArea ---- */
 function renderAuthState(){
   const s=Session.get();
   if(s){
-    els.userArea.innerHTML=`<span class="user-badge">👤 ${escapeHtml(s.username)}</span>
-      <button class="btn btn-ghost" id="btnLogout">Выйти</button>`;
-    $('btnLogout').onclick=()=>{
-      Session.clear();Sound.close();Log.add('Выход из аккаунта','warn');
-      renderAuthState();
+    const initial = s.username.charAt(0).toUpperCase();
+    els.userArea.innerHTML = `
+      <div class="user-wrap" id="userWrap">
+        <button class="avatar-btn" id="avatarBtn">
+          <span class="av">${escapeHtml(initial)}</span>
+          <span class="nick">${escapeHtml(s.username)}</span>
+          ${ICO.chev}
+        </button>
+        <div class="user-menu" id="userMenu">
+          <div class="user-menu-head">
+            <div class="av-lg">${escapeHtml(initial)}</div>
+            <div class="info">
+              <div class="name">${escapeHtml(s.username)}</div>
+              <div class="status">в сети</div>
+            </div>
+          </div>
+          <div class="user-menu-body">
+            <button class="menu-item" id="menuSettings">
+              ${ICO.settings}
+              Настройки аккаунта
+            </button>
+            <div class="menu-divider"></div>
+            <button class="menu-item danger" id="menuLogout">
+              ${ICO.logout}
+              Выйти
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const wrap = $('userWrap');
+    const btn = $('avatarBtn');
+    const menu = $('userMenu');
+
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      menuOpen = !menuOpen;
+      menu.classList.toggle('show', menuOpen);
+      btn.classList.toggle('open', menuOpen);
+      Sound.click();
     };
-    els.btnLogin.style.display='none';
-    els.btnRegister.style.display='none';
-  }else{
-    els.userArea.innerHTML=`<button class="btn btn-ghost" id="btnLoginTop">Войти</button>
-      <button class="btn btn-primary" id="btnRegisterTop">Регистрация</button>`;
-    $('btnLoginTop').onclick=()=>openModal('login');
-    $('btnRegisterTop').onclick=()=>openModal('register');
-    els.btnLogin.style.display='';
-    els.btnRegister.style.display='';
+
+    document.addEventListener('click', (e) => {
+      if(menuOpen && !wrap.contains(e.target)){
+        menuOpen = false;
+        menu.classList.remove('show');
+        btn.classList.remove('open');
+      }
+    });
+
+    $('menuSettings').onclick = () => {
+      Sound.click();
+      menuOpen=false;
+      menu.classList.remove('show');
+      btn.classList.remove('open');
+      alert('Настройки аккаунта появятся в следующей версии 😉');
+    };
+
+    $('menuLogout').onclick = async () => {
+      Sound.close();
+      menuOpen=false;
+      await Online.stop();
+      Session.clear();
+      renderAuthState();
+      Online.start();
+    };
+
+    // Скрыть кнопки на главной
+    if(els.heroActions) els.heroActions.style.display='none';
+
+  } else {
+    els.userArea.innerHTML = `
+      <button class="btn btn-ghost" id="btnLoginTop">${ICO.login} Войти</button>
+      <button class="btn btn-primary" id="btnRegisterTop">${ICO.register} Регистрация</button>
+    `;
+    $('btnLoginTop').onclick = () => openModal('login');
+    $('btnRegisterTop').onclick = () => openModal('register');
+    if(els.heroActions) els.heroActions.style.display='';
   }
 }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
-/* --- Модалка --- */
+/* ---- Модалка ---- */
 function openModal(m){
   mode=m;
-  els.modalTitle.textContent = m==='login'?'Вход в ZV-CLUB':'Регистрация';
-  els.submitBtn.textContent = m==='login'?'Войти':'Создать аккаунт';
+  if(m==='login'){
+    els.modalTitleText.textContent='Вход';
+    els.modalTitleIcon.innerHTML='<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>';
+    els.submitText.textContent='Войти';
+  } else {
+    els.modalTitleText.textContent='Регистрация';
+    els.modalTitleIcon.innerHTML='<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>';
+    els.submitText.textContent='Создать аккаунт';
+  }
   els.confirmField.style.display = m==='register'?'block':'none';
-  els.captchaBox.style.display = m==='register'?'block':'none';
+  els.captchaBox.style.display = m==='register'?'flex':'none';
 
   if(m==='register'){
     const a=Math.floor(Math.random()*10)+1;
@@ -514,10 +829,13 @@ function openModal(m){
   els.modalMsg.className='modal-msg';
   els.authForm.reset();
   els.strengthFill.style.width='0%';
+  els.hintUser.textContent='3–20 символов, латиница/цифры/_';
+  els.hintUser.className='hint';
+  els.hintPass.textContent='Минимум 8 символов';
+  els.hintPass.className='hint';
   els.modalOverlay.classList.add('show');
   Sound.open();
-  Log.add(`Открыта форма: ${m==='login'?'вход':'регистрация'}`);
-  setTimeout(()=>els.username.focus(),100);
+  setTimeout(()=>els.username.focus(),80);
 }
 function closeModal(){
   els.modalOverlay.classList.remove('show');
@@ -529,27 +847,29 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&els.modalOverlay.classList.contains('show'))closeModal();
 });
 
-/* --- Кнопки --- */
+/* ---- Кнопки на главной ---- */
 els.btnLogin.onclick=()=>openModal('login');
 els.btnRegister.onclick=()=>openModal('register');
-els.logo.onclick=()=>{Sound.click();Log.add('Переход на главную');window.scrollTo({top:0,behavior:'smooth'})};
+els.logo.onclick=()=>{
+  Sound.click();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
 
-/* --- Показать/скрыть пароль --- */
+/* ---- Показать/скрыть пароль ---- */
 els.passToggle.onclick=()=>{
-  const t=els.password.type==='password'?'text':'password';
-  els.password.type=t;
-  els.passToggle.textContent=t==='password'?'👁':'🙈';
+  const showing = els.password.type==='text';
+  els.password.type = showing ? 'password' : 'text';
+  els.passToggle.innerHTML = showing ? ICO.eye : ICO.eyeOff;
   Sound.click();
 };
 
-/* --- Индикатор силы пароля + звук печати --- */
+/* ---- Валидация в реальном времени ---- */
 els.password.addEventListener('input',()=>{
   Sound.type();
   const s=passwordStrength(els.password.value);
-  const pct=(s/5)*100;
-  const colors=['#ff5470','#ff5470','#fbbf24','#fbbf24','#34d399','#22d3ee'];
-  els.strengthFill.style.width=pct+'%';
-  els.strengthFill.style.background=colors[s];
+  els.strengthFill.style.width = ((s/5)*100)+'%';
+  const colors=['#f87171','#f87171','#fbbf24','#fbbf24','#4ade80','#4ade80'];
+  els.strengthFill.style.background = colors[s];
   const e=validatePassword(els.password.value);
   els.hintPass.textContent = els.password.value ? (e||'✓ Хороший пароль') : 'Минимум 8 символов';
   els.hintPass.className='hint '+(els.password.value?(e?'err':'ok'):'');
@@ -561,7 +881,7 @@ els.username.addEventListener('input',()=>{
   els.hintUser.className='hint '+(els.username.value?(e?'err':'ok'):'');
 });
 
-/* --- Отправка формы --- */
+/* ---- Отправка формы ---- */
 els.authForm.addEventListener('submit',async e=>{
   e.preventDefault();
   els.modalMsg.textContent='';
@@ -571,14 +891,12 @@ els.authForm.addEventListener('submit',async e=>{
   const p=els.password.value;
   const p2=els.password2.value;
 
-  // Капча
   if(mode==='register'){
     const ans=parseInt(els.captchaInput.value,10);
     if(ans!==captchaAnswer){
       Sound.error();
       els.modalMsg.textContent='Неверный ответ на капчу';
       els.modalMsg.className='modal-msg err';
-      Log.add('Капча провалена','err');
       const a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
       captchaAnswer=a+b;
       els.captchaLabel.textContent=`Сколько будет ${a} + ${b}?`;
@@ -588,9 +906,8 @@ els.authForm.addEventListener('submit',async e=>{
   }
 
   els.submitBtn.disabled=true;
-  const origText=els.submitBtn.textContent;
-  els.submitBtn.textContent='⏳ Обработка...';
-  Log.add(`Попытка ${mode==='login'?'входа':'регистрации'}: ${u}`);
+  const orig=els.submitText.textContent;
+  els.submitText.textContent='⏳ Обработка...';
 
   try{
     const res = mode==='login'
@@ -599,18 +916,17 @@ els.authForm.addEventListener('submit',async e=>{
 
     if(res.ok){
       Sound.success();
-      els.modalMsg.textContent='✓ Успех!';
+      els.modalMsg.textContent='✓ Успех';
       els.modalMsg.className='modal-msg ok';
-      Log.add(mode==='login'?'Вход выполнен':'Аккаунт создан','ok');
-      setTimeout(()=>{
+      setTimeout(async ()=>{
         closeModal();
         renderAuthState();
-      },600);
+        await Online.beat();
+      },500);
     }else{
       Sound.error();
       els.modalMsg.textContent='✗ '+res.error;
       els.modalMsg.className='modal-msg err';
-      Log.add('Ошибка: '+res.error,'err');
       els.password.classList.add('err');
       setTimeout(()=>els.password.classList.remove('err'),400);
     }
@@ -618,64 +934,29 @@ els.authForm.addEventListener('submit',async e=>{
     Sound.error();
     els.modalMsg.textContent='✗ Ошибка сети';
     els.modalMsg.className='modal-msg err';
-    Log.add('Ошибка сети: '+err.message,'err');
   }finally{
     els.submitBtn.disabled=false;
-    els.submitBtn.textContent=origText;
+    els.submitText.textContent=orig;
   }
 });
-
-/* =========================================================
-   ЧАСТИЦЫ (фон)
-   ========================================================= */
-(()=>{
-  const cv=document.getElementById('particles');
-  const cx=cv.getContext('2d');
-  let W,H,parts=[];
-  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
-  resize(); addEventListener('resize',resize);
-  const N=40;
-  for(let i=0;i<N;i++)parts.push({
-    x:Math.random()*W,y:Math.random()*H,
-    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
-    r:Math.random()*1.5+.5
-  });
-  function loop(){
-    cx.clearRect(0,0,W,H);
-    for(const p of parts){
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>W)p.vx*=-1;
-      if(p.y<0||p.y>H)p.vy*=-1;
-      cx.beginPath();
-      cx.arc(p.x,p.y,p.r,0,7);
-      cx.fillStyle='rgba(124,92,255,.6)';
-      cx.fill();
-    }
-    for(let i=0;i<parts.length;i++){
-      for(let j=i+1;j<parts.length;j++){
-        const dx=parts[i].x-parts[j].x, dy=parts[i].y-parts[j].y;
-        const d=Math.hypot(dx,dy);
-        if(d<120){
-          cx.beginPath();
-          cx.moveTo(parts[i].x,parts[i].y);
-          cx.lineTo(parts[j].x,parts[j].y);
-          cx.strokeStyle=`rgba(124,92,255,${(1-d/120)*.15})`;
-          cx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(loop);
-  }
-  loop();
-})();
 
 /* =========================================================
    СТАРТ
    ========================================================= */
 renderAuthState();
-Log.add('ZV-CLUB загружен','ok');
-pingServer();
-setInterval(pingServer,60_000);
+Online.start();
+
+/* Уходим в offline при закрытии */
+window.addEventListener('beforeunload', () => {
+  const s = Session.get();
+  const token = s?.token || ('guest_' + (localStorage.getItem('zv_guest')||''));
+  navigator.sendBeacon(API_URL, JSON.stringify({action:'offline', token}));
+});
+
+/* При возврате на вкладку — обновить онлайн */
+document.addEventListener('visibilitychange', () => {
+  if(!document.hidden) Online.beat();
+});
 </script>
 </body>
 </html>

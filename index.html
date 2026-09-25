@@ -147,11 +147,74 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .dash-header{display:flex;align-items:center;justify-content:space-between;padding:0 4px}
 .dash-title{font-size:22px;font-weight:700;color:var(--fg)}
 .dash-sub{font-size:13px;color:var(--muted);margin-top:3px}
-.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;grid-auto-rows:minmax(110px,auto)}
 .dash-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;transition:border-color .35s var(--ease),background .35s var(--ease),transform .3s var(--ease);cursor:pointer}
 .dash-card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-3px)}
 .dash-card h3{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--fg)}
 .dash-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* ===== ZV-AWARDS ===== */
+.dash-card.awards{
+  grid-column:span 2;
+  position:relative;
+  border:none;
+  overflow:hidden;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:200px;
+  color:#fff;
+  cursor:pointer;
+  isolation:isolate;
+  animation:awardsGlow 8s linear infinite;
+}
+.dash-card.awards::before{
+  content:'';
+  position:absolute;inset:-40%;
+  background:conic-gradient(from 0deg,#ff004c,#ff7a00,#ffd400,#3aff6c,#00e0ff,#5b5bff,#c400ff,#ff004c);
+  animation:awardsSpin 6s linear infinite;
+  z-index:-2;
+  filter:blur(2px);
+}
+.dash-card.awards::after{
+  content:'';
+  position:absolute;inset:3px;
+  border-radius:10px;
+  background:rgba(10,10,14,.72);
+  backdrop-filter:blur(6px);
+  z-index:-1;
+}
+@keyframes awardsSpin{to{transform:rotate(360deg)}}
+@keyframes awardsGlow{0%,100%{filter:drop-shadow(0 0 18px rgba(255,0,120,.45))}50%{filter:drop-shadow(0 0 32px rgba(0,220,255,.55))}}
+.dash-card.awards:hover{transform:translateY(-4px) scale(1.005)}
+.dash-card.awards .awards-inner{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px}
+.dash-card.awards .awards-title{
+  font-size:26px;font-weight:900;letter-spacing:1.5px;
+  background:linear-gradient(90deg,#ff4d6d,#ffd400,#3aff6c,#00e0ff,#c400ff,#ff4d6d);
+  background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:awardsText 4s linear infinite;
+}
+@keyframes awardsText{to{background-position:300% 0}}
+.dash-card.awards .awards-sub{font-size:14px;font-weight:600;color:#fff;opacity:.95}
+.dash-card.awards .awards-desc{font-size:12.5px;color:#cfd2dd;max-width:520px;line-height:1.55;margin-top:4px}
+.dash-card.awards .awards-cta{
+  margin-top:12px;
+  display:inline-flex;align-items:center;gap:8px;
+  align-self:flex-start;
+  padding:9px 16px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ff4d6d,#c400ff);
+  color:#fff;font-weight:800;font-size:13px;
+  box-shadow:0 8px 22px rgba(196,0,255,.35);
+}
+.dash-card.awards .awards-cta svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:640px){
+  .dash-card.awards{grid-column:span 1}
+  .dash-card.awards .awards-title{font-size:20px}
+}
 
 .users-section{display:none;flex-direction:column;gap:14px}
 .users-section.active{display:flex}
@@ -578,14 +641,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
     <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
     <span class="lbl">Найти друзей</span>
   </button>
-  <button class="sidebar-item wheel" id="sbWheel">
-    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></span>
-    <span class="lbl">Колесо Фортуны</span>
-  </button>
-  <button class="sidebar-item" id="sbSettings">
-    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-    <span class="lbl">Настройки аккаунта</span>
-  </button>
   <button class="sidebar-item" id="sbSiteSettings">
     <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span>
     <span class="lbl">Настройки сайта</span>
@@ -595,6 +650,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
     <span class="lbl">Админ-панель</span>
   </button>
   <div class="sidebar-spacer"></div>
+  <button class="sidebar-item wheel" id="sbWheel">
+    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></span>
+    <span class="lbl">Колесо Фортуны</span>
+  </button>
   <button class="sidebar-item logout" id="sbLogout">
     <span class="ico"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
     <span class="lbl">Выйти</span>
@@ -644,6 +703,18 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
           <h3>🎡 Колесо Фортуны</h3>
           <p>Испытай удачу! Поставь обезьян и крути колесо. x3, x2 или проигрыш.</p>
         </div>
+
+        <a class="dash-card awards" href="https://ccproxy111-ai.github.io/ZV-AWARDS/" target="_blank" rel="noopener noreferrer" id="awardsCard">
+          <div class="awards-inner">
+            <div class="awards-title">ZV-AWARDS</div>
+            <div class="awards-sub">Голосуй за номинантов</div>
+            <div class="awards-desc">Ежегодная премия клуба. Выбери лучших в номинациях и повлияй на итоги.</div>
+            <span class="awards-cta">
+              Перейти к голосованию
+              <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </span>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -972,6 +1043,8 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 const HEARTBEAT_MS = 10000;
 const FETCH_TIMEOUT = 12000;
+const WHEEL_SPIN_MS = 5600;      // минимум 5 сек анимации
+const WHEEL_SPIN_COOLDOWN = 1500; // защита от спама между спинами
 
 const EMOJI_LIST = [
   { emoji:'', label:'Без эмодзи', price:0 },
@@ -996,7 +1069,6 @@ const THEME_LIST = [
 ];
 const SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
 
-// 8 секторов: индексы [0]=зелёный, [1,3,5]=красные, [2,4,6,7]=чёрные
 const WHEEL_SEGMENTS = [
   { color:'#22c55e', type:'green',  mult:3,   label:'x3'   },
   { color:'#ef4444', type:'red',    mult:2,   label:'x2'   },
@@ -1258,6 +1330,7 @@ let tempProfile=null;
 let tempProfileChanged=false;
 let wheelSpinning=false;
 let wheelTickInterval=null;
+let wheelLastSpinAt=0;
 let whTimer=null;
 
 function applyTheme(theme){
@@ -1540,11 +1613,10 @@ function switchView(name){
 $('sbHome').onclick=()=>{Sound.click();switchView('home');};
 $('sbFriends').onclick=()=>{Sound.click();switchView('friends');};
 $('sbWheel').onclick=()=>{Sound.click();switchView('wheel');};
-$('sbSettings').onclick=()=>{Sound.click();openAccountSettings();};
 $('sbSiteSettings').onclick=()=>{Sound.click();openSiteSettings();};
 $('sbLogout').onclick=()=>{Sound.click();openConfirmLogout();};
 
-document.querySelectorAll('.dash-card').forEach(card=>{
+document.querySelectorAll('.dash-card[data-action]').forEach(card=>{
   card.onclick=()=>{
     const a=card.dataset.action;
     Sound.click();
@@ -1647,6 +1719,8 @@ $('wheelBetInput').addEventListener('input', ()=>{
 
 $('wheelSpinBtn').onclick = async ()=>{
   if(wheelSpinning) return;
+  const now = Date.now();
+  if(now - wheelLastSpinAt < WHEEL_SPIN_COOLDOWN){ Sound.error(); return; }
   const s=Session.get(); if(!s||!s.token){ Sound.error(); return; }
   const bal = (s.profile && s.profile.monkeys) || 0;
   let bet = parseInt($('wheelBetInput').value,10);
@@ -1657,6 +1731,7 @@ $('wheelSpinBtn').onclick = async ()=>{
   if(bet > WHEEL_MAX_BET) bet = WHEEL_MAX_BET;
 
   wheelSpinning = true;
+  wheelLastSpinAt = now;
   $('wheelSpinBtn').disabled = true;
   $('wheelSpinBtn').textContent = '🎡 Крутится...';
   $('wheelResult').className='wheel-result';
@@ -1704,12 +1779,13 @@ $('wheelSpinBtn').onclick = async ()=>{
   const jitter = (Math.random()*segAngle*0.6 - segAngle*0.3);
   const targetAngle = 360*6 - midOfSeg + jitter;
   const rotor = $('wheelRotor');
-  rotor.style.transition = 'transform 6s cubic-bezier(.15,.9,.2,1)';
+  rotor.style.transition = 'transform ' + (WHEEL_SPIN_MS/1000) + 's cubic-bezier(.15,.9,.2,1)';
+  // Принудительный reflow, чтобы transition точно применился
+  void rotor.offsetWidth;
   rotor.style.transform = `rotate(${targetAngle}deg)`;
 
   if(wheelTickInterval) clearInterval(wheelTickInterval);
   wheelTickInterval = setInterval(()=>{
-    // звук только если колесо реально крутится
     if(!wheelSpinning){ clearInterval(wheelTickInterval); wheelTickInterval=null; return; }
     Sound.wheelTick();
   }, 110);
@@ -1740,7 +1816,7 @@ $('wheelSpinBtn').onclick = async ()=>{
     $('wheelSpinBtn').disabled=false;
     $('wheelSpinBtn').textContent='🎡 Крутить колесо';
     loadWheelHistory();
-  }, 6200);
+  }, WHEEL_SPIN_MS);
 };
 
 /* =========================================================

@@ -153,7 +153,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .dash-card h3{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--fg)}
 .dash-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
 
-/* ===== ZV-AWARDS — исправленный плавный фон ===== */
 .dash-card.awards{
   grid-column:span 2;
   position:relative;
@@ -438,7 +437,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .toggle.on{background:var(--ok)}
 .toggle.on::after{transform:translateX(16px)}
 
-/* ===== ADMIN ===== */
 .admin-wrap{padding:0;color:var(--fg);display:flex;flex-direction:column;height:100%;min-height:600px}
 .admin-login{max-width:360px;margin:auto;padding:40px 30px;animation:fadeUp .7s var(--ease)}
 .admin-login h2{text-align:center;font-size:22px;margin-bottom:6px;background:linear-gradient(135deg,#ffcc33,#f59e0b,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -494,7 +492,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .skeleton-card{height:120px;margin-bottom:12px}
 
-/* ===== WHEEL ===== */
 .wheel-section{display:none;flex-direction:column;gap:22px;padding:10px 0;width:100%}
 .wheel-section.active{display:flex;animation:fadeUp .6s var(--ease)}
 .wheel-hero{text-align:center;max-width:640px;margin:0 auto}
@@ -788,7 +785,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- AUTH MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <button class="modal-close" id="modalClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -837,7 +833,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- CONFIRM LOGOUT -->
 <div class="modal-overlay" id="confirmOverlay">
   <div class="modal" style="max-width:380px;">
     <div class="confirm-body">
@@ -852,7 +847,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- UNSAVED -->
 <div class="modal-overlay" id="unsavedOverlay">
   <div class="modal" style="max-width:380px;">
     <div class="confirm-body">
@@ -868,7 +862,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- RESPECT -->
 <div class="modal-overlay" id="respectOverlay">
   <div class="modal" style="max-width:360px;">
     <div class="confirm-body">
@@ -883,7 +876,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- ACCOUNT SETTINGS -->
 <div class="modal-overlay" id="settingsOverlay">
   <div class="modal wide">
     <button class="modal-close" id="settingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -921,7 +913,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- SITE SETTINGS -->
 <div class="modal-overlay" id="siteSettingsOverlay">
   <div class="modal wide">
     <button class="modal-close" id="siteSettingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -954,7 +945,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- PROFILE -->
 <div class="modal-overlay" id="profileOverlay">
   <div class="modal profile" id="profileModal">
     <div class="profile-header">
@@ -985,7 +975,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- BUY -->
 <div class="modal-overlay" id="buyOverlay">
   <div class="modal" style="max-width:360px;">
     <div class="confirm-body">
@@ -1000,7 +989,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
-<!-- ADMIN -->
 <div class="modal-overlay" id="adminOverlay">
   <div class="modal wide" id="adminModal" style="max-height:88vh;display:flex;flex-direction:column;max-width:1000px">
     <button class="modal-close" id="adminClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -1008,9 +996,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 <script>
-/* =========================================================
-   КОНФИГ
-   ========================================================= */
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 const HEARTBEAT_MS = 10000;
 const FETCH_TIMEOUT = 12000;
@@ -1052,15 +1037,6 @@ const WHEEL_SEGMENTS = [
 ];
 const WHEEL_MIN_BET = 100;
 const WHEEL_MAX_BET = 5000;
-
-/* =========================================================
-   ОПТИМИЗАЦИЯ
-   ========================================================= */
-const PERF = (()=>{
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.matchMedia('(max-width: 640px)').matches;
-  return { reduced, isMobile, shaderOff: reduced || isMobile };
-})();
 
 const Sound = (() => {
   let ctx = null;
@@ -1148,9 +1124,6 @@ function randomSalt(len=16){
   return [...a].map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
-/* =========================================================
-   API — JSONP
-   ========================================================= */
 let jsonpCounter = 0;
 function api(action, payload={}){
   return new Promise((resolve, reject) => {
@@ -1597,9 +1570,6 @@ document.querySelectorAll('.dash-card[data-action]').forEach(card=>{
   };
 });
 
-/* =========================================================
-   WHEEL
-   ========================================================= */
 function buildWheel(){
   const svg = $('wheelSvg');
   if(!svg) return;
@@ -1688,7 +1658,6 @@ $('wheelBetInput').addEventListener('input', ()=>{
   if(v > bal) $('wheelBetInput').value = bal;
 });
 
-// Мгновенный сброс без анимации (используется только в редких случаях)
 function resetWheelRotor(){
   const rotor = $('wheelRotor');
   if(!rotor) return;
@@ -1713,7 +1682,6 @@ $('wheelSpinBtn').onclick = async ()=>{
   wheelSpinning = true;
   wheelLastSpinAt = now;
 
-  // Мгновенный сброс колеса в 0 ПЕРЕД новым прокрутом (без анимации)
   resetWheelRotor();
 
   $('wheelSpinBtn').disabled = true;
@@ -1744,15 +1712,6 @@ $('wheelSpinBtn').onclick = async ()=>{
     return;
   }
 
-  const winAmount = res.winAmount || 0;
-  const finalBalance = res.monkeysFinal;
-  const cur2 = Session.get();
-  cur2.profile.monkeys = finalBalance;
-  if(winAmount > 0) cur2.profile.wins = (cur2.profile.wins || 0) + 1;
-  Session.save(cur2);
-  updateWheelBalance();
-  updateMonkeysWidget();
-
   const segIdx = res.segment;
   const N = WHEEL_SEGMENTS.length;
   const segAngle = 360 / N;
@@ -1770,11 +1729,32 @@ $('wheelSpinBtn').onclick = async ()=>{
     Sound.wheelTick();
   }, 110);
 
-  setTimeout(()=>{
+  setTimeout(async ()=>{
     if(wheelTickInterval){ clearInterval(wheelTickInterval); wheelTickInterval=null; }
 
     const seg = WHEEL_SEGMENTS[segIdx];
-    const profit = winAmount - bet;
+    const winAmount = res.winAmount || 0;
+    const betVal = res.bet || bet;
+
+    const fin = await api('finishWheel', {
+      username: s.username,
+      token: s.token,
+      winAmount: winAmount,
+      segType: seg.type,
+      mult: seg.mult,
+      bet: betVal
+    });
+
+    if(fin.ok){
+      const cur2 = Session.get();
+      cur2.profile.monkeys = fin.monkeysFinal;
+      if(winAmount > 0) cur2.profile.wins = (cur2.profile.wins || 0) + 1;
+      Session.save(cur2);
+      updateWheelBalance();
+      updateMonkeysWidget();
+    }
+
+    const profit = winAmount - betVal;
 
     if(seg.type === 'green'){
       $('wheelResult').className='wheel-result jackpot';
@@ -1788,7 +1768,7 @@ $('wheelSpinBtn').onclick = async ()=>{
       showReward(winAmount);
     } else {
       $('wheelResult').className='wheel-result lose';
-      $('wheelResult').innerHTML = `<span class="big">💀 Проигрыш</span><span>Потеряно: −${bet} 🐵</span>`;
+      $('wheelResult').innerHTML = `<span class="big">💀 Проигрыш</span><span>Потеряно: −${betVal} 🐵</span>`;
       Sound.wheelLose();
     }
 
@@ -1797,7 +1777,6 @@ $('wheelSpinBtn').onclick = async ()=>{
     $('wheelSpinBtn').textContent='🎡 Крутить колесо';
     loadWheelHistory();
 
-    // Плавно возвращаем колесо в исходное положение через 1.5 сек
     setTimeout(()=>{
       const r2 = $('wheelRotor');
       r2.style.transition = 'transform 0.6s cubic-bezier(.2,.8,.25,1)';
@@ -1806,9 +1785,6 @@ $('wheelSpinBtn').onclick = async ()=>{
   }, WHEEL_SPIN_MS);
 };
 
-/* =========================================================
-   WHEEL HISTORY
-   ========================================================= */
 function timeAgo(ts){
   const d = Date.now() - ts;
   const s = Math.floor(d/1000);
@@ -1867,10 +1843,7 @@ function stopWhTimer(){
   if(whTimer){ clearInterval(whTimer); whTimer=null; }
 }
 $('whRefresh').onclick = ()=>{ Sound.click(); loadWheelHistory(); };
-  /* =========================================================
-   USERS / PROFILE / SETTINGS / ADMIN
-   ========================================================= */
-async function loadUsers(){
+  async function loadUsers(){
   const grid=$('usersGrid');
   grid.innerHTML='<div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div>';
   const s=Session.get();
@@ -2275,10 +2248,13 @@ function renderSiteMain(){
     <div class="emoji-grid" id="emojiGrid"></div>
   `;
   const grid=$('emojiGrid');
+
   const all = EMOJI_LIST.slice();
-  if(curEmoji && SECRET_EMOJI.includes(curEmoji)){
-    all.push({ emoji: curEmoji, label:'Секретный', price:-1, secret:true });
-  }
+  SECRET_EMOJI.forEach(sec => {
+    const has = owned.includes(sec);
+    if(has) all.push({ emoji: sec, label:'Секретный', price:-1, secret:true });
+  });
+
   grid.innerHTML = all.map(item=>{
     const has = owned.includes(item.emoji);
     const selected = curEmoji===item.emoji;
@@ -2296,12 +2272,13 @@ function renderSiteMain(){
       ${tag}
     </div>`;
   }).join('');
+
   grid.querySelectorAll('.emoji-item').forEach(el=>{
     el.onclick=async ()=>{
       const emoji=el.dataset.emoji;
       const price=parseInt(el.dataset.price,10);
       const has=el.dataset.owned==='true';
-      if(price===-1){ Sound.error(); return; }
+      if(price===-1 && !has){ Sound.error(); return; }
       if(has){
         if(curEmoji===emoji) return;
         const r = await api('setEmoji',{username:s.username,token:s.token,emoji});
@@ -2355,10 +2332,11 @@ function renderSiteThemes(){
     <div class="theme-grid" id="themeGrid"></div>
   `;
   const all = THEME_LIST.slice();
-  if(SECRET_THEMES.some(t=>t.id===curTheme)){
-    const sec = SECRET_THEMES.find(t=>t.id===curTheme);
-    all.push({...sec, secret:true});
-  }
+  SECRET_THEMES.forEach(sec => {
+    const has = owned.includes(sec.id);
+    if(has) all.push({ ...sec, secret:true });
+  });
+
   const grid=$('themeGrid');
   grid.innerHTML = all.map(t=>{
     const selected = curTheme===t.id;
@@ -2377,12 +2355,13 @@ function renderSiteThemes(){
       ${tag}
     </div>`;
   }).join('');
+
   grid.querySelectorAll('.theme-item').forEach(el=>{
     el.onclick=async ()=>{
       const theme=el.dataset.theme;
       const price=parseInt(el.dataset.price,10);
       const has=el.dataset.owned==='true';
-      if(price===-1){ Sound.error(); return; }
+      if(price===-1 && !has){ Sound.error(); return; }
       if(has){
         if(curTheme===theme) return;
         const r = await api('setTheme',{username:s.username,token:s.token,theme});
@@ -2546,9 +2525,6 @@ function showReward(amount){
   setTimeout(()=>p.classList.remove('show'), 2000);
 }
 
-/* =========================================================
-   PROFILE
-   ========================================================= */
 async function openProfile(username){
   Sound.open();
   $('profileOverlay').classList.add('show');
@@ -2746,7 +2722,6 @@ async function openAdminPanel(){
   }
 }
 
-// Экран создания личной пары (только для тех, у кого isAdmin=true, но нет записи в Admins)
 function renderAdminSetup(){
   const s=Session.get();
   $('adminWrap').innerHTML = `
@@ -2950,7 +2925,6 @@ function renderAdminGrid(){
 
     const token=()=>sessionStorage.getItem('zv_admin_token');
 
-    // Эмодзи — сразу сохраняем и обновляем кэш
     card.querySelectorAll('.adm-emoji-picker button').forEach(b=>{
       b.addEventListener('click', async (e)=>{
         e.preventDefault(); e.stopPropagation();
@@ -2963,13 +2937,21 @@ function renderAdminGrid(){
             Sound.success();
             const idx = adminUsersCache.findIndex(x=>x.username===uname);
             if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            const idx2 = allUsers.findIndex(x=>x.username===uname);
+            if(idx2 >= 0 && r.user){
+              allUsers[idx2].emoji = r.user.emoji;
+              allUsers[idx2].visualName = r.user.visualName;
+              allUsers[idx2].monkeys = r.user.monkeys;
+            }
+            if($('viewFriends') && $('viewFriends').classList.contains('active')){
+              renderUsers(allUsers);
+            }
             renderAdminGrid();
           }else{ Sound.error(); }
         } finally { adminBusy = false; }
       });
     });
 
-    // Темы — сразу сохраняем и обновляем кэш
     card.querySelectorAll('.adm-theme-picker button').forEach(b=>{
       b.addEventListener('click', async (e)=>{
         e.preventDefault(); e.stopPropagation();
@@ -2982,13 +2964,17 @@ function renderAdminGrid(){
             Sound.success();
             const idx = adminUsersCache.findIndex(x=>x.username===uname);
             if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            const idx2 = allUsers.findIndex(x=>x.username===uname);
+            if(idx2 >= 0 && r.user) allUsers[idx2].theme = r.user.theme;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')){
+              renderUsers(allUsers);
+            }
             renderAdminGrid();
           }else{ Sound.error(); }
         } finally { adminBusy = false; }
       });
     });
 
-    // Монеты — кнопки +100, +1000, +10к, −100, −1000
     card.querySelectorAll('.adm-give-btn').forEach(b=>{
       b.addEventListener('click', async (e)=>{
         e.preventDefault(); e.stopPropagation();
@@ -3001,13 +2987,17 @@ function renderAdminGrid(){
             Sound.success();
             const idx = adminUsersCache.findIndex(x=>x.username===uname);
             if(idx >= 0) adminUsersCache[idx].monkeys = r.monkeys;
+            const idx2 = allUsers.findIndex(x=>x.username===uname);
+            if(idx2 >= 0) allUsers[idx2].monkeys = r.monkeys;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')){
+              renderUsers(allUsers);
+            }
             renderAdminGrid();
           }else{ Sound.error(); }
         } finally { adminBusy = false; }
       });
     });
 
-    // Точная установка монет
     const setMonBtn = card.querySelector('.adm-set-mon');
     if(setMonBtn){
       setMonBtn.addEventListener('click', async (e)=>{
@@ -3015,7 +3005,7 @@ function renderAdminGrid(){
         if(adminBusy) return;
         const inp = card.querySelector('.adm-mon-input');
         const val = parseInt(inp.value,10);
-        if(isNaN(val)) { Sound.error(); return; }
+        if(isNaN(val) || val < 0) { Sound.error(); return; }
         adminBusy = true;
         try {
           const r = await api('adminUpdateUser', { adminToken: token(), username: uname, monkeys: val });
@@ -3023,13 +3013,17 @@ function renderAdminGrid(){
             Sound.success();
             const idx = adminUsersCache.findIndex(x=>x.username===uname);
             if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            const idx2 = allUsers.findIndex(x=>x.username===uname);
+            if(idx2 >= 0 && r.user) allUsers[idx2].monkeys = r.user.monkeys;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')){
+              renderUsers(allUsers);
+            }
             renderAdminGrid();
           }else{ Sound.error(); }
         } finally { adminBusy = false; }
       });
     }
 
-    // Сохранить визуальный ник
     const saveVnBtn = card.querySelector('.adm-save-vn');
     if(saveVnBtn){
       saveVnBtn.addEventListener('click', async (e)=>{
@@ -3044,13 +3038,17 @@ function renderAdminGrid(){
             Sound.success();
             const idx = adminUsersCache.findIndex(x=>x.username===uname);
             if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            const idx2 = allUsers.findIndex(x=>x.username===uname);
+            if(idx2 >= 0 && r.user) allUsers[idx2].visualName = r.user.visualName;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')){
+              renderUsers(allUsers);
+            }
             renderAdminGrid();
           }else{ Sound.error(); }
         } finally { adminBusy = false; }
       });
     }
 
-    // Выдать/снять админку
     const admBtn = card.querySelector('.adm-toggle-admin');
     if(admBtn){
       admBtn.addEventListener('click', async (e)=>{
@@ -3064,6 +3062,11 @@ function renderAdminGrid(){
             Sound.success();
             const idx = adminUsersCache.findIndex(x=>x.username===uname);
             if(idx >= 0) adminUsersCache[idx].isAdmin = r.isAdmin;
+            const idx2 = allUsers.findIndex(x=>x.username===uname);
+            if(idx2 >= 0) allUsers[idx2].isAdmin = r.isAdmin;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')){
+              renderUsers(allUsers);
+            }
             renderAdminGrid();
           }else{ Sound.error(); alert(r.error||'Ошибка'); }
         } finally { adminBusy = false; }
@@ -3140,21 +3143,11 @@ function adminCardHtml(u, allEmojis, allThemes){
   </div>`;
 }
 
-/* =========================================================
-   BOOT
-   ========================================================= */
 (function init(){
   buildWheel();
   renderAuthState();
   Online.start();
   switchView('home');
-
-  // Если есть токен админки в sessionStorage — сбросим при закрытии вкладки
-  window.addEventListener('beforeunload', ()=>{
-    // Ничего не делаем, токен живёт в sessionStorage
-  });
-
-  // Плавная остановка онлайна
   window.addEventListener('pagehide', ()=>{ Online.stop(); });
 })();
 </script>

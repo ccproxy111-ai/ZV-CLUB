@@ -6,7 +6,6 @@
 <title>ZV-CLUB</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <style>
-/* ===== БАЗА ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#0e0e11;--bg2:#16171b;--bg3:#1d1e24;--bg4:#242630;
@@ -15,9 +14,7 @@
   --ok:#4ade80;--danger:#f87171;
   --accent-a:#7c5cff;--accent-b:#22d3ee;
   --sidebar-w:68px;--sidebar-w-open:220px;
-  --radius:10px;
 }
-/* ТЕМЫ */
 body.theme-light{
   --bg:#f4f5f7;--bg2:#ffffff;--bg3:#e9ebef;--bg4:#dde0e6;
   --fg:#0e0e11;--muted:#5f6471;--muted2:#8a90a0;
@@ -27,10 +24,7 @@ body.theme-moon{
   --bg:#161823;--bg2:#1e2130;--bg3:#262a3a;--bg4:#2f3446;
   --fg:#e8eaf4;--muted:#8b90a8;--muted2:#666c85;
   --border:#2e3346;--border2:#3d4358;
-  background:linear-gradient(135deg,#141826,#1c2238,#141826);
-  background-size:200% 200%;animation:moonShift 20s ease infinite;
 }
-@keyframes moonShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 body.theme-ocean{
   --bg:#08161c;--bg2:#0d1f28;--bg3:#122834;--bg4:#173340;
   --fg:#dff4ff;--muted:#6e97a8;--muted2:#4a6a78;
@@ -49,9 +43,9 @@ body.theme-scarlet{
 body.theme-divine{
   background:linear-gradient(135deg,#c8e8ff,#ffffff,#fff8dc,#c8e8ff);
   background-size:400% 400%;animation:divineShift 15s ease infinite;
-  --bg:rgba(255,255,255,.7);--bg2:rgba(255,255,255,.85);--bg3:rgba(240,248,255,.9);--bg4:rgba(220,235,255,.9);
+  --bg:rgba(255,255,255,.7);--bg2:rgba(255,255,255,.9);--bg3:rgba(240,248,255,.95);--bg4:rgba(220,235,255,.95);
   --fg:#0a2540;--muted:#5f7f9e;--muted2:#8aa8c0;
-  --border:rgba(200,220,240,.6);--border2:rgba(160,200,240,.8);
+  --border:rgba(200,220,240,.7);--border2:rgba(160,200,240,.9);
 }
 @keyframes divineShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 body.theme-obsidian{
@@ -87,7 +81,7 @@ body.theme-light #bg-shader,body.theme-divine #bg-shader{opacity:.3}
   border-bottom:1px solid var(--border);z-index:100;
   transition:left .3s cubic-bezier(.2,.9,.3,1);
 }
-body.theme-light .header,body.theme-divine .header{background:rgba(255,255,255,.7)}
+body.theme-light .header,body.theme-divine .header{background:rgba(255,255,255,.75)}
 body.theme-moon .header{background:rgba(22,24,35,.72)}
 body.logged-in .header{left:var(--sidebar-w)}
 .header-left{display:flex;align-items:center;gap:12px}
@@ -127,13 +121,12 @@ body.logged-in .header{left:var(--sidebar-w)}
 .btn-lg{padding:12px 22px;font-size:14.5px;border-radius:10px}
 .btn-block{width:100%;justify-content:center}
 
-/* SIDEBAR */
 .sidebar{position:fixed;top:56px;left:0;bottom:0;width:var(--sidebar-w);
   background:rgba(20,20,24,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-right:1px solid var(--border);display:flex;flex-direction:column;gap:8px;
+  border-right:1px solid var(--border);display:none;flex-direction:column;gap:8px;
   padding:12px 8px;z-index:99;transition:width .3s cubic-bezier(.2,.9,.3,1);overflow:hidden}
+body.logged-in .sidebar{display:flex}
 .sidebar:hover{width:var(--sidebar-w-open)}
-body:not(.logged-in) .sidebar{display:none}
 .sidebar-item{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:10px;
   background:var(--bg2);border:1px solid var(--border);color:var(--muted);cursor:pointer;
   transition:background .15s,border-color .15s,color .15s;white-space:nowrap;
@@ -149,7 +142,6 @@ body:not(.logged-in) .sidebar{display:none}
 .sidebar-item.admin{border-color:rgba(255,200,50,.3)}
 .sidebar-item.admin:hover{background:rgba(255,200,50,.08);border-color:rgba(255,200,50,.5);color:#ffcc33}
 
-/* USER top-right */
 .user-wrap{position:relative}
 .avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;
   background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:border-color .2s,background .2s}
@@ -192,11 +184,9 @@ body:not(.logged-in) .sidebar{display:none}
 .menu-item.danger:hover svg{stroke:var(--danger)}
 .menu-divider{height:1px;background:var(--border);margin:5px 6px}
 
-/* MAIN */
 .main{min-height:100vh;display:flex;align-items:center;justify-content:center;
   padding:90px 30px 80px;position:relative;z-index:1;transition:padding .3s}
 body.logged-in .main{padding-left:calc(var(--sidebar-w) + 30px);align-items:flex-start;justify-content:flex-start}
-body.logged-in .main .hero{display:none}
 
 .hero{text-align:center;max-width:680px}
 .hero-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;
@@ -209,6 +199,7 @@ body.logged-in .main .hero{display:none}
 .hero-sub{color:var(--muted);font-size:17px;margin-bottom:36px}
 .hero-sub .sv{color:var(--fg);font-weight:700;letter-spacing:.3px}
 .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+body.logged-in .hero{display:none}
 
 .dashboard{width:100%;max-width:1200px;display:none;flex-direction:column;gap:20px}
 body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
@@ -222,7 +213,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .dash-card h3{font-size:14px;font-weight:600;margin-bottom:6px}
 .dash-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
 
-/* USERS */
 .users-section{display:none;flex-direction:column;gap:14px}
 .users-section.active{display:flex}
 .users-title{font-size:18px;font-weight:700;padding:0 4px}
@@ -241,7 +231,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .user-card .info .name .emj{font-size:14px}
 .user-card .info .login{font-size:11px;color:var(--muted);margin-top:2px}
 
-/* HOVER CARD */
 .hover-card{position:fixed;width:280px;background:var(--bg2);border:1px solid var(--border2);
   border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.75);
   opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .18s,transform .18s;z-index:400}
@@ -265,7 +254,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .hover-stat .v{font-size:14px;font-weight:700;color:var(--fg)}
 .hover-stat .l{color:var(--muted);font-size:10px;margin-top:2px}
 
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(8,8,10,.75);backdrop-filter:blur(6px);
   display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
 .modal-overlay.show{display:flex;animation:fadeIn .18s}
@@ -331,7 +319,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .modal-msg.err{color:var(--danger)}
 .modal-msg.ok{color:var(--ok)}
 
-/* SETTINGS LAYOUT */
 .settings-layout{display:flex;min-height:560px;max-height:85vh}
 .settings-nav{width:200px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);padding:24px 14px;overflow-y:auto}
 .settings-nav h3{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;
@@ -346,12 +333,10 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .settings-content h2{font-size:18px;font-weight:700;margin-bottom:6px}
 .settings-content .section-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px}
 
-/* BIO EDITOR */
 .bio-editor{background:var(--bg);border:1px solid var(--border);border-radius:10px;
   overflow:hidden;transition:border-color .2s}
 .bio-editor:focus-within{border-color:var(--border2)}
-.bio-toolbar{display:flex;gap:4px;padding:6px;background:var(--bg2);
-  border-bottom:1px solid var(--border)}
+.bio-toolbar{display:flex;gap:4px;padding:6px;background:var(--bg2);border-bottom:1px solid var(--border)}
 .bio-tool{background:none;border:none;cursor:pointer;width:30px;height:30px;border-radius:6px;
   display:flex;align-items:center;justify-content:center;color:var(--muted);
   transition:background .15s,color .15s;font-family:inherit;font-size:13px}
@@ -362,7 +347,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .bio-hint{font-size:11px;color:var(--muted2);padding:6px 12px;background:var(--bg2);
   border-top:1px solid var(--border);display:flex;justify-content:space-between}
 
-/* COLOR PALETTE */
 .color-palette{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-bottom:12px}
 .color-swatch{aspect-ratio:1;border-radius:8px;cursor:pointer;border:2px solid transparent;
   transition:transform .15s,border-color .15s;position:relative}
@@ -373,7 +357,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .color-custom .cc-val{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--fg);flex:1;padding:8px;background:var(--bg2);border-radius:6px}
 .color-custom input[type=text]{width:100px;padding:8px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-family:ui-monospace,monospace;font-size:12.5px;outline:none;text-transform:uppercase}
 
-/* PREVIEW */
 .preview-panel{width:280px;flex-shrink:0;background:var(--bg);border-left:1px solid var(--border);
   padding:24px 18px;display:flex;flex-direction:column;align-items:center;overflow-y:auto}
 .preview-panel h3{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;
@@ -408,7 +391,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .settings-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .settings-toast.err{background:var(--danger)}
 
-/* MONKEYS WIDGET */
 .monkeys-widget{position:fixed;bottom:20px;right:20px;z-index:95;
   background:var(--bg2);border:1px solid var(--border);border-radius:14px;
   padding:14px 16px;min-width:200px;box-shadow:0 8px 30px rgba(0,0,0,.5);
@@ -418,10 +400,9 @@ body.logged-in .monkeys-widget{display:flex}
 .mw-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
 .mw-count{display:flex;align-items:center;gap:6px;font-size:20px;font-weight:800;
   font-variant-numeric:tabular-nums;color:var(--fg)}
-.mw-count .mw-ico{font-size:22px;line-height:1;filter:drop-shadow(0 0 6px rgba(255,200,50,.4))}
+.mw-count .mw-ico{font-size:22px;line-height:1}
 .mw-daily{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px;
-  display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .2s,border-color .2s,transform .15s;
-  position:relative;overflow:hidden}
+  display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
 .mw-daily:hover{background:var(--bg4);border-color:var(--border2)}
 .mw-daily:active{transform:scale(.98)}
 .mw-daily.ready{background:linear-gradient(135deg,rgba(255,200,50,.15),rgba(255,200,50,.05));
@@ -433,7 +414,6 @@ body.logged-in .monkeys-widget{display:flex}
 .mw-daily-sub{font-size:11px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
 .mw-daily.locked .mw-daily-ico{filter:grayscale(1);opacity:.5}
 
-/* MONKEY REWARD POPUP */
 .reward-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.5);
   z-index:500;background:linear-gradient(135deg,rgba(255,200,50,.95),rgba(255,150,0,.95));
   color:#1a0f00;padding:26px 42px;border-radius:20px;font-size:32px;font-weight:900;
@@ -443,21 +423,18 @@ body.logged-in .monkeys-widget{display:flex}
 .reward-popup .rp-label{display:block;font-size:13px;text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:6px;opacity:.7}
 .reward-popup .rp-val{display:flex;align-items:center;justify-content:center;gap:10px}
 
-/* RESPECT BUTTON */
 .respect-btn{
   padding:10px 22px;border-radius:999px;border:1px solid var(--border);
   background:var(--bg2);color:var(--fg);font-weight:700;font-size:14px;cursor:pointer;
   transition:all .3s cubic-bezier(.2,.9,.3,1.2);font-family:inherit;
-  display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden;
+  display:inline-flex;align-items:center;gap:8px;
 }
 .respect-btn:hover{border-color:var(--border2);background:var(--bg3)}
 .respect-btn.active{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-color:transparent;
   box-shadow:0 4px 20px rgba(239,68,68,.4)}
-.respect-btn.active:hover{box-shadow:0 6px 28px rgba(239,68,68,.6)}
 .respect-btn .ico{font-size:16px;transition:transform .3s}
 .respect-btn.active .ico{transform:scale(1.2) rotate(-10deg)}
 
-/* PROFILE PAGE */
 .profile-header{padding:0;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
 .profile-banner{height:120px;position:relative}
 .profile-close{position:absolute;top:12px;right:12px;z-index:5;background:rgba(0,0,0,.5);
@@ -494,9 +471,8 @@ body.logged-in .monkeys-widget{display:flex}
 .post-composer-btns{display:flex;gap:6px}
 .post-ico-btn{background:var(--bg2);border:1px solid var(--border);cursor:pointer;width:34px;height:34px;
   border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);
-  transition:background .15s,border-color .15s,color .15s}
+  transition:background .15s,border-color .15s,color .15s;font-size:15px}
 .post-ico-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg)}
-.post-ico-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .posts-list{display:flex;flex-direction:column;gap:12px}
 .post-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px}
 .post-card .post-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
@@ -508,18 +484,16 @@ body.logged-in .monkeys-widget{display:flex}
 .post-card audio{width:100%;margin-top:6px}
 .post-empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:13px}
 
-/* SETTINGS: emoji/theme grids */
 .emoji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px}
 .emoji-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 8px;
   display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;
-  transition:border-color .15s,background .15s,transform .15s;position:relative}
+  transition:border-color .15s,background .15s,transform .15s}
 .emoji-item:hover{border-color:var(--border2);background:var(--bg2);transform:translateY(-2px)}
 .emoji-item.selected{border-color:var(--ok);background:var(--bg2);box-shadow:0 0 0 1px var(--ok) inset}
 .emoji-item.locked{opacity:.6}
 .emoji-item .e-big{font-size:26px;line-height:1}
 .emoji-item .e-label{font-size:10px;color:var(--muted);text-align:center}
-.emoji-item .e-price{font-size:10px;color:#fbbf24;font-weight:700;display:flex;align-items:center;gap:2px}
-.emoji-item .e-none{font-size:11px;color:var(--muted)}
+.emoji-item .e-price{font-size:10px;color:#fbbf24;font-weight:700}
 
 .theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
 .theme-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;
@@ -529,12 +503,11 @@ body.logged-in .monkeys-widget{display:flex}
 .theme-item.locked{opacity:.65}
 .theme-preview{height:44px;border-radius:8px;margin-bottom:8px;border:1px solid var(--border)}
 .theme-name{font-size:13px;font-weight:600}
-.theme-price{font-size:11px;color:#fbbf24;font-weight:700;margin-top:3px;display:flex;align-items:center;gap:3px}
+.theme-price{font-size:11px;color:#fbbf24;font-weight:700;margin-top:3px}
 .theme-free{font-size:11px;color:var(--ok);font-weight:700;margin-top:3px}
 .theme-item .theme-secret{position:absolute;top:8px;right:8px;font-size:10px;padding:2px 6px;
   background:rgba(255,200,50,.15);border:1px solid rgba(255,200,50,.3);border-radius:999px;color:#fbbf24}
 
-/* ADMIN */
 .admin-wrap{padding:24px}
 .admin-login{max-width:340px;margin:40px auto}
 .admin-login h2{text-align:center;font-size:20px;margin-bottom:20px}
@@ -548,7 +521,6 @@ body.logged-in .monkeys-widget{display:flex}
 .admin-user input:focus{border-color:var(--border2)}
 .admin-user .btn{padding:6px 10px;font-size:11.5px}
 
-/* RESPONSIVE */
 @media(max-width:800px){
   .settings-layout{flex-direction:column}
   .settings-nav{width:100%;border-right:none;border-bottom:1px solid var(--border);
@@ -577,7 +549,6 @@ body.logged-in .monkeys-widget{display:flex}
 </head>
 <body class="theme-dark">
 
-<div id="bg-fallback"></div>
 <canvas id="bg-shader"></canvas>
 
 <header class="header">
@@ -611,7 +582,7 @@ body.logged-in .monkeys-widget{display:flex}
     <span class="lbl">Настройки аккаунта</span>
   </button>
   <button class="sidebar-item" id="sbSiteSettings">
-    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span>
+    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span>
     <span class="lbl">Настройки сайта</span>
   </button>
   <button class="sidebar-item admin" id="sbAdmin" style="display:none;">
@@ -675,7 +646,6 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </main>
 
-<!-- MONKEYS WIDGET -->
 <div class="monkeys-widget" id="monkeysWidget">
   <div class="mw-head">
     <span class="mw-label">Обезьяны</span>
@@ -695,7 +665,6 @@ body.logged-in .monkeys-widget{display:flex}
   <span class="rp-val"><span>🐵</span><span id="rpAmount">+0</span></span>
 </div>
 
-<!-- HOVER CARD -->
 <div class="hover-card" id="hoverCard">
   <div class="hover-banner" id="hoverBanner"></div>
   <div class="hover-body">
@@ -711,7 +680,6 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- AUTH MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <button class="modal-close" id="modalClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -760,7 +728,6 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- CONFIRM LOGOUT -->
 <div class="modal-overlay" id="confirmOverlay">
   <div class="modal" style="max-width:380px;">
     <div class="confirm-body">
@@ -775,11 +742,10 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- UNSAVED CHANGES -->
 <div class="modal-overlay" id="unsavedOverlay">
   <div class="modal" style="max-width:380px;">
     <div class="confirm-body">
-      <div class="confirm-icon blue"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></div>
+      <div class="confirm-icon blue"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg></div>
       <div class="confirm-title">Сохранить изменения?</div>
       <div class="confirm-text">У вас есть несохранённые изменения.</div>
       <div class="confirm-actions" style="flex-direction:column;gap:8px;">
@@ -791,7 +757,6 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- RESPECT CONFIRM -->
 <div class="modal-overlay" id="respectOverlay">
   <div class="modal" style="max-width:360px;">
     <div class="confirm-body">
@@ -806,7 +771,6 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- SETTINGS MODAL (АККАУНТ) -->
 <div class="modal-overlay" id="settingsOverlay">
   <div class="modal wide">
     <button class="modal-close" id="settingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -814,7 +778,7 @@ body.logged-in .monkeys-widget{display:flex}
       <nav class="settings-nav">
         <h3>Аккаунт</h3>
         <button class="settings-nav-item active" data-section="main">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
           Аккаунт
         </button>
         <button class="settings-nav-item" data-section="password">
@@ -822,9 +786,7 @@ body.logged-in .monkeys-widget{display:flex}
           Сменить пароль
         </button>
       </nav>
-      <div class="settings-content" id="settingsContent">
-        <!-- будет заполнено JS -->
-      </div>
+      <div class="settings-content" id="settingsContent"></div>
       <aside class="preview-panel">
         <h3>Предпросмотр</h3>
         <div class="preview-card">
@@ -846,7 +808,6 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- SITE SETTINGS MODAL -->
 <div class="modal-overlay" id="siteSettingsOverlay">
   <div class="modal wide">
     <button class="modal-close" id="siteSettingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -862,18 +823,16 @@ body.logged-in .monkeys-widget{display:flex}
           Темы
         </button>
         <button class="settings-nav-item" data-ssection="extra">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
           Дополнительно
         </button>
       </nav>
-      <div class="settings-content" id="siteSettingsContent">
-        <!-- заполнено JS -->
-      </div>
+      <div class="settings-content" id="siteSettingsContent"></div>
       <aside class="preview-panel">
         <h3>Информация</h3>
         <div style="font-size:12.5px;color:var(--muted);line-height:1.7;text-align:center">
-          <p style="margin-bottom:10px">Изменения тем применяются мгновенно.</p>
-          <p style="margin-bottom:10px">Эмодзи и темы покупаются за обезьян 🐵</p>
+          <p>Изменения применяются мгновенно.</p>
+          <p style="margin-top:10px">Эмодзи и темы покупаются за 🐵</p>
         </div>
       </aside>
     </div>
@@ -881,7 +840,6 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- PROFILE MODAL -->
 <div class="modal-overlay" id="profileOverlay">
   <div class="modal profile" id="profileModal">
     <div class="profile-header">
@@ -909,13 +867,12 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- BUY CONFIRM -->
 <div class="modal-overlay" id="buyOverlay">
   <div class="modal" style="max-width:360px;">
     <div class="confirm-body">
-      <div class="confirm-icon blue" id="buyIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10h8"/></svg></div>
+      <div class="confirm-icon blue"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10h8"/></svg></div>
       <div class="confirm-title" id="buyTitle">Покупка</div>
-      <div class="confirm-text" id="buyText">Купить за <b>0</b> 🐵?</div>
+      <div class="confirm-text" id="buyText"></div>
       <div class="confirm-actions">
         <button class="btn btn-ghost" id="buyCancel">Отмена</button>
         <button class="btn btn-primary" id="buyConfirm">Купить</button>
@@ -924,13 +881,10 @@ body.logged-in .monkeys-widget{display:flex}
   </div>
 </div>
 
-<!-- ADMIN MODAL -->
 <div class="modal-overlay" id="adminOverlay">
   <div class="modal wide" id="adminModal" style="max-height:85vh;display:flex;flex-direction:column">
     <button class="modal-close" id="adminClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    <div class="admin-wrap" id="adminWrap" style="overflow-y:auto">
-      <!-- заполнено JS -->
-    </div>
+    <div class="admin-wrap" id="adminWrap" style="overflow-y:auto"></div>
   </div>
 </div>
 
@@ -1004,8 +958,10 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':
 
 function hasEmoji(str){
   if(!str) return false;
-  const re = /[\u{1F300}-\u{1FAFF}\u{1F000}-\u{1F2FF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2764}]/u;
-  return re.test(str);
+  try{
+    const re = /[\u{1F300}-\u{1FAFF}\u{1F000}-\u{1F2FF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2764}]/u;
+    return re.test(str);
+  }catch(e){ return false; }
 }
 function validateUsername(u){
   if(!u) return 'Введите имя';
@@ -1039,9 +995,6 @@ function passwordStrength(p){
   return Math.min(s,5);
 }
 
-/* =========================================================
-   КРИПТО
-   ========================================================= */
 async function sha256(text){
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
@@ -1096,9 +1049,9 @@ async function api(action, payload={}){
    СЕССИЯ / RATE
    ========================================================= */
 const Session = {
-  save(s){localStorage.setItem('zv_session',JSON.stringify(s))},
-  get(){try{return JSON.parse(localStorage.getItem('zv_session')||'null')}catch{return null}},
-  clear(){localStorage.removeItem('zv_session')},
+  save(s){ localStorage.setItem('zv_session', JSON.stringify(s)); },
+  get(){ try{ return JSON.parse(localStorage.getItem('zv_session')||'null'); }catch(e){ return null; } },
+  clear(){ localStorage.removeItem('zv_session'); },
   updateProfile(profile){
     const s=this.get(); if(!s) return;
     s.profile = profile;
@@ -1107,7 +1060,7 @@ const Session = {
 };
 const Rate = (()=>{
   const MAX=5, LOCK=60_000;
-  function get(){try{return JSON.parse(localStorage.getItem('zv_rl')||'{}')}catch{return{}}}
+  function get(){try{return JSON.parse(localStorage.getItem('zv_rl')||'{}')}catch(e){return{}}}
   function set(d){localStorage.setItem('zv_rl',JSON.stringify(d))}
   return {
     check(a){
@@ -1142,7 +1095,11 @@ const Auth = {
       const res=await api('register',{username,salt,hash});
       Rate.record('register',res.ok);
       if(!res.ok) return {ok:false,error:res.error||'Ошибка'};
-      Session.save({ username, token:res.token, ts:Date.now(), profile:res.profile });
+      const profile = res.profile || {
+        username, visualName: username, avatar:'', bio:'', bannerColor:'#1d1e24',
+        monkeys:0, respects:0, follows:0, emoji:'', theme:'dark', posts:0, lastDaily:0
+      };
+      Session.save({ username, token:res.token, ts:Date.now(), profile });
       return {ok:true};
     }catch(e){
       Rate.record('register',false);
@@ -1160,7 +1117,11 @@ const Auth = {
       const res=await api('login',{username,hash});
       Rate.record('login',res.ok);
       if(!res.ok) return {ok:false,error:'Неверное имя или пароль'};
-      Session.save({ username, token:res.token, ts:Date.now(), profile:res.profile });
+      const profile = res.profile || {
+        username, visualName: username, avatar:'', bio:'', bannerColor:'#1d1e24',
+        monkeys:0, respects:0, follows:0, emoji:'', theme:'dark', posts:0, lastDaily:0
+      };
+      Session.save({ username, token:res.token, ts:Date.now(), profile });
       return {ok:true};
     }catch(e){
       Rate.record('login',false);
@@ -1232,20 +1193,20 @@ let currentProfile=null;
 let currentProfileIsOwner=false;
 let currentProfileIRespect=false;
 let currentProfileUsername=null;
-
 let tempProfile=null;
 let tempProfileChanged=false;
-let tempTheme=null;
 
 /* =========================================================
    ТЕМА
    ========================================================= */
 function applyTheme(theme){
-  document.body.className = 'theme-' + (theme||'dark');
+  const cls = document.body.className.split(' ').filter(c=>!c.startsWith('theme-')).join(' ');
+  document.body.className = (cls + ' theme-' + (theme||'dark')).trim();
+  console.log('[theme] applied:', theme, '| body.className:', document.body.className);
 }
 
 /* =========================================================
-   RENDER USER AREA
+   ICO
    ========================================================= */
 const ICO = {
   chev:'<svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>',
@@ -1255,13 +1216,33 @@ const ICO = {
   register:'<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>'
 };
 
+/* =========================================================
+   RENDER AUTH STATE
+   ========================================================= */
+function isLoggedIn(){
+  const s=Session.get();
+  return !!(s && s.username && s.token);
+}
+
 function renderAuthState(){
   const s=Session.get();
-  const isLogged=!!s;
-  document.body.classList.toggle('logged-in', isLogged);
+  const logged = !!(s && s.username && s.token);
+  console.log('[renderAuthState] logged:', logged, 'session:', s);
 
-  if(isLogged){
-    const p = s.profile || { username:s.username, visualName:s.username, avatar:'', emoji:'', theme:'dark' };
+  if(logged){
+    document.body.classList.add('logged-in');
+
+    // Гарантируем, что у профиля есть все поля
+    if(!s.profile){
+      s.profile = {
+        username: s.username, visualName: s.username,
+        avatar:'', bio:'', bannerColor:'#1d1e24',
+        monkeys:0, respects:0, follows:0,
+        emoji:'', theme:'dark', posts:0, lastDaily:0
+      };
+      Session.save(s);
+    }
+    const p = s.profile;
     applyTheme(p.theme || 'dark');
 
     const visual = p.visualName || p.username;
@@ -1299,12 +1280,19 @@ function renderAuthState(){
 
     const wrap=$('userWrap'), btn=$('avatarBtn'), menu=$('userMenu');
     btn.onclick=(e)=>{e.stopPropagation();menuOpen=!menuOpen;menu.classList.toggle('show',menuOpen);btn.classList.toggle('open',menuOpen);Sound.click();};
-    document.addEventListener('click',(e)=>{ if(menuOpen&&!wrap.contains(e.target)){menuOpen=false;menu.classList.remove('show');btn.classList.remove('open');} });
+    document.addEventListener('click',(e)=>{ if(menuOpen&&wrap&&!wrap.contains(e.target)){menuOpen=false;menu.classList.remove('show');btn.classList.remove('open');} });
     $('menuSettings').onclick=()=>{Sound.click();closeMenu();openAccountSettings();};
     $('menuLogout').onclick=()=>{Sound.click();closeMenu();openConfirmLogout();};
 
     $('sbAdmin').style.display = (s.username.toLowerCase()==='medy3a') ? 'flex' : 'none';
+
+    // Форсируем показ dashboard
+    $('dashboard').style.display = 'flex';
+    $('hero').style.display = 'none';
+
+    updateMonkeysWidget();
   } else {
+    document.body.classList.remove('logged-in');
     $('userArea').innerHTML = `
       <button class="btn btn-ghost" id="btnLoginTop">${ICO.login} Войти</button>
       <button class="btn btn-primary" id="btnRegisterTop">${ICO.register} Регистрация</button>
@@ -1313,8 +1301,11 @@ function renderAuthState(){
     $('btnRegisterTop').onclick=()=>openModal('register');
     applyTheme('dark');
     $('sbAdmin').style.display='none';
+    $('dashboard').style.display='none';
+    $('hero').style.display='';
   }
 }
+
 function closeMenu(){
   menuOpen=false;
   const m=$('userMenu'),b=$('avatarBtn');
@@ -1411,7 +1402,12 @@ $('authForm').addEventListener('submit',async e=>{
     if(res.ok){
       Sound.success();
       $('modalMsg').textContent='✓ Успех'; $('modalMsg').className='modal-msg ok';
-      setTimeout(async ()=>{ closeModal(); renderAuthState(); switchView('home'); await Online.beat(); },500);
+      setTimeout(async ()=>{
+        closeModal();
+        renderAuthState();
+        switchView('home');
+        await Online.beat();
+      },400);
     }else{
       Sound.error();
       $('modalMsg').textContent='✗ '+res.error; $('modalMsg').className='modal-msg err';
@@ -1441,7 +1437,7 @@ $('confirmCancel').onclick=()=>{$('confirmOverlay').classList.remove('show');Sou
 $('confirmOverlay').onclick=e=>{if(e.target===$('confirmOverlay')){$('confirmOverlay').classList.remove('show');}};
 
 /* =========================================================
-   UNSAVED CONFIRM
+   UNSAVED
    ========================================================= */
 let unsavedCallback=null;
 function openUnsaved(saveCb){
@@ -1463,7 +1459,7 @@ $('unsavedCancel').onclick=()=>{
 };
 
 /* =========================================================
-   RESPECT CONFIRM
+   RESPECT
    ========================================================= */
 let respectCallback=null;
 function openRespectConfirm(cb){
@@ -1498,7 +1494,6 @@ $('sbSettings').onclick=()=>{Sound.click();openAccountSettings();};
 $('sbSiteSettings').onclick=()=>{Sound.click();openSiteSettings();};
 $('sbLogout').onclick=()=>{Sound.click();openConfirmLogout();};
 
-/* Кликабельные карточки на главной */
 document.querySelectorAll('.dash-card').forEach(card=>{
   card.onclick=()=>{
     const a=card.dataset.action;
@@ -1509,7 +1504,7 @@ document.querySelectorAll('.dash-card').forEach(card=>{
 });
 
 /* =========================================================
-   USERS LIST
+   USERS
    ========================================================= */
 async function loadUsers(){
   const grid=$('usersGrid');
@@ -1550,7 +1545,6 @@ function renderUsers(users){
   });
 }
 
-/* HOVER */
 let hoverTimer=null;
 function showHover(uname,anchor){
   clearTimeout(hoverTimer);
@@ -1581,10 +1575,7 @@ $('hoverCard').addEventListener('mouseleave',hideHover);
 /* =========================================================
    ACCOUNT SETTINGS
    ========================================================= */
-const ACCOUNT_SECTIONS = {
-  main: renderAccountMain,
-  password: renderAccountPassword
-};
+const ACCOUNT_SECTIONS = { main: renderAccountMain, password: renderAccountPassword };
 
 function openAccountSettings(){
   const s=Session.get(); if(!s) return;
@@ -1644,12 +1635,12 @@ function renderAccountMain(){
       <label>Описание профиля</label>
       <div class="bio-editor">
         <div class="bio-toolbar">
-          <button class="bio-tool" data-tool="bold" title="Жирный"><b>B</b></button>
-          <button class="bio-tool" data-tool="italic" title="Курсив"><i>I</i></button>
-          <button class="bio-tool" data-tool="strike" title="Зачёркнутый"><s>S</s></button>
-          <button class="bio-tool" data-tool="link" title="Ссылка"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+          <button class="bio-tool" data-tool="bold"><b>B</b></button>
+          <button class="bio-tool" data-tool="italic"><i>I</i></button>
+          <button class="bio-tool" data-tool="strike"><s>S</s></button>
+          <button class="bio-tool" data-tool="link"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
         </div>
-        <textarea class="bio-textarea" id="setBio" maxlength="500" placeholder="Расскажи о себе… ссылки станут кликабельными: https://…">${escapeHtml(tempProfile.bio)}</textarea>
+        <textarea class="bio-textarea" id="setBio" maxlength="500" placeholder="Расскажи о себе… ссылки станут кликабельными">${escapeHtml(tempProfile.bio)}</textarea>
         <div class="bio-hint"><span>Ссылки автоматически с иконкой</span><span id="bioCount">${(tempProfile.bio||'').length}/500</span></div>
       </div>
     </div>
@@ -1686,10 +1677,7 @@ function renderPalette(){
   const p = $('colorPalette');
   p.innerHTML = COLORS.map(c => `<div class="color-swatch${c.toLowerCase()===tempProfile.bannerColor.toLowerCase()?' selected':''}" data-color="${c}" style="background:${c}"></div>`).join('');
   p.querySelectorAll('.color-swatch').forEach(sw=>{
-    sw.onclick=()=>{
-      setBannerColor(sw.dataset.color);
-      Sound.click();
-    };
+    sw.onclick=()=>{ setBannerColor(sw.dataset.color); Sound.click(); };
   });
 }
 
@@ -1734,9 +1722,9 @@ function bindAccountMain(){
       const ta=$('setBio'); const tool=t.dataset.tool;
       const start=ta.selectionStart, end=ta.selectionEnd;
       const wrapMap={bold:'**',italic:'*',strike:'~~'};
-      const sel = ta.value.substring(start,end) || (tool==='link'?'https://':'текст');
+      const sel = ta.value.substring(start,end) || (tool==='link'?'https://example.com':'текст');
       let ins;
-      if(tool==='link') ins = `[${sel||'ссылка'}](${tool==='link'?'https://example.com':''})`;
+      if(tool==='link') ins = sel;
       else { const w=wrapMap[tool]; ins = w+sel+w; }
       ta.value = ta.value.substring(0,start)+ins+ta.value.substring(end);
       tempProfile.bio = ta.value;
@@ -1761,9 +1749,7 @@ function updatePreview(){
   }
   $('previewBanner').style.background = tempProfile.bannerColor;
   $('previewBio').innerHTML = tempProfile.bio ? renderBio(tempProfile.bio) : '<span style="opacity:.5">Нет описания</span>';
-  if(!$('previewAv').onclick){
-    $('previewAv').onclick=()=>$('avatarInput').click();
-  }
+  if(!$('previewAv').onclick) $('previewAv').onclick=()=>$('avatarInput').click();
 }
 $('previewAv').onclick=()=>$('avatarInput').click();
 $('avatarInput').addEventListener('change',(e)=>{
@@ -1803,15 +1789,15 @@ async function saveAccountChanges(){
     bannerColor: tempProfile.bannerColor
   });
   if(res.ok){
-    Session.updateProfile({
-      username:s.username,
-      visualName:tempProfile.visualName||s.username,
-      avatar:tempProfile.avatar,
-      bio:tempProfile.bio,
-      bannerColor:tempProfile.bannerColor,
-      emoji: s.profile?.emoji || '',
-      theme: s.profile?.theme || 'dark'
-    });
+    const cur=Session.get();
+    cur.profile = {
+      ...cur.profile,
+      visualName: tempProfile.visualName||s.username,
+      avatar: tempProfile.avatar,
+      bio: tempProfile.bio,
+      bannerColor: tempProfile.bannerColor
+    };
+    Session.save(cur);
     tempProfileChanged=false;
     renderAuthState();
     toastAccount('Сохранено ✓',false);
@@ -1830,12 +1816,10 @@ function toastAccount(text,isErr){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-/* Смена пароля */
 function renderAccountPassword(){
   $('settingsContent').innerHTML = `
     <h2>Сменить пароль</h2>
-    <div class="section-sub">Пароль можно сменить в любой момент. Старый нужен для подтверждения.</div>
-
+    <div class="section-sub">Пароль можно сменить в любой момент.</div>
     <div class="field">
       <label for="oldPass">Текущий пароль</label>
       <input type="password" id="oldPass" maxlength="64" placeholder="••••••••">
@@ -1849,7 +1833,6 @@ function renderAccountPassword(){
       <label for="newPass2">Повторите новый пароль</label>
       <input type="password" id="newPass2" maxlength="64" placeholder="••••••••">
     </div>
-
     <div class="settings-foot">
       <button class="btn btn-ghost" id="pwdCancel">Закрыть</button>
       <button class="btn btn-primary" id="pwdSave">Сменить пароль</button>
@@ -1892,11 +1875,7 @@ function renderAccountPassword(){
 /* =========================================================
    SITE SETTINGS
    ========================================================= */
-const SITE_SECTIONS = {
-  main: renderSiteMain,
-  themes: renderSiteThemes,
-  extra: renderSiteExtra
-};
+const SITE_SECTIONS = { main: renderSiteMain, themes: renderSiteThemes, extra: renderSiteExtra };
 
 function openSiteSettings(){
   const s=Session.get(); if(!s) return;
@@ -1936,10 +1915,10 @@ function renderSiteMain(){
     all.push({ emoji: curEmoji, label:'Секретный', price:-1 });
   }
   grid.innerHTML = all.map(item=>{
-    const owned = item.price<=0 || item.price===-1 || (s.profile?.ownedEmoji||[]).includes(item.emoji) || curEmoji===item.emoji;
+    const owned = item.price<=0 || item.price===-1 || curEmoji===item.emoji;
     const selected = curEmoji===item.emoji;
     const lockClass = (!owned && item.price>0) ? 'locked' : '';
-    const label = item.emoji || 'Без эмодзи';
+    const label = item.label;
     const priceHtml = item.price>0
       ? `<div class="e-price">🐵 ${item.price}</div>`
       : (item.price===-1 ? `<div class="e-price" style="color:#fbbf24">секрет</div>` : `<div class="e-price" style="color:var(--ok)">бесплатно</div>`);
@@ -1970,7 +1949,6 @@ function renderSiteMain(){
           }else{ Sound.error(); alert(r.error||'Ошибка'); }
         });
       }else{
-        // применяем
         api('setEmoji',{username:s.username,token:s.token,emoji}).then(r=>{
           if(r.ok){
             const cur=Session.get(); cur.profile.emoji=emoji; Session.save(cur);
@@ -1999,7 +1977,7 @@ function renderSiteThemes(){
   const grid=$('themeGrid');
   grid.innerHTML = all.map(t=>{
     const selected = curTheme===t.id;
-    const owned = t.price<=0 || t.price===-1 || (s.profile?.ownedThemes||[]).includes(t.id) || selected;
+    const owned = t.price<=0 || t.price===-1 || selected;
     const lock = (!owned && t.price>0) ? 'locked' : '';
     const priceHtml = t.secret ? `<div class="theme-price">🔒 секрет</div>`
       : t.price>0 ? `<div class="theme-price">🐵 ${t.price}</div>`
@@ -2045,7 +2023,6 @@ function renderSiteThemes(){
 }
 
 function renderSiteExtra(){
-  const s=Session.get();
   const soundOn = Sound.isEnabled();
   $('siteSettingsContent').innerHTML = `
     <h2>Дополнительно</h2>
@@ -2074,7 +2051,6 @@ function renderSiteExtra(){
   $('openThemesBtn').onclick=()=>renderSiteSection('themes');
 }
 
-/* BUY CONFIRM */
 let buyCallback=null;
 function openBuyConfirm(item, price, kind, cb){
   buyCallback = cb;
@@ -2093,8 +2069,8 @@ $('buyConfirm').onclick=async()=>{
    MONKEYS WIDGET
    ========================================================= */
 function updateMonkeysWidget(){
-  const s=Session.get(); if(!s) return;
-  const p=s.profile||{};
+  const s=Session.get(); if(!s||!s.profile) return;
+  const p=s.profile;
   $('monkeysCount').textContent = p.monkeys || 0;
 
   const last = p.lastDaily ? Number(p.lastDaily) : 0;
@@ -2117,8 +2093,8 @@ function updateMonkeysWidget(){
   }
 }
 function updateTimer(){
-  const s=Session.get(); if(!s) return;
-  const last = s.profile?.lastDaily ? Number(s.profile.lastDaily) : 0;
+  const s=Session.get(); if(!s||!s.profile) return;
+  const last = s.profile.lastDaily ? Number(s.profile.lastDaily) : 0;
   const next = last + 24*60*60*1000;
   const now = Date.now();
   if(now >= next){ updateMonkeysWidget(); return; }
@@ -2211,7 +2187,6 @@ function renderProfile(){
       if(currentProfileIRespect){
         openRespectConfirm(async ()=>{ await toggleRespect(); });
       }else{
-        // анимация — сразу
         animateRespect($('respectBtn'));
         setTimeout(toggleRespect, 400);
       }
@@ -2235,7 +2210,6 @@ async function toggleRespect(){
 }
 
 async function loadProfilePosts(){
-  const s=Session.get();
   const res = await api('getPosts',{ username: currentProfileUsername });
   const posts = res.ok ? res.posts : [];
   const body=$('profileBody');
@@ -2300,8 +2274,7 @@ async function loadProfilePosts(){
     };
     $('postImgBtn').onclick=()=>$('postFileImg').click();
     $('postVidBtn').onclick=()=>$('postFileVid').click();
-    $('postAudBtn').onclick=()=>alert('Голосовые: выбери поддержку браузера. Пока не готово.');
-
+    $('postAudBtn').onclick=()=>alert('Голосовые пока не готовы');
     $('postFileImg').onchange=(e)=>uploadPostFile(e,'image');
     $('postFileVid').onchange=(e)=>uploadPostFile(e,'video');
   }
@@ -2322,7 +2295,7 @@ function uploadPostFile(e, type){
 }
 
 /* =========================================================
-   ADMIN PANEL
+   ADMIN
    ========================================================= */
 $('sbAdmin').onclick=()=>{ Sound.click(); openAdminPanel(); };
 $('adminClose').onclick=()=>{ $('adminOverlay').classList.remove('show'); Sound.close(); };
@@ -2484,25 +2457,24 @@ document.addEventListener('keydown',e=>{
 });
 
 /* =========================================================
-   СТАРТ
+   START
    ========================================================= */
+console.log('[ZV-CLUB] Starting...');
 renderAuthState();
 Online.start();
 switchView('home');
-updateMonkeysWidget();
 
-// Обновляем инфу каждые 15 сек (обезьян, последний daily)
 setInterval(async ()=>{
-  const s=Session.get(); if(!s) return;
+  const s=Session.get(); if(!s||!s.token) return;
   const r=await api('getMyState',{username:s.username, token:s.token});
-  if(r.ok){
+  if(r.ok && r.profile){
     const cur=Session.get();
     cur.profile = { ...cur.profile, ...r.profile };
     Session.save(cur);
     updateMonkeysWidget();
     $('monkeysCount').textContent = r.profile.monkeys || 0;
   }
-}, 15000);
+}, 20000);
 
 window.addEventListener('beforeunload',()=>{
   const s=Session.get();

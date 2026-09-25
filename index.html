@@ -90,6 +90,9 @@ body.logged-in .sidebar{display:flex}
 .sidebar-item.logout:hover{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.3);color:var(--danger)}
 .sidebar-item.admin{border-color:rgba(255,200,50,.3)}
 .sidebar-item.admin:hover{background:rgba(255,200,50,.08);border-color:rgba(255,200,50,.5);color:#ffcc33}
+.sidebar-item.wheel{border-color:rgba(168,85,247,.35)}
+.sidebar-item.wheel:hover{background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.6);color:#c084fc}
+.sidebar-item.wheel.active{background:rgba(168,85,247,.18);border-color:rgba(168,85,247,.6);color:#c084fc}
 
 .user-wrap{position:relative}
 .avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:border-color .3s var(--ease),background .3s var(--ease);color:var(--fg)}
@@ -399,7 +402,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .toggle.on{background:var(--ok)}
 .toggle.on::after{transform:translateX(16px)}
 
-/* ===== Admin panel ===== */
+/* ===== ADMIN ===== */
 .admin-wrap{padding:0;color:var(--fg);display:flex;flex-direction:column;height:100%;min-height:600px}
 .admin-login{max-width:360px;margin:auto;padding:40px 30px;animation:fadeUp .7s var(--ease)}
 .admin-login h2{text-align:center;font-size:22px;margin-bottom:6px;background:linear-gradient(135deg,#ffcc33,#f59e0b,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -455,37 +458,63 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .skeleton-card{height:120px;margin-bottom:12px}
 
-@media(max-width:900px){
-  .admin-grid{grid-template-columns:1fr}
-}
-@media(max-width:800px){
-  .settings-layout{flex-direction:column}
-  .settings-nav{width:100%;border-right:none;border-bottom:1px solid var(--border);display:flex;gap:6px;overflow-x:auto;padding:12px}
-  .settings-nav h3{display:none}
-  .preview-panel{width:100%;border-left:none;border-top:1px solid var(--border)}
-  .profile-head{flex-direction:column;align-items:flex-start;margin-top:-50px}
-  .profile-av{width:84px;height:84px}
-  .profile-info{padding-top:0}
-  .profile-actions{width:100%;padding-left:0}
-}
+/* ===== WHEEL ===== */
+.wheel-section{display:none;flex-direction:column;gap:20px;align-items:center;padding:10px 0}
+.wheel-section.active{display:flex;animation:fadeUp .6s var(--ease)}
+.wheel-hero{text-align:center;max-width:640px}
+.wheel-hero h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-1.2px;margin-bottom:10px;background:linear-gradient(135deg,#fbbf24,#ef4444,#a855f7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.wheel-hero p{color:var(--muted);font-size:14px;line-height:1.55}
+.wheel-hero .legend{display:flex;justify-content:center;gap:16px;margin-top:14px;flex-wrap:wrap;font-size:12.5px}
+.wheel-hero .legend span{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.wheel-hero .legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+
+.wheel-stage{position:relative;width:min(440px,86vw);height:min(440px,86vw);margin:0 auto;display:flex;align-items:center;justify-content:center}
+.wheel-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid #fbbf24;filter:drop-shadow(0 6px 10px rgba(251,191,36,.6));z-index:5}
+.wheel-pointer::after{content:'';position:absolute;top:-30px;left:-10px;width:20px;height:20px;border-radius:50%;background:#fbbf24;box-shadow:0 0 16px rgba(251,191,36,.9)}
+.wheel-rotor{width:100%;height:100%;border-radius:50%;position:relative;box-shadow:0 0 0 10px #1a1a22,0 0 0 14px #2a2a35,0 0 60px rgba(168,85,247,.35),inset 0 0 40px rgba(0,0,0,.6);transition:transform 6s cubic-bezier(.15,.9,.2,1);background:#0e0e11}
+.wheel-seg{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;transform-origin:50% 50%;pointer-events:none}
+.wheel-seg span{position:absolute;top:14px;font-size:13px;font-weight:800;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.9);letter-spacing:.5px}
+.wheel-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26%;height:26%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3a4a,#0e0e11);border:3px solid #fbbf24;display:flex;align-items:center;justify-content:center;z-index:4;box-shadow:0 0 24px rgba(251,191,36,.5),inset 0 0 12px rgba(0,0,0,.8)}
+.wheel-hub span{font-size:clamp(18px,3.6vw,26px);font-weight:900;color:#fbbf24;text-shadow:0 0 12px rgba(251,191,36,.8)}
+.wheel-glow{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.25),transparent 65%);pointer-events:none;z-index:-1;animation:wheelGlow 3s ease-in-out infinite}
+@keyframes wheelGlow{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+
+.wheel-panel{width:min(520px,92vw);background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.wheel-balance{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
+.wheel-balance .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.wheel-balance .val{font-size:22px;font-weight:900;color:var(--fg);font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:6px}
+.wheel-balance .val .ico{font-size:22px}
+
+.wheel-bet-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.wheel-bet-row .btn{flex:0 0 auto;padding:11px 14px;font-size:12px;border-radius:10px;font-weight:800;letter-spacing:.5px}
+.wheel-bet-row .btn.min{background:rgba(74,222,128,.12);color:#4ade80;border:1px solid rgba(74,222,128,.35)}
+.wheel-bet-row .btn.min:hover{background:rgba(74,222,128,.22)}
+.wheel-bet-row .btn.max{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.35)}
+.wheel-bet-row .btn.max:hover{background:rgba(251,191,36,.22)}
+.wheel-bet-input{flex:1;position:relative}
+.wheel-bet-input input{width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border2);border-radius:10px;color:var(--fg);font-size:16px;font-weight:800;font-family:inherit;outline:none;text-align:center;font-variant-numeric:tabular-nums;transition:border-color .3s var(--ease)}
+.wheel-bet-input input:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.15)}
+.wheel-bet-input .suffix{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none}
+
+.wheel-limits{font-size:11.5px;color:var(--muted);text-align:center;margin-bottom:14px}
+.wheel-limits b{color:var(--fg);font-weight:700}
+
+.wheel-spin-btn{width:100%;padding:16px;border-radius:14px;border:none;background:linear-gradient(135deg,#a855f7,#ec4899,#fbbf24);color:#fff;font-size:17px;font-weight:900;letter-spacing:1px;cursor:pointer;font-family:inherit;transition:transform .3s var(--ease),box-shadow .3s var(--ease),opacity .3s var(--ease);box-shadow:0 10px 30px rgba(168,85,247,.4);text-transform:uppercase}
+.wheel-spin-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 40px rgba(168,85,247,.55)}
+.wheel-spin-btn:active:not(:disabled){transform:translateY(0) scale(.98)}
+.wheel-spin-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.wheel-result{margin-top:14px;padding:14px;border-radius:12px;text-align:center;font-size:14px;font-weight:700;background:var(--bg);border:1px solid var(--border);color:var(--muted);min-height:52px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;transition:all .4s var(--ease)}
+.wheel-result.win{background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(34,211,238,.1));border-color:rgba(74,222,128,.4);color:#4ade80}
+.wheel-result.lose{background:linear-gradient(135deg,rgba(248,113,113,.15),rgba(239,68,68,.08));border-color:rgba(248,113,113,.4);color:#f87171}
+.wheel-result.jackpot{background:linear-gradient(135deg,rgba(251,191,36,.2),rgba(168,85,247,.15));border-color:rgba(251,191,36,.6);color:#fbbf24;animation:jackpotPulse 1.2s ease infinite}
+@keyframes jackpotPulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}50%{box-shadow:0 0 0 12px rgba(251,191,36,0)}}
+.wheel-result .big{font-size:20px;font-weight:900}
+
 @media(max-width:640px){
-  .header{padding:0 14px}
-  .logo{font-size:16px;padding:6px 9px}
-  .logo-text .c{display:none}
-  .avatar-btn .nick{display:none}
-  .avatar-btn{padding:4px}
-  .online{padding:5px 9px;font-size:12px}
-  .online .lbl{display:none}
-  .hero-actions{flex-direction:column;width:100%}
-  .btn-lg{width:100%;justify-content:center}
-  .user-menu{right:-4px;width:240px}
-  .dash-grid,.users-grid{grid-template-columns:1fr}
-  .monkeys-widget{left:20px;right:20px;bottom:20px}
-  .settings-content{padding:20px}
-  .profile-head{padding:0 18px 16px}
-  .profile-av{width:84px;height:84px}
-  .admin-topbar{padding:12px}
-  .admin-body{padding:12px}
+  .wheel-stage{width:min(340px,88vw);height:min(340px,88vw)}
+  .wheel-panel{padding:16px}
+  .wheel-hero h1{font-size:26px}
 }
 </style>
 </head>
@@ -518,6 +547,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   <button class="sidebar-item" id="sbFriends">
     <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
     <span class="lbl">Найти друзей</span>
+  </button>
+  <button class="sidebar-item wheel" id="sbWheel">
+    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></span>
+    <span class="lbl">Колесо Фортуны</span>
   </button>
   <button class="sidebar-item" id="sbSettings">
     <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
@@ -577,6 +610,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
           <h3>⚡ Настрой свой профиль</h3>
           <p>Открой настройки аккаунта: аватар, баннер, описание.</p>
         </div>
+        <div class="dash-card" data-action="wheel">
+          <h3>🎡 Колесо Фортуны</h3>
+          <p>Испытай удачу! Поставь обезьян и крути колесо. x3, x1.5 или проигрыш.</p>
+        </div>
       </div>
     </section>
 
@@ -584,6 +621,51 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
       <div class="users-title">Все участники</div>
       <div class="users-sub" id="usersCount">загрузка…</div>
       <div class="users-grid" id="usersGrid"></div>
+    </section>
+
+    <section id="viewWheel" class="wheel-section">
+      <div class="wheel-hero">
+        <h1>🎡 КОЛЕСО ФОРТУНЫ</h1>
+        <p>Поставь обезьян на кон. Крути колесо и испытай удачу!<br>Минимальная ставка — <b>100</b> 🐵, максимальная — <b>5000</b> 🐵.</p>
+        <div class="legend">
+          <span><i style="background:#22c55e;box-shadow:0 0 8px #22c55e"></i> Зелёный — x3 (шанс 1%)</span>
+          <span><i style="background:#ef4444;box-shadow:0 0 8px #ef4444"></i> Красный — x1.5 (шанс 30%)</span>
+          <span><i style="background:#1a1a1a;border:1px solid #444"></i> Чёрный — проигрыш (69%)</span>
+        </div>
+      </div>
+
+      <div class="wheel-stage">
+        <div class="wheel-pointer"></div>
+        <div class="wheel-glow"></div>
+        <div class="wheel-rotor" id="wheelRotor">
+          <div class="wheel-hub"><span>ZV</span></div>
+        </div>
+      </div>
+
+      <div class="wheel-panel">
+        <div class="wheel-balance">
+          <span class="lbl">Твой баланс</span>
+          <span class="val"><span class="ico">🐵</span><span id="wheelBalance">0</span></span>
+        </div>
+
+        <div class="wheel-bet-row">
+          <button class="btn min" id="wheelMinBtn">МИН.</button>
+          <div class="wheel-bet-input">
+            <input type="number" id="wheelBetInput" min="100" max="5000" step="50" value="100">
+            <span class="suffix">🐵</span>
+          </div>
+          <button class="btn max" id="wheelMaxBtn">МАКС.</button>
+        </div>
+        <div class="wheel-limits">
+          Мин: <b>100</b> 🐵 &nbsp;•&nbsp; Макс: <b>5000</b> 🐵
+        </div>
+
+        <button class="wheel-spin-btn" id="wheelSpinBtn">🎡 Крутить колесо</button>
+
+        <div class="wheel-result" id="wheelResult">
+          <span>Поставь ставку и крути!</span>
+        </div>
+      </div>
     </section>
   </div>
 </main>
@@ -622,6 +704,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- AUTH MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <button class="modal-close" id="modalClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -670,6 +753,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- CONFIRM LOGOUT -->
 <div class="modal-overlay" id="confirmOverlay">
   <div class="modal" style="max-width:380px;">
     <div class="confirm-body">
@@ -684,6 +768,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- UNSAVED -->
 <div class="modal-overlay" id="unsavedOverlay">
   <div class="modal" style="max-width:380px;">
     <div class="confirm-body">
@@ -699,6 +784,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- RESPECT -->
 <div class="modal-overlay" id="respectOverlay">
   <div class="modal" style="max-width:360px;">
     <div class="confirm-body">
@@ -713,6 +799,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- ACCOUNT SETTINGS -->
 <div class="modal-overlay" id="settingsOverlay">
   <div class="modal wide">
     <button class="modal-close" id="settingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -750,6 +837,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- SITE SETTINGS -->
 <div class="modal-overlay" id="siteSettingsOverlay">
   <div class="modal wide">
     <button class="modal-close" id="siteSettingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -782,6 +870,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- PROFILE -->
 <div class="modal-overlay" id="profileOverlay">
   <div class="modal profile" id="profileModal">
     <div class="profile-header">
@@ -811,6 +900,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- BUY -->
 <div class="modal-overlay" id="buyOverlay">
   <div class="modal" style="max-width:360px;">
     <div class="confirm-body">
@@ -825,6 +915,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<!-- ADMIN -->
 <div class="modal-overlay" id="adminOverlay">
   <div class="modal wide" id="adminModal" style="max-height:88vh;display:flex;flex-direction:column;max-width:1000px">
     <button class="modal-close" id="adminClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -838,7 +929,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
    ========================================================= */
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 const HEARTBEAT_MS = 10000;
-const FETCH_TIMEOUT = 9000;
+const FETCH_TIMEOUT = 12000;
 
 const EMOJI_LIST = [
   { emoji:'', label:'Без эмодзи', price:0 },
@@ -862,6 +953,21 @@ const THEME_LIST = [
   { id:'obsidian', name:'Обсидиан',     price:10000, preview:'linear-gradient(135deg,#0a0510,#2a0a3a,#0a0510)' }
 ];
 const SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
+
+// 8 секторов колеса: 1 зелёный (x3), 3 красных (x1.5), 4 чёрных (x0)
+// Индексы: 0 = зелёный, 1,3,5 = красные, 2,4,6,7 = чёрные
+const WHEEL_SEGMENTS = [
+  { color:'#22c55e', type:'green',  mult:3,   label:'x3' },
+  { color:'#ef4444', type:'red',    mult:1.5, label:'x1.5' },
+  { color:'#15151a', type:'black',  mult:0,   label:'x0' },
+  { color:'#ef4444', type:'red',    mult:1.5, label:'x1.5' },
+  { color:'#15151a', type:'black',  mult:0,   label:'x0' },
+  { color:'#ef4444', type:'red',    mult:1.5, label:'x1.5' },
+  { color:'#15151a', type:'black',  mult:0,   label:'x0' },
+  { color:'#15151a', type:'black',  mult:0,   label:'x0' }
+];
+const WHEEL_MIN_BET = 100;
+const WHEEL_MAX_BET = 5000;
 
 /* =========================================================
    ОПТИМИЗАЦИЯ
@@ -897,6 +1003,10 @@ const Sound = (() => {
     reward:()=>{tone(660,.1);setTimeout(()=>tone(880,.1),100);setTimeout(()=>tone(1320,.2),220)},
     respect:()=>{tone(440,.08);setTimeout(()=>tone(660,.1),90);setTimeout(()=>tone(880,.15),200)},
     buy:()=>{tone(600,.08);setTimeout(()=>tone(900,.1),80);setTimeout(()=>tone(1200,.15),180)},
+    wheelTick:()=>tone(900+Math.random()*400,.02,'square',.015),
+    wheelWin:()=>{tone(523,.1);setTimeout(()=>tone(659,.1),100);setTimeout(()=>tone(784,.1),200);setTimeout(()=>tone(1046,.25),300)},
+    wheelLose:()=>{tone(400,.15,'sawtooth',.05);setTimeout(()=>tone(250,.25,'sawtooth',.05),150)},
+    wheelJackpot:()=>{tone(523,.08);setTimeout(()=>tone(659,.08),80);setTimeout(()=>tone(784,.08),160);setTimeout(()=>tone(1046,.12),240);setTimeout(()=>tone(1318,.3),360)},
     setEnabled:(on)=>{enabled=on;localStorage.setItem('zv_sound',on?'on':'off')},
     isEnabled:()=>enabled
   };
@@ -955,7 +1065,7 @@ function randomSalt(len=16){
 }
 
 /* =========================================================
-   API — только JSONP
+   API — JSONP
    ========================================================= */
 let jsonpCounter = 0;
 function api(action, payload={}){
@@ -1105,6 +1215,7 @@ let currentProfileIRespect=false;
 let currentProfileUsername=null;
 let tempProfile=null;
 let tempProfileChanged=false;
+let wheelSpinning=false;
 
 function applyTheme(theme){
   const cls = document.body.className.split(' ').filter(c=>!c.startsWith('theme-')).join(' ');
@@ -1365,18 +1476,25 @@ $('respectYes').onclick=async()=>{
 
 function switchView(name){
   document.querySelectorAll('.sidebar-item').forEach(el=>el.classList.remove('active'));
-  const btn={home:'sbHome',friends:'sbFriends'}[name];
+  const btn={home:'sbHome',friends:'sbFriends',wheel:'sbWheel'}[name];
   if(btn&&$(btn)) $(btn).classList.add('active');
-  const vHome=$('viewHome'), vFriends=$('viewFriends');
+  const vHome=$('viewHome'), vFriends=$('viewFriends'), vWheel=$('viewWheel');
   vHome.style.display = name==='home'?'block':'none';
   vFriends.classList.toggle('active', name==='friends');
-  const titles={home:{t:'Главная',s:'Добро пожаловать в ZV-CLUB'},friends:{t:'Найти друзей',s:'Все участники клуба'}};
+  vWheel.classList.toggle('active', name==='wheel');
+  const titles={
+    home:{t:'Главная',s:'Добро пожаловать в ZV-CLUB'},
+    friends:{t:'Найти друзей',s:'Все участники клуба'},
+    wheel:{t:'Колесо Фортуны',s:'Испытай удачу и умножь своих обезьян'}
+  };
   $('dashTitle').textContent=titles[name].t;
   $('dashSub').textContent=titles[name].s;
   if(name==='friends') loadUsers();
+  if(name==='wheel') updateWheelBalance();
 }
 $('sbHome').onclick=()=>{Sound.click();switchView('home');};
 $('sbFriends').onclick=()=>{Sound.click();switchView('friends');};
+$('sbWheel').onclick=()=>{Sound.click();switchView('wheel');};
 $('sbSettings').onclick=()=>{Sound.click();openAccountSettings();};
 $('sbSiteSettings').onclick=()=>{Sound.click();openSiteSettings();};
 $('sbLogout').onclick=()=>{Sound.click();openConfirmLogout();};
@@ -1387,9 +1505,202 @@ document.querySelectorAll('.dash-card').forEach(card=>{
     Sound.click();
     if(a==='friends') switchView('friends');
     else if(a==='settings') openAccountSettings();
+    else if(a==='wheel') switchView('wheel');
   };
 });
 
+/* =========================================================
+   WHEEL
+   ========================================================= */
+function buildWheel(){
+  const rotor = $('wheelRotor');
+  if(!rotor) return;
+  // Убираем старые сегменты (оставляем hub)
+  rotor.querySelectorAll('.wheel-seg').forEach(el=>el.remove());
+  const N = WHEEL_SEGMENTS.length;
+  const segAngle = 360 / N;
+  for(let i=0;i<N;i++){
+    const seg = WHEEL_SEGMENTS[i];
+    const a1 = i*segAngle;
+    const a2 = (i+1)*segAngle;
+    // SVG-конус через conic-gradient — проще и надёжнее
+    // Но чтобы был красивый пирог с разделителями — используем clip-path на диве
+    const div = document.createElement('div');
+    div.className = 'wheel-seg';
+    div.style.transform = `rotate(${a1}deg)`;
+    div.innerHTML = `<div style="
+      position:absolute;inset:0;
+      background:${seg.color};
+      clip-path:polygon(50% 50%, 50% 0, ${50 + 50*Math.tan(segAngle*Math.PI/180)}% 0);
+      transform-origin:50% 50%;
+    "></div>
+    <span style="transform:rotate(${segAngle/2}deg);transform-origin:50% ${rotor.offsetWidth/2}px;top:14px;left:50%;margin-left:-14px;width:28px;text-align:center">${seg.label}</span>`;
+    rotor.appendChild(div);
+  }
+  // Перерисуем через conic-gradient — точнее
+  const stops = [];
+  for(let i=0;i<N;i++){
+    const start = i*segAngle;
+    const end = (i+1)*segAngle;
+    stops.push(`${WHEEL_SEGMENTS[i].color} ${start}deg ${end}deg`);
+  }
+  rotor.style.background = `conic-gradient(from -${segAngle/2}deg, ${stops.join(',')})`;
+  rotor.querySelectorAll('.wheel-seg').forEach(el=>el.remove());
+
+  // Подписи
+  for(let i=0;i<N;i++){
+    const seg = WHEEL_SEGMENTS[i];
+    const mid = i*segAngle + segAngle/2 - segAngle/2; // центр сектора относительно 0
+    const span = document.createElement('div');
+    span.className='wheel-seg';
+    span.style.transform = `rotate(${i*segAngle + segAngle/2}deg)`;
+    span.innerHTML = `<span style="
+      position:absolute;top:18px;left:50%;transform:translateX(-50%);
+      font-size:13px;font-weight:900;color:#fff;
+      text-shadow:0 2px 6px rgba(0,0,0,.95);
+      letter-spacing:.5px;pointer-events:none;
+    ">${seg.label}</span>`;
+    rotor.appendChild(span);
+  }
+}
+
+function updateWheelBalance(){
+  const s=Session.get();
+  if(!s||!s.profile) return;
+  const bal = s.profile.monkeys || 0;
+  $('wheelBalance').textContent = bal;
+  const inp = $('wheelBetInput');
+  if(inp){
+    inp.max = Math.min(WHEEL_MAX_BET, Math.max(WHEEL_MIN_BET, bal));
+  }
+}
+
+function setBet(val){
+  const s=Session.get(); if(!s||!s.profile) return;
+  const bal = s.profile.monkeys || 0;
+  let v = parseInt(val,10);
+  if(isNaN(v)) v = WHEEL_MIN_BET;
+  v = Math.max(WHEEL_MIN_BET, Math.min(WHEEL_MAX_BET, v));
+  if(v > bal) v = Math.max(0, bal); // если денег меньше — ставим все
+  $('wheelBetInput').value = v;
+}
+
+$('wheelMinBtn').onclick = ()=>{ Sound.click(); setBet(WHEEL_MIN_BET); };
+$('wheelMaxBtn').onclick = ()=>{ Sound.click(); setBet(WHEEL_MAX_BET); };
+$('wheelBetInput').addEventListener('input', ()=>{
+  const s=Session.get(); if(!s||!s.profile) return;
+  const bal = s.profile.monkeys || 0;
+  let v = parseInt($('wheelBetInput').value,10);
+  if(isNaN(v)) return;
+  if(v > bal) $('wheelBetInput').value = bal;
+});
+
+function pickWheelSegment(){
+  const r = Math.random() * 100;
+  // зелёный 1% (индекс 0), красный 30% (индексы 1,3,5), чёрный 69% (2,4,6,7)
+  if(r < 1) return 0;
+  if(r < 31){
+    const reds = [1,3,5];
+    return reds[Math.floor(Math.random()*reds.length)];
+  }
+  const blacks = [2,4,6,7];
+  return blacks[Math.floor(Math.random()*blacks.length)];
+}
+
+$('wheelSpinBtn').onclick = async ()=>{
+  if(wheelSpinning) return;
+  const s=Session.get(); if(!s||!s.token){ Sound.error(); return; }
+  const bal = (s.profile && s.profile.monkeys) || 0;
+  let bet = parseInt($('wheelBetInput').value,10);
+  if(isNaN(bet)) bet = WHEEL_MIN_BET;
+  if(bet < WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Минимальная ставка — 100 🐵</span>'; $('wheelResult').className='wheel-result lose'; return; }
+  if(bal < WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Недостаточно обезьян (мин. 100)</span>'; $('wheelResult').className='wheel-result lose'; return; }
+  if(bet > bal) bet = bal; // если денег меньше — ставим все
+  if(bet > WHEEL_MAX_BET) bet = WHEEL_MAX_BET;
+
+  wheelSpinning = true;
+  $('wheelSpinBtn').disabled = true;
+  $('wheelSpinBtn').textContent = '🎡 Крутится...';
+  $('wheelResult').className='wheel-result';
+  $('wheelResult').innerHTML = '<span>Крутится...</span>';
+  Sound.click();
+
+  // 1. Списываем ставку
+  const res = await api('spinWheel', { username:s.username, token:s.token, bet });
+  if(!res.ok){
+    wheelSpinning=false;
+    $('wheelSpinBtn').disabled=false;
+    $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+    $('wheelResult').className='wheel-result lose';
+    $('wheelResult').innerHTML = `<span>${escapeHtml(res.error||'Ошибка')}</span>`;
+    Sound.error();
+    return;
+  }
+
+  // 2. Обновляем баланс сразу (ставка списана)
+  const cur = Session.get();
+  cur.profile.monkeys = res.monkeysAfterBet;
+  Session.save(cur);
+  updateWheelBalance();
+  updateMonkeysWidget();
+
+  // 3. Крутим колесо к выбранному сектору
+  const segIdx = res.segment;
+  const N = WHEEL_SEGMENTS.length;
+  const segAngle = 360 / N;
+  // указатель сверху (-90° от начала conic-gradient)
+  const targetAngle = 360*6 + (360 - (segIdx*segAngle + segAngle/2)) + (Math.random()*segAngle*0.6 - segAngle*0.3);
+  const rotor = $('wheelRotor');
+  rotor.style.transition = 'transform 6s cubic-bezier(.15,.9,.2,1)';
+  rotor.style.transform = `rotate(${targetAngle}deg)`;
+
+  // Тики во время вращения
+  let tickCount = 0;
+  const tickInterval = setInterval(()=>{
+    Sound.wheelTick();
+    tickCount++;
+    if(tickCount > 40) clearInterval(tickInterval);
+  }, 120);
+
+  setTimeout(()=>{
+    clearInterval(tickInterval);
+    // 4. Показываем результат
+    const seg = WHEEL_SEGMENTS[segIdx];
+    const winAmount = Math.floor(bet * seg.mult);
+    const profit = winAmount - bet;
+    const newBal = res.monkeysAfterBet + winAmount;
+
+    cur.profile.monkeys = newBal;
+    Session.save(cur);
+    updateWheelBalance();
+    updateMonkeysWidget();
+    bumpMonkeys();
+
+    if(seg.type === 'green'){
+      $('wheelResult').className='wheel-result jackpot';
+      $('wheelResult').innerHTML = `<span class="big">🎉 ДЖЕКПОТ! x3</span><span>Выигрыш: +${winAmount} 🐵 (чистыми +${profit})</span>`;
+      Sound.wheelJackpot();
+      showReward(winAmount);
+    } else if(seg.type === 'red'){
+      $('wheelResult').className='wheel-result win';
+      $('wheelResult').innerHTML = `<span class="big">✅ x1.5</span><span>Выигрыш: +${winAmount} 🐵 (чистыми +${profit})</span>`;
+      Sound.wheelWin();
+      showReward(winAmount);
+    } else {
+      $('wheelResult').className='wheel-result lose';
+      $('wheelResult').innerHTML = `<span class="big">💀 Проигрыш</span><span>Потеряно: −${bet} 🐵</span>`;
+      Sound.wheelLose();
+    }
+
+    wheelSpinning=false;
+    $('wheelSpinBtn').disabled=false;
+    $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+  }, 6200);
+};
+
+/* =========================================================
+   USERS / PROFILE / SETTINGS / ADMIN
+   ========================================================= */
 async function loadUsers(){
   const grid=$('usersGrid');
   grid.innerHTML='<div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div>';
@@ -1996,6 +2307,7 @@ function updateMonkeysWidget(){
   const s=Session.get(); if(!s||!s.profile) return;
   const p=s.profile;
   $('monkeysCount').textContent = p.monkeys || 0;
+  updateWheelBalance();
   const last = p.lastDaily ? Number(p.lastDaily) : 0;
   const now = Date.now();
   const dayMs = 24*60*60*1000;
@@ -2227,7 +2539,7 @@ function uploadPostFile(e, type){
 }
 
 /* =========================================================
-   ADMIN v4 — ИСПРАВЛЕННЫЙ
+   ADMIN v4
    ========================================================= */
 $('sbAdmin').onclick=()=>{ Sound.click(); openAdminPanel(); };
 $('adminClose').onclick=()=>{ $('adminOverlay').classList.remove('show'); Sound.close(); };
@@ -2242,10 +2554,7 @@ function openAdminPanel(){
   const p = s.profile || {};
   const canAdmin = p.isAdmin || p.isOwner || s.username.toLowerCase()==='medy3a';
   if(!canAdmin){ alert('Нет доступа'); return; }
-  
-  // КРИТИЧНО: сброс флага при открытии
   adminBusy = false;
-  
   $('adminOverlay').classList.add('show');
   Sound.open();
   const token = sessionStorage.getItem('zv_admin_token');
@@ -2306,9 +2615,7 @@ function renderAdminLogin(){
 }
 
 async function adminFetchUsers(){
-  // КРИТИЧНО: сброс флага
   adminBusy = false;
-  
   const token=sessionStorage.getItem('zv_admin_token')||'';
   if(!token){ renderAdminLogin(); return; }
   $('adminWrap').innerHTML = `
@@ -2364,10 +2671,7 @@ function updateAdminStats(){
 function renderAdminGrid(){
   const body = $('admBody');
   if(!body) return;
-  
-  // КРИТИЧНО: сброс флага при каждом рендере
   adminBusy = false;
-  
   let users = adminUsersCache;
   if(adminSearchQuery){
     users = users.filter(u =>
@@ -2389,12 +2693,10 @@ function renderAdminGrid(){
     const user = adminUsersCache.find(x=>x.username===uname);
     if(!user) return;
 
-    // Сохранить визуал + эмодзи
     const saveBtn = card.querySelector('.adm-save');
     if(saveBtn) {
       saveBtn.addEventListener('click', async (e)=>{
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         adminBusy=true;
         const token=sessionStorage.getItem('zv_admin_token');
@@ -2412,20 +2714,15 @@ function renderAdminGrid(){
             if(emjEl) emjEl.textContent = emoji || '∅';
           } else { Sound.error(); alert(r.error||'Ошибка'); }
         } catch(err) {
-          Sound.error();
-          alert('Ошибка сети');
-        } finally {
-          adminBusy=false;
-        }
+          Sound.error(); alert('Ошибка сети');
+        } finally { adminBusy=false; }
       });
     }
 
-    // Выдать обезьян
     const giveBtn = card.querySelector('.adm-give');
     if(giveBtn) {
       giveBtn.addEventListener('click', async (e)=>{
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         const inp = card.querySelector('.adm-give-amount');
         const amt = parseInt(inp.value||'0',10);
@@ -2443,19 +2740,14 @@ function renderAdminGrid(){
             updateAdminStats();
           } else { Sound.error(); alert(r.error||'Ошибка'); }
         } catch(err) {
-          Sound.error();
-          alert('Ошибка сети');
-        } finally {
-          adminBusy=false;
-        }
+          Sound.error(); alert('Ошибка сети');
+        } finally { adminBusy=false; }
       });
     }
 
-    // Быстрые кнопки
     card.querySelectorAll('.adm-quick').forEach(b=>{
       b.addEventListener('click', async (e)=>{
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         const delta = parseInt(b.dataset.delta,10);
         if(!delta) return;
@@ -2470,20 +2762,14 @@ function renderAdminGrid(){
             if(monEl) monEl.textContent = r.monkeys;
             updateAdminStats();
           } else Sound.error();
-        } catch(err) {
-          Sound.error();
-        } finally {
-          adminBusy=false;
-        }
+        } catch(err) { Sound.error(); } finally { adminBusy=false; }
       });
     });
 
-    // Точное значение
     const setBtn = card.querySelector('.adm-set');
     if(setBtn) {
       setBtn.addEventListener('click', async (e)=>{
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         const val = parseInt(card.querySelector('.adm-set-val').value||'0',10);
         const delta = val - (user.monkeys||0);
@@ -2499,21 +2785,15 @@ function renderAdminGrid(){
             if(monEl) monEl.textContent = r.monkeys;
             updateAdminStats();
           } else Sound.error();
-        } catch(err) {
-          Sound.error();
-        } finally {
-          adminBusy=false;
-        }
+        } catch(err) { Sound.error(); } finally { adminBusy=false; }
       });
     }
 
-    // Выбор эмодзи
     const emojiValueEl = card.querySelector('.adm-emoji-value');
     if(emojiValueEl) {
       card.querySelectorAll('.adm-emoji-picker button').forEach(b=>{
         b.addEventListener('click', (e)=>{
-          e.preventDefault();
-          e.stopPropagation();
+          e.preventDefault(); e.stopPropagation();
           const eVal = b.dataset.e;
           emojiValueEl.value = eVal;
           card.querySelectorAll('.adm-emoji-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.e===eVal));
@@ -2523,13 +2803,11 @@ function renderAdminGrid(){
       });
     }
 
-    // Выбор темы
     const themeValueEl = card.querySelector('.adm-theme-value');
     if(themeValueEl) {
       card.querySelectorAll('.adm-theme-picker button').forEach(b=>{
         b.addEventListener('click', async (e)=>{
-          e.preventDefault();
-          e.stopPropagation();
+          e.preventDefault(); e.stopPropagation();
           if(adminBusy) return;
           const th = b.dataset.t;
           adminBusy=true;
@@ -2543,21 +2821,15 @@ function renderAdminGrid(){
               card.querySelectorAll('.adm-theme-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.t===th));
             }
             else Sound.error();
-          } catch(err) {
-            Sound.error();
-          } finally {
-            adminBusy=false;
-          }
+          } catch(err) { Sound.error(); } finally { adminBusy=false; }
         });
       });
     }
 
-    // Выдать админку
     const admBtn = card.querySelector('.adm-toggle-admin');
     if(admBtn){
       admBtn.addEventListener('click', async (e)=>{
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         adminBusy=true;
         const token=sessionStorage.getItem('zv_admin_token');
@@ -2570,11 +2842,8 @@ function renderAdminGrid(){
             renderAdminGrid();
           } else { Sound.error(); alert(r.error||'Ошибка'); }
         } catch(err) {
-          Sound.error();
-          alert('Ошибка сети');
-        } finally {
-          adminBusy=false;
-        }
+          Sound.error(); alert('Ошибка сети');
+        } finally { adminBusy=false; }
       });
     }
   });
@@ -2739,6 +3008,7 @@ document.addEventListener('keydown',e=>{
 });
 
 renderAuthState();
+buildWheel();
 Online.start();
 switchView('home');
 

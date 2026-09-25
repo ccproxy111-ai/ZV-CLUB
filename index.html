@@ -6,219 +6,210 @@
 <title>ZV-CLUB</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <style>
+/* ===== БАЗА ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#0e0e11;--bg2:#16171b;--bg3:#1d1e24;--bg4:#242630;
   --fg:#e8e9ec;--muted:#7c7f8a;--muted2:#5a5d68;
   --border:#26282f;--border2:#32353d;
-  --ok:#4ade80;--danger:#f87171;--accent:#8b8d9a;
-  --radius:10px;
+  --ok:#4ade80;--danger:#f87171;
+  --accent-a:#7c5cff;--accent-b:#22d3ee;
   --sidebar-w:68px;--sidebar-w-open:220px;
+  --radius:10px;
 }
+/* ТЕМЫ */
+body.theme-light{
+  --bg:#f4f5f7;--bg2:#ffffff;--bg3:#e9ebef;--bg4:#dde0e6;
+  --fg:#0e0e11;--muted:#5f6471;--muted2:#8a90a0;
+  --border:#d7dae0;--border2:#c2c6ce;
+}
+body.theme-moon{
+  --bg:#161823;--bg2:#1e2130;--bg3:#262a3a;--bg4:#2f3446;
+  --fg:#e8eaf4;--muted:#8b90a8;--muted2:#666c85;
+  --border:#2e3346;--border2:#3d4358;
+  background:linear-gradient(135deg,#141826,#1c2238,#141826);
+  background-size:200% 200%;animation:moonShift 20s ease infinite;
+}
+@keyframes moonShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+body.theme-ocean{
+  --bg:#08161c;--bg2:#0d1f28;--bg3:#122834;--bg4:#173340;
+  --fg:#dff4ff;--muted:#6e97a8;--muted2:#4a6a78;
+  --border:#0f2832;--border2:#1c4252;
+}
+body.theme-toxic{
+  --bg:#0d1a0d;--bg2:#122612;--bg3:#183018;--bg4:#1f3d1f;
+  --fg:#dcffdc;--muted:#6da86d;--muted2:#4a7a4a;
+  --border:#132a13;--border2:#204520;
+}
+body.theme-scarlet{
+  --bg:#1a0e0e;--bg2:#261212;--bg3:#331818;--bg4:#401e1e;
+  --fg:#ffe4e4;--muted:#c98a8a;--muted2:#8a5a5a;
+  --border:#2a1212;--border2:#4a2020;
+}
+body.theme-divine{
+  background:linear-gradient(135deg,#c8e8ff,#ffffff,#fff8dc,#c8e8ff);
+  background-size:400% 400%;animation:divineShift 15s ease infinite;
+  --bg:rgba(255,255,255,.7);--bg2:rgba(255,255,255,.85);--bg3:rgba(240,248,255,.9);--bg4:rgba(220,235,255,.9);
+  --fg:#0a2540;--muted:#5f7f9e;--muted2:#8aa8c0;
+  --border:rgba(200,220,240,.6);--border2:rgba(160,200,240,.8);
+}
+@keyframes divineShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+body.theme-obsidian{
+  background:linear-gradient(135deg,#0a0510,#1a0a2a,#0a0510,#2a0a3a);
+  background-size:300% 300%;animation:obsShift 25s ease infinite;
+  --bg:#0a0510;--bg2:#14081c;--bg3:#1e0f2a;--bg4:#2a1638;
+  --fg:#e8d8ff;--muted:#8a6fa8;--muted2:#5a4770;
+  --border:#22102e;--border2:#3a1f4a;
+}
+@keyframes obsShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+body.theme-rgb{
+  background:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8b00ff,#ff0000);
+  background-size:400% 400%;animation:rgbShift 10s linear infinite;
+  --bg:#0a0a0f;--bg2:rgba(20,20,30,.85);--bg3:rgba(30,30,45,.85);--bg4:rgba(45,45,65,.9);
+  --fg:#ffffff;--muted:#c0c0d0;--muted2:#9090a0;
+  --border:rgba(80,80,120,.5);--border2:rgba(120,120,180,.7);
+}
+@keyframes rgbShift{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+
 html,body{
   height:100%;background:var(--bg);color:var(--fg);
   font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   overflow-x:hidden;-webkit-font-smoothing:antialiased;
 }
-#bg-shader{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
-#bg-fallback{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(900px 500px at 15% -10%,rgba(120,120,140,.07),transparent 60%),
-             radial-gradient(700px 400px at 90% 110%,rgba(90,90,110,.05),transparent 60%)}
+#bg-shader{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;opacity:.85}
+body.theme-light #bg-shader,body.theme-divine #bg-shader{opacity:.3}
 
-/* ===== HEADER ===== */
 .header{
   position:fixed;top:0;left:0;right:0;height:56px;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;background:rgba(14,14,17,.72);
+  padding:0 20px;background:rgba(20,20,24,.72);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);z-index:100;
   transition:left .3s cubic-bezier(.2,.9,.3,1);
 }
+body.theme-light .header,body.theme-divine .header{background:rgba(255,255,255,.7)}
+body.theme-moon .header{background:rgba(22,24,35,.72)}
 body.logged-in .header{left:var(--sidebar-w)}
 .header-left{display:flex;align-items:center;gap:12px}
 .header-right{display:flex;align-items:center;gap:10px}
 
-.logo{
-  cursor:pointer;font-weight:800;font-size:18px;letter-spacing:.5px;
-  padding:7px 12px;border-radius:8px;
-  transition:background .2s,transform .15s;
-  user-select:none;display:flex;align-items:center;gap:7px;
-}
+.logo{cursor:pointer;font-weight:800;font-size:18px;letter-spacing:.5px;
+  padding:7px 12px;border-radius:8px;transition:background .2s;
+  user-select:none;display:flex;align-items:center;gap:7px}
 .logo:hover{background:var(--bg2)}
-.logo:active{transform:scale(.96)}
-.logo svg{width:18px;height:18px;stroke:var(--fg);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.logo-text{color:var(--fg)}
+.logo svg{width:18px;height:18px;stroke:var(--fg);fill:none;stroke-width:2}
 .logo-text .c{color:var(--muted)}
 
-.online{
-  display:flex;align-items:center;gap:8px;
-  padding:6px 12px;border-radius:999px;
-  background:var(--bg2);border:1px solid var(--border);
-  font-size:13px;color:var(--fg);font-weight:500;
-}
+.online{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--border);font-size:13px;font-weight:500}
 .online .dot{position:relative;width:8px;height:8px;border-radius:50%;
   background:var(--ok);box-shadow:0 0 8px rgba(74,222,128,.8)}
 .online .dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;
   border:1px solid var(--ok);opacity:.6;animation:pulse 2s ease-out infinite}
 @keyframes pulse{0%{transform:scale(.7);opacity:.8}100%{transform:scale(1.8);opacity:0}}
-.online .count{color:var(--fg);font-variant-numeric:tabular-nums;font-weight:600;min-width:14px;text-align:center}
+.online .count{font-variant-numeric:tabular-nums;font-weight:600;min-width:14px;text-align:center}
 .online .lbl{color:var(--muted);font-size:12px}
 .online.err .dot{background:var(--muted2);box-shadow:none}
 .online.err .dot::after{display:none}
-.online.err .count{color:var(--muted)}
 
-.btn{
-  border:none;border-radius:9px;padding:9px 16px;font-size:13.5px;font-weight:600;
+.btn{border:none;border-radius:9px;padding:9px 16px;font-size:13.5px;font-weight:600;
   cursor:pointer;transition:background .15s,border-color .15s,transform .12s,color .15s;
-  font-family:inherit;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
-}
+  font-family:inherit;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .btn-primary{background:var(--fg);color:var(--bg);border:1px solid var(--fg)}
-.btn-primary:hover{background:#fff;border-color:#fff}
+.btn-primary:hover{opacity:.9}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
 .btn-ghost:hover{color:var(--fg);border-color:var(--border2);background:var(--bg2)}
 .btn-danger{background:var(--danger);color:#fff;border:1px solid var(--danger)}
-.btn-danger:hover{background:#ef4444;border-color:#ef4444}
+.btn-danger:hover{opacity:.9}
 .btn-lg{padding:12px 22px;font-size:14.5px;border-radius:10px}
 .btn-block{width:100%;justify-content:center}
 
-/* ===== SIDEBAR ===== */
-.sidebar{
-  position:fixed;top:56px;left:0;bottom:0;
-  width:var(--sidebar-w);
-  background:rgba(14,14,17,.72);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;gap:8px;
-  padding:12px 8px;z-index:99;
-  transition:width .3s cubic-bezier(.2,.9,.3,1);
-  overflow:hidden;
-}
+/* SIDEBAR */
+.sidebar{position:fixed;top:56px;left:0;bottom:0;width:var(--sidebar-w);
+  background:rgba(20,20,24,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-right:1px solid var(--border);display:flex;flex-direction:column;gap:8px;
+  padding:12px 8px;z-index:99;transition:width .3s cubic-bezier(.2,.9,.3,1);overflow:hidden}
 .sidebar:hover{width:var(--sidebar-w-open)}
 body:not(.logged-in) .sidebar{display:none}
-.sidebar-item{
-  display:flex;align-items:center;gap:14px;
-  padding:11px 12px;border-radius:10px;
-  background:var(--bg2);border:1px solid var(--border);
-  color:var(--muted);cursor:pointer;
-  transition:background .15s,border-color .15s,color .15s;
-  white-space:nowrap;font-size:14px;font-weight:500;
-  font-family:inherit;
-}
+.sidebar-item{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:10px;
+  background:var(--bg2);border:1px solid var(--border);color:var(--muted);cursor:pointer;
+  transition:background .15s,border-color .15s,color .15s;white-space:nowrap;
+  font-size:14px;font-weight:500;font-family:inherit;text-align:left;width:100%}
 .sidebar-item:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg)}
 .sidebar-item.active{background:var(--bg3);border-color:var(--border2);color:var(--fg)}
-.sidebar-item .ico{
-  width:22px;height:22px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.sidebar-item .ico svg{
-  width:20px;height:20px;stroke:currentColor;fill:none;
-  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-}
+.sidebar-item .ico{width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.sidebar-item .ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sidebar-item .lbl{opacity:0;transition:opacity .15s .1s}
 .sidebar:hover .sidebar-item .lbl{opacity:1}
 .sidebar-spacer{flex:1}
 .sidebar-item.logout:hover{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.3);color:var(--danger)}
+.sidebar-item.admin{border-color:rgba(255,200,50,.3)}
+.sidebar-item.admin:hover{background:rgba(255,200,50,.08);border-color:rgba(255,200,50,.5);color:#ffcc33}
 
-/* ===== АККАУНТ ===== */
+/* USER top-right */
 .user-wrap{position:relative}
-.avatar-btn{
-  display:flex;align-items:center;gap:9px;
-  padding:5px 12px 5px 5px;border-radius:999px;
-  background:var(--bg2);border:1px solid var(--border);
-  cursor:pointer;transition:border-color .2s,background .2s;
-}
+.avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;
+  background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:border-color .2s,background .2s}
 .avatar-btn:hover{border-color:var(--border2);background:var(--bg3)}
-.avatar-btn .av{
-  width:26px;height:26px;border-radius:50%;
-  background:linear-gradient(135deg,#3a3d47,#2a2d35);
-  border:1px solid var(--border2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;color:var(--fg);
-  text-transform:uppercase;letter-spacing:.3px;
-  overflow:hidden;
-}
+.avatar-btn .av{width:26px;height:26px;border-radius:50%;
+  background:linear-gradient(135deg,#3a3d47,#2a2d35);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;
+  color:#e8e9ec;text-transform:uppercase;overflow:hidden}
 .avatar-btn .av img{width:100%;height:100%;object-fit:cover}
-.avatar-btn .nick{font-size:13px;color:var(--fg);font-weight:500;
-  max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.avatar-btn .nick{font-size:13px;font-weight:500;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.avatar-btn .emoji{margin-left:2px;font-size:14px}
 .avatar-btn .chev{width:12px;height:12px;stroke:var(--muted);fill:none;stroke-width:2.2;
   stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
 .avatar-btn.open .chev{transform:rotate(180deg)}
 
-.user-menu{
-  position:absolute;top:calc(100% + 8px);right:0;width:240px;
-  background:var(--bg2);border:1px solid var(--border2);
-  border-radius:12px;overflow:hidden;
-  box-shadow:0 12px 40px rgba(0,0,0,.6);
-  opacity:0;transform:translateY(-6px) scale(.97);pointer-events:none;
-  transition:opacity .18s ease,transform .18s ease;z-index:150;
-}
+.user-menu{position:absolute;top:calc(100% + 8px);right:0;width:240px;
+  background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);opacity:0;transform:translateY(-6px) scale(.97);
+  pointer-events:none;transition:opacity .18s,transform .18s;z-index:150}
 .user-menu.show{opacity:1;transform:none;pointer-events:auto}
-.user-menu-head{padding:14px 16px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:11px}
-.user-menu-head .av-lg{
-  width:38px;height:38px;border-radius:50%;
-  background:linear-gradient(135deg,#3a3d47,#2a2d35);
-  border:1px solid var(--border2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:700;text-transform:uppercase;
-  color:var(--fg);flex-shrink:0;overflow:hidden;
-}
+.user-menu-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px}
+.user-menu-head .av-lg{width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,#3a3d47,#2a2d35);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;
+  text-transform:uppercase;color:#e8e9ec;flex-shrink:0;overflow:hidden}
 .user-menu-head .av-lg img{width:100%;height:100%;object-fit:cover}
 .user-menu-head .info{min-width:0;flex:1}
-.user-menu-head .info .name{font-size:14px;font-weight:600;color:var(--fg);
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.user-menu-head .info .status{font-size:11px;color:var(--ok);margin-top:2px;
-  display:flex;align-items:center;gap:5px}
-.user-menu-head .info .status::before{content:'';width:5px;height:5px;border-radius:50%;
-  background:var(--ok);box-shadow:0 0 4px var(--ok)}
+.user-menu-head .info .name{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.user-menu-head .info .status{font-size:11px;color:var(--ok);margin-top:2px;display:flex;align-items:center;gap:5px}
+.user-menu-head .info .status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ok)}
 .user-menu-body{padding:6px}
-.menu-item{
-  display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:8px;
-  font-size:13.5px;color:var(--fg);cursor:pointer;
-  transition:background .15s,color .15s;border:none;background:none;
-  width:100%;text-align:left;font-family:inherit;
-}
+.menu-item{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:8px;font-size:13.5px;
+  color:var(--fg);cursor:pointer;transition:background .15s,color .15s;border:none;background:none;
+  width:100%;text-align:left;font-family:inherit}
 .menu-item:hover{background:var(--bg3)}
-.menu-item svg{width:16px;height:16px;stroke:var(--muted);fill:none;
-  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
+.menu-item svg{width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
 .menu-item:hover svg{stroke:var(--fg)}
 .menu-item.danger:hover{background:rgba(248,113,113,.08);color:var(--danger)}
 .menu-item.danger:hover svg{stroke:var(--danger)}
 .menu-divider{height:1px;background:var(--border);margin:5px 6px}
 
-/* ===== MAIN ===== */
-.main{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:90px 30px 60px;position:relative;z-index:1;
-  transition:padding .3s;
-}
-body.logged-in .main{padding-left:calc(var(--sidebar-w) + 30px);
-  align-items:flex-start;justify-content:flex-start}
+/* MAIN */
+.main{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:90px 30px 80px;position:relative;z-index:1;transition:padding .3s}
+body.logged-in .main{padding-left:calc(var(--sidebar-w) + 30px);align-items:flex-start;justify-content:flex-start}
 body.logged-in .main .hero{display:none}
 
 .hero{text-align:center;max-width:680px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:5px 12px;border-radius:999px;
-  background:rgba(22,23,27,.75);border:1px solid var(--border);
-  font-size:12px;color:var(--muted);margin-bottom:26px;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  animation:fadeUp .5s ease;
-}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--ok);
-  box-shadow:0 0 6px rgba(74,222,128,.7)}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;
+  background:rgba(22,23,27,.75);border:1px solid var(--border);font-size:12px;color:var(--muted);
+  margin-bottom:26px;backdrop-filter:blur(8px);animation:fadeUp .5s ease}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.hero-title{font-size:clamp(44px,7vw,84px);font-weight:800;letter-spacing:-2.5px;
-  margin-bottom:16px;line-height:1;color:var(--fg);animation:fadeUp .6s ease}
+.hero-title{font-size:clamp(44px,7vw,84px);font-weight:800;letter-spacing:-2.5px;margin-bottom:16px;line-height:1}
 .hero-title .accent{color:var(--muted);font-weight:300}
-.hero-sub{color:var(--muted);font-size:17px;margin-bottom:36px;animation:fadeUp .7s ease}
+.hero-sub{color:var(--muted);font-size:17px;margin-bottom:36px}
 .hero-sub .sv{color:var(--fg);font-weight:700;letter-spacing:.3px}
-.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s ease}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
-/* ===== DASHBOARD ===== */
 .dashboard{width:100%;max-width:1200px;display:none;flex-direction:column;gap:20px}
 body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .dash-header{display:flex;align-items:center;justify-content:space-between;padding:0 4px}
@@ -226,332 +217,347 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
 .dash-sub{font-size:13px;color:var(--muted);margin-top:3px}
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .dash-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;
-  transition:border-color .2s,background .2s,transform .15s}
+  transition:border-color .2s,background .2s,transform .15s;cursor:pointer}
 .dash-card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-2px)}
 .dash-card h3{font-size:14px;font-weight:600;margin-bottom:6px}
 .dash-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
 
-/* ===== USERS ===== */
+/* USERS */
 .users-section{display:none;flex-direction:column;gap:14px}
-.users-section.active{display:flex;animation:fadeUp .3s ease}
+.users-section.active{display:flex}
 .users-title{font-size:18px;font-weight:700;padding:0 4px}
 .users-sub{font-size:12.5px;color:var(--muted);padding:0 4px;margin-top:-8px}
-.users-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.user-card{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:12px;padding:14px;
-  display:flex;align-items:center;gap:12px;
-  transition:border-color .2s,background .2s,transform .15s;
-  cursor:default;position:relative;
-}
+.users-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.user-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;
+  display:flex;align-items:center;gap:12px;transition:border-color .2s,background .2s,transform .15s;cursor:pointer}
 .user-card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-2px)}
-.user-card .av{
-  width:42px;height:42px;border-radius:50%;
-  background:linear-gradient(135deg,#3a3d47,#2a2d35);
-  border:1px solid var(--border2);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:700;text-transform:uppercase;
-  color:var(--fg);overflow:hidden;
-}
+.user-card .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#3a3d47,#2a2d35);
+  border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;text-transform:uppercase;color:#e8e9ec;overflow:hidden}
 .user-card .av img{width:100%;height:100%;object-fit:cover}
 .user-card .info{min-width:0;flex:1}
-.user-card .info .name{font-size:13.5px;font-weight:600;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.user-card .info .login{font-size:11px;color:var(--muted);margin-top:2px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.user-card .info .name{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;display:flex;align-items:center;gap:5px}
+.user-card .info .name .emj{font-size:14px}
+.user-card .info .login{font-size:11px;color:var(--muted);margin-top:2px}
 
-/* Мини-профиль */
-.hover-card{
-  position:fixed;width:260px;
-  background:var(--bg2);border:1px solid var(--border2);
-  border-radius:12px;overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.75);
-  opacity:0;transform:translateY(8px);pointer-events:none;
-  transition:opacity .18s ease,transform .18s ease;
-  z-index:400;
-}
+/* HOVER CARD */
+.hover-card{position:fixed;width:280px;background:var(--bg2);border:1px solid var(--border2);
+  border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.75);
+  opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .18s,transform .18s;z-index:400}
 .hover-card.show{opacity:1;transform:none;pointer-events:auto}
-.hover-banner{height:64px;background:#1d1e24;transition:background .3s}
+.hover-banner{height:64px;background:#1d1e24}
 .hover-body{padding:0 14px 14px;margin-top:-26px}
-.hover-av{
-  width:52px;height:52px;border-radius:50%;
-  background:linear-gradient(135deg,#3a3d47,#2a2d35);
-  border:3px solid var(--bg2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;font-weight:700;text-transform:uppercase;
-  color:var(--fg);overflow:hidden;margin-bottom:8px;
-}
+.hover-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3a3d47,#2a2d35);
+  border:3px solid var(--bg2);display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:700;text-transform:uppercase;color:#e8e9ec;overflow:hidden;margin-bottom:8px}
 .hover-av img{width:100%;height:100%;object-fit:cover}
-.hover-name{font-size:15px;font-weight:700;margin-bottom:2px}
+.hover-name{font-size:15px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:5px}
 .hover-login{font-size:11.5px;color:var(--muted);margin-bottom:10px}
-.hover-bio{font-size:12px;color:var(--muted);line-height:1.55;
-  max-height:100px;overflow-y:auto;word-wrap:break-word}
-.hover-bio a{color:var(--fg);text-decoration:none;
-  display:inline-flex;align-items:center;gap:3px;
-  padding:1px 5px;border-radius:5px;background:var(--bg3);
-  transition:background .15s;font-size:11.5px;margin:2px 0}
+.hover-bio{font-size:12px;color:var(--muted);line-height:1.55;max-height:100px;overflow-y:auto;word-wrap:break-word}
+.hover-bio a{color:var(--fg);text-decoration:none;display:inline-flex;align-items:center;gap:3px;
+  padding:1px 5px;border-radius:5px;background:var(--bg3);font-size:11.5px;margin:2px 0}
 .hover-bio a:hover{background:var(--bg4)}
-.hover-bio .link-ico{
-  width:11px;height:11px;border-radius:50%;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:7px;font-weight:800;color:#fff;flex-shrink:0;
-  text-transform:uppercase;
-}
+.hover-bio .link-ico{width:11px;height:11px;border-radius:50%;display:inline-flex;align-items:center;
+  justify-content:center;font-size:7px;font-weight:800;color:#fff;flex-shrink:0;text-transform:uppercase}
+.hover-stats{display:flex;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:11px}
+.hover-stat{flex:1;text-align:center}
+.hover-stat .v{font-size:14px;font-weight:700;color:var(--fg)}
+.hover-stat .l{color:var(--muted);font-size:10px;margin-top:2px}
 
-/* ===== MODAL ===== */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(8,8,10,.75);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  display:none;align-items:center;justify-content:center;
-  z-index:300;padding:20px;
-}
-.modal-overlay.show{display:flex;animation:fadeIn .18s ease}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,8,10,.75);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
+.modal-overlay.show{display:flex;animation:fadeIn .18s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{
-  background:var(--bg2);border:1px solid var(--border2);
-  border-radius:16px;padding:30px 28px;width:100%;max-width:400px;
-  box-shadow:0 20px 60px rgba(0,0,0,.7);position:relative;
-  animation:modalIn .28s cubic-bezier(.2,.9,.3,1.2);
-}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:30px 28px;
+  width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.7);position:relative;
+  animation:modalIn .28s cubic-bezier(.2,.9,.3,1.2)}
+.modal.wide{max-width:900px;padding:0;overflow:hidden}
+.modal.profile{max-width:820px;padding:0;overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
 @keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-.modal.wide{max-width:860px;padding:0;overflow:hidden}
-.modal-close{
-  position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);
-  width:30px;height:30px;border-radius:8px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .15s,color .15s;z-index:5;
-}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);
+  width:30px;height:30px;border-radius:8px;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;transition:background .15s,color .15s;z-index:5}
 .modal-close:hover{background:var(--bg3);color:var(--fg)}
 .modal-close svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
 .modal-title{font-size:20px;font-weight:700;margin-bottom:22px;display:flex;align-items:center;gap:10px}
-.modal-title svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.modal-title svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2}
 
-/* модалка подтверждения */
 .confirm-body{text-align:center;padding:6px 0 8px}
-.confirm-icon{
-  width:52px;height:52px;border-radius:50%;
-  background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);
-  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
-}
-.confirm-icon svg{width:24px;height:24px;stroke:var(--danger);fill:none;
-  stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.confirm-icon{width:52px;height:52px;border-radius:50%;background:rgba(248,113,113,.1);
+  border:1px solid rgba(248,113,113,.25);display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px}
+.confirm-icon svg{width:24px;height:24px;stroke:var(--danger);fill:none;stroke-width:2}
+.confirm-icon.blue{background:rgba(124,92,255,.1);border-color:rgba(124,92,255,.25)}
+.confirm-icon.blue svg{stroke:var(--accent-a)}
 .confirm-title{font-size:18px;font-weight:700;margin-bottom:8px}
 .confirm-text{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:22px}
 .confirm-actions{display:flex;gap:10px}
 .confirm-actions .btn{flex:1;justify-content:center}
 
-/* форма */
 .field{margin-bottom:15px}
 .field label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:7px;
   text-transform:uppercase;letter-spacing:.6px;font-weight:600}
 .field .input-wrap{position:relative}
-.field .input-wrap svg.inp-ico{
-  position:absolute;left:13px;top:50%;transform:translateY(-50%);
-  width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;
-  stroke-linecap:round;stroke-linejoin:round;pointer-events:none;transition:stroke .2s;
-}
-.field input, .field textarea{
-  width:100%;padding:11px 13px 11px 38px;
-  background:var(--bg);border:1px solid var(--border);border-radius:9px;
-  color:var(--fg);font-size:14px;font-family:inherit;outline:none;
-  transition:border-color .2s,background .2s;
-}
+.field .input-wrap svg.inp-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;pointer-events:none}
+.field input,.field textarea{width:100%;padding:11px 13px 11px 38px;background:var(--bg);
+  border:1px solid var(--border);border-radius:9px;color:var(--fg);font-size:14px;
+  font-family:inherit;outline:none;transition:border-color .2s,background .2s}
 .field textarea{padding-left:13px;min-height:70px;resize:vertical}
-.field input:focus, .field textarea:focus{border-color:var(--border2);background:var(--bg3)}
+.field input:focus,.field textarea:focus{border-color:var(--border2);background:var(--bg3)}
 .field input.err{border-color:var(--danger);animation:shake .3s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.pass-toggle{
-  position:absolute;right:8px;top:50%;transform:translateY(-50%);
-  background:none;border:none;cursor:pointer;width:28px;height:28px;border-radius:7px;
-  display:flex;align-items:center;justify-content:center;transition:background .15s;
-}
+.pass-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;
+  border:none;cursor:pointer;width:28px;height:28px;border-radius:7px;display:flex;
+  align-items:center;justify-content:center;transition:background .15s}
 .pass-toggle:hover{background:var(--bg3)}
-.pass-toggle svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.pass-toggle:hover svg{stroke:var(--fg)}
+.pass-toggle svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2}
 
 .hint{display:block;font-size:11px;color:var(--muted2);margin-top:6px}
 .hint.err{color:var(--danger)}
 .hint.ok{color:var(--ok)}
 .strength-bar{height:3px;background:var(--border);border-radius:2px;margin-top:9px;overflow:hidden}
 .strength-fill{height:100%;width:0;background:var(--danger);border-radius:2px;transition:width .3s,background .3s}
-
-.captcha-box{
-  background:var(--bg);border:1px solid var(--border);border-radius:9px;
-  padding:12px 14px;margin-bottom:15px;display:flex;align-items:center;gap:12px;
-}
-.captcha-box .cap-ico{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:2;
-  stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.captcha-box .cap-body{flex:1}
+.captcha-box{background:var(--bg);border:1px solid var(--border);border-radius:9px;
+  padding:12px 14px;margin-bottom:15px;display:flex;align-items:center;gap:12px}
+.captcha-box .cap-ico{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0}
 .captcha-box label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
-.captcha-box input{
-  width:100%;padding:7px 11px;background:var(--bg2);border:1px solid var(--border);
-  border-radius:7px;color:var(--fg);font-size:14px;outline:none;font-family:inherit;
-}
-.captcha-box input:focus{border-color:var(--border2)}
+.captcha-box input{width:100%;padding:7px 11px;background:var(--bg2);border:1px solid var(--border);
+  border-radius:7px;color:var(--fg);font-size:14px;outline:none;font-family:inherit}
 .modal-actions{margin-top:6px}
 .modal-msg{margin-top:14px;font-size:12.5px;text-align:center;min-height:17px;color:var(--muted)}
 .modal-msg.err{color:var(--danger)}
 .modal-msg.ok{color:var(--ok)}
 
-/* ===== НАСТРОЙКИ ===== */
-.settings-layout{display:flex;min-height:560px}
-.settings-nav{
-  width:220px;flex-shrink:0;
-  background:var(--bg);border-right:1px solid var(--border);
-  padding:24px 14px;
-}
-.settings-nav h3{font-size:11px;color:var(--muted2);text-transform:uppercase;
-  letter-spacing:1px;font-weight:700;padding:0 10px;margin-bottom:12px}
-.settings-nav-item{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 11px;border-radius:8px;font-size:13.5px;
-  color:var(--muted);cursor:pointer;transition:background .15s,color .15s;
-  border:none;background:none;width:100%;text-align:left;font-family:inherit;font-weight:500;
-}
+/* SETTINGS LAYOUT */
+.settings-layout{display:flex;min-height:560px;max-height:85vh}
+.settings-nav{width:200px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);padding:24px 14px;overflow-y:auto}
+.settings-nav h3{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;
+  font-weight:700;padding:0 10px;margin-bottom:12px}
+.settings-nav-item{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:8px;
+  font-size:13.5px;color:var(--muted);cursor:pointer;transition:background .15s,color .15s;
+  border:none;background:none;width:100%;text-align:left;font-family:inherit;font-weight:500;margin-bottom:4px}
 .settings-nav-item:hover{background:var(--bg2);color:var(--fg)}
 .settings-nav-item.active{background:var(--bg3);color:var(--fg)}
-.settings-nav-item svg{width:16px;height:16px;stroke:currentColor;fill:none;
-  stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-.settings-content{flex:1;padding:28px 28px;overflow-y:auto;max-height:80vh}
+.settings-nav-item svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.settings-content{flex:1;padding:28px 28px;overflow-y:auto}
 .settings-content h2{font-size:18px;font-weight:700;margin-bottom:6px}
 .settings-content .section-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px}
 
-.set-field{margin-bottom:18px}
-.set-field label{display:block;font-size:12px;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:7px}
-.set-field input[type=text]{
-  width:100%;padding:10px 13px;background:var(--bg);border:1px solid var(--border);
-  border-radius:9px;color:var(--fg);font-size:14px;font-family:inherit;outline:none;
-  transition:border-color .2s;
-}
-.set-field input[type=text]:focus{border-color:var(--border2)}
-.set-field .sub{font-size:11.5px;color:var(--muted2);margin-top:6px}
+/* BIO EDITOR */
+.bio-editor{background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  overflow:hidden;transition:border-color .2s}
+.bio-editor:focus-within{border-color:var(--border2)}
+.bio-toolbar{display:flex;gap:4px;padding:6px;background:var(--bg2);
+  border-bottom:1px solid var(--border)}
+.bio-tool{background:none;border:none;cursor:pointer;width:30px;height:30px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);
+  transition:background .15s,color .15s;font-family:inherit;font-size:13px}
+.bio-tool:hover{background:var(--bg3);color:var(--fg)}
+.bio-tool svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bio-textarea{width:100%;padding:12px 14px;background:transparent;border:none;
+  color:var(--fg);font-size:14px;font-family:inherit;outline:none;resize:vertical;min-height:100px;line-height:1.6}
+.bio-hint{font-size:11px;color:var(--muted2);padding:6px 12px;background:var(--bg2);
+  border-top:1px solid var(--border);display:flex;justify-content:space-between}
 
-/* toggle */
-.toggle-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 14px;background:var(--bg);border:1px solid var(--border);
-  border-radius:9px;margin-bottom:10px;
-}
-.toggle-row .tr-title{font-size:13.5px;font-weight:600}
-.toggle-row .tr-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
-.toggle{
-  position:relative;width:38px;height:22px;border-radius:999px;
-  background:var(--border);cursor:pointer;transition:background .2s;flex-shrink:0;
-  border:none;
-}
-.toggle::after{
-  content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;
-  border-radius:50%;background:var(--fg);transition:transform .2s;
-}
-.toggle.on{background:var(--ok)}
-.toggle.on::after{transform:translateX(16px)}
+/* COLOR PALETTE */
+.color-palette{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-bottom:12px}
+.color-swatch{aspect-ratio:1;border-radius:8px;cursor:pointer;border:2px solid transparent;
+  transition:transform .15s,border-color .15s;position:relative}
+.color-swatch:hover{transform:scale(1.1)}
+.color-swatch.selected{border-color:var(--fg);box-shadow:0 0 0 2px var(--bg2),0 0 0 4px var(--fg)}
+.color-custom{display:flex;align-items:center;gap:10px;background:var(--bg);padding:10px 12px;border-radius:9px;border:1px solid var(--border)}
+.color-custom input[type=color]{width:40px;height:36px;border:none;background:transparent;cursor:pointer;border-radius:6px}
+.color-custom .cc-val{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--fg);flex:1;padding:8px;background:var(--bg2);border-radius:6px}
+.color-custom input[type=text]{width:100px;padding:8px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-family:ui-monospace,monospace;font-size:12.5px;outline:none;text-transform:uppercase}
 
-/* rgb color */
-.rgb-picker{background:var(--bg);border:1px solid var(--border);
-  border-radius:9px;padding:14px}
-.rgb-preview{
-  height:44px;border-radius:7px;margin-bottom:12px;
-  border:1px solid var(--border2);transition:background .15s;
-}
-.rgb-slider{margin-bottom:10px}
-.rgb-slider .rgb-head{display:flex;justify-content:space-between;font-size:11px;
-  color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px;font-weight:600}
-.rgb-slider input[type=range]{
-  width:100%;height:5px;border-radius:3px;outline:none;cursor:pointer;
-  -webkit-appearance:none;appearance:none;
-}
-.rgb-slider input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;
-  background:#fff;border:2px solid var(--bg2);cursor:pointer;
-}
-.rgb-slider input[type=range]::-moz-range-thumb{
-  width:14px;height:14px;border-radius:50%;background:#fff;
-  border:2px solid var(--bg2);cursor:pointer;
-}
-.rgb-r{background:linear-gradient(to right,#000,#f00)}
-.rgb-g{background:linear-gradient(to right,#000,#0f0)}
-.rgb-b{background:linear-gradient(to right,#000,#00f)}
-.rgb-value{
-  margin-top:10px;font-family:ui-monospace,monospace;font-size:12px;color:var(--muted);
-  text-align:center;padding:6px;background:var(--bg2);border-radius:6px;
-}
-
-/* preview profile */
-.preview-panel{
-  width:280px;flex-shrink:0;
-  background:var(--bg);border-left:1px solid var(--border);
-  padding:24px 18px;
-  display:flex;flex-direction:column;align-items:center;
-}
-.preview-panel h3{font-size:11px;color:var(--muted2);text-transform:uppercase;
-  letter-spacing:1px;font-weight:700;margin-bottom:16px;text-align:center}
-.preview-card{
-  width:100%;background:var(--bg2);border:1px solid var(--border2);
-  border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.6);
-}
-.preview-banner{height:80px;transition:background .3s}
+/* PREVIEW */
+.preview-panel{width:280px;flex-shrink:0;background:var(--bg);border-left:1px solid var(--border);
+  padding:24px 18px;display:flex;flex-direction:column;align-items:center;overflow-y:auto}
+.preview-panel h3{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;
+  font-weight:700;margin-bottom:16px;text-align:center}
+.preview-card{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.6)}
+.preview-banner{height:80px}
 .preview-body{padding:0 16px 16px;margin-top:-32px;text-align:center}
-.preview-av{
-  width:64px;height:64px;border-radius:50%;
-  background:linear-gradient(135deg,#3a3d47,#2a2d35);
-  border:3px solid var(--bg2);margin:0 auto;
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;font-weight:800;text-transform:uppercase;
-  color:var(--fg);overflow:hidden;position:relative;cursor:pointer;
-  transition:transform .2s;
-}
+.preview-av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#3a3d47,#2a2d35);
+  border:3px solid var(--bg2);margin:0 auto;display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:800;text-transform:uppercase;color:#e8e9ec;overflow:hidden;position:relative;cursor:pointer;transition:transform .2s}
 .preview-av:hover{transform:scale(1.05)}
 .preview-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.preview-av .edit-overlay{
-  position:absolute;inset:0;border-radius:50%;
-  background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .2s;
-}
+.preview-av .edit-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
 .preview-av:hover .edit-overlay{opacity:1}
-.preview-av .edit-overlay svg{width:22px;height:22px;stroke:#fff;fill:none;
-  stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.preview-name{font-size:15px;font-weight:700;margin-top:10px;word-break:break-word}
+.preview-av .edit-overlay svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
+.preview-name{font-size:15px;font-weight:700;margin-top:10px;word-break:break-word;display:flex;align-items:center;justify-content:center;gap:5px}
 .preview-login{font-size:11.5px;color:var(--muted);margin-top:2px}
-.preview-bio{
-  font-size:12px;color:var(--muted);line-height:1.55;margin-top:12px;
-  max-height:110px;overflow-y:auto;word-wrap:break-word;text-align:left;
-  padding:0 4px;
-}
-.preview-bio a{color:var(--fg);text-decoration:none;
-  display:inline-flex;align-items:center;gap:3px;
-  padding:1px 5px;border-radius:5px;background:var(--bg3);
-  transition:background .15s;font-size:11.5px;margin:2px 0}
+.preview-bio{font-size:12px;color:var(--muted);line-height:1.55;margin-top:12px;max-height:110px;
+  overflow-y:auto;word-wrap:break-word;text-align:left;padding:0 4px}
+.preview-bio a{color:var(--fg);text-decoration:none;display:inline-flex;align-items:center;gap:3px;
+  padding:1px 5px;border-radius:5px;background:var(--bg3);font-size:11.5px;margin:2px 0}
 .preview-bio a:hover{background:var(--bg4)}
-.preview-bio .link-ico{
-  width:11px;height:11px;border-radius:50%;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:7px;font-weight:800;color:#fff;flex-shrink:0;
-  text-transform:uppercase;
-}
+.preview-bio .link-ico{width:11px;height:11px;border-radius:50%;display:inline-flex;align-items:center;
+  justify-content:center;font-size:7px;font-weight:800;color:#fff;flex-shrink:0}
 
-.settings-foot{
-  margin-top:20px;display:flex;gap:10px;justify-content:flex-end;
-  padding-top:16px;border-top:1px solid var(--border);
-}
-.settings-toast{
-  position:absolute;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--ok);color:#fff;padding:9px 18px;border-radius:9px;
-  font-size:13px;font-weight:600;opacity:0;pointer-events:none;
-  transition:opacity .25s,transform .25s;
-}
+.settings-foot{margin-top:20px;display:flex;gap:10px;justify-content:flex-end;
+  padding-top:16px;border-top:1px solid var(--border)}
+.settings-toast{position:absolute;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ok);color:#fff;padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:10}
 .settings-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .settings-toast.err{background:var(--danger)}
 
+/* MONKEYS WIDGET */
+.monkeys-widget{position:fixed;bottom:20px;right:20px;z-index:95;
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+  padding:14px 16px;min-width:200px;box-shadow:0 8px 30px rgba(0,0,0,.5);
+  display:none;flex-direction:column;gap:10px}
+body.logged-in .monkeys-widget{display:flex}
+.mw-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mw-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.mw-count{display:flex;align-items:center;gap:6px;font-size:20px;font-weight:800;
+  font-variant-numeric:tabular-nums;color:var(--fg)}
+.mw-count .mw-ico{font-size:22px;line-height:1;filter:drop-shadow(0 0 6px rgba(255,200,50,.4))}
+.mw-daily{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px;
+  display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .2s,border-color .2s,transform .15s;
+  position:relative;overflow:hidden}
+.mw-daily:hover{background:var(--bg4);border-color:var(--border2)}
+.mw-daily:active{transform:scale(.98)}
+.mw-daily.ready{background:linear-gradient(135deg,rgba(255,200,50,.15),rgba(255,200,50,.05));
+  border-color:rgba(255,200,50,.4);animation:dailyPulse 2s ease infinite}
+@keyframes dailyPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,200,50,.4)}50%{box-shadow:0 0 0 8px rgba(255,200,50,0)}}
+.mw-daily-ico{font-size:22px}
+.mw-daily-info{flex:1;min-width:0}
+.mw-daily-title{font-size:13px;font-weight:700}
+.mw-daily-sub{font-size:11px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.mw-daily.locked .mw-daily-ico{filter:grayscale(1);opacity:.5}
+
+/* MONKEY REWARD POPUP */
+.reward-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.5);
+  z-index:500;background:linear-gradient(135deg,rgba(255,200,50,.95),rgba(255,150,0,.95));
+  color:#1a0f00;padding:26px 42px;border-radius:20px;font-size:32px;font-weight:900;
+  box-shadow:0 20px 80px rgba(255,180,0,.6);pointer-events:none;opacity:0;
+  transition:opacity .3s,transform .3s}
+.reward-popup.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.reward-popup .rp-label{display:block;font-size:13px;text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:6px;opacity:.7}
+.reward-popup .rp-val{display:flex;align-items:center;justify-content:center;gap:10px}
+
+/* RESPECT BUTTON */
+.respect-btn{
+  padding:10px 22px;border-radius:999px;border:1px solid var(--border);
+  background:var(--bg2);color:var(--fg);font-weight:700;font-size:14px;cursor:pointer;
+  transition:all .3s cubic-bezier(.2,.9,.3,1.2);font-family:inherit;
+  display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden;
+}
+.respect-btn:hover{border-color:var(--border2);background:var(--bg3)}
+.respect-btn.active{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-color:transparent;
+  box-shadow:0 4px 20px rgba(239,68,68,.4)}
+.respect-btn.active:hover{box-shadow:0 6px 28px rgba(239,68,68,.6)}
+.respect-btn .ico{font-size:16px;transition:transform .3s}
+.respect-btn.active .ico{transform:scale(1.2) rotate(-10deg)}
+
+/* PROFILE PAGE */
+.profile-header{padding:0;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
+.profile-banner{height:120px;position:relative}
+.profile-close{position:absolute;top:12px;right:12px;z-index:5;background:rgba(0,0,0,.5);
+  border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.profile-close:hover{background:rgba(0,0,0,.7)}
+.profile-close svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
+.profile-head{padding:0 24px 20px;margin-top:-40px;display:flex;align-items:flex-end;gap:18px}
+.profile-av{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#3a3d47,#2a2d35);
+  border:4px solid var(--bg2);flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:32px;font-weight:800;text-transform:uppercase;color:#e8e9ec;overflow:hidden}
+.profile-av img{width:100%;height:100%;object-fit:cover}
+.profile-info{flex:1;min-width:0;padding-bottom:6px}
+.profile-name{font-size:22px;font-weight:800;display:flex;align-items:center;gap:8px}
+.profile-name .emj{font-size:22px}
+.profile-login{font-size:13px;color:var(--muted);margin-top:2px}
+.profile-stats{display:flex;gap:20px;margin-top:10px;font-size:12px;color:var(--muted)}
+.profile-stats b{color:var(--fg);font-size:13px;font-weight:700}
+.profile-actions{padding-bottom:8px}
+.profile-tabs{padding:0 24px;border-bottom:1px solid var(--border);display:flex;gap:4px;flex-shrink:0}
+.profile-tab{padding:12px 16px;font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;
+  border:none;background:none;font-family:inherit;position:relative;transition:color .15s}
+.profile-tab:hover{color:var(--fg)}
+.profile-tab.active{color:var(--fg)}
+.profile-tab.active::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;
+  background:var(--fg);border-radius:2px}
+.profile-body{flex:1;overflow-y:auto;padding:20px 24px}
+.post-composer{background:var(--bg);border:1px solid var(--border);border-radius:12px;
+  padding:14px;margin-bottom:16px}
+.post-composer textarea{width:100%;padding:10px;background:var(--bg2);border:1px solid var(--border);
+  border-radius:8px;color:var(--fg);font-size:14px;font-family:inherit;outline:none;resize:vertical;min-height:60px}
+.post-composer textarea:focus{border-color:var(--border2)}
+.post-composer-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.post-composer-btns{display:flex;gap:6px}
+.post-ico-btn{background:var(--bg2);border:1px solid var(--border);cursor:pointer;width:34px;height:34px;
+  border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);
+  transition:background .15s,border-color .15s,color .15s}
+.post-ico-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg)}
+.post-ico-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.posts-list{display:flex;flex-direction:column;gap:12px}
+.post-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px}
+.post-card .post-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.post-card .post-date{font-size:11px;color:var(--muted)}
+.post-card .post-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:0 4px}
+.post-card .post-del:hover{color:var(--danger)}
+.post-card .post-content{font-size:14px;line-height:1.6;word-wrap:break-word;white-space:pre-wrap}
+.post-card img,.post-card video{max-width:100%;border-radius:8px;margin-top:6px}
+.post-card audio{width:100%;margin-top:6px}
+.post-empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:13px}
+
+/* SETTINGS: emoji/theme grids */
+.emoji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px}
+.emoji-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 8px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;
+  transition:border-color .15s,background .15s,transform .15s;position:relative}
+.emoji-item:hover{border-color:var(--border2);background:var(--bg2);transform:translateY(-2px)}
+.emoji-item.selected{border-color:var(--ok);background:var(--bg2);box-shadow:0 0 0 1px var(--ok) inset}
+.emoji-item.locked{opacity:.6}
+.emoji-item .e-big{font-size:26px;line-height:1}
+.emoji-item .e-label{font-size:10px;color:var(--muted);text-align:center}
+.emoji-item .e-price{font-size:10px;color:#fbbf24;font-weight:700;display:flex;align-items:center;gap:2px}
+.emoji-item .e-none{font-size:11px;color:var(--muted)}
+
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.theme-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;
+  cursor:pointer;transition:border-color .15s,background .15s,transform .15s;position:relative}
+.theme-item:hover{border-color:var(--border2);background:var(--bg2);transform:translateY(-2px)}
+.theme-item.selected{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok) inset}
+.theme-item.locked{opacity:.65}
+.theme-preview{height:44px;border-radius:8px;margin-bottom:8px;border:1px solid var(--border)}
+.theme-name{font-size:13px;font-weight:600}
+.theme-price{font-size:11px;color:#fbbf24;font-weight:700;margin-top:3px;display:flex;align-items:center;gap:3px}
+.theme-free{font-size:11px;color:var(--ok);font-weight:700;margin-top:3px}
+.theme-item .theme-secret{position:absolute;top:8px;right:8px;font-size:10px;padding:2px 6px;
+  background:rgba(255,200,50,.15);border:1px solid rgba(255,200,50,.3);border-radius:999px;color:#fbbf24}
+
+/* ADMIN */
+.admin-wrap{padding:24px}
+.admin-login{max-width:340px;margin:40px auto}
+.admin-login h2{text-align:center;font-size:20px;margin-bottom:20px}
+.admin-users{max-height:500px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.admin-user{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;
+  display:grid;grid-template-columns:1fr auto auto auto;gap:10px;align-items:center}
+.admin-user .au-info .name{font-weight:700;font-size:14px}
+.admin-user .au-info .login{font-size:11px;color:var(--muted)}
+.admin-user input{padding:6px 9px;background:var(--bg2);border:1px solid var(--border);
+  border-radius:6px;color:var(--fg);font-size:12px;font-family:inherit;outline:none;width:110px}
+.admin-user input:focus{border-color:var(--border2)}
+.admin-user .btn{padding:6px 10px;font-size:11.5px}
+
+/* RESPONSIVE */
 @media(max-width:800px){
   .settings-layout{flex-direction:column}
   .settings-nav{width:100%;border-right:none;border-bottom:1px solid var(--border);
     display:flex;gap:6px;overflow-x:auto;padding:12px}
   .settings-nav h3{display:none}
   .preview-panel{width:100%;border-left:none;border-top:1px solid var(--border)}
+  .profile-head{flex-direction:column;align-items:flex-start}
+  .profile-av{width:72px;height:72px}
 }
-
 @media(max-width:640px){
   .header{padding:0 14px}
   .logo{font-size:16px;padding:6px 9px}
@@ -564,17 +570,19 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
   .btn-lg{width:100%;justify-content:center}
   .user-menu{right:-4px}
   .dash-grid,.users-grid{grid-template-columns:1fr}
+  .monkeys-widget{left:20px;right:20px;bottom:20px}
+  .settings-content{padding:20px}
 }
 </style>
 </head>
-<body>
+<body class="theme-dark">
 
 <div id="bg-fallback"></div>
 <canvas id="bg-shader"></canvas>
 
 <header class="header">
   <div class="header-left">
-    <div class="online err" id="onlineBadge" title="Пользователей онлайн">
+    <div class="online err" id="onlineBadge">
       <span class="dot"></span>
       <span class="count" id="onlineCount">—</span>
       <span class="lbl">онлайн</span>
@@ -589,30 +597,35 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
   </div>
 </header>
 
-<!-- БОКОВАЯ ПАНЕЛЬ -->
 <aside class="sidebar" id="sidebar">
-  <button class="sidebar-item" id="sbHome" title="Главная">
+  <button class="sidebar-item active" id="sbHome">
     <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
     <span class="lbl">Главная</span>
   </button>
-  <button class="sidebar-item" id="sbFriends" title="Найти друзей">
+  <button class="sidebar-item" id="sbFriends">
     <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
     <span class="lbl">Найти друзей</span>
   </button>
-  <button class="sidebar-item" id="sbSettings" title="Настройки аккаунта">
+  <button class="sidebar-item" id="sbSettings">
     <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-    <span class="lbl">Настройки</span>
+    <span class="lbl">Настройки аккаунта</span>
+  </button>
+  <button class="sidebar-item" id="sbSiteSettings">
+    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span>
+    <span class="lbl">Настройки сайта</span>
+  </button>
+  <button class="sidebar-item admin" id="sbAdmin" style="display:none;">
+    <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+    <span class="lbl">Админ-панель</span>
   </button>
   <div class="sidebar-spacer"></div>
-  <button class="sidebar-item logout" id="sbLogout" title="Выйти">
+  <button class="sidebar-item logout" id="sbLogout">
     <span class="ico"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
     <span class="lbl">Выйти</span>
   </button>
 </aside>
 
-<!-- MAIN -->
 <main class="main">
-  <!-- HERO для гостей -->
   <section class="hero" id="hero">
     <div class="hero-badge"><span class="dot"></span> закрытое сообщество</div>
     <h1 class="hero-title">ZV<span class="accent">-CLUB</span></h1>
@@ -629,7 +642,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
     </div>
   </section>
 
-  <!-- DASHBOARD -->
   <div class="dashboard" id="dashboard">
     <div class="dash-header">
       <div>
@@ -638,25 +650,23 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
       </div>
     </div>
 
-    <!-- Главная -->
     <section id="viewHome">
       <div class="dash-grid">
-        <div class="dash-card">
+        <div class="dash-card" data-action="home">
           <h3>👋 Привет, <span id="greetName">друг</span></h3>
           <p>Рады видеть тебя в клубе. Заходи в «Найти друзей» и посмотри, кто уже здесь.</p>
         </div>
-        <div class="dash-card">
+        <div class="dash-card" data-action="friends">
           <h3>👥 Участников</h3>
           <p id="statUsers">— пользователей зарегистрировано</p>
         </div>
-        <div class="dash-card">
+        <div class="dash-card" data-action="settings">
           <h3>⚡ Настрой свой профиль</h3>
-          <p>Открой «Настройки» и поставь аватар, баннер и описание.</p>
+          <p>Открой настройки аккаунта: аватар, баннер, описание.</p>
         </div>
       </div>
     </section>
 
-    <!-- Найти друзей -->
     <section id="viewFriends" class="users-section">
       <div class="users-title">Все участники</div>
       <div class="users-sub" id="usersCount">загрузка…</div>
@@ -665,7 +675,27 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
   </div>
 </main>
 
-<!-- HOVER мини-профиль -->
+<!-- MONKEYS WIDGET -->
+<div class="monkeys-widget" id="monkeysWidget">
+  <div class="mw-head">
+    <span class="mw-label">Обезьяны</span>
+    <span class="mw-count"><span class="mw-ico">🐵</span><span id="monkeysCount">0</span></span>
+  </div>
+  <div class="mw-daily locked" id="dailyBtn">
+    <span class="mw-daily-ico">🎁</span>
+    <div class="mw-daily-info">
+      <div class="mw-daily-title" id="dailyTitle">Ежедневная награда</div>
+      <div class="mw-daily-sub" id="dailySub">Загрузка…</div>
+    </div>
+  </div>
+</div>
+
+<div class="reward-popup" id="rewardPopup">
+  <span class="rp-label">Получено</span>
+  <span class="rp-val"><span>🐵</span><span id="rpAmount">+0</span></span>
+</div>
+
+<!-- HOVER CARD -->
 <div class="hover-card" id="hoverCard">
   <div class="hover-banner" id="hoverBanner"></div>
   <div class="hover-body">
@@ -673,15 +703,18 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
     <div class="hover-name" id="hoverName">—</div>
     <div class="hover-login" id="hoverLogin">@—</div>
     <div class="hover-bio" id="hoverBio"></div>
+    <div class="hover-stats">
+      <div class="hover-stat"><div class="v" id="hoverRespects">0</div><div class="l">уважают</div></div>
+      <div class="hover-stat"><div class="v" id="hoverPosts">0</div><div class="l">постов</div></div>
+      <div class="hover-stat"><div class="v" id="hoverMonkeys">0</div><div class="l">обезьян</div></div>
+    </div>
   </div>
 </div>
 
-<!-- МОДАЛКА АВТОРИЗАЦИИ -->
+<!-- AUTH MODAL -->
 <div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="modal">
-    <button class="modal-close" id="modalClose">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+  <div class="modal">
+    <button class="modal-close" id="modalClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <h2 class="modal-title">
       <svg id="modalTitleIcon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
       <span id="modalTitleText">Вход</span>
@@ -700,9 +733,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
         <div class="input-wrap">
           <svg class="inp-ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           <input type="password" id="password" maxlength="64" required placeholder="••••••••">
-          <button type="button" class="pass-toggle" id="passToggle">
-            <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          </button>
+          <button type="button" class="pass-toggle" id="passToggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
         </div>
         <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
         <small class="hint" id="hintPass">Минимум 8 символов</small>
@@ -715,31 +746,27 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
         </div>
       </div>
       <div class="captcha-box" id="captchaBox" style="display:none;">
-        <svg class="cap-ico" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-        <div class="cap-body">
+        <svg class="cap-ico" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+        <div style="flex:1">
           <label id="captchaLabel"></label>
           <input type="text" id="captchaInput" placeholder="Ответ" autocomplete="off">
         </div>
       </div>
       <div class="modal-actions">
-        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
-          <span id="submitText">Войти</span>
-        </button>
+        <button type="submit" class="btn btn-primary btn-block" id="submitBtn"><span id="submitText">Войти</span></button>
       </div>
       <div class="modal-msg" id="modalMsg"></div>
     </form>
   </div>
 </div>
 
-<!-- МОДАЛКА ПОДТВЕРЖДЕНИЯ ВЫХОДА -->
+<!-- CONFIRM LOGOUT -->
 <div class="modal-overlay" id="confirmOverlay">
   <div class="modal" style="max-width:380px;">
     <div class="confirm-body">
-      <div class="confirm-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      </div>
-      <div class="confirm-title">Выйти из аккаунта?</div>
-      <div class="confirm-text">Вы действительно хотите выйти?<br>Придётся снова вводить логин и пароль.</div>
+      <div class="confirm-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+      <div class="confirm-title" id="cfTitle">Выйти из аккаунта?</div>
+      <div class="confirm-text" id="cfText">Вы действительно хотите выйти?</div>
       <div class="confirm-actions">
         <button class="btn btn-ghost" id="confirmCancel">Отмена</button>
         <button class="btn btn-danger" id="confirmLogout">Выйти</button>
@@ -748,97 +775,64 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
   </div>
 </div>
 
-<!-- МОДАЛКА НАСТРОЕК -->
+<!-- UNSAVED CHANGES -->
+<div class="modal-overlay" id="unsavedOverlay">
+  <div class="modal" style="max-width:380px;">
+    <div class="confirm-body">
+      <div class="confirm-icon blue"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></div>
+      <div class="confirm-title">Сохранить изменения?</div>
+      <div class="confirm-text">У вас есть несохранённые изменения.</div>
+      <div class="confirm-actions" style="flex-direction:column;gap:8px;">
+        <button class="btn btn-primary" id="unsavedSave" style="width:100%;justify-content:center">Сохранить</button>
+        <button class="btn btn-danger" id="unsavedDiscard" style="width:100%;justify-content:center">Не сохранять</button>
+        <button class="btn btn-ghost" id="unsavedCancel" style="width:100%;justify-content:center">Отмена</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESPECT CONFIRM -->
+<div class="modal-overlay" id="respectOverlay">
+  <div class="modal" style="max-width:360px;">
+    <div class="confirm-body">
+      <div class="confirm-icon blue"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <div class="confirm-title">Перестать уважать?</div>
+      <div class="confirm-text">Вы больше не будете уважать этого человека.</div>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="respectNo">Нет</button>
+        <button class="btn btn-danger" id="respectYes">Да</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL (АККАУНТ) -->
 <div class="modal-overlay" id="settingsOverlay">
-  <div class="modal wide" id="settingsModal">
-    <button class="modal-close" id="settingsClose">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+  <div class="modal wide">
+    <button class="modal-close" id="settingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <div class="settings-layout">
       <nav class="settings-nav">
-        <h3>Разделы</h3>
+        <h3>Аккаунт</h3>
         <button class="settings-nav-item active" data-section="main">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg>
-          Главное
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82"/></svg>
+          Аккаунт
+        </button>
+        <button class="settings-nav-item" data-section="password">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Сменить пароль
         </button>
       </nav>
       <div class="settings-content" id="settingsContent">
-        <h2>Главное</h2>
-        <div class="section-sub">Основные настройки аккаунта и профиля</div>
-
-        <div class="set-field">
-          <label for="setVisualName">Визуальный ник (для всех)</label>
-          <input type="text" id="setVisualName" maxlength="32" placeholder="Как тебя видят другие">
-          <div class="sub">Отображается другим пользователям вместо логина</div>
-        </div>
-
-        <div class="set-field">
-          <label for="setLoginName">Ник для входа (логин)</label>
-          <input type="text" id="setLoginName" maxlength="20" placeholder="username" disabled>
-          <div class="sub">Смена логина пока недоступна — обратись к администратору</div>
-        </div>
-
-        <div class="set-field">
-          <label for="setBio">Описание профиля</label>
-          <textarea id="setBio" maxlength="500" placeholder="Расскажи о себе… Ссылки автоматически станут кликабельными: https://…"></textarea>
-          <div class="sub">Ссылки станут кликабельными с иконкой сервиса</div>
-        </div>
-
-        <div class="set-field">
-          <label>Баннер профиля</label>
-          <div class="rgb-picker">
-            <div class="rgb-preview" id="rgbPreview"></div>
-            <div class="rgb-slider">
-              <div class="rgb-head"><span>Red</span><span id="valR">29</span></div>
-              <input type="range" id="sliderR" min="0" max="255" value="29" class="rgb-r">
-            </div>
-            <div class="rgb-slider">
-              <div class="rgb-head"><span>Green</span><span id="valG">30</span></div>
-              <input type="range" id="sliderG" min="0" max="255" value="30" class="rgb-g">
-            </div>
-            <div class="rgb-slider">
-              <div class="rgb-head"><span>Blue</span><span id="valB">36</span></div>
-              <input type="range" id="sliderB" min="0" max="255" value="36" class="rgb-b">
-            </div>
-            <div class="rgb-value" id="rgbValue">#1d1e24</div>
-          </div>
-        </div>
-
-        <div class="set-field">
-          <label>Настройки</label>
-          <div class="toggle-row">
-            <div>
-              <div class="tr-title">Звуки на сайте</div>
-              <div class="tr-sub">Клики, успех, ошибки</div>
-            </div>
-            <button class="toggle on" id="toggleSound"></button>
-          </div>
-        </div>
-
-        <div class="set-field">
-          <label>Аккаунт</label>
-          <button class="btn btn-ghost" id="setLogout" style="width:100%;justify-content:center;color:var(--danger);border-color:rgba(248,113,113,.25)">
-            <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Выйти из аккаунта
-          </button>
-        </div>
-
-        <div class="settings-foot">
-          <button class="btn btn-ghost" id="setCancel">Отмена</button>
-          <button class="btn btn-primary" id="setSave">Сохранить</button>
-        </div>
+        <!-- будет заполнено JS -->
       </div>
-
       <aside class="preview-panel">
         <h3>Предпросмотр</h3>
         <div class="preview-card">
           <div class="preview-banner" id="previewBanner"></div>
           <div class="preview-body">
-            <div class="preview-av" id="previewAv" title="Изменить аватар">
+            <div class="preview-av" id="previewAv">
               <span id="previewAvText">?</span>
-              <div class="edit-overlay">
-                <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-              </div>
+              <div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
             </div>
             <div class="preview-name" id="previewName">nickname</div>
             <div class="preview-login" id="previewLogin">@nickname</div>
@@ -846,8 +840,96 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
           </div>
         </div>
         <input type="file" id="avatarInput" accept="image/*" style="display:none">
-        <div class="settings-toast" id="settingsToast"></div>
       </aside>
+    </div>
+    <div class="settings-toast" id="settingsToast"></div>
+  </div>
+</div>
+
+<!-- SITE SETTINGS MODAL -->
+<div class="modal-overlay" id="siteSettingsOverlay">
+  <div class="modal wide">
+    <button class="modal-close" id="siteSettingsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <h3>Настройки сайта</h3>
+        <button class="settings-nav-item active" data-ssection="main">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>
+          Главное
+        </button>
+        <button class="settings-nav-item" data-ssection="themes">
+          <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="18" r="2.5"/></svg>
+          Темы
+        </button>
+        <button class="settings-nav-item" data-ssection="extra">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15"/></svg>
+          Дополнительно
+        </button>
+      </nav>
+      <div class="settings-content" id="siteSettingsContent">
+        <!-- заполнено JS -->
+      </div>
+      <aside class="preview-panel">
+        <h3>Информация</h3>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.7;text-align:center">
+          <p style="margin-bottom:10px">Изменения тем применяются мгновенно.</p>
+          <p style="margin-bottom:10px">Эмодзи и темы покупаются за обезьян 🐵</p>
+        </div>
+      </aside>
+    </div>
+    <div class="settings-toast" id="siteSettingsToast"></div>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-overlay" id="profileOverlay">
+  <div class="modal profile" id="profileModal">
+    <div class="profile-header">
+      <div class="profile-banner" id="profileBanner">
+        <button class="profile-close" id="profileClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="profile-head">
+        <div class="profile-av" id="profileAv">?</div>
+        <div class="profile-info">
+          <div class="profile-name" id="profileName">—</div>
+          <div class="profile-login" id="profileLogin">@—</div>
+          <div class="profile-stats">
+            <span><b id="profileRespects">0</b> уважают</span>
+            <span><b id="profilePosts">0</b> постов</span>
+            <span><b id="profileMonkeys">0</b> обезьян</span>
+          </div>
+        </div>
+        <div class="profile-actions" id="profileActions"></div>
+      </div>
+      <div class="profile-tabs">
+        <button class="profile-tab active" data-tab="posts">Посты</button>
+      </div>
+    </div>
+    <div class="profile-body" id="profileBody"></div>
+  </div>
+</div>
+
+<!-- BUY CONFIRM -->
+<div class="modal-overlay" id="buyOverlay">
+  <div class="modal" style="max-width:360px;">
+    <div class="confirm-body">
+      <div class="confirm-icon blue" id="buyIcon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10h8"/></svg></div>
+      <div class="confirm-title" id="buyTitle">Покупка</div>
+      <div class="confirm-text" id="buyText">Купить за <b>0</b> 🐵?</div>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="buyCancel">Отмена</button>
+        <button class="btn btn-primary" id="buyConfirm">Купить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="adminOverlay">
+  <div class="modal wide" id="adminModal" style="max-height:85vh;display:flex;flex-direction:column">
+    <button class="modal-close" id="adminClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="admin-wrap" id="adminWrap" style="overflow-y:auto">
+      <!-- заполнено JS -->
     </div>
   </div>
 </div>
@@ -858,6 +940,29 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .4s ease}
    ========================================================= */
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 const HEARTBEAT_MS = 10000;
+
+const EMOJI_LIST = [
+  { emoji:'', label:'Без эмодзи', price:0 },
+  { emoji:'🐔', label:'Петух', price:0 },
+  { emoji:'😧', label:'Шок', price:500 },
+  { emoji:'🔥', label:'Огонь', price:1000 },
+  { emoji:'😈', label:'Демон', price:5000 },
+  { emoji:'💎', label:'Алмаз', price:10000 },
+  { emoji:'⚡', label:'Молния', price:50000 }
+];
+const SECRET_EMOJI = ['❤️‍🔥'];
+
+const THEME_LIST = [
+  { id:'dark',     name:'Тёмная',       price:0,     preview:'linear-gradient(135deg,#0e0e11,#1d1e24)' },
+  { id:'light',    name:'Светлая',      price:0,     preview:'linear-gradient(135deg,#f4f5f7,#dde0e6)' },
+  { id:'moon',     name:'Лунная',       price:500,   preview:'linear-gradient(135deg,#161823,#262a3a,#161823)' },
+  { id:'ocean',    name:'Океаническая', price:1500,  preview:'linear-gradient(135deg,#08161c,#1c4252,#08161c)' },
+  { id:'toxic',    name:'Токсичная',    price:3000,  preview:'linear-gradient(135deg,#0d1a0d,#204520,#0d1a0d)' },
+  { id:'scarlet',  name:'Алая',         price:3000,  preview:'linear-gradient(135deg,#1a0e0e,#4a2020,#1a0e0e)' },
+  { id:'divine',   name:'Божественная', price:5000,  preview:'linear-gradient(135deg,#c8e8ff,#ffffff,#fff8dc)' },
+  { id:'obsidian', name:'Обсидиан',     price:10000, preview:'linear-gradient(135deg,#0a0510,#2a0a3a,#0a0510)' }
+];
+const SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
 
 /* =========================================================
    ЗВУКИ
@@ -884,77 +989,37 @@ const Sound = (() => {
     open:()=>tone(660,.06),
     close:()=>tone(440,.06),
     type:()=>tone(1100+Math.random()*300,.015,'sine',.012),
-    setEnabled:(on)=>{enabled = on; localStorage.setItem('zv_sound', on?'on':'off')},
+    reward:()=>{tone(660,.1);setTimeout(()=>tone(880,.1),100);setTimeout(()=>tone(1320,.2),220)},
+    respect:()=>{tone(440,.08);setTimeout(()=>tone(660,.1),90);setTimeout(()=>tone(880,.15),200)},
+    setEnabled:(on)=>{enabled=on;localStorage.setItem('zv_sound',on?'on':'off')},
     isEnabled:()=>enabled
   };
 })();
 
 /* =========================================================
-   КРИПТО
+   УТИЛИТЫ
    ========================================================= */
-async function sha256(text){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-function randomSalt(len=16){
-  const a=new Uint8Array(len); crypto.getRandomValues(a);
-  return [...a].map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+function $(id){ return document.getElementById(id); }
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
-/* =========================================================
-   API (POST + JSONP fallback)
-   ========================================================= */
-let jsonpCounter = 0;
-function jsonpRequest(params){
-  return new Promise((resolve, reject) => {
-    const cb = 'zv_cb_' + (++jsonpCounter) + '_' + Date.now();
-    const timeout = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 12000);
-    window[cb] = (data) => { clearTimeout(timeout); cleanup(); resolve(data); };
-    function cleanup(){
-      try{ delete window[cb]; }catch(e){ window[cb] = undefined; }
-      const el = document.getElementById(cb + '_script');
-      if(el) el.remove();
-    }
-    const qs = new URLSearchParams({...params, callback: cb}).toString();
-    const script = document.createElement('script');
-    script.id = cb + '_script';
-    script.src = API_URL + '?' + qs;
-    script.onerror = () => { clearTimeout(timeout); cleanup(); reject(new Error('network')); };
-    document.body.appendChild(script);
-  });
+function hasEmoji(str){
+  if(!str) return false;
+  const re = /[\u{1F300}-\u{1FAFF}\u{1F000}-\u{1F2FF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2764}]/u;
+  return re.test(str);
 }
-
-async function api(action, payload={}){
-  try{
-    const res = await fetch(API_URL, {
-      method:'POST', mode:'cors',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body: JSON.stringify({action, ...payload}),
-      redirect:'follow'
-    });
-    if(res.ok){
-      const txt = await res.text();
-      try{ return JSON.parse(txt); }catch(e){}
-    }
-  }catch(e){}
-  const params = {action, _t: Date.now()};
-  for(const k in payload){
-    if(typeof payload[k] !== 'undefined' && payload[k] !== null){
-      params[k] = payload[k];
-    }
-  }
-  return await jsonpRequest(params);
-}
-
-/* =========================================================
-   ВАЛИДАЦИЯ
-   ========================================================= */
 function validateUsername(u){
   if(!u) return 'Введите имя';
   if(u.length<3) return 'Минимум 3 символа';
   if(u.length>20) return 'Максимум 20 символов';
   if(!/^[a-zA-Z0-9_]+$/.test(u)) return 'Только латиница, цифры и _';
   if(/^\d/.test(u)) return 'Не может начинаться с цифры';
+  if(hasEmoji(u)) return 'Эмодзи запрещены';
+  return null;
+}
+function validateVisualName(u){
+  if(!u) return null;
+  if(u.length>32) return 'Максимум 32 символа';
+  if(hasEmoji(u)) return 'Эмодзи запрещены';
   return null;
 }
 function validatePassword(p){
@@ -975,44 +1040,92 @@ function passwordStrength(p){
 }
 
 /* =========================================================
-   RATE LIMIT
+   КРИПТО
    ========================================================= */
-const Rate = (()=>{
-  const MAX=5, LOCK=60_000;
-  function get(){try{return JSON.parse(localStorage.getItem('zv_rl')||'{}')}catch{return{}}}
-  function set(d){localStorage.setItem('zv_rl',JSON.stringify(d))}
-  return {
-    check(action){
-      const a=get(), now=Date.now();
-      const r=a[action]||{count:0,last:0,lock:0};
-      if(r.lock>now) return {ok:false,msg:`Слишком много попыток. Жди ${Math.ceil((r.lock-now)/1000)} сек.`};
-      if(now-r.last>LOCK) r.count=0;
-      return {ok:true,r};
-    },
-    record(action,success){
-      const a=get(), now=Date.now();
-      const r=a[action]||{count:0,last:0,lock:0};
-      r.last=now;
-      if(success){r.count=0;r.lock=0}
-      else{ r.count=(r.count||0)+1; if(r.count>=MAX){r.lock=now+LOCK;r.count=0} }
-      a[action]=r; set(a);
-    }
-  };
-})();
+async function sha256(text){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function randomSalt(len=16){
+  const a=new Uint8Array(len); crypto.getRandomValues(a);
+  return [...a].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
 
 /* =========================================================
-   СЕССИЯ
+   API
+   ========================================================= */
+let jsonpCounter = 0;
+function jsonpRequest(params){
+  return new Promise((resolve, reject) => {
+    const cb = 'zv_cb_' + (++jsonpCounter) + '_' + Date.now();
+    const timeout = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 12000);
+    window[cb] = (data) => { clearTimeout(timeout); cleanup(); resolve(data); };
+    function cleanup(){
+      try{ delete window[cb]; }catch(e){ window[cb] = undefined; }
+      const el = document.getElementById(cb + '_script'); if(el) el.remove();
+    }
+    const qs = new URLSearchParams({...params, callback: cb}).toString();
+    const script = document.createElement('script');
+    script.id = cb + '_script';
+    script.src = API_URL + '?' + qs;
+    script.onerror = () => { clearTimeout(timeout); cleanup(); reject(new Error('network')); };
+    document.body.appendChild(script);
+  });
+}
+async function api(action, payload={}){
+  try{
+    const res = await fetch(API_URL, {
+      method:'POST', mode:'cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({action, ...payload}),
+      redirect:'follow'
+    });
+    if(res.ok){
+      const txt = await res.text();
+      try{ return JSON.parse(txt); }catch(e){}
+    }
+  }catch(e){}
+  const params = {action, _t: Date.now()};
+  for(const k in payload){
+    if(typeof payload[k] !== 'undefined' && payload[k] !== null) params[k] = payload[k];
+  }
+  return await jsonpRequest(params);
+}
+
+/* =========================================================
+   СЕССИЯ / RATE
    ========================================================= */
 const Session = {
   save(s){localStorage.setItem('zv_session',JSON.stringify(s))},
   get(){try{return JSON.parse(localStorage.getItem('zv_session')||'null')}catch{return null}},
   clear(){localStorage.removeItem('zv_session')},
   updateProfile(profile){
-    const s = this.get(); if(!s) return;
+    const s=this.get(); if(!s) return;
     s.profile = profile;
     this.save(s);
   }
 };
+const Rate = (()=>{
+  const MAX=5, LOCK=60_000;
+  function get(){try{return JSON.parse(localStorage.getItem('zv_rl')||'{}')}catch{return{}}}
+  function set(d){localStorage.setItem('zv_rl',JSON.stringify(d))}
+  return {
+    check(a){
+      const ar=get(), n=Date.now();
+      const r=ar[a]||{count:0,last:0,lock:0};
+      if(r.lock>n) return {ok:false,msg:`Слишком много попыток. Жди ${Math.ceil((r.lock-n)/1000)} сек.`};
+      if(n-r.last>LOCK) r.count=0;
+      return {ok:true};
+    },
+    record(a,s){
+      const ar=get(), n=Date.now();
+      const r=ar[a]||{count:0,last:0,lock:0};
+      r.last=n;
+      if(s){r.count=0;r.lock=0} else {r.count=(r.count||0)+1; if(r.count>=MAX){r.lock=n+LOCK;r.count=0}}
+      ar[a]=r; set(ar);
+    }
+  };
+})();
 
 /* =========================================================
    AUTH
@@ -1028,11 +1141,8 @@ const Auth = {
       const hash=await sha256(salt+password);
       const res=await api('register',{username,salt,hash});
       Rate.record('register',res.ok);
-      if(!res.ok) return {ok:false,error:res.error||'Ошибка регистрации'};
-      Session.save({
-        username, token:res.token, ts:Date.now(),
-        profile: { username, visualName: username, avatar:'', bio:'', bannerColor:'#1d1e24' }
-      });
+      if(!res.ok) return {ok:false,error:res.error||'Ошибка'};
+      Session.save({ username, token:res.token, ts:Date.now(), profile:res.profile });
       return {ok:true};
     }catch(e){
       Rate.record('register',false);
@@ -1044,16 +1154,13 @@ const Auth = {
     if(!password) return {ok:false,error:'Введите пароль'};
     const rl=Rate.check('login'); if(!rl.ok) return {ok:false,error:rl.msg};
     try{
-      const saltRes=await api('getSalt',{username});
-      if(!saltRes.ok){Rate.record('login',false);return {ok:false,error:'Неверное имя или пароль'}};
-      const hash=await sha256(saltRes.salt+password);
+      const sr=await api('getSalt',{username});
+      if(!sr.ok){Rate.record('login',false);return {ok:false,error:'Неверное имя или пароль'}};
+      const hash=await sha256(sr.salt+password);
       const res=await api('login',{username,hash});
       Rate.record('login',res.ok);
       if(!res.ok) return {ok:false,error:'Неверное имя или пароль'};
-      Session.save({
-        username, token:res.token, ts:Date.now(),
-        profile: res.profile || { username, visualName: username, avatar:'', bio:'', bannerColor:'#1d1e24' }
-      });
+      Session.save({ username, token:res.token, ts:Date.now(), profile:res.profile });
       return {ok:true};
     }catch(e){
       Rate.record('login',false);
@@ -1068,225 +1175,151 @@ const Auth = {
 const Online = {
   timer:null,
   async beat(){
-    const s = Session.get();
-    let guest = localStorage.getItem('zv_guest');
-    if(!guest){ guest = 'g_' + Math.random().toString(36).slice(2,12); localStorage.setItem('zv_guest', guest); }
-    const token = s?.token || guest;
+    const s=Session.get();
+    let g=localStorage.getItem('zv_guest');
+    if(!g){g='g_'+Math.random().toString(36).slice(2,12);localStorage.setItem('zv_guest',g);}
+    const token=s?.token||g;
     try{
-      const res = await api('heartbeat',{token});
-      const badge = document.getElementById('onlineBadge');
-      if(res.ok){
-        document.getElementById('onlineCount').textContent = res.count;
-        badge.classList.remove('err');
-      }else{ badge.classList.add('err'); }
-    }catch(e){ document.getElementById('onlineBadge').classList.add('err'); }
+      const res=await api('heartbeat',{token});
+      const badge=$('onlineBadge');
+      if(res.ok){ $('onlineCount').textContent=res.count; badge.classList.remove('err'); }
+      else badge.classList.add('err');
+    }catch(e){ $('onlineBadge').classList.add('err'); }
   },
-  start(){ this.beat(); this.timer = setInterval(()=>this.beat(), HEARTBEAT_MS); },
+  start(){ this.beat(); this.timer=setInterval(()=>this.beat(),HEARTBEAT_MS); },
   async stop(){
     clearInterval(this.timer);
-    const s = Session.get();
-    const guest = localStorage.getItem('zv_guest')||'';
-    const token = s?.token || guest;
+    const s=Session.get();
+    const g=localStorage.getItem('zv_guest')||'';
+    const token=s?.token||g;
     try{ await api('offline',{token}); }catch(e){}
   }
 };
 
 /* =========================================================
-   UI helpers
+   SERVICES
    ========================================================= */
-const $=id=>document.getElementById(id);
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-
-/* Иконки сервисов для ссылок */
 function detectService(url){
   try{
-    const u = new URL(url);
-    const host = u.hostname.replace(/^www\./,'');
-    const map = {
-      'youtube.com':'YT','youtu.be':'YT',
-      'github.com':'GH',
-      'twitter.com':'TW','x.com':'X',
-      'instagram.com':'IG',
-      't.me':'TG','telegram.me':'TG','telegram.org':'TG',
-      'vk.com':'VK',
-      'discord.com':'DC','discord.gg':'DC',
-      'twitch.tv':'TV',
-      'tiktok.com':'TT',
-      'reddit.com':'RD',
-      'steamcommunity.com':'ST',
-      'spotify.com':'SP',
-      'soundcloud.com':'SC',
-      'patreon.com':'PT',
-      'boosty.to':'BY',
-      'google.com':'G','gmail.com':'GM'
-    };
-    for(const k in map){ if(host === k || host.endsWith('.'+k)) return {code:map[k], host}; }
-    return {code: host.charAt(0).toUpperCase(), host};
-  }catch(e){ return {code:'?', host:''}; }
+    const u=new URL(url);
+    const host=u.hostname.replace(/^www\./,'');
+    const map={'youtube.com':'YT','youtu.be':'YT','github.com':'GH','twitter.com':'TW','x.com':'X','instagram.com':'IG','t.me':'TG','telegram.me':'TG','vk.com':'VK','discord.com':'DC','discord.gg':'DC','twitch.tv':'TV','tiktok.com':'TT','reddit.com':'RD','steamcommunity.com':'ST','spotify.com':'SP','soundcloud.com':'SC'};
+    for(const k in map){ if(host===k||host.endsWith('.'+k)) return {code:map[k],host}; }
+    return {code:host.charAt(0).toUpperCase(),host};
+  }catch(e){ return {code:'?',host:''}; }
 }
-
-const SERVICE_COLORS = {
-  YT:'#ff0000', GH:'#24292e', TW:'#1da1f2', X:'#000000', IG:'#e1306c',
-  TG:'#229ed9', VK:'#0077ff', DC:'#5865f2', TV:'#9146ff', TT:'#000000',
-  RD:'#ff4500', ST:'#171a21', SP:'#1db954', SC:'#ff5500', PT:'#f96854',
-  BY:'#ff5c00', G:'#4285f4', GM:'#ea4335'
-};
-
-/* Рендер bio с кликабельными ссылками + иконками */
+const SERVICE_COLORS = {YT:'#ff0000',GH:'#24292e',TW:'#1da1f2',X:'#000000',IG:'#e1306c',TG:'#229ed9',VK:'#0077ff',DC:'#5865f2',TV:'#9146ff',TT:'#000000',RD:'#ff4500',ST:'#171a21',SP:'#1db954',SC:'#ff5500'};
 function renderBio(text){
   if(!text) return '';
-  // Экранируем HTML
-  let safe = escapeHtml(text);
-  // Находим URL и заменяем на ссылки с иконкой
-  const urlRegex = /(https?:\/\/[^\s<]+)/g;
-  safe = safe.replace(urlRegex, (match) => {
-    const {code} = detectService(match);
-    const color = SERVICE_COLORS[code] || '#7c7f8a';
-    return `<a href="${match}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(match)}"><span class="link-ico" style="background:${color}">${escapeHtml(code)}</span>${escapeHtml(detectService(match).host)}</a>`;
+  let safe=escapeHtml(text);
+  const re=/(https?:\/\/[^\s<]+)/g;
+  safe=safe.replace(re,(m)=>{
+    const {code,host}=detectService(m);
+    const color=SERVICE_COLORS[code]||'#7c7f8a';
+    return `<a href="${m}" target="_blank" rel="noopener noreferrer"><span class="link-ico" style="background:${color}">${escapeHtml(code)}</span>${escapeHtml(host)}</a>`;
   });
-  return safe.replace(/\n/g, '<br>');
-}
-
-/* Рендер avatar/initial */
-function renderAvatar(el, profile, fallbackText){
-  if(profile && profile.avatar){
-    el.innerHTML = `<img src="${profile.avatar}" alt="">`;
-  }else{
-    el.textContent = (fallbackText || (profile?.visualName || profile?.username || '?')).charAt(0).toUpperCase();
-  }
+  return safe.replace(/\n/g,'<br>');
 }
 
 /* =========================================================
-   СОСТОЯНИЕ UI
+   STATE
    ========================================================= */
 let mode='login';
 let captchaAnswer=0;
 let menuOpen=false;
-let currentView='home';
 let allUsers=[];
+let currentProfile=null;
+let currentProfileIsOwner=false;
+let currentProfileIRespect=false;
+let currentProfileUsername=null;
 
+let tempProfile=null;
+let tempProfileChanged=false;
+let tempTheme=null;
+
+/* =========================================================
+   ТЕМА
+   ========================================================= */
+function applyTheme(theme){
+  document.body.className = 'theme-' + (theme||'dark');
+}
+
+/* =========================================================
+   RENDER USER AREA
+   ========================================================= */
 const ICO = {
   chev:'<svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>',
   settings:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
   logout:'<svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
   login:'<svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>',
-  register:'<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>',
-  eye:'<svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
-  eyeOff:'<svg id="eyeIcon" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+  register:'<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>'
 };
 
-/* =========================================================
-   RENDER
-   ========================================================= */
 function renderAuthState(){
   const s=Session.get();
-  const isLogged = !!s;
-
+  const isLogged=!!s;
   document.body.classList.toggle('logged-in', isLogged);
 
   if(isLogged){
-    const p = s.profile || { username: s.username, visualName: s.username, avatar:'', bio:'', bannerColor:'#1d1e24' };
+    const p = s.profile || { username:s.username, visualName:s.username, avatar:'', emoji:'', theme:'dark' };
+    applyTheme(p.theme || 'dark');
+
     const visual = p.visualName || p.username;
     const initial = visual.charAt(0).toUpperCase();
+    const emojiHtml = p.emoji ? `<span class="emoji">${p.emoji}</span>` : '';
 
-    els.userArea.innerHTML = `
+    $('userArea').innerHTML = `
       <div class="user-wrap" id="userWrap">
         <button class="avatar-btn" id="avatarBtn">
           <span class="av" id="topAv">${escapeHtml(initial)}</span>
-          <span class="nick">${escapeHtml(visual)}</span>
+          <span class="nick">${escapeHtml(visual)}</span>${emojiHtml}
           ${ICO.chev}
         </button>
         <div class="user-menu" id="userMenu">
           <div class="user-menu-head">
             <div class="av-lg" id="menuAv">${escapeHtml(initial)}</div>
             <div class="info">
-              <div class="name">${escapeHtml(visual)}</div>
+              <div class="name">${escapeHtml(visual)}${emojiHtml}</div>
               <div class="status">в сети</div>
             </div>
           </div>
           <div class="user-menu-body">
-            <button class="menu-item" id="menuSettings">
-              ${ICO.settings}
-              Настройки аккаунта
-            </button>
+            <button class="menu-item" id="menuSettings">${ICO.settings} Настройки аккаунта</button>
             <div class="menu-divider"></div>
-            <button class="menu-item danger" id="menuLogout">
-              ${ICO.logout}
-              Выйти
-            </button>
+            <button class="menu-item danger" id="menuLogout">${ICO.logout} Выйти</button>
           </div>
         </div>
       </div>
     `;
-
-    // Если есть аватар — показываем
     if(p.avatar){
       $('topAv').innerHTML = `<img src="${p.avatar}" alt="">`;
       $('menuAv').innerHTML = `<img src="${p.avatar}" alt="">`;
     }
-
     $('greetName').textContent = visual;
-    $('dashSub').textContent = `Добро пожаловать, ${visual}`;
 
-    const wrap = $('userWrap');
-    const btn = $('avatarBtn');
-    const menu = $('userMenu');
-    btn.onclick = (e) => {
-      e.stopPropagation();
-      menuOpen = !menuOpen;
-      menu.classList.toggle('show', menuOpen);
-      btn.classList.toggle('open', menuOpen);
-      Sound.click();
-    };
-    document.addEventListener('click', (e) => {
-      if(menuOpen && !wrap.contains(e.target)){
-        menuOpen = false;
-        menu.classList.remove('show');
-        btn.classList.remove('open');
-      }
-    });
-    $('menuSettings').onclick = () => { Sound.click(); closeMenu(); openSettings(); };
-    $('menuLogout').onclick = () => { Sound.click(); closeMenu(); openConfirm(); };
+    const wrap=$('userWrap'), btn=$('avatarBtn'), menu=$('userMenu');
+    btn.onclick=(e)=>{e.stopPropagation();menuOpen=!menuOpen;menu.classList.toggle('show',menuOpen);btn.classList.toggle('open',menuOpen);Sound.click();};
+    document.addEventListener('click',(e)=>{ if(menuOpen&&!wrap.contains(e.target)){menuOpen=false;menu.classList.remove('show');btn.classList.remove('open');} });
+    $('menuSettings').onclick=()=>{Sound.click();closeMenu();openAccountSettings();};
+    $('menuLogout').onclick=()=>{Sound.click();closeMenu();openConfirmLogout();};
 
+    $('sbAdmin').style.display = (s.username.toLowerCase()==='medy3a') ? 'flex' : 'none';
   } else {
-    els.userArea.innerHTML = `
+    $('userArea').innerHTML = `
       <button class="btn btn-ghost" id="btnLoginTop">${ICO.login} Войти</button>
       <button class="btn btn-primary" id="btnRegisterTop">${ICO.register} Регистрация</button>
     `;
-    $('btnLoginTop').onclick = () => openModal('login');
-    $('btnRegisterTop').onclick = () => openModal('register');
+    $('btnLoginTop').onclick=()=>openModal('login');
+    $('btnRegisterTop').onclick=()=>openModal('register');
+    applyTheme('dark');
+    $('sbAdmin').style.display='none';
   }
 }
 function closeMenu(){
   menuOpen=false;
-  const m = $('userMenu'); const b = $('avatarBtn');
-  if(m) m.classList.remove('show');
-  if(b) b.classList.remove('open');
+  const m=$('userMenu'),b=$('avatarBtn');
+  if(m)m.classList.remove('show'); if(b)b.classList.remove('open');
 }
-
-const els = {
-  userArea: document.getElementById('userArea'),
-  modalOverlay: document.getElementById('modalOverlay'),
-  confirmOverlay: document.getElementById('confirmOverlay'),
-  settingsOverlay: document.getElementById('settingsOverlay'),
-  modalTitleIcon: document.getElementById('modalTitleIcon'),
-  modalTitleText: document.getElementById('modalTitleText'),
-  authForm: document.getElementById('authForm'),
-  username: document.getElementById('username'),
-  password: document.getElementById('password'),
-  password2: document.getElementById('password2'),
-  confirmField: document.getElementById('confirmField'),
-  passToggle: document.getElementById('passToggle'),
-  strengthFill: document.getElementById('strengthFill'),
-  hintUser: document.getElementById('hintUser'),
-  hintPass: document.getElementById('hintPass'),
-  captchaBox: document.getElementById('captchaBox'),
-  captchaLabel: document.getElementById('captchaLabel'),
-  captchaInput: document.getElementById('captchaInput'),
-  submitBtn: document.getElementById('submitBtn'),
-  submitText: document.getElementById('submitText'),
-  modalMsg: document.getElementById('modalMsg')
-};
 
 /* =========================================================
    AUTH MODAL
@@ -1294,529 +1327,1161 @@ const els = {
 function openModal(m){
   mode=m;
   if(m==='login'){
-    els.modalTitleText.textContent='Вход';
-    els.modalTitleIcon.innerHTML='<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>';
-    els.submitText.textContent='Войти';
+    $('modalTitleText').textContent='Вход';
+    $('modalTitleIcon').innerHTML='<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>';
+    $('submitText').textContent='Войти';
   } else {
-    els.modalTitleText.textContent='Регистрация';
-    els.modalTitleIcon.innerHTML='<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>';
-    els.submitText.textContent='Создать аккаунт';
+    $('modalTitleText').textContent='Регистрация';
+    $('modalTitleIcon').innerHTML='<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>';
+    $('submitText').textContent='Создать аккаунт';
   }
-  els.confirmField.style.display = m==='register'?'block':'none';
-  els.captchaBox.style.display = m==='register'?'flex':'none';
+  $('confirmField').style.display = m==='register'?'block':'none';
+  $('captchaBox').style.display = m==='register'?'flex':'none';
   if(m==='register'){
-    const a=Math.floor(Math.random()*10)+1;
-    const b=Math.floor(Math.random()*10)+1;
+    const a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
     captchaAnswer=a+b;
-    els.captchaLabel.textContent=`Сколько будет ${a} + ${b}?`;
-    els.captchaInput.value='';
+    $('captchaLabel').textContent=`Сколько будет ${a} + ${b}?`;
+    $('captchaInput').value='';
   }
-  els.modalMsg.textContent='';
-  els.modalMsg.className='modal-msg';
-  els.authForm.reset();
-  els.strengthFill.style.width='0%';
-  els.hintUser.textContent='3–20 символов, латиница/цифры/_';
-  els.hintUser.className='hint';
-  els.hintPass.textContent='Минимум 8 символов';
-  els.hintPass.className='hint';
-  els.modalOverlay.classList.add('show');
+  $('modalMsg').textContent='';
+  $('modalMsg').className='modal-msg';
+  $('authForm').reset();
+  $('strengthFill').style.width='0%';
+  $('hintUser').textContent='3–20 символов, латиница/цифры/_';
+  $('hintUser').className='hint';
+  $('hintPass').textContent='Минимум 8 символов';
+  $('hintPass').className='hint';
+  $('modalOverlay').classList.add('show');
   Sound.open();
-  setTimeout(()=>els.username.focus(),80);
+  setTimeout(()=>$('username').focus(),80);
 }
-function closeModal(){ els.modalOverlay.classList.remove('show'); Sound.close(); }
-document.getElementById('modalClose').onclick=closeModal;
-els.modalOverlay.onclick=e=>{if(e.target===els.modalOverlay)closeModal()};
+function closeModal(){$('modalOverlay').classList.remove('show');Sound.close();}
+$('modalClose').onclick=closeModal;
+$('modalOverlay').onclick=e=>{if(e.target===$('modalOverlay'))closeModal()};
 
-document.getElementById('btnLogin').onclick=()=>openModal('login');
-document.getElementById('btnRegister').onclick=()=>openModal('register');
-document.getElementById('logo').onclick=()=>{ Sound.click(); switchView('home'); };
+$('btnLogin').onclick=()=>openModal('login');
+$('btnRegister').onclick=()=>openModal('register');
+$('logo').onclick=()=>{Sound.click();switchView('home');};
 
-els.passToggle.onclick=()=>{
-  const showing = els.password.type==='text';
-  els.password.type = showing ? 'password' : 'text';
-  els.passToggle.innerHTML = showing ? ICO.eye : ICO.eyeOff;
+$('passToggle').onclick=()=>{
+  const t=$('password'); const showing=t.type==='text';
+  t.type=showing?'password':'text';
+  $('passToggle').innerHTML=showing?
+    '<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>':
+    '<svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
   Sound.click();
 };
 
-els.password.addEventListener('input',()=>{
+$('password').addEventListener('input',()=>{
   Sound.type();
-  const s=passwordStrength(els.password.value);
-  els.strengthFill.style.width = ((s/5)*100)+'%';
+  const s=passwordStrength($('password').value);
+  $('strengthFill').style.width=((s/5)*100)+'%';
   const colors=['#f87171','#f87171','#fbbf24','#fbbf24','#4ade80','#4ade80'];
-  els.strengthFill.style.background = colors[s];
-  const e=validatePassword(els.password.value);
-  els.hintPass.textContent = els.password.value ? (e||'✓ Хороший пароль') : 'Минимум 8 символов';
-  els.hintPass.className='hint '+(els.password.value?(e?'err':'ok'):'');
+  $('strengthFill').style.background=colors[s];
+  const e=validatePassword($('password').value);
+  $('hintPass').textContent=$('password').value?(e||'✓ Хороший пароль'):'Минимум 8 символов';
+  $('hintPass').className='hint '+($('password').value?(e?'err':'ok'):'');
 });
-els.username.addEventListener('input',()=>{
+$('username').addEventListener('input',()=>{
   Sound.type();
-  const e=validateUsername(els.username.value);
-  els.hintUser.textContent = els.username.value ? (e||'✓ Доступно') : '3–20 символов, латиница/цифры/_';
-  els.hintUser.className='hint '+(els.username.value?(e?'err':'ok'):'');
+  const e=validateUsername($('username').value);
+  $('hintUser').textContent=$('username').value?(e||'✓ Доступно'):'3–20 символов, латиница/цифры/_';
+  $('hintUser').className='hint '+($('username').value?(e?'err':'ok'):'');
 });
 
-els.authForm.addEventListener('submit',async e=>{
+$('authForm').addEventListener('submit',async e=>{
   e.preventDefault();
-  els.modalMsg.textContent='';
-  els.modalMsg.className='modal-msg';
-
-  const u=els.username.value.trim();
-  const p=els.password.value;
-  const p2=els.password2.value;
+  $('modalMsg').textContent='';
+  const u=$('username').value.trim(), p=$('password').value, p2=$('password2').value;
 
   if(mode==='register'){
-    const ans=parseInt(els.captchaInput.value,10);
+    const ans=parseInt($('captchaInput').value,10);
     if(ans!==captchaAnswer){
-      Sound.error();
-      els.modalMsg.textContent='Неверный ответ на капчу';
-      els.modalMsg.className='modal-msg err';
+      Sound.error(); $('modalMsg').textContent='Неверный ответ на капчу'; $('modalMsg').className='modal-msg err';
       const a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
-      captchaAnswer=a+b;
-      els.captchaLabel.textContent=`Сколько будет ${a} + ${b}?`;
-      els.captchaInput.value='';
+      captchaAnswer=a+b; $('captchaLabel').textContent=`Сколько будет ${a} + ${b}?`; $('captchaInput').value='';
       return;
     }
   }
-
-  els.submitBtn.disabled=true;
-  const orig=els.submitText.textContent;
-  els.submitText.textContent='⏳ Обработка...';
-
+  $('submitBtn').disabled=true;
+  const orig=$('submitText').textContent;
+  $('submitText').textContent='⏳ Обработка...';
   try{
     const res = mode==='login' ? await Auth.login(u,p) : await Auth.register(u,p,p2);
     if(res.ok){
       Sound.success();
-      els.modalMsg.textContent='✓ Успех';
-      els.modalMsg.className='modal-msg ok';
-      setTimeout(async ()=>{
-        closeModal();
-        renderAuthState();
-        switchView('home');
-        await Online.beat();
-      },500);
+      $('modalMsg').textContent='✓ Успех'; $('modalMsg').className='modal-msg ok';
+      setTimeout(async ()=>{ closeModal(); renderAuthState(); switchView('home'); await Online.beat(); },500);
     }else{
       Sound.error();
-      els.modalMsg.textContent='✗ '+res.error;
-      els.modalMsg.className='modal-msg err';
-      els.password.classList.add('err');
-      setTimeout(()=>els.password.classList.remove('err'),400);
+      $('modalMsg').textContent='✗ '+res.error; $('modalMsg').className='modal-msg err';
+      $('password').classList.add('err');
+      setTimeout(()=>$('password').classList.remove('err'),400);
     }
   }catch(err){
-    Sound.error();
-    els.modalMsg.textContent='✗ Ошибка сети';
-    els.modalMsg.className='modal-msg err';
+    Sound.error(); $('modalMsg').textContent='✗ Ошибка сети'; $('modalMsg').className='modal-msg err';
   }finally{
-    els.submitBtn.disabled=false;
-    els.submitText.textContent=orig;
+    $('submitBtn').disabled=false; $('submitText').textContent=orig;
   }
 });
 
 /* =========================================================
-   ПОДТВЕРЖДЕНИЕ ВЫХОДА
+   LOGOUT CONFIRM
    ========================================================= */
-function openConfirm(){ els.confirmOverlay.classList.add('show'); Sound.open(); }
-function closeConfirm(){ els.confirmOverlay.classList.remove('show'); Sound.close(); }
-document.getElementById('confirmCancel').onclick = closeConfirm;
-document.getElementById('confirmLogout').onclick = async () => {
-  Sound.close();
-  closeConfirm();
-  await Online.stop();
-  Session.clear();
-  renderAuthState();
-  switchView('home');
-  Online.start();
-};
-els.confirmOverlay.onclick = e => { if(e.target === els.confirmOverlay) closeConfirm(); };
+function openConfirmLogout(){
+  $('cfTitle').textContent='Выйти из аккаунта?';
+  $('cfText').textContent='Вы действительно хотите выйти? Придётся снова вводить логин и пароль.';
+  $('confirmLogout').onclick=async ()=>{
+    Sound.close(); $('confirmOverlay').classList.remove('show');
+    await Online.stop(); Session.clear(); renderAuthState(); switchView('home'); Online.start();
+  };
+  $('confirmOverlay').classList.add('show'); Sound.open();
+}
+$('confirmCancel').onclick=()=>{$('confirmOverlay').classList.remove('show');Sound.close();};
+$('confirmOverlay').onclick=e=>{if(e.target===$('confirmOverlay')){$('confirmOverlay').classList.remove('show');}};
 
 /* =========================================================
-   SIDEBAR / ВИДЫ
+   UNSAVED CONFIRM
+   ========================================================= */
+let unsavedCallback=null;
+function openUnsaved(saveCb){
+  unsavedCallback = saveCb;
+  $('unsavedOverlay').classList.add('show');
+  Sound.open();
+}
+$('unsavedSave').onclick=async()=>{
+  $('unsavedOverlay').classList.remove('show');
+  if(unsavedCallback) await unsavedCallback();
+};
+$('unsavedDiscard').onclick=()=>{
+  $('unsavedOverlay').classList.remove('show'); Sound.close();
+  tempProfileChanged=false;
+  $('settingsOverlay').classList.remove('show');
+};
+$('unsavedCancel').onclick=()=>{
+  $('unsavedOverlay').classList.remove('show'); Sound.close();
+};
+
+/* =========================================================
+   RESPECT CONFIRM
+   ========================================================= */
+let respectCallback=null;
+function openRespectConfirm(cb){
+  respectCallback=cb;
+  $('respectOverlay').classList.add('show');
+  Sound.open();
+}
+$('respectNo').onclick=()=>{ $('respectOverlay').classList.remove('show'); Sound.close(); };
+$('respectYes').onclick=async()=>{
+  $('respectOverlay').classList.remove('show');
+  if(respectCallback) await respectCallback();
+};
+
+/* =========================================================
+   SWITCH VIEW
    ========================================================= */
 function switchView(name){
-  currentView = name;
-  // активный пункт
-  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
-  const btn = {home:'sbHome', friends:'sbFriends'}[name];
-  if(btn && document.getElementById(btn)) document.getElementById(btn).classList.add('active');
-
-  const vHome = document.getElementById('viewHome');
-  const vFriends = document.getElementById('viewFriends');
-  vHome.style.display = name==='home' ? 'block' : 'none';
+  document.querySelectorAll('.sidebar-item').forEach(el=>el.classList.remove('active'));
+  const btn={home:'sbHome',friends:'sbFriends'}[name];
+  if(btn&&$(btn)) $(btn).classList.add('active');
+  const vHome=$('viewHome'), vFriends=$('viewFriends');
+  vHome.style.display = name==='home'?'block':'none';
   vFriends.classList.toggle('active', name==='friends');
-
-  const titles = {
-    home: {t:'Главная', s:'Добро пожаловать в ZV-CLUB'},
-    friends: {t:'Найти друзей', s:'Все участники клуба'}
-  };
-  document.getElementById('dashTitle').textContent = titles[name].t;
-  document.getElementById('dashSub').textContent = titles[name].s;
-
+  const titles={home:{t:'Главная',s:'Добро пожаловать в ZV-CLUB'},friends:{t:'Найти друзей',s:'Все участники клуба'}};
+  $('dashTitle').textContent=titles[name].t;
+  $('dashSub').textContent=titles[name].s;
   if(name==='friends') loadUsers();
 }
-document.getElementById('sbHome').onclick = () => { Sound.click(); switchView('home'); };
-document.getElementById('sbFriends').onclick = () => { Sound.click(); switchView('friends'); };
-document.getElementById('sbSettings').onclick = () => { Sound.click(); openSettings(); };
-document.getElementById('sbLogout').onclick = () => { Sound.click(); openConfirm(); };
+$('sbHome').onclick=()=>{Sound.click();switchView('home');};
+$('sbFriends').onclick=()=>{Sound.click();switchView('friends');};
+$('sbSettings').onclick=()=>{Sound.click();openAccountSettings();};
+$('sbSiteSettings').onclick=()=>{Sound.click();openSiteSettings();};
+$('sbLogout').onclick=()=>{Sound.click();openConfirmLogout();};
+
+/* Кликабельные карточки на главной */
+document.querySelectorAll('.dash-card').forEach(card=>{
+  card.onclick=()=>{
+    const a=card.dataset.action;
+    Sound.click();
+    if(a==='friends') switchView('friends');
+    else if(a==='settings') openAccountSettings();
+  };
+});
 
 /* =========================================================
-   НАЙТИ ДРУЗЕЙ + HOVER
+   USERS LIST
    ========================================================= */
 async function loadUsers(){
-  const grid = document.getElementById('usersGrid');
-  grid.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:14px;">Загрузка…</div>';
+  const grid=$('usersGrid');
+  grid.innerHTML='<div style="color:var(--muted);font-size:13px;padding:14px;">Загрузка…</div>';
+  const s=Session.get();
   try{
-    const res = await api('getUsers', {});
-    if(!res.ok){ grid.innerHTML = '<div style="color:var(--danger);font-size:13px;padding:14px;">Ошибка загрузки</div>'; return; }
-    allUsers = res.users || [];
-    document.getElementById('statUsers').textContent = allUsers.length + ' пользователей зарегистрировано';
-    document.getElementById('usersCount').textContent = allUsers.length + ' участников';
+    const res=await api('getUsers',{me:s?.username||''});
+    if(!res.ok){ grid.innerHTML='<div style="color:var(--danger);font-size:13px;padding:14px;">Ошибка загрузки</div>'; return; }
+    allUsers=res.users||[];
+    $('statUsers').textContent=allUsers.length+' пользователей зарегистрировано';
+    $('usersCount').textContent=allUsers.length+' участников';
     renderUsers(allUsers);
   }catch(e){
-    grid.innerHTML = '<div style="color:var(--danger);font-size:13px;padding:14px;">Нет связи с сервером</div>';
+    grid.innerHTML='<div style="color:var(--danger);font-size:13px;padding:14px;">Нет связи с сервером</div>';
   }
 }
 function renderUsers(users){
-  const grid = document.getElementById('usersGrid');
-  if(!users.length){
-    grid.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:14px;">Пока никого нет</div>';
-    return;
-  }
-  grid.innerHTML = users.map(u => {
-    const visual = u.visualName || u.username;
-    const initial = visual.charAt(0).toUpperCase();
-    const avInner = u.avatar ? `<img src="${u.avatar}" alt="">` : escapeHtml(initial);
-    return `
-      <div class="user-card" data-username="${escapeHtml(u.username)}">
-        <div class="av">${avInner}</div>
-        <div class="info">
-          <div class="name">${escapeHtml(visual)}</div>
-          <div class="login">@${escapeHtml(u.username)}</div>
-        </div>
+  const grid=$('usersGrid');
+  if(!users.length){ grid.innerHTML='<div style="color:var(--muted);font-size:13px;padding:14px;">Пока никого нет</div>'; return; }
+  grid.innerHTML=users.map(u=>{
+    const visual=u.visualName||u.username;
+    const initial=visual.charAt(0).toUpperCase();
+    const avInner=u.avatar?`<img src="${u.avatar}" alt="">`:escapeHtml(initial);
+    const emj=u.emoji?`<span class="emj">${u.emoji}</span>`:'';
+    return `<div class="user-card" data-username="${escapeHtml(u.username)}">
+      <div class="av">${avInner}</div>
+      <div class="info">
+        <div class="name">${escapeHtml(visual)}${emj}</div>
+        <div class="login">@${escapeHtml(u.username)}</div>
       </div>
-    `;
+    </div>`;
   }).join('');
-
-  // hover
-  grid.querySelectorAll('.user-card').forEach(card => {
-    const uname = card.dataset.username;
-    card.addEventListener('mouseenter', (e) => showHover(uname, card));
-    card.addEventListener('mouseleave', () => hideHover());
+  grid.querySelectorAll('.user-card').forEach(card=>{
+    const uname=card.dataset.username;
+    card.addEventListener('mouseenter',()=>showHover(uname,card));
+    card.addEventListener('mouseleave',hideHover);
+    card.addEventListener('click',()=>openProfile(uname));
   });
 }
 
-let hoverTimer = null;
-function showHover(username, anchor){
+/* HOVER */
+let hoverTimer=null;
+function showHover(uname,anchor){
   clearTimeout(hoverTimer);
-  const user = allUsers.find(u => u.username === username);
-  if(!user) return;
-  const hc = document.getElementById('hoverCard');
-  const banner = document.getElementById('hoverBanner');
-  const av = document.getElementById('hoverAv');
-  const name = document.getElementById('hoverName');
-  const login = document.getElementById('hoverLogin');
-  const bio = document.getElementById('hoverBio');
-
-  banner.style.background = user.bannerColor || '#1d1e24';
-  const visual = user.visualName || user.username;
-  if(user.avatar){
-    av.innerHTML = `<img src="${user.avatar}" alt="">`;
-  }else{
-    av.textContent = visual.charAt(0).toUpperCase();
-  }
-  name.textContent = visual;
-  login.textContent = '@' + user.username;
-  bio.innerHTML = user.bio ? renderBio(user.bio) : '<span style="opacity:.5">Нет описания</span>';
-
-  // Позиция рядом с карточкой
-  const rect = anchor.getBoundingClientRect();
-  let left = rect.right + 12;
-  let top = rect.top;
-  if(left + 280 > window.innerWidth) left = rect.left - 272;
-  if(top + 260 > window.innerHeight) top = window.innerHeight - 260;
-  if(top < 60) top = 60;
-  hc.style.left = left + 'px';
-  hc.style.top = top + 'px';
+  const u=allUsers.find(x=>x.username===uname); if(!u) return;
+  const hc=$('hoverCard');
+  $('hoverBanner').style.background=u.bannerColor||'#1d1e24';
+  const visual=u.visualName||u.username;
+  const av=$('hoverAv');
+  if(u.avatar) av.innerHTML=`<img src="${u.avatar}" alt="">`; else av.textContent=visual.charAt(0).toUpperCase();
+  $('hoverName').innerHTML=escapeHtml(visual)+(u.emoji?` <span style="font-size:14px">${u.emoji}</span>`:'');
+  $('hoverLogin').textContent='@'+u.username;
+  $('hoverBio').innerHTML=u.bio?renderBio(u.bio):'<span style="opacity:.5">Нет описания</span>';
+  $('hoverRespects').textContent=u.respects||0;
+  $('hoverPosts').textContent=u.posts||0;
+  $('hoverMonkeys').textContent=u.monkeys||0;
+  const r=anchor.getBoundingClientRect();
+  let left=r.right+12, top=r.top;
+  if(left+290>window.innerWidth) left=r.left-282;
+  if(top+280>window.innerHeight) top=window.innerHeight-290;
+  if(top<60) top=60;
+  hc.style.left=left+'px'; hc.style.top=top+'px';
   hc.classList.add('show');
 }
-function hideHover(){
-  hoverTimer = setTimeout(() => {
-    document.getElementById('hoverCard').classList.remove('show');
-  }, 80);
-}
-document.getElementById('hoverCard').addEventListener('mouseenter', ()=>clearTimeout(hoverTimer));
-document.getElementById('hoverCard').addEventListener('mouseleave', hideHover);
+function hideHover(){ hoverTimer=setTimeout(()=>$('hoverCard').classList.remove('show'),80); }
+$('hoverCard').addEventListener('mouseenter',()=>clearTimeout(hoverTimer));
+$('hoverCard').addEventListener('mouseleave',hideHover);
 
 /* =========================================================
-   НАСТРОЙКИ АККАУНТА
+   ACCOUNT SETTINGS
    ========================================================= */
-const setEls = {
-  visual: document.getElementById('setVisualName'),
-  login: document.getElementById('setLoginName'),
-  bio: document.getElementById('setBio'),
-  previewBanner: document.getElementById('previewBanner'),
-  previewAv: document.getElementById('previewAv'),
-  previewAvText: document.getElementById('previewAvText'),
-  previewName: document.getElementById('previewName'),
-  previewLogin: document.getElementById('previewLogin'),
-  previewBio: document.getElementById('previewBio'),
-  sliderR: document.getElementById('sliderR'),
-  sliderG: document.getElementById('sliderG'),
-  sliderB: document.getElementById('sliderB'),
-  valR: document.getElementById('valR'),
-  valG: document.getElementById('valG'),
-  valB: document.getElementById('valB'),
-  rgbPreview: document.getElementById('rgbPreview'),
-  rgbValue: document.getElementById('rgbValue'),
-  toggleSound: document.getElementById('toggleSound'),
-  toast: document.getElementById('settingsToast')
+const ACCOUNT_SECTIONS = {
+  main: renderAccountMain,
+  password: renderAccountPassword
 };
 
-let tempProfile = { visualName:'', avatar:'', bio:'', bannerColor:'#1d1e24' };
-let rgb = { r:29, g:30, b:36 };
-
-function hexToRgb(hex){
-  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return m ? { r:parseInt(m[1],16), g:parseInt(m[2],16), b:parseInt(m[3],16) } : {r:29,g:30,b:36};
-}
-function rgbToHex(r,g,b){
-  return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
-}
-
-function openSettings(){
-  const s = Session.get(); if(!s) return;
-  const p = s.profile || { username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24' };
-  tempProfile = { ...p };
-  els.settingsOverlay.classList.add('show');
+function openAccountSettings(){
+  const s=Session.get(); if(!s) return;
+  const p=s.profile||{ username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24' };
+  tempProfile={
+    username:s.username, token:s.token,
+    visualName:p.visualName||s.username,
+    avatar:p.avatar||'', bio:p.bio||'', bannerColor:p.bannerColor||'#1d1e24'
+  };
+  tempProfileChanged=false;
+  $('settingsOverlay').classList.add('show');
   Sound.open();
-
-  setEls.visual.value = p.visualName || s.username;
-  setEls.login.value = s.username;
-  setEls.bio.value = p.bio || '';
-
-  const { r,g,b } = hexToRgb(p.bannerColor || '#1d1e24');
-  rgb = {r,g,b};
-  setEls.sliderR.value = r; setEls.sliderG.value = g; setEls.sliderB.value = b;
-  setEls.valR.textContent = r; setEls.valG.textContent = g; setEls.valB.textContent = b;
-
-  updateRGBPreview();
-  updatePreview();
-  setEls.toggleSound.classList.toggle('on', Sound.isEnabled());
+  renderAccountSection('main');
 }
 
-function closeSettings(){
-  els.settingsOverlay.classList.remove('show');
+function closeAccountSettings(){
+  if(tempProfileChanged){
+    openUnsaved(async ()=>{ await saveAccountChanges(); });
+    return;
+  }
+  $('settingsOverlay').classList.remove('show');
   Sound.close();
 }
+$('settingsClose').onclick=closeAccountSettings;
+$('settingsOverlay').onclick=e=>{if(e.target===$('settingsOverlay'))closeAccountSettings();};
 
-function updateRGBPreview(){
-  const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
-  setEls.rgbPreview.style.background = hex;
-  setEls.rgbValue.textContent = hex;
-  setEls.previewBanner.style.background = hex;
-  tempProfile.bannerColor = hex;
+document.querySelectorAll('#settingsOverlay .settings-nav-item').forEach(btn=>{
+  btn.onclick=()=>{ Sound.click(); renderAccountSection(btn.dataset.section); };
+});
+
+function renderAccountSection(sec){
+  document.querySelectorAll('#settingsOverlay .settings-nav-item').forEach(b=>{
+    b.classList.toggle('active', b.dataset.section===sec);
+  });
+  const c = ACCOUNT_SECTIONS[sec];
+  if(c) c();
 }
+
+function renderAccountMain(){
+  $('settingsContent').innerHTML = `
+    <h2>Аккаунт</h2>
+    <div class="section-sub">Основные настройки профиля</div>
+
+    <div class="field">
+      <label for="setVisualName">Визуальный ник (для всех)</label>
+      <input type="text" id="setVisualName" maxlength="32" value="${escapeHtml(tempProfile.visualName)}" placeholder="Можно на русском">
+      <div class="hint" id="setVisualHint">Отображается другим. Эмодзи запрещены.</div>
+    </div>
+
+    <div class="field">
+      <label for="setLoginName">Ник для входа (логин)</label>
+      <input type="text" id="setLoginName" value="${escapeHtml(tempProfile.username)}" disabled style="opacity:.6">
+      <div class="hint">Смена логина недоступна</div>
+    </div>
+
+    <div class="field">
+      <label>Описание профиля</label>
+      <div class="bio-editor">
+        <div class="bio-toolbar">
+          <button class="bio-tool" data-tool="bold" title="Жирный"><b>B</b></button>
+          <button class="bio-tool" data-tool="italic" title="Курсив"><i>I</i></button>
+          <button class="bio-tool" data-tool="strike" title="Зачёркнутый"><s>S</s></button>
+          <button class="bio-tool" data-tool="link" title="Ссылка"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+        </div>
+        <textarea class="bio-textarea" id="setBio" maxlength="500" placeholder="Расскажи о себе… ссылки станут кликабельными: https://…">${escapeHtml(tempProfile.bio)}</textarea>
+        <div class="bio-hint"><span>Ссылки автоматически с иконкой</span><span id="bioCount">${(tempProfile.bio||'').length}/500</span></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Баннер профиля</label>
+      <div class="color-palette" id="colorPalette"></div>
+      <div class="color-custom">
+        <input type="color" id="bannerColorPick" value="${tempProfile.bannerColor}">
+        <span class="cc-val" id="bannerColorVal">${tempProfile.bannerColor.toUpperCase()}</span>
+        <input type="text" id="bannerColorHex" value="${tempProfile.bannerColor.toUpperCase()}" maxlength="7">
+      </div>
+    </div>
+
+    <div class="settings-foot">
+      <button class="btn btn-ghost" id="setCancel">Закрыть</button>
+      <button class="btn btn-primary" id="setSave">Сохранить</button>
+    </div>
+  `;
+  bindAccountMain();
+  updatePreview();
+  renderPalette();
+}
+
+function renderPalette(){
+  const COLORS = [
+    '#1d1e24','#26282f','#32353d','#0e0e11',
+    '#7c5cff','#22d3ee','#f87171','#4ade80',
+    '#fbbf24','#f59e0b','#ec4899','#8b5cf6',
+    '#3b82f6','#14b8a6','#ef4444','#a3a3a3',
+    '#000000','#ffffff','#ff6b6b','#4ecdc4',
+    '#1a535c','#ff9f1c','#2ec4b6','#e71d36'
+  ];
+  const p = $('colorPalette');
+  p.innerHTML = COLORS.map(c => `<div class="color-swatch${c.toLowerCase()===tempProfile.bannerColor.toLowerCase()?' selected':''}" data-color="${c}" style="background:${c}"></div>`).join('');
+  p.querySelectorAll('.color-swatch').forEach(sw=>{
+    sw.onclick=()=>{
+      setBannerColor(sw.dataset.color);
+      Sound.click();
+    };
+  });
+}
+
+function setBannerColor(c){
+  tempProfile.bannerColor = c;
+  $('bannerColorPick').value = c;
+  $('bannerColorHex').value = c.toUpperCase();
+  $('bannerColorVal').textContent = c.toUpperCase();
+  $('previewBanner').style.background = c;
+  renderPalette();
+  markProfileChanged();
+}
+
+function bindAccountMain(){
+  const vn=$('setVisualName'), bio=$('setBio'), bioCount=$('bioCount');
+  vn.oninput=()=>{
+    Sound.type();
+    tempProfile.visualName = vn.value;
+    const err=validateVisualName(vn.value);
+    const hint=$('setVisualHint');
+    hint.textContent = err ? err : 'Отображается другим. Эмодзи запрещены.';
+    hint.className='hint '+(err?'err':'');
+    markProfileChanged();
+    updatePreview();
+  };
+  bio.oninput=()=>{
+    Sound.type();
+    tempProfile.bio = bio.value;
+    bioCount.textContent = bio.value.length + '/500';
+    markProfileChanged();
+    updatePreview();
+  };
+  $('setCancel').onclick=closeAccountSettings;
+  $('setSave').onclick=async()=>{ await saveAccountChanges(); };
+  $('bannerColorPick').oninput=(e)=>{ setBannerColor(e.target.value); };
+  $('bannerColorHex').oninput=(e)=>{
+    const v=e.target.value;
+    if(/^#[0-9a-fA-F]{6}$/.test(v)) setBannerColor(v.toLowerCase());
+  };
+  document.querySelectorAll('.bio-tool').forEach(t=>{
+    t.onclick=()=>{
+      const ta=$('setBio'); const tool=t.dataset.tool;
+      const start=ta.selectionStart, end=ta.selectionEnd;
+      const wrapMap={bold:'**',italic:'*',strike:'~~'};
+      const sel = ta.value.substring(start,end) || (tool==='link'?'https://':'текст');
+      let ins;
+      if(tool==='link') ins = `[${sel||'ссылка'}](${tool==='link'?'https://example.com':''})`;
+      else { const w=wrapMap[tool]; ins = w+sel+w; }
+      ta.value = ta.value.substring(0,start)+ins+ta.value.substring(end);
+      tempProfile.bio = ta.value;
+      bioCount.textContent = ta.value.length+'/500';
+      markProfileChanged();
+      updatePreview();
+      ta.focus();
+    };
+  });
+}
+
+function markProfileChanged(){ tempProfileChanged=true; }
 
 function updatePreview(){
-  const visual = setEls.visual.value.trim() || 'nickname';
-  setEls.previewName.textContent = visual;
-  setEls.previewLogin.textContent = '@' + (setEls.login.value || 'nickname');
+  const vn=tempProfile.visualName||tempProfile.username;
+  $('previewName').textContent=vn;
+  $('previewLogin').textContent='@'+tempProfile.username;
   if(tempProfile.avatar){
-    setEls.previewAv.innerHTML = `<img src="${tempProfile.avatar}" alt=""><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
+    $('previewAv').innerHTML=`<img src="${tempProfile.avatar}" alt=""><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
   }else{
-    setEls.previewAv.innerHTML = `<span id="previewAvText">${escapeHtml(visual.charAt(0).toUpperCase())}</span><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
+    $('previewAv').innerHTML=`<span>${escapeHtml(vn.charAt(0).toUpperCase())}</span><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
   }
-  const bioVal = setEls.bio.value.trim();
-  setEls.previewBio.innerHTML = bioVal ? renderBio(bioVal) : '<span style="opacity:.5">Нет описания</span>';
+  $('previewBanner').style.background = tempProfile.bannerColor;
+  $('previewBio').innerHTML = tempProfile.bio ? renderBio(tempProfile.bio) : '<span style="opacity:.5">Нет описания</span>';
+  if(!$('previewAv').onclick){
+    $('previewAv').onclick=()=>$('avatarInput').click();
+  }
 }
-
-setEls.visual.addEventListener('input', ()=>{ Sound.type(); updatePreview(); });
-setEls.bio.addEventListener('input', ()=>{ Sound.type(); updatePreview(); });
-setEls.sliderR.addEventListener('input', ()=>{ rgb.r = +setEls.sliderR.value; setEls.valR.textContent = rgb.r; updateRGBPreview(); });
-setEls.sliderG.addEventListener('input', ()=>{ rgb.g = +setEls.sliderG.value; setEls.valG.textContent = rgb.g; updateRGBPreview(); });
-setEls.sliderB.addEventListener('input', ()=>{ rgb.b = +setEls.sliderB.value; setEls.valB.textContent = rgb.b; updateRGBPreview(); });
-
-setEls.toggleSound.onclick = () => {
-  const on = !setEls.toggleSound.classList.contains('on');
-  setEls.toggleSound.classList.toggle('on', on);
-  Sound.setEnabled(on);
-  if(on) Sound.click();
-};
-
-/* Аватар */
-document.getElementById('previewAv').onclick = () => {
-  document.getElementById('avatarInput').click();
-};
-document.getElementById('avatarInput').addEventListener('change', (e) => {
-  const file = e.target.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    const img = new Image();
-    img.onload = () => {
-      // Кроп в квадрат + resize до 256
-      const size = 256;
-      const canvas = document.createElement('canvas');
-      canvas.width = size; canvas.height = size;
-      const ctx = canvas.getContext('2d');
-      const minSide = Math.min(img.width, img.height);
-      const sx = (img.width - minSide) / 2;
-      const sy = (img.height - minSide) / 2;
-      ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
-      tempProfile.avatar = canvas.toDataURL('image/jpeg', 0.85);
+$('previewAv').onclick=()=>$('avatarInput').click();
+$('avatarInput').addEventListener('change',(e)=>{
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=(ev)=>{
+    const img=new Image();
+    img.onload=()=>{
+      const size=256;
+      const cvs=document.createElement('canvas');
+      cvs.width=size;cvs.height=size;
+      const cx=cvs.getContext('2d');
+      const minSide=Math.min(img.width,img.height);
+      const sx=(img.width-minSide)/2, sy=(img.height-minSide)/2;
+      cx.drawImage(img,sx,sy,minSide,minSide,0,0,size,size);
+      tempProfile.avatar=cvs.toDataURL('image/jpeg',0.85);
       updatePreview();
+      markProfileChanged();
       Sound.success();
-      showToast('Аватар обновлён', false);
     };
-    img.src = ev.target.result;
+    img.src=ev.target.result;
   };
   reader.readAsDataURL(file);
-  e.target.value = '';
+  e.target.value='';
 });
 
-function showToast(text, isError){
-  setEls.toast.textContent = text;
-  setEls.toast.classList.toggle('err', !!isError);
-  setEls.toast.classList.add('show');
-  setTimeout(()=>setEls.toast.classList.remove('show'), 2200);
+async function saveAccountChanges(){
+  const s=Session.get(); if(!s) return;
+  const vnErr=validateVisualName(tempProfile.visualName);
+  if(vnErr){ toastAccount(vnErr,true); Sound.error(); return; }
+
+  const res=await api('updateProfile',{
+    username:s.username, token:s.token,
+    visualName: tempProfile.visualName,
+    avatar: tempProfile.avatar,
+    bio: tempProfile.bio,
+    bannerColor: tempProfile.bannerColor
+  });
+  if(res.ok){
+    Session.updateProfile({
+      username:s.username,
+      visualName:tempProfile.visualName||s.username,
+      avatar:tempProfile.avatar,
+      bio:tempProfile.bio,
+      bannerColor:tempProfile.bannerColor,
+      emoji: s.profile?.emoji || '',
+      theme: s.profile?.theme || 'dark'
+    });
+    tempProfileChanged=false;
+    renderAuthState();
+    toastAccount('Сохранено ✓',false);
+    Sound.success();
+    setTimeout(()=>{ $('settingsOverlay').classList.remove('show'); },500);
+  }else{
+    toastAccount('Ошибка: '+(res.error||'?'),true);
+    Sound.error();
+  }
+}
+function toastAccount(text,isErr){
+  const t=$('settingsToast');
+  t.textContent=text;
+  t.classList.toggle('err',!!isErr);
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-document.getElementById('settingsClose').onclick = closeSettings;
-document.getElementById('setCancel').onclick = closeSettings;
-els.settingsOverlay.onclick = e => { if(e.target === els.settingsOverlay) closeSettings(); };
+/* Смена пароля */
+function renderAccountPassword(){
+  $('settingsContent').innerHTML = `
+    <h2>Сменить пароль</h2>
+    <div class="section-sub">Пароль можно сменить в любой момент. Старый нужен для подтверждения.</div>
 
-document.getElementById('setSave').onclick = async () => {
-  const s = Session.get(); if(!s) return;
-  const visualName = setEls.visual.value.trim() || s.username;
-  const bio = setEls.bio.value.trim();
-  const bannerColor = rgbToHex(rgb.r, rgb.g, rgb.b);
+    <div class="field">
+      <label for="oldPass">Текущий пароль</label>
+      <input type="password" id="oldPass" maxlength="64" placeholder="••••••••">
+    </div>
+    <div class="field">
+      <label for="newPass">Новый пароль</label>
+      <input type="password" id="newPass" maxlength="64" placeholder="••••••••">
+      <div class="hint" id="newPassHint">Минимум 8 символов</div>
+    </div>
+    <div class="field">
+      <label for="newPass2">Повторите новый пароль</label>
+      <input type="password" id="newPass2" maxlength="64" placeholder="••••••••">
+    </div>
 
-  const btn = document.getElementById('setSave');
-  btn.disabled = true;
-  const orig = btn.textContent;
-  btn.textContent = 'Сохранение…';
+    <div class="settings-foot">
+      <button class="btn btn-ghost" id="pwdCancel">Закрыть</button>
+      <button class="btn btn-primary" id="pwdSave">Сменить пароль</button>
+    </div>
+  `;
+  $('pwdCancel').onclick=closeAccountSettings;
+  $('newPass').oninput=()=>{
+    const e=validatePassword($('newPass').value);
+    $('newPassHint').textContent = $('newPass').value ? (e||'✓ Хороший пароль') : 'Минимум 8 символов';
+    $('newPassHint').className = 'hint '+($('newPass').value?(e?'err':'ok'):'');
+  };
+  $('pwdSave').onclick=async()=>{
+    const s=Session.get(); if(!s) return;
+    const oldP=$('oldPass').value, newP=$('newPass').value, newP2=$('newPass2').value;
+    if(!oldP){ toastAccount('Введите текущий пароль',true); Sound.error(); return; }
+    const eP=validatePassword(newP); if(eP){ toastAccount(eP,true); Sound.error(); return; }
+    if(newP!==newP2){ toastAccount('Пароли не совпадают',true); Sound.error(); return; }
 
-  try{
-    const res = await api('updateProfile', {
-      username: s.username,
-      token: s.token,
-      visualName,
-      avatar: tempProfile.avatar || '',
-      bio,
-      bannerColor
+    const sr=await api('getSalt',{username:s.username});
+    if(!sr.ok){ toastAccount('Ошибка сервера',true); return; }
+    const oldHash=await sha256(sr.salt+oldP);
+    const newSalt=randomSalt();
+    const newHash=await sha256(newSalt+newP);
+
+    const res=await api('changePassword',{
+      username:s.username, token:s.token,
+      oldHash, salt:newSalt, newHash
     });
     if(res.ok){
-      Session.updateProfile({ username:s.username, visualName, avatar:tempProfile.avatar || '', bio, bannerColor });
-      renderAuthState();
-      showToast('Сохранено ✓', false);
       Sound.success();
-      setTimeout(closeSettings, 500);
+      toastAccount('Пароль изменён ✓',false);
+      $('oldPass').value=''; $('newPass').value=''; $('newPass2').value='';
     }else{
-      showToast('Ошибка: ' + (res.error||'?'), true);
       Sound.error();
+      toastAccount(res.error||'Ошибка',true);
     }
-  }catch(e){
-    showToast('Нет связи с сервером', true);
-    Sound.error();
-  }finally{
-    btn.disabled = false;
-    btn.textContent = orig;
+  };
+}
+
+/* =========================================================
+   SITE SETTINGS
+   ========================================================= */
+const SITE_SECTIONS = {
+  main: renderSiteMain,
+  themes: renderSiteThemes,
+  extra: renderSiteExtra
+};
+
+function openSiteSettings(){
+  const s=Session.get(); if(!s) return;
+  $('siteSettingsOverlay').classList.add('show');
+  Sound.open();
+  renderSiteSection('main');
+}
+function closeSiteSettings(){
+  $('siteSettingsOverlay').classList.remove('show');
+  Sound.close();
+}
+$('siteSettingsClose').onclick=closeSiteSettings;
+$('siteSettingsOverlay').onclick=e=>{if(e.target===$('siteSettingsOverlay'))closeSiteSettings();};
+document.querySelectorAll('#siteSettingsOverlay .settings-nav-item').forEach(btn=>{
+  btn.onclick=()=>{ Sound.click(); renderSiteSection(btn.dataset.ssection); };
+});
+function renderSiteSection(sec){
+  document.querySelectorAll('#siteSettingsOverlay .settings-nav-item').forEach(b=>{
+    b.classList.toggle('active', b.dataset.ssection===sec);
+  });
+  const fn = SITE_SECTIONS[sec];
+  if(fn) fn();
+}
+
+function renderSiteMain(){
+  const s=Session.get();
+  const curEmoji = s.profile?.emoji || '';
+  const monkeys = s.profile?.monkeys || 0;
+  $('siteSettingsContent').innerHTML = `
+    <h2>Главное</h2>
+    <div class="section-sub">Эмодзи рядом с ником. У вас: <b style="color:#fbbf24">🐵 ${monkeys}</b></div>
+    <div class="emoji-grid" id="emojiGrid"></div>
+  `;
+  const grid=$('emojiGrid');
+  const all = EMOJI_LIST.concat([]);
+  if(curEmoji && SECRET_EMOJI.includes(curEmoji)){
+    all.push({ emoji: curEmoji, label:'Секретный', price:-1 });
+  }
+  grid.innerHTML = all.map(item=>{
+    const owned = item.price<=0 || item.price===-1 || (s.profile?.ownedEmoji||[]).includes(item.emoji) || curEmoji===item.emoji;
+    const selected = curEmoji===item.emoji;
+    const lockClass = (!owned && item.price>0) ? 'locked' : '';
+    const label = item.emoji || 'Без эмодзи';
+    const priceHtml = item.price>0
+      ? `<div class="e-price">🐵 ${item.price}</div>`
+      : (item.price===-1 ? `<div class="e-price" style="color:#fbbf24">секрет</div>` : `<div class="e-price" style="color:var(--ok)">бесплатно</div>`);
+    return `<div class="emoji-item ${selected?'selected':''} ${lockClass}" data-emoji="${escapeHtml(item.emoji)}" data-price="${item.price}" data-owned="${owned}">
+      <div class="e-big">${item.emoji||'∅'}</div>
+      <div class="e-label">${escapeHtml(label)}</div>
+      ${priceHtml}
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('.emoji-item').forEach(el=>{
+    el.onclick=()=>{
+      const emoji=el.dataset.emoji;
+      const price=parseInt(el.dataset.price,10);
+      const owned=el.dataset.owned==='true';
+      if(price===-1){ Sound.error(); return; }
+      if(price>0 && !owned){
+        openBuyConfirm(emoji, price, 'эмодзи', async ()=>{
+          const r=await api('buyEmoji',{username:s.username,token:s.token,emoji});
+          if(r.ok){
+            const cur=Session.get();
+            cur.profile.monkeys=r.monkeys;
+            cur.profile.emoji=emoji;
+            Session.save(cur);
+            renderAuthState();
+            updateMonkeysWidget();
+            Sound.success();
+            renderSiteMain();
+          }else{ Sound.error(); alert(r.error||'Ошибка'); }
+        });
+      }else{
+        // применяем
+        api('setEmoji',{username:s.username,token:s.token,emoji}).then(r=>{
+          if(r.ok){
+            const cur=Session.get(); cur.profile.emoji=emoji; Session.save(cur);
+            renderAuthState(); Sound.success(); renderSiteMain();
+          }
+        });
+      }
+    };
+  });
+}
+
+function renderSiteThemes(){
+  const s=Session.get();
+  const curTheme = s.profile?.theme || 'dark';
+  const monkeys = s.profile?.monkeys || 0;
+  $('siteSettingsContent').innerHTML = `
+    <h2>Темы</h2>
+    <div class="section-sub">У вас: <b style="color:#fbbf24">🐵 ${monkeys}</b></div>
+    <div class="theme-grid" id="themeGrid"></div>
+  `;
+  const all = THEME_LIST.concat([]);
+  if(SECRET_THEMES.some(t=>t.id===curTheme)){
+    const sec = SECRET_THEMES.find(t=>t.id===curTheme);
+    all.push({...sec, secret:true});
+  }
+  const grid=$('themeGrid');
+  grid.innerHTML = all.map(t=>{
+    const selected = curTheme===t.id;
+    const owned = t.price<=0 || t.price===-1 || (s.profile?.ownedThemes||[]).includes(t.id) || selected;
+    const lock = (!owned && t.price>0) ? 'locked' : '';
+    const priceHtml = t.secret ? `<div class="theme-price">🔒 секрет</div>`
+      : t.price>0 ? `<div class="theme-price">🐵 ${t.price}</div>`
+      : `<div class="theme-free">бесплатно</div>`;
+    return `<div class="theme-item ${selected?'selected':''} ${lock}" data-theme="${t.id}" data-price="${t.price||0}" data-owned="${owned}">
+      ${t.secret?'<span class="theme-secret">secret</span>':''}
+      <div class="theme-preview" style="background:${t.preview}"></div>
+      <div class="theme-name">${escapeHtml(t.name)}</div>
+      ${priceHtml}
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('.theme-item').forEach(el=>{
+    el.onclick=()=>{
+      const theme=el.dataset.theme;
+      const price=parseInt(el.dataset.price,10);
+      const owned=el.dataset.owned==='true';
+      if(price===-1){ Sound.error(); return; }
+      if(price>0 && !owned){
+        openBuyConfirm(theme, price, 'тему', async ()=>{
+          const r=await api('buyTheme',{username:s.username,token:s.token,theme});
+          if(r.ok){
+            const cur=Session.get();
+            cur.profile.monkeys=r.monkeys;
+            cur.profile.theme=theme;
+            Session.save(cur);
+            applyTheme(theme);
+            renderAuthState();
+            updateMonkeysWidget();
+            Sound.success();
+            renderSiteThemes();
+          }else{ Sound.error(); alert(r.error||'Ошибка'); }
+        });
+      }else{
+        api('setTheme',{username:s.username,token:s.token,theme}).then(r=>{
+          if(r.ok){
+            const cur=Session.get(); cur.profile.theme=theme; Session.save(cur);
+            applyTheme(theme); renderAuthState(); Sound.success(); renderSiteThemes();
+          }
+        });
+      }
+    };
+  });
+}
+
+function renderSiteExtra(){
+  const s=Session.get();
+  const soundOn = Sound.isEnabled();
+  $('siteSettingsContent').innerHTML = `
+    <h2>Дополнительно</h2>
+    <div class="section-sub">Прочие настройки</div>
+    <div class="toggle-row" style="margin-bottom:10px;">
+      <div>
+        <div class="tr-title">Звуки на сайте</div>
+        <div class="tr-sub">Клики, успех, ошибки</div>
+      </div>
+      <button class="toggle ${soundOn?'on':''}" id="toggleSound"></button>
+    </div>
+    <div class="toggle-row">
+      <div>
+        <div class="tr-title">Сменить тему</div>
+        <div class="tr-sub">Открой вкладку «Темы»</div>
+      </div>
+      <button class="btn btn-ghost" id="openThemesBtn">Открыть</button>
+    </div>
+  `;
+  $('toggleSound').onclick=()=>{
+    const on=!$('toggleSound').classList.contains('on');
+    $('toggleSound').classList.toggle('on',on);
+    Sound.setEnabled(on);
+    if(on) Sound.click();
+  };
+  $('openThemesBtn').onclick=()=>renderSiteSection('themes');
+}
+
+/* BUY CONFIRM */
+let buyCallback=null;
+function openBuyConfirm(item, price, kind, cb){
+  buyCallback = cb;
+  $('buyTitle').textContent = 'Покупка';
+  $('buyText').innerHTML = `Купить ${kind} <b>${escapeHtml(item)}</b> за <b style="color:#fbbf24">🐵 ${price}</b>?`;
+  $('buyOverlay').classList.add('show');
+  Sound.open();
+}
+$('buyCancel').onclick=()=>{$('buyOverlay').classList.remove('show');Sound.close();};
+$('buyConfirm').onclick=async()=>{
+  $('buyOverlay').classList.remove('show');
+  if(buyCallback) await buyCallback();
+};
+
+/* =========================================================
+   MONKEYS WIDGET
+   ========================================================= */
+function updateMonkeysWidget(){
+  const s=Session.get(); if(!s) return;
+  const p=s.profile||{};
+  $('monkeysCount').textContent = p.monkeys || 0;
+
+  const last = p.lastDaily ? Number(p.lastDaily) : 0;
+  const now = Date.now();
+  const dayMs = 24*60*60*1000;
+  const btn = $('dailyBtn');
+  const title = $('dailyTitle');
+  const sub = $('dailySub');
+
+  if(!last || now - last >= dayMs){
+    btn.classList.add('ready');
+    btn.classList.remove('locked');
+    title.textContent = 'Забрать награду!';
+    sub.textContent = 'Доступно сейчас 🎁';
+  }else{
+    btn.classList.add('locked');
+    btn.classList.remove('ready');
+    title.textContent = 'Ежедневная награда';
+    updateTimer();
+  }
+}
+function updateTimer(){
+  const s=Session.get(); if(!s) return;
+  const last = s.profile?.lastDaily ? Number(s.profile.lastDaily) : 0;
+  const next = last + 24*60*60*1000;
+  const now = Date.now();
+  if(now >= next){ updateMonkeysWidget(); return; }
+  const diff = next - now;
+  const h = Math.floor(diff/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const sec = Math.floor((diff%60000)/1000);
+  $('dailySub').textContent = `Через ${h}ч ${m}м ${sec}с`;
+}
+setInterval(updateTimer, 1000);
+
+$('dailyBtn').onclick=async ()=>{
+  const s=Session.get(); if(!s) return;
+  const res=await api('claimDaily',{username:s.username,token:s.token});
+  if(res.ok){
+    const cur=Session.get();
+    cur.profile.monkeys = res.monkeys;
+    cur.profile.lastDaily = res.nextAt - 24*60*60*1000;
+    Session.save(cur);
+    showReward(res.reward);
+    Sound.reward();
+    updateMonkeysWidget();
+  }else if(res.error && res.nextAt){
+    const cur=Session.get();
+    cur.profile.lastDaily = res.nextAt - 24*60*60*1000;
+    Session.save(cur);
+    updateMonkeysWidget();
   }
 };
 
-document.getElementById('setLogout').onclick = () => { closeSettings(); openConfirm(); };
+function showReward(amount){
+  $('rpAmount').textContent = '+' + amount;
+  const p=$('rewardPopup');
+  p.classList.add('show');
+  Sound.reward();
+  setTimeout(()=>p.classList.remove('show'), 1800);
+}
 
 /* =========================================================
-   ESC закрывает верхнюю модалку
+   PROFILE MODAL
    ========================================================= */
-document.addEventListener('keydown', e => {
-  if(e.key !== 'Escape') return;
-  if(els.settingsOverlay.classList.contains('show')) closeSettings();
-  else if(els.confirmOverlay.classList.contains('show')) closeConfirm();
-  else if(els.modalOverlay.classList.contains('show')) closeModal();
-});
+async function openProfile(username){
+  Sound.open();
+  $('profileOverlay').classList.add('show');
+  $('profileBody').innerHTML = '<div style="padding:40px;text-align:center;color:var(--muted)">Загрузка…</div>';
+  currentProfileUsername = username;
+
+  const s = Session.get();
+  const res = await api('getProfile', { username, me: s?.username||'' });
+  if(!res.ok){
+    $('profileBody').innerHTML = '<div style="padding:40px;text-align:center;color:var(--danger)">Не найдено</div>';
+    return;
+  }
+  currentProfile = res.profile;
+  currentProfileIsOwner = res.isOwner;
+  currentProfileIRespect = res.iRespect;
+
+  renderProfile();
+  loadProfilePosts();
+}
+function closeProfile(){
+  $('profileOverlay').classList.remove('show');
+  Sound.close();
+}
+$('profileClose').onclick=closeProfile;
+$('profileOverlay').onclick=e=>{if(e.target===$('profileOverlay'))closeProfile();};
+
+function renderProfile(){
+  const p=currentProfile;
+  $('profileBanner').style.background = p.bannerColor || '#1d1e24';
+  const visual = p.visualName || p.username;
+  const av = $('profileAv');
+  if(p.avatar) av.innerHTML = `<img src="${p.avatar}" alt="">`; else av.textContent = visual.charAt(0).toUpperCase();
+  $('profileName').innerHTML = escapeHtml(visual) + (p.emoji?` <span class="emj">${p.emoji}</span>`:'');
+  $('profileLogin').textContent = '@' + p.username;
+  $('profileRespects').textContent = p.respects || 0;
+  $('profilePosts').textContent = p.posts || 0;
+  $('profileMonkeys').textContent = p.monkeys || 0;
+
+  const actions=$('profileActions');
+  if(currentProfileIsOwner){
+    actions.innerHTML = `<button class="btn btn-ghost" id="editProfileBtn">✏️ Редактировать профиль</button>`;
+    $('editProfileBtn').onclick=()=>{ closeProfile(); openAccountSettings(); };
+  }else{
+    actions.innerHTML = `<button class="respect-btn ${currentProfileIRespect?'active':''}" id="respectBtn">
+      <span class="ico">${currentProfileIRespect?'🔥':'❤️'}</span>
+      <span>${currentProfileIRespect?'Уважаю':'Уважение?'}</span>
+    </button>`;
+    $('respectBtn').onclick = () => {
+      if(currentProfileIRespect){
+        openRespectConfirm(async ()=>{ await toggleRespect(); });
+      }else{
+        // анимация — сразу
+        animateRespect($('respectBtn'));
+        setTimeout(toggleRespect, 400);
+      }
+    };
+  }
+}
+function animateRespect(btn){
+  btn.style.transform = 'scale(1.15)';
+  setTimeout(()=>{ btn.style.transform=''; }, 300);
+  Sound.respect();
+}
+async function toggleRespect(){
+  const s=Session.get(); if(!s) return;
+  const res = await api('toggleRespect',{from:s.username, token:s.token, to:currentProfileUsername});
+  if(res.ok){
+    currentProfileIRespect = res.respect;
+    currentProfile.respects = res.count;
+    renderProfile();
+    Sound.success();
+  }
+}
+
+async function loadProfilePosts(){
+  const s=Session.get();
+  const res = await api('getPosts',{ username: currentProfileUsername });
+  const posts = res.ok ? res.posts : [];
+  const body=$('profileBody');
+  const canPost = currentProfileIsOwner;
+
+  body.innerHTML = `
+    ${canPost ? `
+    <div class="post-composer">
+      <textarea id="postText" placeholder="Что нового?"></textarea>
+      <div class="post-composer-foot">
+        <div class="post-composer-btns">
+          <button class="post-ico-btn" id="postImgBtn" title="Фото">📷</button>
+          <button class="post-ico-btn" id="postVidBtn" title="Видео">🎬</button>
+          <button class="post-ico-btn" id="postAudBtn" title="Голосовое">🎤</button>
+        </div>
+        <button class="btn btn-primary" id="postSend">Опубликовать</button>
+      </div>
+    </div>
+    <input type="file" id="postFileImg" accept="image/*" style="display:none">
+    <input type="file" id="postFileVid" accept="video/*" style="display:none">
+    ` : ''}
+    <div class="posts-list" id="postsList"></div>
+  `;
+
+  const list=$('postsList');
+  if(!posts.length){
+    list.innerHTML = `<div class="post-empty">Пока нет публикаций</div>`;
+  }else{
+    list.innerHTML = posts.map(p=>{
+      const date = p.createdAt ? new Date(p.createdAt).toLocaleString('ru-RU') : '';
+      const del = canPost ? `<button class="post-del" data-id="${p.id}" title="Удалить">×</button>` : '';
+      let content='';
+      if(p.type==='text') content = `<div class="post-content">${escapeHtml(p.content).replace(/\n/g,'<br>')}</div>`;
+      else if(p.type==='image') content = `<img src="${p.content}" alt=""><div class="post-content" style="margin-top:8px">${escapeHtml(p.meta||'')}</div>`;
+      else if(p.type==='video') content = `<video src="${p.content}" controls></video><div class="post-content" style="margin-top:8px">${escapeHtml(p.meta||'')}</div>`;
+      else if(p.type==='audio') content = `<audio src="${p.content}" controls></audio>`;
+      return `<div class="post-card" data-id="${p.id}">
+        <div class="post-head">
+          <div class="post-date">${date}</div>
+          ${del}
+        </div>
+        ${content}
+      </div>`;
+    }).join('');
+    list.querySelectorAll('.post-del').forEach(b=>{
+      b.onclick=async()=>{
+        const id=b.dataset.id;
+        const s=Session.get();
+        const r=await api('deletePost',{username:s.username,token:s.token,id});
+        if(r.ok){ Sound.success(); loadProfilePosts(); }
+      };
+    });
+  }
+
+  if(canPost){
+    $('postSend').onclick = async()=>{
+      const text=$('postText').value.trim();
+      if(!text){ Sound.error(); return; }
+      const s=Session.get();
+      const r=await api('addPost',{username:s.username,token:s.token,type:'text',content:text});
+      if(r.ok){ $('postText').value=''; Sound.success(); loadProfilePosts(); }
+    };
+    $('postImgBtn').onclick=()=>$('postFileImg').click();
+    $('postVidBtn').onclick=()=>$('postFileVid').click();
+    $('postAudBtn').onclick=()=>alert('Голосовые: выбери поддержку браузера. Пока не готово.');
+
+    $('postFileImg').onchange=(e)=>uploadPostFile(e,'image');
+    $('postFileVid').onchange=(e)=>uploadPostFile(e,'video');
+  }
+}
+
+function uploadPostFile(e, type){
+  const f=e.target.files[0]; if(!f) return;
+  if(f.size > 500*1024){ Sound.error(); alert('Файл слишком большой (макс. 500 КБ)'); return; }
+  const reader=new FileReader();
+  reader.onload=async(ev)=>{
+    const s=Session.get();
+    const r=await api('addPost',{username:s.username,token:s.token,type,content:ev.target.result});
+    if(r.ok){ Sound.success(); loadProfilePosts(); }
+    else{ Sound.error(); alert(r.error); }
+  };
+  reader.readAsDataURL(f);
+  e.target.value='';
+}
+
+/* =========================================================
+   ADMIN PANEL
+   ========================================================= */
+$('sbAdmin').onclick=()=>{ Sound.click(); openAdminPanel(); };
+$('adminClose').onclick=()=>{ $('adminOverlay').classList.remove('show'); Sound.close(); };
+$('adminOverlay').onclick=e=>{ if(e.target===$('adminOverlay')){ $('adminOverlay').classList.remove('show'); } };
+
+function openAdminPanel(){
+  const s=Session.get(); if(!s) return;
+  if(s.username.toLowerCase()!=='medy3a'){ alert('Нет доступа'); return; }
+  $('adminOverlay').classList.add('show');
+  Sound.open();
+  renderAdminLogin();
+}
+
+function renderAdminLogin(){
+  $('adminWrap').innerHTML = `
+    <div class="admin-login">
+      <h2>🔒 Админ-панель</h2>
+      <div class="field">
+        <label>Пароль</label>
+        <input type="password" id="admPass" placeholder="пароль">
+      </div>
+      <div class="field">
+        <label>Кодовое слово</label>
+        <input type="password" id="admCode" placeholder="кодовое слово">
+      </div>
+      <button class="btn btn-primary btn-block" id="admLoginBtn" style="margin-top:10px">Войти</button>
+      <div class="modal-msg" id="admMsg"></div>
+    </div>
+  `;
+  $('admLoginBtn').onclick=async()=>{
+    const s=Session.get();
+    const password=$('admPass').value;
+    const code=$('admCode').value;
+    $('admMsg').textContent='';
+    const r=await api('adminLogin',{username:s.username, password, code});
+    if(r.ok){
+      sessionStorage.setItem('zv_admin_token', r.adminToken);
+      Sound.success();
+      renderAdminUsers();
+    }else{
+      Sound.error();
+      $('admMsg').textContent = r.error||'Ошибка';
+      $('admMsg').className='modal-msg err';
+    }
+  };
+}
+
+async function renderAdminUsers(){
+  const token=sessionStorage.getItem('zv_admin_token')||'';
+  if(!token){ renderAdminLogin(); return; }
+  $('adminWrap').innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted)">Загрузка…</div>';
+  const r=await api('adminListUsers',{adminToken:token});
+  if(!r.ok){
+    sessionStorage.removeItem('zv_admin_token');
+    renderAdminLogin(); return;
+  }
+  const users=r.users;
+  $('adminWrap').innerHTML = `
+    <h2 style="font-size:20px;margin-bottom:6px">👑 Админ-панель</h2>
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Пользователей: ${users.length}</div>
+    <div class="admin-users" id="adminUsers"></div>
+  `;
+  const box=$('adminUsers');
+  box.innerHTML = users.map(u=>`
+    <div class="admin-user" data-u="${escapeHtml(u.username)}">
+      <div class="au-info">
+        <div class="name">${escapeHtml(u.visualName||u.username)} ${u.emoji||''}</div>
+        <div class="login">@${escapeHtml(u.username)} · 🐵 ${u.monkeys} · ❤ ${u.respects}</div>
+      </div>
+      <input type="text" class="au-visual" placeholder="визуал" value="${escapeHtml(u.visualName||'')}">
+      <input type="text" class="au-emoji" placeholder="эмодзи" value="${escapeHtml(u.emoji||'')}" style="width:60px">
+      <div style="display:flex;gap:4px;">
+        <input type="number" class="au-monkeys" placeholder="+🐵" style="width:70px">
+        <button class="btn btn-primary au-give">+</button>
+        <button class="btn btn-ghost au-save">💾</button>
+      </div>
+    </div>
+  `).join('');
+
+  box.querySelectorAll('.admin-user').forEach(row=>{
+    const uname=row.dataset.u;
+    row.querySelector('.au-give').onclick=async()=>{
+      const amt=parseInt(row.querySelector('.au-monkeys').value||'0',10);
+      if(!amt) return;
+      const token=sessionStorage.getItem('zv_admin_token');
+      const r=await api('adminGive',{adminToken:token, username:uname, amount:amt});
+      if(r.ok){ Sound.success(); renderAdminUsers(); }
+    };
+    row.querySelector('.au-save').onclick=async()=>{
+      const token=sessionStorage.getItem('zv_admin_token');
+      const visualName=row.querySelector('.au-visual').value;
+      const emoji=row.querySelector('.au-emoji').value;
+      const r=await api('adminUpdateUser',{adminToken:token, username:uname, visualName, emoji});
+      if(r.ok){ Sound.success(); renderAdminUsers(); }
+    };
+  });
+}
 
 /* =========================================================
    WEBGL ШЕЙДЕР
    ========================================================= */
 (function initShader(){
-  const canvas = document.getElementById('bg-shader');
+  const canvas=$('bg-shader');
   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
   if(!gl){ canvas.style.display='none'; return; }
-
-  const vs = `attribute vec2 pos; void main(){ gl_Position = vec4(pos,0.0,1.0); }`;
-  const fs = `
-    precision highp float;
+  const vs='attribute vec2 pos; void main(){ gl_Position = vec4(pos,0.0,1.0); }';
+  const fs=`precision highp float;
     uniform vec2 u_res; uniform float u_time;
-    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
-    float noise(vec2 p){
-      vec2 i = floor(p), f = fract(p);
-      vec2 u = f*f*(3.0-2.0*f);
-      return mix(mix(hash(i), hash(i+vec2(1,0)), u.x),
-                 mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), u.x), u.y);
-    }
-    float fbm(vec2 p){
-      float v=0.0, a=0.5;
-      for(int i=0;i<5;i++){ v += a*noise(p); p*=2.0; a*=0.5; }
-      return v;
-    }
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+    float noise(vec2 p){ vec2 i=floor(p), f=fract(p); vec2 u=f*f*(3.0-2.0*f);
+      return mix(mix(hash(i),hash(i+vec2(1,0)),u.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x), u.y); }
+    float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<5;i++){ v+=a*noise(p); p*=2.0; a*=0.5;} return v; }
     void main(){
-      vec2 uv = gl_FragCoord.xy / u_res.xy;
-      vec2 p = uv*2.0-1.0; p.x *= u_res.x/u_res.y;
-      float t = u_time * 0.06;
-      float n  = fbm(p*1.2 + vec2(t, -t*0.6));
-      float n2 = fbm(p*2.3 - vec2(t*0.4, t));
-      vec3 col = vec3(0.055,0.055,0.067);
-      float g1 = smoothstep(0.9,0.0,length(p-vec2(-0.7,0.6)));
-      col += vec3(0.03,0.03,0.04)*g1*(0.7+0.3*n);
-      float g2 = smoothstep(1.1,0.0,length(p-vec2(0.8,-0.7)));
-      col += vec3(0.025,0.025,0.035)*g2*(0.7+0.3*n2);
-      col += (hash(gl_FragCoord.xy + u_time) - 0.5)*0.02;
-      float vig = smoothstep(1.4,0.3,length(p));
-      col *= mix(0.85,1.0,vig);
-      gl_FragColor = vec4(col,1.0);
-    }
-  `;
-  function sh(type, src){
-    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
-    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){ console.warn(gl.getShaderInfoLog(s)); return null; }
-    return s;
-  }
-  const vsh = sh(gl.VERTEX_SHADER, vs);
-  const fsh = sh(gl.FRAGMENT_SHADER, fs);
-  if(!vsh || !fsh){ canvas.style.display='none'; return; }
-
-  const prog = gl.createProgram();
-  gl.attachShader(prog,vsh); gl.attachShader(prog,fsh); gl.linkProgram(prog);
-  if(!gl.getProgramParameter(prog, gl.LINK_STATUS)){ canvas.style.display='none'; return; }
+      vec2 uv=gl_FragCoord.xy/u_res.xy; vec2 p=uv*2.0-1.0; p.x*=u_res.x/u_res.y;
+      float t=u_time*0.06;
+      float n=fbm(p*1.2+vec2(t,-t*0.6));
+      float n2=fbm(p*2.3-vec2(t*0.4,t));
+      vec3 col=vec3(0.055,0.055,0.067);
+      float g1=smoothstep(0.9,0.0,length(p-vec2(-0.7,0.6)));
+      col+=vec3(0.03,0.03,0.04)*g1*(0.7+0.3*n);
+      float g2=smoothstep(1.1,0.0,length(p-vec2(0.8,-0.7)));
+      col+=vec3(0.025,0.025,0.035)*g2*(0.7+0.3*n2);
+      col+=(hash(gl_FragCoord.xy+u_time)-0.5)*0.02;
+      float vig=smoothstep(1.4,0.3,length(p));
+      col*=mix(0.85,1.0,vig);
+      gl_FragColor=vec4(col,1.0);
+    }`;
+  function sh(t,s){ const x=gl.createShader(t); gl.shaderSource(x,s); gl.compileShader(x); if(!gl.getShaderParameter(x,gl.COMPILE_STATUS)){console.warn(gl.getShaderInfoLog(x));return null;} return x; }
+  const vsh=sh(gl.VERTEX_SHADER,vs), fsh=sh(gl.FRAGMENT_SHADER,fs);
+  if(!vsh||!fsh){ canvas.style.display='none'; return; }
+  const prog=gl.createProgram(); gl.attachShader(prog,vsh); gl.attachShader(prog,fsh); gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){ canvas.style.display='none'; return; }
   gl.useProgram(prog);
-
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
-
-  const posLoc = gl.getAttribLocation(prog, 'pos');
-  gl.enableVertexAttribArray(posLoc);
-  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-
-  const uRes = gl.getUniformLocation(prog, 'u_res');
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-
-  function resize(){
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.floor(innerWidth * dpr);
-    canvas.height = Math.floor(innerHeight * dpr);
-    gl.viewport(0,0,canvas.width,canvas.height);
-  }
-  resize(); addEventListener('resize', resize);
-
-  const start = performance.now();
-  function frame(){
-    const t = (performance.now() - start) / 1000;
-    gl.uniform2f(uRes, canvas.width, canvas.height);
-    gl.uniform1f(uTime, t);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-    requestAnimationFrame(frame);
-  }
+  const buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+  const pL=gl.getAttribLocation(prog,'pos'); gl.enableVertexAttribArray(pL); gl.vertexAttribPointer(pL,2,gl.FLOAT,false,0,0);
+  const uRes=gl.getUniformLocation(prog,'u_res'), uTime=gl.getUniformLocation(prog,'u_time');
+  function resize(){ const d=Math.min(devicePixelRatio||1,2); canvas.width=innerWidth*d; canvas.height=innerHeight*d; gl.viewport(0,0,canvas.width,canvas.height); }
+  resize(); addEventListener('resize',resize);
+  const start=performance.now();
+  function frame(){ const t=(performance.now()-start)/1000; gl.uniform2f(uRes,canvas.width,canvas.height); gl.uniform1f(uTime,t); gl.drawArrays(gl.TRIANGLES,0,6); requestAnimationFrame(frame); }
   frame();
 })();
+
+/* =========================================================
+   ESC
+   ========================================================= */
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  if($('buyOverlay').classList.contains('show')) $('buyOverlay').classList.remove('show');
+  else if($('respectOverlay').classList.contains('show')) $('respectOverlay').classList.remove('show');
+  else if($('unsavedOverlay').classList.contains('show')) $('unsavedOverlay').classList.remove('show');
+  else if($('adminOverlay').classList.contains('show')) $('adminOverlay').classList.remove('show');
+  else if($('profileOverlay').classList.contains('show')) closeProfile();
+  else if($('siteSettingsOverlay').classList.contains('show')) closeSiteSettings();
+  else if($('settingsOverlay').classList.contains('show')) closeAccountSettings();
+  else if($('confirmOverlay').classList.contains('show')) $('confirmOverlay').classList.remove('show');
+  else if($('modalOverlay').classList.contains('show')) closeModal();
+});
 
 /* =========================================================
    СТАРТ
@@ -1824,17 +2489,28 @@ document.addEventListener('keydown', e => {
 renderAuthState();
 Online.start();
 switchView('home');
+updateMonkeysWidget();
 
-window.addEventListener('beforeunload', () => {
-  const s = Session.get();
-  const guest = localStorage.getItem('zv_guest')||'';
-  const token = s?.token || guest;
+// Обновляем инфу каждые 15 сек (обезьян, последний daily)
+setInterval(async ()=>{
+  const s=Session.get(); if(!s) return;
+  const r=await api('getMyState',{username:s.username, token:s.token});
+  if(r.ok){
+    const cur=Session.get();
+    cur.profile = { ...cur.profile, ...r.profile };
+    Session.save(cur);
+    updateMonkeysWidget();
+    $('monkeysCount').textContent = r.profile.monkeys || 0;
+  }
+}, 15000);
+
+window.addEventListener('beforeunload',()=>{
+  const s=Session.get();
+  const g=localStorage.getItem('zv_guest')||'';
+  const token=s?.token||g;
   try{ navigator.sendBeacon(API_URL, JSON.stringify({action:'offline', token})); }catch(e){}
 });
-
-document.addEventListener('visibilitychange', () => {
-  if(!document.hidden) Online.beat();
-});
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) Online.beat(); });
 </script>
 </body>
 </html>

@@ -214,7 +214,7 @@ body.logged-in .sidebar{display:flex}
 .sidebar-item.admin{border-color:rgba(255,200,50,.3)}
 .sidebar-item.admin:hover{background:rgba(255,200,50,.08);border-color:rgba(255,200,50,.5);color:#ffcc33}
 
-/* ===== АККАУНТ (справа сверху) ===== */
+/* ===== АККАУНТ ===== */
 .user-wrap{position:relative}
 .avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;
   background:var(--bg2);border:1px solid var(--border);cursor:pointer;
@@ -237,7 +237,6 @@ body.logged-in .sidebar{display:flex}
   pointer-events:none;transition:opacity .18s,transform .18s,background .4s,border-color .4s;z-index:150}
 .user-menu.show{opacity:1;transform:none;pointer-events:auto}
 
-/* Кликабельный мини-профиль внутри меню */
 .user-menu-profile{position:relative;cursor:pointer;transition:background .15s}
 .user-menu-profile:hover{background:var(--bg3)}
 .user-menu-banner{height:52px;background:var(--banner-default);transition:background .3s}
@@ -529,7 +528,7 @@ body.logged-in .monkeys-widget{display:flex}
 .respect-btn .ico{font-size:16px;transition:transform .3s}
 .respect-btn.active .ico{transform:scale(1.2) rotate(-10deg)}
 
-/* ===== PROFILE (полный) ===== */
+/* ===== PROFILE ===== */
 .profile-header{padding:0;background:var(--bg2);flex-shrink:0;position:relative;border-bottom:1px solid var(--border)}
 .profile-banner{height:140px;position:relative;background:var(--banner-default);transition:background .3s}
 .profile-banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.25) 100%)}
@@ -1337,7 +1336,6 @@ function renderAuthState(){
     const initial = visual.charAt(0).toUpperCase();
     const emojiHtml = p.emoji ? `<span class="emoji">${p.emoji}</span>` : '';
 
-    // Кнопка + выпадающее меню с мини-профилем
     $('userArea').innerHTML = `
       <div class="user-wrap" id="userWrap">
         <button class="avatar-btn" id="avatarBtn">
@@ -1346,7 +1344,6 @@ function renderAuthState(){
           ${ICO.chev}
         </button>
         <div class="user-menu" id="userMenu">
-          <!-- Кликабельный мини-профиль -->
           <div class="user-menu-profile" id="menuProfile" title="Открыть профиль">
             <div class="user-menu-banner" id="menuBanner"></div>
             <div class="user-menu-av" id="menuAv">${escapeHtml(initial)}</div>
@@ -1373,7 +1370,6 @@ function renderAuthState(){
       $('topAv').innerHTML = `<img src="${p.avatar}" alt="">`;
       $('menuAv').innerHTML = `<img src="${p.avatar}" alt="">`;
     }
-    // Баннер в меню
     $('menuBanner').style.background = p.bannerColor || 'var(--banner-default)';
 
     $('greetName').textContent = visual;
@@ -1383,7 +1379,6 @@ function renderAuthState(){
     document.addEventListener('click',(e)=>{ if(menuOpen&&wrap&&!wrap.contains(e.target)){menuOpen=false;menu.classList.remove('show');btn.classList.remove('open');} });
     $('menuSettings').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openAccountSettings();};
     $('menuLogout').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openConfirmLogout();};
-    // Клик по мини-профилю → открыть свой профиль
     $('menuProfile').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openProfile(s.username);};
 
     $('sbAdmin').style.display = (s.username.toLowerCase()==='medy3a') ? 'flex' : 'none';
@@ -2535,7 +2530,6 @@ setInterval(async ()=>{
     cur.profile = { ...cur.profile, ...r.profile };
     Session.save(cur);
     updateMonkeysWidget();
-    // Обновляем меню, чтобы баннер/статистика были свежими
     if(document.body.classList.contains('logged-in')){
       const p = cur.profile;
       const banner = $('menuBanner');

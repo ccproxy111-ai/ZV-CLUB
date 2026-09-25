@@ -153,7 +153,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .dash-card h3{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--fg)}
 .dash-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
 
-/* ===== ZV-AWARDS ===== */
+/* ===== ZV-AWARDS — исправленный плавный фон ===== */
 .dash-card.awards{
   grid-column:span 2;
   position:relative;
@@ -166,54 +166,27 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
   min-height:200px;
   color:#fff;
   cursor:pointer;
-  isolation:isolate;
-  animation:awardsGlow 8s linear infinite;
+  text-decoration:none;
+  background:linear-gradient(120deg,#ff004c,#ff7a00,#ffd400,#3aff6c,#00e0ff,#5b5bff,#c400ff,#ff004c);
+  background-size:300% 300%;
+  animation:awardsShift 12s ease infinite;
+  box-shadow:0 12px 40px rgba(196,0,255,.35), inset 0 0 0 1px rgba(255,255,255,.15);
 }
-.dash-card.awards::before{
-  content:'';
-  position:absolute;inset:-40%;
-  background:conic-gradient(from 0deg,#ff004c,#ff7a00,#ffd400,#3aff6c,#00e0ff,#5b5bff,#c400ff,#ff004c);
-  animation:awardsSpin 6s linear infinite;
-  z-index:-2;
-  filter:blur(2px);
+@keyframes awardsShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-.dash-card.awards::after{
-  content:'';
-  position:absolute;inset:3px;
-  border-radius:10px;
-  background:rgba(10,10,14,.72);
-  backdrop-filter:blur(6px);
-  z-index:-1;
-}
-@keyframes awardsSpin{to{transform:rotate(360deg)}}
-@keyframes awardsGlow{0%,100%{filter:drop-shadow(0 0 18px rgba(255,0,120,.45))}50%{filter:drop-shadow(0 0 32px rgba(0,220,255,.55))}}
-.dash-card.awards:hover{transform:translateY(-4px) scale(1.005)}
-.dash-card.awards .awards-inner{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px}
-.dash-card.awards .awards-title{
-  font-size:26px;font-weight:900;letter-spacing:1.5px;
-  background:linear-gradient(90deg,#ff4d6d,#ffd400,#3aff6c,#00e0ff,#c400ff,#ff4d6d);
-  background-size:300% 100%;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:awardsText 4s linear infinite;
-}
-@keyframes awardsText{to{background-position:300% 0}}
-.dash-card.awards .awards-sub{font-size:14px;font-weight:600;color:#fff;opacity:.95}
-.dash-card.awards .awards-desc{font-size:12.5px;color:#cfd2dd;max-width:520px;line-height:1.55;margin-top:4px}
-.dash-card.awards .awards-cta{
-  margin-top:12px;
-  display:inline-flex;align-items:center;gap:8px;
-  align-self:flex-start;
-  padding:9px 16px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#ff4d6d,#c400ff);
-  color:#fff;font-weight:800;font-size:13px;
-  box-shadow:0 8px 22px rgba(196,0,255,.35);
-}
+.dash-card.awards:hover{transform:translateY(-4px) scale(1.005); box-shadow:0 18px 50px rgba(196,0,255,.5), inset 0 0 0 1px rgba(255,255,255,.25)}
+.dash-card.awards .awards-inner{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+.dash-card.awards .awards-title{font-size:28px;font-weight:900;letter-spacing:2px;color:#fff}
+.dash-card.awards .awards-sub{font-size:14px;font-weight:700;color:#fff;opacity:.98}
+.dash-card.awards .awards-desc{font-size:12.5px;color:#fff;opacity:.92;max-width:520px;line-height:1.55;margin-top:4px}
+.dash-card.awards .awards-cta{margin-top:12px;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:9px 16px;border-radius:999px;background:rgba(0,0,0,.35);color:#fff;font-weight:800;font-size:13px;backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .dash-card.awards .awards-cta svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:640px){
   .dash-card.awards{grid-column:span 1}
-  .dash-card.awards .awards-title{font-size:20px}
+  .dash-card.awards .awards-title{font-size:22px}
 }
 
 .users-section{display:none;flex-direction:column;gap:14px}
@@ -573,7 +546,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 @keyframes jackpotPulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}50%{box-shadow:0 0 0 12px rgba(251,191,36,0)}}
 .wheel-result .big{font-size:20px;font-weight:900}
 
-/* ===== Wheel history ===== */
 .wheel-history{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:0;overflow:hidden;display:flex;flex-direction:column;max-height:min(660px,80vh);box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .wh-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);background:var(--bg)}
 .wh-title{font-size:13px;font-weight:800;color:var(--fg);letter-spacing:.3px}
@@ -1035,7 +1007,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
     <div class="admin-wrap" id="adminWrap"></div>
   </div>
 </div>
-
 <script>
 /* =========================================================
    КОНФИГ
@@ -1043,8 +1014,8 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 const HEARTBEAT_MS = 10000;
 const FETCH_TIMEOUT = 12000;
-const WHEEL_SPIN_MS = 5600;      // минимум 5 сек анимации
-const WHEEL_SPIN_COOLDOWN = 1500; // защита от спама между спинами
+const WHEEL_SPIN_MS = 5600;
+const WHEEL_SPIN_COOLDOWN = 1500;
 
 const EMOJI_LIST = [
   { emoji:'', label:'Без эмодзи', price:0 },
@@ -1717,6 +1688,15 @@ $('wheelBetInput').addEventListener('input', ()=>{
   if(v > bal) $('wheelBetInput').value = bal;
 });
 
+// Мгновенный сброс без анимации (используется только в редких случаях)
+function resetWheelRotor(){
+  const rotor = $('wheelRotor');
+  if(!rotor) return;
+  rotor.style.transition = 'none';
+  rotor.style.transform = 'rotate(0deg)';
+  void rotor.offsetWidth;
+}
+
 $('wheelSpinBtn').onclick = async ()=>{
   if(wheelSpinning) return;
   const now = Date.now();
@@ -1732,13 +1712,16 @@ $('wheelSpinBtn').onclick = async ()=>{
 
   wheelSpinning = true;
   wheelLastSpinAt = now;
+
+  // Мгновенный сброс колеса в 0 ПЕРЕД новым прокрутом (без анимации)
+  resetWheelRotor();
+
   $('wheelSpinBtn').disabled = true;
   $('wheelSpinBtn').textContent = '🎡 Крутится...';
   $('wheelResult').className='wheel-result';
   $('wheelResult').innerHTML = '<span>Крутится...</span>';
   Sound.click();
 
-  // Мгновенно списываем ставку — чтобы юзер видел, как обезьяны уходят сразу
   const cur = Session.get();
   cur.profile.monkeys = bal - bet;
   Session.save(cur);
@@ -1752,7 +1735,6 @@ $('wheelSpinBtn').onclick = async ()=>{
     $('wheelSpinBtn').textContent='🎡 Крутить колесо';
     $('wheelResult').className='wheel-result lose';
     $('wheelResult').innerHTML = `<span>${escapeHtml(res.error||'Ошибка')}</span>`;
-    // откат баланса
     const c2 = Session.get();
     c2.profile.monkeys = bal;
     Session.save(c2);
@@ -1762,7 +1744,6 @@ $('wheelSpinBtn').onclick = async ()=>{
     return;
   }
 
-  // Сразу начисляем выигрыш (если есть) — результат уже пришёл с сервера
   const winAmount = res.winAmount || 0;
   const finalBalance = res.monkeysFinal;
   const cur2 = Session.get();
@@ -1780,7 +1761,6 @@ $('wheelSpinBtn').onclick = async ()=>{
   const targetAngle = 360*6 - midOfSeg + jitter;
   const rotor = $('wheelRotor');
   rotor.style.transition = 'transform ' + (WHEEL_SPIN_MS/1000) + 's cubic-bezier(.15,.9,.2,1)';
-  // Принудительный reflow, чтобы transition точно применился
   void rotor.offsetWidth;
   rotor.style.transform = `rotate(${targetAngle}deg)`;
 
@@ -1816,6 +1796,13 @@ $('wheelSpinBtn').onclick = async ()=>{
     $('wheelSpinBtn').disabled=false;
     $('wheelSpinBtn').textContent='🎡 Крутить колесо';
     loadWheelHistory();
+
+    // Плавно возвращаем колесо в исходное положение через 1.5 сек
+    setTimeout(()=>{
+      const r2 = $('wheelRotor');
+      r2.style.transition = 'transform 0.6s cubic-bezier(.2,.8,.25,1)';
+      r2.style.transform = 'rotate(0deg)';
+    }, 1500);
   }, WHEEL_SPIN_MS);
 };
 
@@ -1880,8 +1867,7 @@ function stopWhTimer(){
   if(whTimer){ clearInterval(whTimer); whTimer=null; }
 }
 $('whRefresh').onclick = ()=>{ Sound.click(); loadWheelHistory(); };
-
-/* =========================================================
+  /* =========================================================
    USERS / PROFILE / SETTINGS / ADMIN
    ========================================================= */
 async function loadUsers(){
@@ -2724,7 +2710,7 @@ function uploadPostFile(e, type){
 }
 
 /* =========================================================
-   ADMIN v4
+   ADMIN
    ========================================================= */
 $('sbAdmin').onclick=()=>{ Sound.click(); openAdminPanel(); };
 $('adminClose').onclick=()=>{ $('adminOverlay').classList.remove('show'); Sound.close(); };
@@ -2733,28 +2719,104 @@ $('adminOverlay').onclick=e=>{ if(e.target===$('adminOverlay')){ $('adminOverlay
 let adminUsersCache=[];
 let adminSearchQuery='';
 let adminBusy=false;
+let adminMe = null;
 
-function openAdminPanel(){
+async function openAdminPanel(){
   const s=Session.get(); if(!s) return;
-  const p = s.profile || {};
-  const canAdmin = p.isAdmin || p.isOwner || s.username.toLowerCase()==='medy3a';
-  if(!canAdmin){ alert('Нет доступа'); return; }
   adminBusy = false;
   $('adminOverlay').classList.add('show');
   Sound.open();
+
+  const st = await api('adminStatus', { username: s.username });
+  if(!st.ok || !st.isAdmin){
+    $('adminWrap').innerHTML = `<div class="admin-login"><h2>🔒 Админ-панель</h2><div class="al-sub">У вас нет доступа.</div></div>`;
+    return;
+  }
+  adminMe = st;
+
   const token = sessionStorage.getItem('zv_admin_token');
-  if(token){
+  if(token && !st.needsSetup){
     adminFetchUsers();
+    return;
+  }
+  if(st.needsSetup){
+    renderAdminSetup();
   } else {
     renderAdminLogin();
   }
 }
 
+// Экран создания личной пары (только для тех, у кого isAdmin=true, но нет записи в Admins)
+function renderAdminSetup(){
+  const s=Session.get();
+  $('adminWrap').innerHTML = `
+    <div class="admin-login">
+      <h2>🔑 Настройка админ-пары</h2>
+      <div class="al-sub">Задайте свой пароль и кодовое слово. Они будут использоваться при входе в админ-панель.</div>
+      <div class="field">
+        <label>Логин</label>
+        <input type="text" value="${escapeHtml(s.username)}" disabled style="opacity:.6">
+      </div>
+      <div class="field">
+        <label>Пароль</label>
+        <input type="password" id="setupPass" placeholder="минимум 8 символов" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label>Повторите пароль</label>
+        <input type="password" id="setupPass2" placeholder="повторите" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label>Кодовое слово</label>
+        <input type="text" id="setupCode" placeholder="например, ваше секретное слово" autocomplete="off">
+      </div>
+      <button class="btn btn-primary btn-block" id="setupBtn" style="margin-top:10px">Создать пару</button>
+      <div class="modal-msg" id="setupMsg"></div>
+    </div>
+  `;
+  $('setupBtn').onclick = async ()=>{
+    if(adminBusy) return;
+    adminBusy = true;
+    const p1 = $('setupPass').value;
+    const p2 = $('setupPass2').value;
+    const code = $('setupCode').value.trim();
+    $('setupMsg').textContent = '';
+
+    if(p1.length < 8){ $('setupMsg').textContent = 'Пароль минимум 8 символов'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
+    if(p1 !== p2){ $('setupMsg').textContent = 'Пароли не совпадают'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
+    if(code.length < 3){ $('setupMsg').textContent = 'Кодовое слово минимум 3 символа'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
+
+    const salt = randomSalt();
+    const hash = await sha256(salt + p1);
+    try {
+      const r = await api('adminSetup', { username: s.username, salt, hash, code });
+      if(!r.ok){
+        Sound.error();
+        $('setupMsg').textContent = r.error || 'Ошибка';
+        $('setupMsg').className='modal-msg err';
+        adminBusy = false;
+        return;
+      }
+      Sound.success();
+      $('setupMsg').textContent = '✓ Пара создана. Входим…';
+      $('setupMsg').className='modal-msg ok';
+      setTimeout(()=>renderAdminLogin(), 600);
+    } catch(err) {
+      Sound.error();
+      $('setupMsg').textContent = 'Ошибка сети';
+      $('setupMsg').className='modal-msg err';
+    } finally {
+      adminBusy = false;
+    }
+  };
+}
+
 function renderAdminLogin(){
+  const s=Session.get();
+  const isOwner = adminMe && adminMe.isOwner;
   $('adminWrap').innerHTML = `
     <div class="admin-login">
       <h2>🔒 Админ-панель</h2>
-      <div class="al-sub">Доступ только для избранных</div>
+      <div class="al-sub">${isOwner ? 'Вход владельца' : 'Введите свой пароль и кодовое слово'}</div>
       <div class="field">
         <label>Пароль</label>
         <input type="password" id="admPass" placeholder="пароль" autocomplete="off">
@@ -2770,12 +2832,24 @@ function renderAdminLogin(){
   const submit = async ()=>{
     if(adminBusy) return;
     adminBusy=true;
-    const s=Session.get();
     const password=$('admPass').value;
     const code=$('admCode').value;
     $('admMsg').textContent='';
     try {
-      const r=await api('adminLogin',{username:s.username, password, code});
+      let payload = { username: s.username, password, code };
+      if(!isOwner){
+        const sr = await api('adminGetSalt', { username: s.username });
+        if(!sr.ok){
+          Sound.error();
+          $('admMsg').textContent = sr.error || 'Пара не найдена';
+          $('admMsg').className='modal-msg err';
+          adminBusy=false;
+          return;
+        }
+        const hash = await sha256(sr.salt + password);
+        payload = { username: s.username, hash, code };
+      }
+      const r=await api('adminLogin', payload);
       if(r.ok){
         sessionStorage.setItem('zv_admin_token', r.adminToken);
         Sound.success();
@@ -2812,7 +2886,6 @@ async function adminFetchUsers(){
           <input type="text" id="admSearch" placeholder="Поиск по нику…" autocomplete="off">
         </div>
         <div class="admin-stats" id="admStats"><span class="admin-stat">Загрузка…</span></div>
-        <button class="btn btn-ghost" id="admLogout">Выйти</button>
       </div>
       <div class="admin-body" id="admBody">
         <div class="skeleton skeleton-card"></div>
@@ -2821,11 +2894,6 @@ async function adminFetchUsers(){
       </div>
     </div>
   `;
-  $('admLogout').onclick = ()=>{
-    sessionStorage.removeItem('zv_admin_token');
-    Sound.close();
-    renderAdminLogin();
-  };
   $('admSearch').addEventListener('input', debounce((e)=>{
     adminSearchQuery = e.target.value.toLowerCase().trim();
     renderAdminGrid();
@@ -2880,157 +2948,125 @@ function renderAdminGrid(){
     const user = adminUsersCache.find(x=>x.username===uname);
     if(!user) return;
 
-    const saveBtn = card.querySelector('.adm-save');
-    if(saveBtn) {
-      saveBtn.addEventListener('click', async (e)=>{
-        e.preventDefault(); e.stopPropagation();
-        if(adminBusy) return;
-        adminBusy=true;
-        const token=sessionStorage.getItem('zv_admin_token');
-        const visualName = card.querySelector('.adm-visual').value;
-        const emoji = card.querySelector('.adm-emoji-value').value;
-        try {
-          const r=await api('adminUpdateUser',{adminToken:token, username:uname, visualName, emoji});
-          if(r.ok){
-            Sound.success();
-            user.visualName=visualName;
-            user.emoji=emoji;
-            const nameEl = card.querySelector('.admin-card-name');
-            if(nameEl) nameEl.innerHTML = `${escapeHtml(visualName||uname)} <span class="emj">${emoji||''}</span>`;
-            const emjEl = card.querySelector('.adm-emoji-current');
-            if(emjEl) emjEl.textContent = emoji || '∅';
-          } else { Sound.error(); alert(r.error||'Ошибка'); }
-        } catch(err) {
-          Sound.error(); alert('Ошибка сети');
-        } finally { adminBusy=false; }
-      });
-    }
+    const token=()=>sessionStorage.getItem('zv_admin_token');
 
-    const giveBtn = card.querySelector('.adm-give');
-    if(giveBtn) {
-      giveBtn.addEventListener('click', async (e)=>{
-        e.preventDefault(); e.stopPropagation();
-        if(adminBusy) return;
-        const inp = card.querySelector('.adm-give-amount');
-        const amt = parseInt(inp.value||'0',10);
-        if(!amt) return;
-        adminBusy=true;
-        const token=sessionStorage.getItem('zv_admin_token');
-        try {
-          const r=await api('adminGive',{adminToken:token, username:uname, amount:amt});
-          if(r.ok){
-            Sound.success();
-            user.monkeys=r.monkeys;
-            inp.value='';
-            const monEl = card.querySelector('.adm-monkeys-val');
-            if(monEl) monEl.textContent = r.monkeys;
-            updateAdminStats();
-          } else { Sound.error(); alert(r.error||'Ошибка'); }
-        } catch(err) {
-          Sound.error(); alert('Ошибка сети');
-        } finally { adminBusy=false; }
-      });
-    }
-
-    card.querySelectorAll('.adm-quick').forEach(b=>{
+    // Эмодзи — сразу сохраняем и обновляем кэш
+    card.querySelectorAll('.adm-emoji-picker button').forEach(b=>{
       b.addEventListener('click', async (e)=>{
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const delta = parseInt(b.dataset.delta,10);
-        if(!delta) return;
-        adminBusy=true;
-        const token=sessionStorage.getItem('zv_admin_token');
+        const eVal = b.dataset.e;
+        adminBusy = true;
         try {
-          const r=await api('adminGive',{adminToken:token, username:uname, amount:delta});
+          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, emoji: eVal });
           if(r.ok){
-            Sound.click();
-            user.monkeys=r.monkeys;
-            const monEl = card.querySelector('.adm-monkeys-val');
-            if(monEl) monEl.textContent = r.monkeys;
-            updateAdminStats();
-          } else Sound.error();
-        } catch(err) { Sound.error(); } finally { adminBusy=false; }
+            Sound.success();
+            const idx = adminUsersCache.findIndex(x=>x.username===uname);
+            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            renderAdminGrid();
+          }else{ Sound.error(); }
+        } finally { adminBusy = false; }
       });
     });
 
-    const setBtn = card.querySelector('.adm-set');
-    if(setBtn) {
-      setBtn.addEventListener('click', async (e)=>{
+    // Темы — сразу сохраняем и обновляем кэш
+    card.querySelectorAll('.adm-theme-picker button').forEach(b=>{
+      b.addEventListener('click', async (e)=>{
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const val = parseInt(card.querySelector('.adm-set-val').value||'0',10);
-        const delta = val - (user.monkeys||0);
-        if(delta===0) return;
-        adminBusy=true;
-        const token=sessionStorage.getItem('zv_admin_token');
+        const tVal = b.dataset.t;
+        adminBusy = true;
         try {
-          const r=await api('adminGive',{adminToken:token, username:uname, amount:delta});
+          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, theme: tVal });
           if(r.ok){
             Sound.success();
-            user.monkeys=r.monkeys;
-            const monEl = card.querySelector('.adm-monkeys-val');
-            if(monEl) monEl.textContent = r.monkeys;
-            updateAdminStats();
-          } else Sound.error();
-        } catch(err) { Sound.error(); } finally { adminBusy=false; }
+            const idx = adminUsersCache.findIndex(x=>x.username===uname);
+            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            renderAdminGrid();
+          }else{ Sound.error(); }
+        } finally { adminBusy = false; }
+      });
+    });
+
+    // Монеты — кнопки +100, +1000, +10к, −100, −1000
+    card.querySelectorAll('.adm-give-btn').forEach(b=>{
+      b.addEventListener('click', async (e)=>{
+        e.preventDefault(); e.stopPropagation();
+        if(adminBusy) return;
+        const amount = parseInt(b.dataset.amount,10);
+        adminBusy = true;
+        try {
+          const r = await api('adminGive', { adminToken: token(), username: uname, amount });
+          if(r.ok){
+            Sound.success();
+            const idx = adminUsersCache.findIndex(x=>x.username===uname);
+            if(idx >= 0) adminUsersCache[idx].monkeys = r.monkeys;
+            renderAdminGrid();
+          }else{ Sound.error(); }
+        } finally { adminBusy = false; }
+      });
+    });
+
+    // Точная установка монет
+    const setMonBtn = card.querySelector('.adm-set-mon');
+    if(setMonBtn){
+      setMonBtn.addEventListener('click', async (e)=>{
+        e.preventDefault(); e.stopPropagation();
+        if(adminBusy) return;
+        const inp = card.querySelector('.adm-mon-input');
+        const val = parseInt(inp.value,10);
+        if(isNaN(val)) { Sound.error(); return; }
+        adminBusy = true;
+        try {
+          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, monkeys: val });
+          if(r.ok){
+            Sound.success();
+            const idx = adminUsersCache.findIndex(x=>x.username===uname);
+            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            renderAdminGrid();
+          }else{ Sound.error(); }
+        } finally { adminBusy = false; }
       });
     }
 
-    const emojiValueEl = card.querySelector('.adm-emoji-value');
-    if(emojiValueEl) {
-      card.querySelectorAll('.adm-emoji-picker button').forEach(b=>{
-        b.addEventListener('click', (e)=>{
-          e.preventDefault(); e.stopPropagation();
-          const eVal = b.dataset.e;
-          emojiValueEl.value = eVal;
-          card.querySelectorAll('.adm-emoji-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.e===eVal));
-          const curEl = card.querySelector('.adm-emoji-current');
-          if(curEl) curEl.textContent = eVal || '∅';
-        });
+    // Сохранить визуальный ник
+    const saveVnBtn = card.querySelector('.adm-save-vn');
+    if(saveVnBtn){
+      saveVnBtn.addEventListener('click', async (e)=>{
+        e.preventDefault(); e.stopPropagation();
+        if(adminBusy) return;
+        const inp = card.querySelector('.adm-vn-input');
+        const vn = inp.value.trim();
+        adminBusy = true;
+        try {
+          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, visualName: vn });
+          if(r.ok){
+            Sound.success();
+            const idx = adminUsersCache.findIndex(x=>x.username===uname);
+            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
+            renderAdminGrid();
+          }else{ Sound.error(); }
+        } finally { adminBusy = false; }
       });
     }
 
-    const themeValueEl = card.querySelector('.adm-theme-value');
-    if(themeValueEl) {
-      card.querySelectorAll('.adm-theme-picker button').forEach(b=>{
-        b.addEventListener('click', async (e)=>{
-          e.preventDefault(); e.stopPropagation();
-          if(adminBusy) return;
-          const th = b.dataset.t;
-          adminBusy=true;
-          const token=sessionStorage.getItem('zv_admin_token');
-          try {
-            const r = await api('adminUpdateUser',{adminToken:token, username:uname, theme: th});
-            if(r.ok){
-              Sound.success();
-              user.theme=th;
-              themeValueEl.value = th;
-              card.querySelectorAll('.adm-theme-picker button').forEach(x=>x.classList.toggle('selected', x.dataset.t===th));
-            }
-            else Sound.error();
-          } catch(err) { Sound.error(); } finally { adminBusy=false; }
-        });
-      });
-    }
-
+    // Выдать/снять админку
     const admBtn = card.querySelector('.adm-toggle-admin');
     if(admBtn){
       admBtn.addEventListener('click', async (e)=>{
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        adminBusy=true;
-        const token=sessionStorage.getItem('zv_admin_token');
-        const makeAdmin = !user.isAdmin;
+        const newState = !user.isAdmin;
+        adminBusy = true;
         try {
-          const r=await api('adminSetAdmin',{adminToken:token, username:uname, isAdmin: makeAdmin});
+          const r = await api('adminSetAdmin', { adminToken: token(), username: uname, isAdmin: newState });
           if(r.ok){
             Sound.success();
-            user.isAdmin = makeAdmin;
+            const idx = adminUsersCache.findIndex(x=>x.username===uname);
+            if(idx >= 0) adminUsersCache[idx].isAdmin = r.isAdmin;
             renderAdminGrid();
-          } else { Sound.error(); alert(r.error||'Ошибка'); }
-        } catch(err) {
-          Sound.error(); alert('Ошибка сети');
-        } finally { adminBusy=false; }
+          }else{ Sound.error(); alert(r.error||'Ошибка'); }
+        } finally { adminBusy = false; }
       });
     }
   });
@@ -3039,190 +3075,88 @@ function renderAdminGrid(){
 function adminCardHtml(u, allEmojis, allThemes){
   const visual = u.visualName || u.username;
   const initial = visual.charAt(0).toUpperCase();
-  const curEmoji = u.emoji || '';
-  const curTheme = u.theme || 'dark';
-  const isOwner = u.username.toLowerCase()==='medy3a';
-  const isAdmin = !!u.isAdmin;
+  const avInner = u.avatar ? `<img src="${u.avatar}" alt="">` : escapeHtml(initial);
+  const emj = u.emoji ? `<span class="emj">${u.emoji}</span>` : '';
+  const ownedEmojis = Array.isArray(u.ownedEmojis) ? u.ownedEmojis : [];
+  const ownedThemes = Array.isArray(u.ownedThemes) ? u.ownedThemes : [];
 
-  const emojiButtons = allEmojis.map(e=>`
-    <button type="button" data-e="${escapeHtml(e.emoji)}" class="${e.emoji===curEmoji?'selected':''}" title="${escapeHtml(e.label||e.emoji||'Без эмодзи')}">${e.emoji||'∅'}</button>
-  `).join('');
-
-  const themeButtons = allThemes.map(t=>`
-    <button type="button" data-t="${escapeHtml(t.id)}" class="${t.id===curTheme?'selected':''}" title="${escapeHtml(t.name)}">${escapeHtml(t.name)}</button>
-  `).join('');
-
-  let badge = '';
-  if(isOwner) badge = '<span class="admin-badge owner">owner</span>';
-  else if(isAdmin) badge = '<span class="admin-badge admin">admin</span>';
-
-  const adminBtn = isOwner
-    ? `<span class="admin-badge owner">владелец</span>`
-    : `<button type="button" class="btn btn-ghost adm-toggle-admin ${isAdmin?'admin-give-admin':''}">${isAdmin?'− Снять админку':'+ Выдать админку'}</button>`;
-
-  return `
-    <div class="admin-card" data-u="${escapeHtml(u.username)}">
-      <div class="admin-card-head">
-        <div class="admin-card-av">${escapeHtml(initial)}</div>
-        <div style="min-width:0;flex:1">
-          <div class="admin-card-name">${escapeHtml(visual)} <span class="emj">${curEmoji||''}</span></div>
-          <div class="admin-card-login">@${escapeHtml(u.username)} ${badge}</div>
+  return `<div class="admin-card" data-u="${escapeHtml(u.username)}">
+    <div class="admin-card-head">
+      <div class="admin-card-av">${avInner}</div>
+      <div style="min-width:0;flex:1">
+        <div class="admin-card-name">${escapeHtml(visual)}${emj}
+          ${u.isAdmin ? '<span class="admin-badge admin">ADMIN</span>' : ''}
         </div>
-        <div class="admin-card-stats">
-          <span>🐵 <b class="adm-monkeys-val">${u.monkeys||0}</b></span>
-          <span>❤️ <b>${u.respects||0}</b></span>
-          <span>🏆 <b>${u.wins||0}</b></span>
-        </div>
+        <div class="admin-card-login">@${escapeHtml(u.username)}</div>
       </div>
-
-      <div class="admin-row">
-        <label>Визуал</label>
-        <input type="text" class="adm-visual" maxlength="32" value="${escapeHtml(u.visualName||'')}" placeholder="Отображаемое имя">
-      </div>
-
-      <div class="admin-row">
-        <label>Эмодзи</label>
-        <div style="flex:1;display:flex;flex-direction:column;gap:6px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <span class="adm-emoji-current" style="font-size:22px">${curEmoji||'∅'}</span>
-            <input type="hidden" class="adm-emoji-value" value="${escapeHtml(curEmoji)}">
-            <span style="font-size:11px;color:var(--muted)">нажми, чтобы выбрать из базы</span>
-          </div>
-          <div class="admin-emoji-picker">${emojiButtons}</div>
-        </div>
-      </div>
-
-      <div class="admin-row">
-        <label>Тема</label>
-        <input type="hidden" class="adm-theme-value" value="${escapeHtml(curTheme)}">
-        <div class="admin-theme-picker" style="flex:1">${themeButtons}</div>
-      </div>
-
-      <div class="admin-row">
-        <label>Выдать</label>
-        <div class="admin-monkeys-set">
-          <input type="number" class="adm-give-amount" placeholder="кол-во" min="1" max="1000000">
-          <button type="button" class="btn btn-primary adm-give">+🐵</button>
-        </div>
-      </div>
-
-      <div class="admin-mono-row">
-        <button type="button" class="btn btn-ghost adm-quick" data-delta="100">+100</button>
-        <button type="button" class="btn btn-ghost adm-quick" data-delta="1000">+1000</button>
-        <button type="button" class="btn btn-ghost adm-quick" data-delta="10000">+10к</button>
-        <button type="button" class="btn btn-ghost adm-quick" data-delta="-100">−100</button>
-        <button type="button" class="btn btn-ghost adm-quick" data-delta="-1000">−1000</button>
-      </div>
-
-      <div class="admin-row">
-        <label>Точно</label>
-        <input type="number" class="adm-set-val" placeholder="значение" min="0" max="100000000">
-        <button type="button" class="btn btn-ghost adm-set">Установить</button>
-      </div>
-
-      <div class="admin-mono-row" style="justify-content:flex-end">
-        ${adminBtn}
-        <button type="button" class="btn btn-primary adm-save">💾 Сохранить</button>
+      <div class="admin-card-stats">
+        <span>🐵 <b>${u.monkeys||0}</b></span>
+        <span>❤️ <b>${u.respects||0}</b></span>
+        <span>🏆 <b>${u.wins||0}</b></span>
       </div>
     </div>
-  `;
+
+    <div class="admin-row">
+      <label>Ник</label>
+      <input type="text" class="adm-vn-input" value="${escapeHtml(u.visualName||'')}" maxlength="32">
+      <button class="btn btn-ghost adm-save-vn">OK</button>
+    </div>
+
+    <div class="admin-row">
+      <label>🐵</label>
+      <div class="admin-monkeys-set">
+        <input type="number" class="adm-mon-input" value="${u.monkeys||0}" min="0">
+        <button class="btn btn-ghost adm-set-mon">Set</button>
+      </div>
+    </div>
+
+    <div class="admin-mono-row">
+      <button class="btn btn-ghost adm-give-btn" data-amount="100">+100</button>
+      <button class="btn btn-ghost adm-give-btn" data-amount="1000">+1000</button>
+      <button class="btn btn-ghost adm-give-btn" data-amount="10000">+10к</button>
+      <button class="btn btn-ghost adm-give-btn" data-amount="-100">−100</button>
+      <button class="btn btn-ghost adm-give-btn" data-amount="-1000">−1000</button>
+    </div>
+
+    <div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px">
+      <label style="min-width:0">Эмодзи</label>
+      <div class="adm-emoji-picker">
+        ${allEmojis.map(e=>`<button data-e="${escapeHtml(e.emoji)}" class="${u.emoji===e.emoji?'selected':''}" title="${escapeHtml(e.label)}">${e.emoji||'∅'}</button>`).join('')}
+      </div>
+    </div>
+
+    <div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px">
+      <label style="min-width:0">Тема</label>
+      <div class="adm-theme-picker">
+        ${allThemes.map(t=>`<button data-t="${t.id}" class="${u.theme===t.id?'selected':''}">${escapeHtml(t.name)}</button>`).join('')}
+      </div>
+    </div>
+
+    <div class="admin-mono-row">
+      <button class="btn btn-ghost adm-toggle-admin ${u.isAdmin?'admin-give-admin':''}" style="flex:1;justify-content:center">
+        ${u.isAdmin ? '− Снять админку' : '+ Выдать админку'}
+      </button>
+    </div>
+  </div>`;
 }
 
 /* =========================================================
-   WEBGL ШЕЙДЕР
+   BOOT
    ========================================================= */
-(function initShader(){
-  if(PERF.shaderOff) return;
-  const canvas=$('bg-shader');
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  if(!gl){ canvas.style.display='none'; return; }
-  const vs='attribute vec2 pos; void main(){ gl_Position = vec4(pos,0.0,1.0); }';
-  const fs=`precision highp float;
-    uniform vec2 u_res; uniform float u_time;
-    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
-    float noise(vec2 p){ vec2 i=floor(p), f=fract(p); vec2 u=f*f*(3.0-2.0*f);
-      return mix(mix(hash(i),hash(i+vec2(1,0)),u.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x), u.y); }
-    float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p*=2.0; a*=0.5;} return v; }
-    void main(){
-      vec2 uv=gl_FragCoord.xy/u_res.xy; vec2 p=uv*2.0-1.0; p.x*=u_res.x/u_res.y;
-      float t=u_time*0.05;
-      float n=fbm(p*1.1+vec2(t,-t*0.5));
-      vec3 col=vec3(0.055,0.055,0.067);
-      float g1=smoothstep(0.9,0.0,length(p-vec2(-0.7,0.6)));
-      col+=vec3(0.03,0.03,0.04)*g1*(0.7+0.3*n);
-      float g2=smoothstep(1.1,0.0,length(p-vec2(0.8,-0.7)));
-      col+=vec3(0.025,0.025,0.035)*g2*(0.7+0.3*n);
-      float vig=smoothstep(1.4,0.3,length(p));
-      col*=mix(0.85,1.0,vig);
-      gl_FragColor=vec4(col,1.0);
-    }`;
-  function sh(t,s){ const x=gl.createShader(t); gl.shaderSource(x,s); gl.compileShader(x); if(!gl.getShaderParameter(x,gl.COMPILE_STATUS))return null; return x; }
-  const vsh=sh(gl.VERTEX_SHADER,vs), fsh=sh(gl.FRAGMENT_SHADER,fs);
-  if(!vsh||!fsh){ canvas.style.display='none'; return; }
-  const prog=gl.createProgram(); gl.attachShader(prog,vsh); gl.attachShader(prog,fsh); gl.linkProgram(prog);
-  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){ canvas.style.display='none'; return; }
-  gl.useProgram(prog);
-  const buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
-  const pL=gl.getAttribLocation(prog,'pos'); gl.enableVertexAttribArray(pL); gl.vertexAttribPointer(pL,2,gl.FLOAT,false,0,0);
-  const uRes=gl.getUniformLocation(prog,'u_res'), uTime=gl.getUniformLocation(prog,'u_time');
-  function resize(){ const d=Math.min(devicePixelRatio||1,1.5); canvas.width=innerWidth*d; canvas.height=innerHeight*d; gl.viewport(0,0,canvas.width,canvas.height); }
-  resize(); addEventListener('resize',resize,{passive:true});
-  const start=performance.now();
-  let last=0;
-  function frame(now){
-    if(document.hidden){ requestAnimationFrame(frame); return; }
-    if(now - last > 40){
-      const t=(now-start)/1000;
-      gl.uniform2f(uRes,canvas.width,canvas.height); gl.uniform1f(uTime,t); gl.drawArrays(gl.TRIANGLES,0,6);
-      last = now;
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
+(function init(){
+  buildWheel();
+  renderAuthState();
+  Online.start();
+  switchView('home');
+
+  // Если есть токен админки в sessionStorage — сбросим при закрытии вкладки
+  window.addEventListener('beforeunload', ()=>{
+    // Ничего не делаем, токен живёт в sessionStorage
+  });
+
+  // Плавная остановка онлайна
+  window.addEventListener('pagehide', ()=>{ Online.stop(); });
 })();
-
-document.addEventListener('keydown',e=>{
-  if(e.key!=='Escape') return;
-  if($('buyOverlay').classList.contains('show')) $('buyOverlay').classList.remove('show');
-  else if($('respectOverlay').classList.contains('show')) $('respectOverlay').classList.remove('show');
-  else if($('unsavedOverlay').classList.contains('show')) $('unsavedOverlay').classList.remove('show');
-  else if($('adminOverlay').classList.contains('show')) $('adminOverlay').classList.remove('show');
-  else if($('profileOverlay').classList.contains('show')) closeProfile();
-  else if($('siteSettingsOverlay').classList.contains('show')) closeSiteSettings();
-  else if($('settingsOverlay').classList.contains('show')) closeAccountSettings();
-  else if($('confirmOverlay').classList.contains('show')) $('confirmOverlay').classList.remove('show');
-  else if($('modalOverlay').classList.contains('show')) closeModal();
-});
-
-renderAuthState();
-buildWheel();
-Online.start();
-switchView('home');
-
-setInterval(async ()=>{
-  const s=Session.get(); if(!s||!s.token) return;
-  const r=await api('getMyState',{username:s.username, token:s.token});
-  if(r.ok && r.profile){
-    const cur=Session.get();
-    cur.profile = { ...cur.profile, ...r.profile };
-    Session.save(cur);
-    updateMonkeysWidget();
-    if(document.body.classList.contains('logged-in')){
-      const p = cur.profile;
-      const banner = $('menuBanner');
-      if(banner) banner.style.background = p.bannerColor || 'var(--banner-default)';
-    }
-  }
-}, 30000);
-
-window.addEventListener('beforeunload',()=>{
-  const s=Session.get();
-  const g=localStorage.getItem('zv_guest')||'';
-  const token=s?.token||g;
-  try{ navigator.sendBeacon(API_URL, JSON.stringify({action:'offline', token})); }catch(e){}
-});
-document.addEventListener('visibilitychange',()=>{ if(!document.hidden) Online.heartbeat && Online.beat(); });
 </script>
 </body>
 </html>

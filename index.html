@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZV-CLUB</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0b0d12;--bg2:#12151c;--fg:#e6e8ee;--muted:#8a90a0;
+  --accent:#7c5cff;--accent2:#22d3ee;--danger:#ff5470;--ok:#34d399;
+  --border:#232734;--radius:12px;--shadow:0 8px 32px rgba(0,0,0,.5);
+}
+html,body{
+  height:100%;
+  background:radial-gradient(1200px 600px at 80% -10%,#1a1f2e 0%,var(--bg) 60%);
+  color:var(--fg);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  overflow-x:hidden;
+}
+/* HEADER */
+.header{
+  position:fixed;top:0;left:0;right:0;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;background:rgba(11,13,18,.7);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);z-index:100;
+}
+.header-left{display:flex;align-items:center;gap:8px}
+.header-right{display:flex;align-items:center;gap:12px}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);transition:background .3s}
+.status-dot.online{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.status-dot.offline{background:var(--danger)}
+.status-text{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.logo{
+  cursor:pointer;font-weight:800;font-size:20px;letter-spacing:1px;
+  padding:8px 14px;border-radius:var(--radius);transition:transform .2s,background .2s;
+  user-select:none;
+}
+.logo:hover{background:var(--bg2);transform:scale(1.05)}
+.logo:active{transform:scale(.95)}
+.logo-z{color:var(--accent);text-shadow:0 0 12px rgba(124,92,255,.6)}
+.logo-c{color:var(--fg)}
+/* BUTTONS */
+.btn{
+  border:none;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:600;
+  cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s,opacity .2s;
+  font-family:inherit;position:relative;overflow:hidden;
+}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
+  box-shadow:0 4px 16px rgba(124,92,255,.35);
+}
+.btn-primary:hover{box-shadow:0 6px 24px rgba(124,92,255,.55);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--fg);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--muted)}
+.btn-ghost:hover{color:var(--fg)}
+.btn-lg{padding:14px 28px;font-size:16px}
+.btn-block{width:100%}
+/* HERO */
+.main{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 40px 60px;position:relative;z-index:1;
+}
+.hero{text-align:center;max-width:700px}
+.hero-title{font-size:clamp(48px,8vw,96px);font-weight:900;letter-spacing:-2px;margin-bottom:16px}
+.grad{
+  background:linear-gradient(135deg,var(--accent),var(--accent2),#ff6ec7);
+  background-size:200% 200%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:gradShift 6s ease infinite;
+}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-sub{color:var(--muted);font-size:18px;margin-bottom:40px}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+/* LOG PANEL */
+.log-panel{
+  position:fixed;right:20px;bottom:20px;width:300px;max-height:340px;
+  background:rgba(18,21,28,.85);backdrop-filter:blur(12px);
+  border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+  overflow:hidden;z-index:90;
+}
+.log-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 14px;border-bottom:1px solid var(--border);
+  font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);
+}
+.log-clear{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1}
+.log-clear:hover{color:var(--danger)}
+.log-body{
+  flex:1;overflow-y:auto;padding:8px 12px;
+  font-family:ui-monospace,'Courier New',monospace;font-size:11px;color:var(--muted);
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.log-body::-webkit-scrollbar{width:6px}
+.log-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.log-entry{padding:4px 0;border-bottom:1px dashed rgba(35,39,52,.6);animation:logIn .3s ease;word-break:break-word}
+@keyframes logIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+.log-entry .t{color:#555c70}
+.log-entry.info{color:var(--fg)}
+.log-entry.ok{color:var(--ok)}
+.log-entry.err{color:var(--danger)}
+.log-entry.warn{color:#fbbf24}
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;z-index:200;padding:20px;
+}
+.modal-overlay.show{display:flex;animation:fadeIn .2s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
+  padding:32px;width:100%;max-width:420px;box-shadow:var(--shadow);
+  position:relative;animation:modalIn .35s cubic-bezier(.2,.9,.3,1.3);
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:none}}
+.modal-close{
+  position:absolute;top:12px;right:14px;background:none;border:none;
+  color:var(--muted);font-size:26px;cursor:pointer;line-height:1;
+  transition:color .2s,transform .2s;
+}
+.modal-close:hover{color:var(--danger);transform:rotate(90deg)}
+.modal-title{font-size:22px;margin-bottom:24px;text-align:center}
+/* FORM */
+.field{margin-bottom:16px}
+.field label{
+  display:block;font-size:12px;color:var(--muted);margin-bottom:6px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.field input{
+  width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;color:var(--fg);font-size:15px;font-family:inherit;
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,92,255,.15)}
+.field input.err{border-color:var(--danger);animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.hint{display:block;font-size:11px;color:var(--muted);margin-top:6px}
+.hint.err{color:var(--danger)}
+.hint.ok{color:var(--ok)}
+.pass-wrap{position:relative}
+.pass-toggle{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;font-size:16px;opacity:.6;
+}
+.pass-toggle:hover{opacity:1}
+.strength-bar{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+.strength-fill{height:100%;width:0%;background:var(--danger);border-radius:2px;transition:width .3s,background .3s}
+.captcha-box{background:var(--bg);padding:12px;border-radius:10px;border:1px solid var(--border);margin-bottom:16px}
+.captcha-box label{display:block;font-size:13px;margin-bottom:8px;color:var(--fg)}
+.captcha-box input{width:100%;padding:8px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--fg)}
+.modal-actions{margin-top:8px}
+.modal-msg{margin-top:14px;font-size:13px;text-align:center;min-height:18px}
+.modal-msg.err{color:var(--danger)}
+.modal-msg.ok{color:var(--ok)}
+/* USER INFO */
+.user-badge{font-size:13px;color:var(--fg);margin-right:8px}
+/* PARTICLES */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+/* RESPONSIVE */
+@media(max-width:640px){
+  .log-panel{width:calc(100% - 40px);right:20px;left:20px;max-height:180px}
+  .hero-actions{flex-direction:column}
+  .btn-lg{width:100%}
+  .logo{font-size:16px;padding:6px 10px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <span class="status-dot" id="statusDot" title="Статус соединения"></span>
+    <span class="status-text" id="statusText">offline</span>
+  </div>
+  <div class="header-right">
+    <div id="userArea"></div>
+    <div class="logo" id="logo" title="На главную">
+      <span class="logo-z">ZV</span><span class="logo-c">-CLUB</span>
+    </div>
+  </div>
+</header>
+
+<main class="main" id="mainPage">
+  <section class="hero">
+    <h1 class="hero-title"><span class="grad">ZV-CLUB</span></h1>
+    <p class="hero-sub">Закрытое сообщество. Только для своих.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary btn-lg" id="btnRegister">Создать аккаунт</button>
+      <button class="btn btn-outline btn-lg" id="btnLogin">Войти</button>
+    </div>
+  </section>
+</main>
+
+<aside class="log-panel" id="logPanel">
+  <div class="log-header">
+    <span>📋 Лог событий</span>
+    <button class="log-clear" id="logClear" title="Очистить">×</button>
+  </div>
+  <div class="log-body" id="logBody"></div>
+</aside>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">×</button>
+    <h2 class="modal-title" id="modalTitle">Вход</h2>
+    <form id="authForm" autocomplete="off">
+      <div class="field">
+        <label for="username">Имя пользователя</label>
+        <input type="text" id="username" maxlength="20" required>
+        <small class="hint" id="hintUser">3–20 символов, латиница/цифры/_</small>
+      </div>
+      <div class="field">
+        <label for="password">Пароль</label>
+        <div class="pass-wrap">
+          <input type="password" id="password" maxlength="64" required>
+          <button type="button" class="pass-toggle" id="passToggle">👁</button>
+        </div>
+        <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+        <small class="hint" id="hintPass">Минимум 8 символов</small>
+      </div>
+      <div class="field" id="confirmField" style="display:none;">
+        <label for="password2">Повторите пароль</label>
+        <input type="password" id="password2" maxlength="64">
+      </div>
+      <div class="captcha-box" id="captchaBox" style="display:none;">
+        <label id="captchaLabel"></label>
+        <input type="text" id="captchaInput" placeholder="Ответ" autocomplete="off">
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Войти</button>
+      </div>
+      <div class="modal-msg" id="modalMsg"></div>
+    </form>
+  </div>
+</div>
+
+<canvas id="particles"></canvas>
+
+<script>
+/* =========================================================
+   КОНФИГ — твой Apps Script Web App
+   ========================================================= */
+const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
+
+/* =========================================================
+   ЗВУКИ (Web Audio API — без внешних файлов)
+   ========================================================= */
+const Sound = (() => {
+  let ctx = null;
+  function c(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; }
+  function tone(freq, dur=0.08, type='sine', vol=0.06){
+    try{
+      const a=c(), o=a.createOscillator(), g=a.createGain();
+      o.type=type; o.frequency.setValueAtTime(freq,a.currentTime);
+      g.gain.setValueAtTime(vol,a.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+dur);
+      o.connect(g).connect(a.destination);
+      o.start(); o.stop(a.currentTime+dur);
+    }catch(e){}
+  }
+  return {
+    click:()=>tone(600,.05,'square',.05),
+    hover:()=>tone(900,.03,'sine',.02),
+    success:()=>{tone(523,.1);setTimeout(()=>tone(659,.1),90);setTimeout(()=>tone(784,.18),180)},
+    error:()=>{tone(200,.15,'sawtooth',.06);setTimeout(()=>tone(150,.2,'sawtooth',.06),120)},
+    open:()=>{tone(440,.06);setTimeout(()=>tone(660,.08),60)},
+    close:()=>{tone(660,.06);setTimeout(()=>tone(440,.08),60)},
+    type:()=>tone(1200+Math.random()*400,.02,'sine',.015)
+  };
+})();
+
+/* =========================================================
+   ЛОГ
+   ========================================================= */
+const Log = (() => {
+  const body = document.getElementById('logBody');
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  return {
+    add(msg,type='info'){
+      const t=new Date().toLocaleTimeString('ru-RU');
+      const d=document.createElement('div');
+      d.className='log-entry '+type;
+      d.innerHTML=`<span class="t">[${t}]</span> ${escapeHtml(msg)}`;
+      body.prepend(d);
+      while(body.children.length>100) body.lastChild.remove();
+    },
+    clear(){body.innerHTML=''}
+  };
+})();
+
+/* =========================================================
+   КРИПТО + УТИЛИТЫ
+   ========================================================= */
+async function sha256(text){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function randomSalt(len=16){
+  const a=new Uint8Array(len); crypto.getRandomValues(a);
+  return [...a].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+/* =========================================================
+   API — обёртка над Google Apps Script
+   ========================================================= */
+async function api(action, payload={}){
+  const res = await fetch(API_URL,{
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({action, ...payload}),
+    redirect: 'follow'
+  });
+  if(!res.ok) throw new Error('HTTP '+res.status);
+  return res.json();
+}
+
+/* =========================================================
+   ВАЛИДАЦИЯ
+   ========================================================= */
+function validateUsername(u){
+  if(!u) return 'Введите имя';
+  if(u.length<3) return 'Минимум 3 символа';
+  if(u.length>20) return 'Максимум 20 символов';
+  if(!/^[a-zA-Z0-9_]+$/.test(u)) return 'Только латиница, цифры и _';
+  if(/^\d/.test(u)) return 'Не может начинаться с цифры';
+  const banned=['admin','root','moderator','system','null','undefined','zvclub'];
+  if(banned.includes(u.toLowerCase())) return 'Имя зарезервировано';
+  return null;
+}
+function validatePassword(p){
+  if(!p) return 'Введите пароль';
+  if(p.length<8) return 'Минимум 8 символов';
+  if(p.length>64) return 'Максимум 64 символа';
+  if(!/[a-zA-Z]/.test(p)) return 'Нужна хотя бы одна буква';
+  if(!/\d/.test(p)) return 'Нужна хотя бы одна цифра';
+  return null;
+}
+function passwordStrength(p){
+  let s=0;
+  if(p.length>=8)s++; if(p.length>=12)s++;
+  if(/[a-z]/.test(p)&&/[A-Z]/.test(p))s++;
+  if(/\d/.test(p))s++;
+  if(/[^a-zA-Z0-9]/.test(p))s++;
+  return Math.min(s,5);
+}
+
+/* =========================================================
+   RATE LIMIT (локальный)
+   ========================================================= */
+const Rate = (()=>{
+  const MAX=5, LOCK=60_000;
+  function get(){try{return JSON.parse(localStorage.getItem('zv_rl')||'{}')}catch{return{}}}
+  function set(d){localStorage.setItem('zv_rl',JSON.stringify(d))}
+  return {
+    check(action){
+      const a=get(), now=Date.now();
+      const r=a[action]||{count:0,last:0,lock:0};
+      if(r.lock>now) return {ok:false,msg:`Слишком много попыток. Жди ${Math.ceil((r.lock-now)/1000)} сек.`};
+      if(now-r.last>LOCK) r.count=0;
+      return {ok:true,r};
+    },
+    record(action,success){
+      const a=get(), now=Date.now();
+      const r=a[action]||{count:0,last:0,lock:0};
+      r.last=now;
+      if(success){r.count=0;r.lock=0}
+      else{
+        r.count=(r.count||0)+1;
+        if(r.count>=MAX){r.lock=now+LOCK;r.count=0}
+      }
+      a[action]=r; set(a);
+    }
+  };
+})();
+
+/* =========================================================
+   СЕССИЯ
+   ========================================================= */
+const Session = {
+  save(s){localStorage.setItem('zv_session',JSON.stringify(s))},
+  get(){try{return JSON.parse(localStorage.getItem('zv_session')||'null')}catch{return null}},
+  clear(){localStorage.removeItem('zv_session')}
+};
+
+/* =========================================================
+   AUTH — регистрация / вход
+   ========================================================= */
+const Auth = {
+  async register(username,password,password2){
+    const eU=validateUsername(username); if(eU) return {ok:false,error:eU};
+    const eP=validatePassword(password); if(eP) return {ok:false,error:eP};
+    if(password!==password2) return {ok:false,error:'Пароли не совпадают'};
+    const rl=Rate.check('register'); if(!rl.ok) return {ok:false,error:rl.msg};
+
+    try{
+      const salt=randomSalt();
+      const hash=await sha256(salt+password);
+      const res=await api('register',{username,salt,hash});
+      Rate.record('register',res.ok);
+      if(!res.ok) return {ok:false,error:res.error||'Ошибка регистрации'};
+      Session.save({username,token:res.token,ts:Date.now()});
+      return {ok:true};
+    }catch(e){
+      Rate.record('register',false);
+      return {ok:false,error:'Нет связи с сервером'};
+    }
+  },
+  async login(username,password){
+    const eU=validateUsername(username); if(eU) return {ok:false,error:eU};
+    if(!password) return {ok:false,error:'Введите пароль'};
+    const rl=Rate.check('login'); if(!rl.ok) return {ok:false,error:rl.msg};
+
+    try{
+      const saltRes=await api('getSalt',{username});
+      if(!saltRes.ok){Rate.record('login',false);return {ok:false,error:'Неверное имя или пароль'}};
+      const hash=await sha256(saltRes.salt+password);
+      const res=await api('login',{username,hash});
+      Rate.record('login',res.ok);
+      if(!res.ok) return {ok:false,error:'Неверное имя или пароль'};
+      Session.save({username,token:res.token,ts:Date.now()});
+      return {ok:true};
+    }catch(e){
+      Rate.record('login',false);
+      return {ok:false,error:'Нет связи с сервером'};
+    }
+  }
+};
+
+/* =========================================================
+   UI
+   ========================================================= */
+const $=id=>document.getElementById(id);
+const els={
+  statusDot:$('statusDot'),statusText:$('statusText'),
+  userArea:$('userArea'),
+  logo:$('logo'),
+  btnLogin:$('btnLogin'),btnRegister:$('btnRegister'),
+  modalOverlay:$('modalOverlay'),modalClose:$('modalClose'),
+  modalTitle:$('modalTitle'),authForm:$('authForm'),
+  username:$('username'),password:$('password'),password2:$('password2'),
+  confirmField:$('confirmField'),passToggle:$('passToggle'),
+  strengthFill:$('strengthFill'),
+  hintUser:$('hintUser'),hintPass:$('hintPass'),
+  captchaBox:$('captchaBox'),captchaLabel:$('captchaLabel'),captchaInput:$('captchaInput'),
+  submitBtn:$('submitBtn'),modalMsg:$('modalMsg')
+};
+
+let mode='login';
+let captchaAnswer=0;
+
+/* --- Лог панель --- */
+$('logClear').onclick=()=>{Log.clear();Sound.click();Log.add('Лог очищен','warn')};
+
+/* --- Проверка сервера --- */
+async function pingServer(){
+  try{
+    const r=await fetch(API_URL,{method:'GET', redirect:'follow'});
+    const ok=r.ok;
+    els.statusDot.className='status-dot '+(ok?'online':'offline');
+    els.statusText.textContent=ok?'online':'offline';
+    Log.add(ok?'Соединение установлено':'Сервер недоступен',ok?'ok':'err');
+  }catch(e){
+    els.statusDot.className='status-dot offline';
+    els.statusText.textContent='offline';
+    Log.add('Сервер недоступен','err');
+  }
+}
+
+/* --- Рендер состояния --- */
+function renderAuthState(){
+  const s=Session.get();
+  if(s){
+    els.userArea.innerHTML=`<span class="user-badge">👤 ${escapeHtml(s.username)}</span>
+      <button class="btn btn-ghost" id="btnLogout">Выйти</button>`;
+    $('btnLogout').onclick=()=>{
+      Session.clear();Sound.close();Log.add('Выход из аккаунта','warn');
+      renderAuthState();
+    };
+    els.btnLogin.style.display='none';
+    els.btnRegister.style.display='none';
+  }else{
+    els.userArea.innerHTML=`<button class="btn btn-ghost" id="btnLoginTop">Войти</button>
+      <button class="btn btn-primary" id="btnRegisterTop">Регистрация</button>`;
+    $('btnLoginTop').onclick=()=>openModal('login');
+    $('btnRegisterTop').onclick=()=>openModal('register');
+    els.btnLogin.style.display='';
+    els.btnRegister.style.display='';
+  }
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+/* --- Модалка --- */
+function openModal(m){
+  mode=m;
+  els.modalTitle.textContent = m==='login'?'Вход в ZV-CLUB':'Регистрация';
+  els.submitBtn.textContent = m==='login'?'Войти':'Создать аккаунт';
+  els.confirmField.style.display = m==='register'?'block':'none';
+  els.captchaBox.style.display = m==='register'?'block':'none';
+
+  if(m==='register'){
+    const a=Math.floor(Math.random()*10)+1;
+    const b=Math.floor(Math.random()*10)+1;
+    captchaAnswer=a+b;
+    els.captchaLabel.textContent=`Сколько будет ${a} + ${b}?`;
+    els.captchaInput.value='';
+  }
+  els.modalMsg.textContent='';
+  els.modalMsg.className='modal-msg';
+  els.authForm.reset();
+  els.strengthFill.style.width='0%';
+  els.modalOverlay.classList.add('show');
+  Sound.open();
+  Log.add(`Открыта форма: ${m==='login'?'вход':'регистрация'}`);
+  setTimeout(()=>els.username.focus(),100);
+}
+function closeModal(){
+  els.modalOverlay.classList.remove('show');
+  Sound.close();
+}
+els.modalClose.onclick=closeModal;
+els.modalOverlay.onclick=e=>{if(e.target===els.modalOverlay)closeModal()};
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&els.modalOverlay.classList.contains('show'))closeModal();
+});
+
+/* --- Кнопки --- */
+els.btnLogin.onclick=()=>openModal('login');
+els.btnRegister.onclick=()=>openModal('register');
+els.logo.onclick=()=>{Sound.click();Log.add('Переход на главную');window.scrollTo({top:0,behavior:'smooth'})};
+
+/* --- Показать/скрыть пароль --- */
+els.passToggle.onclick=()=>{
+  const t=els.password.type==='password'?'text':'password';
+  els.password.type=t;
+  els.passToggle.textContent=t==='password'?'👁':'🙈';
+  Sound.click();
+};
+
+/* --- Индикатор силы пароля + звук печати --- */
+els.password.addEventListener('input',()=>{
+  Sound.type();
+  const s=passwordStrength(els.password.value);
+  const pct=(s/5)*100;
+  const colors=['#ff5470','#ff5470','#fbbf24','#fbbf24','#34d399','#22d3ee'];
+  els.strengthFill.style.width=pct+'%';
+  els.strengthFill.style.background=colors[s];
+  const e=validatePassword(els.password.value);
+  els.hintPass.textContent = els.password.value ? (e||'✓ Хороший пароль') : 'Минимум 8 символов';
+  els.hintPass.className='hint '+(els.password.value?(e?'err':'ok'):'');
+});
+els.username.addEventListener('input',()=>{
+  Sound.type();
+  const e=validateUsername(els.username.value);
+  els.hintUser.textContent = els.username.value ? (e||'✓ Доступно') : '3–20 символов, латиница/цифры/_';
+  els.hintUser.className='hint '+(els.username.value?(e?'err':'ok'):'');
+});
+
+/* --- Отправка формы --- */
+els.authForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  els.modalMsg.textContent='';
+  els.modalMsg.className='modal-msg';
+
+  const u=els.username.value.trim();
+  const p=els.password.value;
+  const p2=els.password2.value;
+
+  // Капча
+  if(mode==='register'){
+    const ans=parseInt(els.captchaInput.value,10);
+    if(ans!==captchaAnswer){
+      Sound.error();
+      els.modalMsg.textContent='Неверный ответ на капчу';
+      els.modalMsg.className='modal-msg err';
+      Log.add('Капча провалена','err');
+      const a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
+      captchaAnswer=a+b;
+      els.captchaLabel.textContent=`Сколько будет ${a} + ${b}?`;
+      els.captchaInput.value='';
+      return;
+    }
+  }
+
+  els.submitBtn.disabled=true;
+  const origText=els.submitBtn.textContent;
+  els.submitBtn.textContent='⏳ Обработка...';
+  Log.add(`Попытка ${mode==='login'?'входа':'регистрации'}: ${u}`);
+
+  try{
+    const res = mode==='login'
+      ? await Auth.login(u,p)
+      : await Auth.register(u,p,p2);
+
+    if(res.ok){
+      Sound.success();
+      els.modalMsg.textContent='✓ Успех!';
+      els.modalMsg.className='modal-msg ok';
+      Log.add(mode==='login'?'Вход выполнен':'Аккаунт создан','ok');
+      setTimeout(()=>{
+        closeModal();
+        renderAuthState();
+      },600);
+    }else{
+      Sound.error();
+      els.modalMsg.textContent='✗ '+res.error;
+      els.modalMsg.className='modal-msg err';
+      Log.add('Ошибка: '+res.error,'err');
+      els.password.classList.add('err');
+      setTimeout(()=>els.password.classList.remove('err'),400);
+    }
+  }catch(err){
+    Sound.error();
+    els.modalMsg.textContent='✗ Ошибка сети';
+    els.modalMsg.className='modal-msg err';
+    Log.add('Ошибка сети: '+err.message,'err');
+  }finally{
+    els.submitBtn.disabled=false;
+    els.submitBtn.textContent=origText;
+  }
+});
+
+/* =========================================================
+   ЧАСТИЦЫ (фон)
+   ========================================================= */
+(()=>{
+  const cv=document.getElementById('particles');
+  const cx=cv.getContext('2d');
+  let W,H,parts=[];
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+  resize(); addEventListener('resize',resize);
+  const N=40;
+  for(let i=0;i<N;i++)parts.push({
+    x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+    r:Math.random()*1.5+.5
+  });
+  function loop(){
+    cx.clearRect(0,0,W,H);
+    for(const p of parts){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      cx.beginPath();
+      cx.arc(p.x,p.y,p.r,0,7);
+      cx.fillStyle='rgba(124,92,255,.6)';
+      cx.fill();
+    }
+    for(let i=0;i<parts.length;i++){
+      for(let j=i+1;j<parts.length;j++){
+        const dx=parts[i].x-parts[j].x, dy=parts[i].y-parts[j].y;
+        const d=Math.hypot(dx,dy);
+        if(d<120){
+          cx.beginPath();
+          cx.moveTo(parts[i].x,parts[i].y);
+          cx.lineTo(parts[j].x,parts[j].y);
+          cx.strokeStyle=`rgba(124,92,255,${(1-d/120)*.15})`;
+          cx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* =========================================================
+   СТАРТ
+   ========================================================= */
+renderAuthState();
+Log.add('ZV-CLUB загружен','ok');
+pingServer();
+setInterval(pingServer,60_000);
+</script>
+</body>
+</html>

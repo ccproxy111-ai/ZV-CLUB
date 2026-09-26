@@ -1690,6 +1690,7 @@ $('wheelSpinBtn').onclick = async ()=>{
   $('wheelResult').innerHTML = '<span>Крутится...</span>';
   Sound.click();
 
+  // Списываем ставку локально сразу, чтобы UI был отзывчивым
   const cur = Session.get();
   cur.profile.monkeys = bal - bet;
   Session.save(cur);
@@ -1736,6 +1737,7 @@ $('wheelSpinBtn').onclick = async ()=>{
     const winAmount = res.winAmount || 0;
     const betVal = res.bet || bet;
 
+    // Финализируем на сервере — начисляем выигрыш и пишем историю
     const fin = await api('finishWheel', {
       username: s.username,
       token: s.token,
@@ -1843,7 +1845,8 @@ function stopWhTimer(){
   if(whTimer){ clearInterval(whTimer); whTimer=null; }
 }
 $('whRefresh').onclick = ()=>{ Sound.click(); loadWheelHistory(); };
-  async function loadUsers(){
+
+async function loadUsers(){
   const grid=$('usersGrid');
   grid.innerHTML='<div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div>';
   const s=Session.get();

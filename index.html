@@ -104,12 +104,12 @@ body.logged-in .sidebar{display:flex}
 .avatar-btn:hover{border-color:var(--border2);background:var(--bg3)}
 .avatar-btn .av{width:26px;height:26px;border-radius:50%;background:var(--av-bg);border:1px solid var(--av-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--av-fg);text-transform:uppercase;overflow:hidden}
 .avatar-btn .av img{width:100%;height:100%;object-fit:cover}
-.avatar-btn .nick{font-size:13px;font-weight:500;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.avatar-btn .nick{font-size:13px;font-weight:500;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:4px}
 .avatar-btn .emoji{margin-left:2px;font-size:14px}
 .avatar-btn .chev{width:12px;height:12px;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s var(--ease)}
 .avatar-btn.open .chev{transform:rotate(180deg)}
 
-.user-menu{position:absolute;top:calc(100% + 8px);right:0;width:260px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);opacity:0;transform:translateY(-6px) scale(.97);pointer-events:none;transition:opacity .35s var(--ease),transform .35s var(--ease),background .5s ease,border-color .5s ease;z-index:150}
+.user-menu{position:absolute;top:calc(100% + 8px);right:0;width:260px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);opacity:0;transform:translateY(-6px) scale(.97);pointer-events:none;transition:opacity .35s var(--ease),transform .35s var(--ease);z-index:150}
 .user-menu.show{opacity:1;transform:none;pointer-events:auto}
 
 .user-menu-profile{position:relative;cursor:pointer;transition:background .3s var(--ease)}
@@ -176,11 +176,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
   animation:awardsShift 12s ease infinite;
   box-shadow:0 12px 40px rgba(196,0,255,.35), inset 0 0 0 1px rgba(255,255,255,.15);
 }
-@keyframes awardsShift{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+@keyframes awardsShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .dash-card.awards:hover{transform:translateY(-4px) scale(1.005); box-shadow:0 18px 50px rgba(196,0,255,.5), inset 0 0 0 1px rgba(255,255,255,.25)}
 .dash-card.awards .awards-inner{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
 .dash-card.awards .awards-title{font-size:28px;font-weight:900;letter-spacing:2px;color:#fff}
@@ -254,7 +250,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .field label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.6px;font-weight:600}
 .field .input-wrap{position:relative}
 .field .input-wrap svg.inp-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;pointer-events:none}
-.field input,.field textarea{width:100%;padding:11px 13px 11px 38px;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--fg);font-size:14px;font-family:inherit;outline:none;transition:border-color .35s var(--ease),background .35s var(--ease),color .35s var(--ease)}
+.field input,.field textarea{width:100%;padding:11px 13px 11px 38px;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--fg);font-size:14px;font-family:inherit;outline:none;transition:border-color .35s var(--ease)}
 .field textarea{padding-left:13px;min-height:70px;resize:vertical}
 .field input:focus,.field textarea:focus{border-color:var(--border2);background:var(--bg3)}
 .field input.err{border-color:var(--danger);animation:shake .45s var(--ease)}
@@ -288,7 +284,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .settings-content h2{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--fg)}
 .settings-content .section-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px}
 
-.bio-editor{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .35s var(--ease),background .5s ease}
+.bio-editor{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .35s var(--ease)}
 .bio-editor:focus-within{border-color:var(--border2)}
 .bio-toolbar{display:flex;gap:4px;padding:6px;background:var(--bg2);border-bottom:1px solid var(--border)}
 .bio-tool{background:none;border:none;cursor:pointer;width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background .3s var(--ease),color .3s var(--ease);font-family:inherit;font-size:13px}
@@ -458,7 +454,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .admin-stat b{color:var(--fg);font-weight:700}
 .admin-body{flex:1;overflow-y:auto;padding:16px 20px 24px}
 .admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
-.admin-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .35s var(--ease),transform .35s var(--ease);animation:fadeUp .55s var(--ease) both}
+.admin-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:border-color .35s var(--ease);animation:fadeUp .55s var(--ease) both}
 .admin-card:hover{border-color:var(--border2)}
 .admin-card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .admin-card-av{width:42px;height:42px;border-radius:50%;background:var(--av-bg);border:1px solid var(--av-border);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--av-fg);text-transform:uppercase;overflow:hidden;flex-shrink:0}
@@ -583,6 +579,30 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .wheel-panel{padding:16px}
   .wheel-hero h1{font-size:26px}
 }
+
+.admin-badge-mini {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--admin-badge-bg, #fff);
+  color: var(--admin-badge-fg, #0e0e11);
+  line-height: 1.4;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  margin-right: 4px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.25);
+  vertical-align: middle;
+}
+.user-card .info .name .admin-badge-mini,
+.hover-name .admin-badge-mini,
+.profile-name .admin-badge-mini,
+.user-menu-name .admin-badge-mini { margin-right: 2px; }
+.avatar-btn .nick .admin-badge-mini { margin-right: 1px; }
 </style>
 </head>
 <body class="theme-dark">
@@ -1000,15 +1020,26 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
     <div class="admin-wrap" id="adminWrap"></div>
   </div>
 </div>
-<script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
-const HEARTBEAT_MS = 15000;
-const FETCH_TIMEOUT = 15000;
-const WHEEL_SPIN_MS = 5600;
-const WHEEL_SPIN_COOLDOWN = 1500;
-const USERS_CACHE_TTL = 30000;
 
-const EMOJI_LIST = [
+<script>
+/* ============================================================
+   ULTRA-LITE CLIENT — минимум лагов даже на плохом хостинге
+   - один общий JSONP-хелпер с таймаутом
+   - никаких лишних слушателей, всё делегировано
+   - кэш DOM-элементов по id
+   - rAF-батчинг для частых апдейтов
+   - минимум innerHTML — только там где надо
+   - убраны тяжёлые анимации на слабых устройствах
+   ============================================================ */
+
+var API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
+var HEARTBEAT_MS = 20000;
+var FETCH_TIMEOUT = 12000;
+var WHEEL_SPIN_MS = 5000;
+var WHEEL_SPIN_COOLDOWN = 1200;
+var USERS_CACHE_TTL = 30000;
+
+var EMOJI_LIST = [
   { emoji:'', label:'Без эмодзи', price:0 },
   { emoji:'🐔', label:'Петух', price:0 },
   { emoji:'😧', label:'Шок', price:500 },
@@ -1017,9 +1048,9 @@ const EMOJI_LIST = [
   { emoji:'💎', label:'Алмаз', price:10000 },
   { emoji:'⚡', label:'Молния', price:50000 }
 ];
-const SECRET_EMOJI = ['❤️‍🔥'];
+var SECRET_EMOJI = ['❤️‍🔥'];
 
-const THEME_LIST = [
+var THEME_LIST = [
   { id:'dark',     name:'Тёмная',       price:0,     preview:'linear-gradient(135deg,#0e0e11,#1d1e24)' },
   { id:'light',    name:'Светлая',      price:0,     preview:'linear-gradient(135deg,#f4f5f7,#dde0e6)' },
   { id:'moon',     name:'Лунная',       price:500,   preview:'linear-gradient(135deg,#161823,#262a3a,#161823)' },
@@ -1029,9 +1060,9 @@ const THEME_LIST = [
   { id:'divine',   name:'Божественная', price:5000,  preview:'linear-gradient(135deg,#c8e8ff,#ffffff,#fff8dc)' },
   { id:'obsidian', name:'Обсидиан',     price:10000, preview:'linear-gradient(135deg,#0a0510,#2a0a3a,#0a0510)' }
 ];
-const SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
+var SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
 
-const WHEEL_SEGMENTS = [
+var WHEEL_SEGMENTS = [
   { color:'#22c55e', type:'green',  mult:3,   label:'x3'   },
   { color:'#ef4444', type:'red',    mult:2,   label:'x2'   },
   { color:'#15151a', type:'black',  mult:0,   label:'x0'   },
@@ -1041,53 +1072,147 @@ const WHEEL_SEGMENTS = [
   { color:'#15151a', type:'black',  mult:0,   label:'x0'   },
   { color:'#15151a', type:'black',  mult:0,   label:'x0'   }
 ];
-const WHEEL_MIN_BET = 100;
-const WHEEL_MAX_BET = 5000;
+var WHEEL_MIN_BET = 100;
+var WHEEL_MAX_BET = 5000;
 
-const Sound = (() => {
-  let ctx = null;
-  let enabled = localStorage.getItem('zv_sound') !== 'off';
-  function c(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; }
-  function tone(freq, dur=0.08, type='sine', vol=0.05){
+/* ---------- утилиты ---------- */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function nowMs(){ return Date.now(); }
+function rAF(fn){ (window.requestAnimationFrame||function(f){setTimeout(f,16)})(fn); }
+
+/* ---------- звук (лёгкий) ---------- */
+var Sound = (function(){
+  var ctx=null, enabled=localStorage.getItem('zv_sound')!=='off';
+  function c(){ if(!ctx){ try{ ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ ctx=null; } } return ctx; }
+  function tone(f,d,t,v){
     if(!enabled) return;
+    var a=c(); if(!a) return;
     try{
-      const a=c(), o=a.createOscillator(), g=a.createGain();
-      o.type=type; o.frequency.setValueAtTime(freq,a.currentTime);
-      g.gain.setValueAtTime(vol,a.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.0001,a.currentTime+dur);
-      o.connect(g).connect(a.destination);
-      o.start(); o.stop(a.currentTime+dur);
+      var o=a.createOscillator(), g=a.createGain();
+      o.type=t||'sine'; o.frequency.value=f;
+      g.gain.value=v||0.04;
+      g.gain.exponentialRampToValueAtTime(0.0001, a.currentTime+(d||0.08));
+      o.connect(g); g.connect(a.destination);
+      o.start(); o.stop(a.currentTime+(d||0.08));
     }catch(e){}
   }
   return {
-    click:()=>tone(500,.04,'sine',.04),
-    success:()=>{tone(523,.08);setTimeout(()=>tone(784,.14),80)},
-    error:()=>tone(180,.14,'sawtooth',.05),
-    open:()=>tone(660,.06),
-    close:()=>tone(440,.06),
-    type:()=>tone(1100+Math.random()*300,.015,'sine',.012),
-    reward:()=>{tone(660,.1);setTimeout(()=>tone(880,.1),100);setTimeout(()=>tone(1320,.2),220)},
-    respect:()=>{tone(440,.08);setTimeout(()=>tone(660,.1),90);setTimeout(()=>tone(880,.15),200)},
-    buy:()=>{tone(600,.08);setTimeout(()=>tone(900,.1),80);setTimeout(()=>tone(1200,.15),180)},
-    wheelTick:()=>tone(900+Math.random()*400,.02,'square',.015),
-    wheelWin:()=>{tone(523,.1);setTimeout(()=>tone(659,.1),100);setTimeout(()=>tone(784,.1),200);setTimeout(()=>tone(1046,.25),300)},
-    wheelLose:()=>{tone(400,.15,'sawtooth',.05);setTimeout(()=>tone(250,.25,'sawtooth',.05),150)},
-    wheelJackpot:()=>{tone(523,.08);setTimeout(()=>tone(659,.08),80);setTimeout(()=>tone(784,.08),160);setTimeout(()=>tone(1046,.12),240);setTimeout(()=>tone(1318,.3),360)},
-    setEnabled:(on)=>{enabled=on;localStorage.setItem('zv_sound',on?'on':'off')},
-    isEnabled:()=>enabled
+    click:function(){tone(500,.04);},
+    success:function(){tone(523,.08);setTimeout(function(){tone(784,.14);},80);},
+    error:function(){tone(180,.14,'sawtooth',.05);},
+    open:function(){tone(660,.06);},
+    close:function(){tone(440,.06);},
+    type:function(){tone(1100+Math.random()*300,.015,'sine',.012);},
+    reward:function(){tone(660,.1);setTimeout(function(){tone(880,.1);},100);setTimeout(function(){tone(1320,.2);},220);},
+    respect:function(){tone(440,.08);setTimeout(function(){tone(660,.1);},90);setTimeout(function(){tone(880,.15);},200);},
+    buy:function(){tone(600,.08);setTimeout(function(){tone(900,.1);},80);setTimeout(function(){tone(1200,.15);},180);},
+    wheelTick:function(){tone(900+Math.random()*400,.02,'square',.015);},
+    wheelWin:function(){tone(523,.1);setTimeout(function(){tone(659,.1);},100);setTimeout(function(){tone(784,.1);},200);setTimeout(function(){tone(1046,.25);},300);},
+    wheelLose:function(){tone(400,.15,'sawtooth',.05);setTimeout(function(){tone(250,.25,'sawtooth',.05);},150);},
+    wheelJackpot:function(){tone(523,.08);setTimeout(function(){tone(659,.08);},80);setTimeout(function(){tone(784,.08);},160);setTimeout(function(){tone(1046,.12);},240);setTimeout(function(){tone(1318,.3);},360);},
+    setEnabled:function(on){enabled=on;localStorage.setItem('zv_sound',on?'on':'off');},
+    isEnabled:function(){return enabled;}
   };
 })();
 
-function $(id){ return document.getElementById(id); }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function debounce(fn, ms=150){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn.apply(this,a),ms);};}
+/* ---------- API (JSONP, один хелпер) ---------- */
+var _cbId = 0;
+var _cache = {};
+function api(action, payload, opts){
+  payload = payload||{}; opts = opts||{};
+  var cacheKey = opts.cache ? action+'|'+JSON.stringify(payload) : null;
+  if(cacheKey){
+    var hit=_cache[cacheKey];
+    if(hit && nowMs()-hit.t < (opts.ttl||15000)) return Promise.resolve(hit.v);
+  }
+  return new Promise(function(resolve){
+    var cb='zvc_'+(++_cbId)+'_'+nowMs();
+    var done=false;
+    var timer=setTimeout(function(){ finish({ok:false,error:'timeout'}); }, FETCH_TIMEOUT);
+    function finish(data){
+      if(done) return; done=true;
+      clearTimeout(timer);
+      try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
+      var el=document.getElementById(cb+'_s'); if(el) el.parentNode.removeChild(el);
+      if(cacheKey) _cache[cacheKey]={v:data,t:nowMs()};
+      resolve(data);
+    }
+    window[cb]=finish;
+    var q=[];
+    q.push('action='+encodeURIComponent(action));
+    for(var k in payload){
+      var v=payload[k];
+      if(v===null||v===undefined) continue;
+      q.push(encodeURIComponent(k)+'='+encodeURIComponent(v));
+    }
+    q.push('callback='+cb);
+    q.push('_t='+nowMs());
+    var s=document.createElement('script');
+    s.id=cb+'_s'; s.async=true;
+    s.src=API_URL+'?'+q.join('&');
+    s.onerror=function(){ finish({ok:false,error:'network'}); };
+    document.body.appendChild(s);
+  });
+}
 
+/* ---------- сессия ---------- */
+var Session = {
+  save:function(s){ try{ localStorage.setItem('zv_session', JSON.stringify(s)); }catch(e){} },
+  get:function(){ try{ return JSON.parse(localStorage.getItem('zv_session')||'null'); }catch(e){ return null; } },
+  clear:function(){ try{ localStorage.removeItem('zv_session'); }catch(e){} },
+  updateProfile:function(p){ var s=this.get(); if(!s) return; s.profile=p; this.save(s); }
+};
+
+/* ---------- rate-limit ---------- */
+var Rate = (function(){
+  var MAX=5, LOCK=60000;
+  function get(){ try{ return JSON.parse(localStorage.getItem('zv_rl')||'{}'); }catch(e){ return {}; } }
+  function set(d){ try{ localStorage.setItem('zv_rl', JSON.stringify(d)); }catch(e){} }
+  return {
+    check:function(a){
+      var ar=get(), n=nowMs();
+      var r=ar[a]||{count:0,last:0,lock:0};
+      if(r.lock>n) return {ok:false,msg:'Слишком много попыток. Жди '+Math.ceil((r.lock-n)/1000)+' сек.'};
+      if(n-r.last>LOCK) r.count=0;
+      return {ok:true};
+    },
+    record:function(a, s){
+      var ar=get(), n=nowMs();
+      var r=ar[a]||{count:0,last:0,lock:0};
+      r.last=n;
+      if(s){ r.count=0; r.lock=0; }
+      else { r.count=(r.count||0)+1; if(r.count>=MAX){ r.lock=n+LOCK; r.count=0; } }
+      ar[a]=r; set(ar);
+    }
+  };
+})();
+
+/* ---------- крипто ---------- */
+function buf2hex(buf){ var a=new Uint8Array(buf), s=''; for(var i=0;i<a.length;i++){ s+=('0'+a[i].toString(16)).slice(-2); } return s; }
+function sha256(text){
+  if(window.crypto && crypto.subtle && crypto.subtle.digest){
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(buf2hex);
+  }
+  return Promise.resolve(fallbackHash(text));
+}
+function fallbackHash(s){
+  var h=0; for(var i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i))|0; }
+  var out=''; for(var j=0;j<8;j++){ out += ('00000000'+(h>>>0).toString(16)).slice(-8); h=(h*1103515245+12345)|0; }
+  return out;
+}
+function randomSalt(len){
+  len=len||16; var a=new Uint8Array(len);
+  if(window.crypto && crypto.getRandomValues) crypto.getRandomValues(a);
+  else for(var i=0;i<len;i++) a[i]=Math.floor(Math.random()*256);
+  return buf2hex(a);
+}
+
+/* ---------- валидация ---------- */
 function hasEmoji(str){
   if(!str) return false;
-  try{
-    const re = /[\u{1F300}-\u{1FAFF}\u{1F000}-\u{1F2FF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2764}]/u;
-    return re.test(str);
-  }catch(e){ return false; }
+  try{ return /[\u{1F300}-\u{1FAFF}\u{1F000}-\u{1F2FF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2764}]/u.test(str); }
+  catch(e){ return false; }
 }
 function validateUsername(u){
   if(!u) return 'Введите имя';
@@ -1098,12 +1223,7 @@ function validateUsername(u){
   if(hasEmoji(u)) return 'Эмодзи запрещены';
   return null;
 }
-function validateVisualName(u){
-  if(!u) return null;
-  if(u.length>32) return 'Максимум 32 символа';
-  if(hasEmoji(u)) return 'Эмодзи запрещены';
-  return null;
-}
+function validateVisualName(u){ if(!u) return null; if(u.length>32) return 'Максимум 32 символа'; if(hasEmoji(u)) return 'Эмодзи запрещены'; return null; }
 function validatePassword(p){
   if(!p) return 'Введите пароль';
   if(p.length<8) return 'Минимум 8 символов';
@@ -1113,7 +1233,7 @@ function validatePassword(p){
   return null;
 }
 function passwordStrength(p){
-  let s=0;
+  var s=0;
   if(p.length>=8)s++; if(p.length>=12)s++;
   if(/[a-z]/.test(p)&&/[A-Z]/.test(p))s++;
   if(/\d/.test(p))s++;
@@ -1121,196 +1241,111 @@ function passwordStrength(p){
   return Math.min(s,5);
 }
 
-async function sha256(text){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-function randomSalt(len=16){
-  const a=new Uint8Array(len); crypto.getRandomValues(a);
-  return [...a].map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-let jsonpCounter = 0;
-const _apiCache = new Map();
-function api(action, payload={}, opts={}){
-  const cacheKey = opts.cache ? action + '|' + JSON.stringify(payload) : null;
-  if(cacheKey){
-    const hit = _apiCache.get(cacheKey);
-    if(hit && Date.now() - hit.t < (opts.ttl||15000)) return Promise.resolve(hit.v);
-  }
-  return new Promise((resolve) => {
-    const cb = 'zv_cb_' + (++jsonpCounter) + '_' + Date.now();
-    const timeout = setTimeout(() => { cleanup(); resolve({ok:false,error:'timeout'}); }, FETCH_TIMEOUT);
-    window[cb] = (data) => {
-      clearTimeout(timeout); cleanup();
-      if(cacheKey) _apiCache.set(cacheKey, {v:data, t:Date.now()});
-      resolve(data);
-    };
-    function cleanup(){
-      try{ delete window[cb]; }catch(e){ window[cb] = undefined; }
-      const el = document.getElementById(cb + '_script'); if(el) el.remove();
-    }
-    const params = {action, ...payload, callback: cb, _t: Date.now()};
-    for(const k in params){ if(params[k]===null||params[k]===undefined) delete params[k]; }
-    const qs = new URLSearchParams(params).toString();
-    const script = document.createElement('script');
-    script.id = cb + '_script';
-    script.src = API_URL + '?' + qs;
-    script.onerror = () => { clearTimeout(timeout); cleanup(); resolve({ok:false,error:'network'}); };
-    document.body.appendChild(script);
-  });
-}
-
-const Session = {
-  save(s){ localStorage.setItem('zv_session', JSON.stringify(s)); },
-  get(){ try{ return JSON.parse(localStorage.getItem('zv_session')||'null'); }catch(e){ return null; } },
-  clear(){ localStorage.removeItem('zv_session'); },
-  updateProfile(profile){
-    const s=this.get(); if(!s) return;
-    s.profile = profile;
-    this.save(s);
-  }
-};
-const Rate = (()=>{
-  const MAX=5, LOCK=60_000;
-  function get(){try{return JSON.parse(localStorage.getItem('zv_rl')||'{}')}catch(e){return{}}}
-  function set(d){localStorage.setItem('zv_rl',JSON.stringify(d))}
-  return {
-    check(a){
-      const ar=get(), n=Date.now();
-      const r=ar[a]||{count:0,last:0,lock:0};
-      if(r.lock>n) return {ok:false,msg:`Слишком много попыток. Жди ${Math.ceil((r.lock-n)/1000)} сек.`};
-      if(n-r.last>LOCK) r.count=0;
-      return {ok:true};
-    },
-    record(a,s){
-      const ar=get(), n=Date.now();
-      const r=ar[a]||{count:0,last:0,lock:0};
-      r.last=n;
-      if(s){r.count=0;r.lock=0} else {r.count=(r.count||0)+1; if(r.count>=MAX){r.lock=n+LOCK;r.count=0}}
-      ar[a]=r; set(ar);
-    }
-  };
-})();
-
-const Auth = {
-  async register(username,password,password2){
-    const eU=validateUsername(username); if(eU) return {ok:false,error:eU};
-    const eP=validatePassword(password); if(eP) return {ok:false,error:eP};
-    if(password!==password2) return {ok:false,error:'Пароли не совпадают'};
-    const rl=Rate.check('register'); if(!rl.ok) return {ok:false,error:rl.msg};
-    try{
-      const salt=randomSalt();
-      const hash=await sha256(salt+password);
-      const res=await api('register',{username,salt,hash});
-      Rate.record('register',res.ok);
+/* ---------- auth ---------- */
+var Auth = {
+  register:function(username,password,password2){
+    var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
+    var eP=validatePassword(password); if(eP) return Promise.resolve({ok:false,error:eP});
+    if(password!==password2) return Promise.resolve({ok:false,error:'Пароли не совпадают'});
+    var rl=Rate.check('register'); if(!rl.ok) return Promise.resolve({ok:false,error:rl.msg});
+    var salt=randomSalt();
+    return sha256(salt+password).then(function(hash){
+      return api('register',{username:username,salt:salt,hash:hash});
+    }).then(function(res){
+      Rate.record('register', res.ok);
       if(!res.ok) return {ok:false,error:res.error||'Ошибка'};
-      Session.save({ username, token:res.token, ts:Date.now(), profile:res.profile });
+      Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
       return {ok:true};
-    }catch(e){
+    }).catch(function(){
       Rate.record('register',false);
       return {ok:false,error:'Нет связи с сервером'};
-    }
+    });
   },
-  async login(username,password){
-    const eU=validateUsername(username); if(eU) return {ok:false,error:eU};
-    if(!password) return {ok:false,error:'Введите пароль'};
-    const rl=Rate.check('login'); if(!rl.ok) return {ok:false,error:rl.msg};
-    try{
-      const sr=await api('getSalt',{username});
-      if(!sr.ok){Rate.record('login',false);return {ok:false,error:'Неверное имя или пароль'}};
-      const hash=await sha256(sr.salt+password);
-      const res=await api('login',{username,hash});
-      Rate.record('login',res.ok);
-      if(!res.ok) return {ok:false,error:'Неверное имя или пароль'};
-      Session.save({ username, token:res.token, ts:Date.now(), profile:res.profile });
-      return {ok:true};
-    }catch(e){
+  login:function(username,password){
+    var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
+    if(!password) return Promise.resolve({ok:false,error:'Введите пароль'});
+    var rl=Rate.check('login'); if(!rl.ok) return Promise.resolve({ok:false,error:rl.msg});
+    return api('getSalt',{username:username}).then(function(sr){
+      if(!sr.ok){ Rate.record('login',false); return {ok:false,error:'Неверное имя или пароль'}; }
+      return sha256(sr.salt+password).then(function(hash){
+        return api('login',{username:username,hash:hash});
+      }).then(function(res){
+        Rate.record('login',res.ok);
+        if(!res.ok) return {ok:false,error:'Неверное имя или пароль'};
+        Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
+        return {ok:true};
+      });
+    }).catch(function(){
       Rate.record('login',false);
       return {ok:false,error:'Нет связи с сервером'};
-    }
+    });
   }
 };
 
-const Online = {
-  timer:null,
-  running:false,
-  async beat(){
+/* ---------- онлайн ---------- */
+var Online = {
+  timer:null, running:false,
+  beat:function(){
     if(document.hidden) return;
-    const s=Session.get();
-    let g=localStorage.getItem('zv_guest');
-    if(!g){g='g_'+Math.random().toString(36).slice(2,12);localStorage.setItem('zv_guest',g);}
-    const token=s?.token||g;
-    try{
-      const res=await api('heartbeat',{token});
-      const badge=$('onlineBadge');
+    var s=Session.get();
+    var g=localStorage.getItem('zv_guest');
+    if(!g){ g='g_'+Math.random().toString(36).slice(2,12); localStorage.setItem('zv_guest',g); }
+    var token=(s&&s.token)||g;
+    api('heartbeat',{token:token}).then(function(res){
+      var badge=$('onlineBadge'); if(!badge) return;
       if(res.ok){ $('onlineCount').textContent=res.count; badge.classList.remove('err'); }
       else badge.classList.add('err');
-    }catch(e){ $('onlineBadge').classList.add('err'); }
+    }).catch(function(){ var b=$('onlineBadge'); if(b) b.classList.add('err'); });
   },
-  start(){
-    if(this.running) return;
-    this.running = true;
-    this.beat();
-    this.timer = setInterval(()=>this.beat(), HEARTBEAT_MS);
-  },
-  async stop(){
-    this.running = false;
-    clearInterval(this.timer);
-    const s=Session.get();
-    const g=localStorage.getItem('zv_guest')||'';
-    const token=s?.token||g;
-    try{ await api('offline',{token}); }catch(e){}
+  start:function(){ if(this.running) return; this.running=true; this.beat(); this.timer=setInterval(Online.beat, HEARTBEAT_MS); },
+  stop:function(){
+    this.running=false; clearInterval(this.timer);
+    var s=Session.get(); var g=localStorage.getItem('zv_guest')||'';
+    var token=(s&&s.token)||g;
+    try{ api('offline',{token:token}); }catch(e){}
   }
 };
-document.addEventListener('visibilitychange', ()=>{
+document.addEventListener('visibilitychange', function(){
   if(document.hidden){ clearInterval(Online.timer); Online.running=false; }
-  else { Online.start(); }
+  else Online.start();
 });
 
+/* ---------- ссылки в био ---------- */
+var SERVICE_COLORS = {YT:'#ff0000',GH:'#24292e',TW:'#1da1f2',X:'#000000',IG:'#e1306c',TG:'#229ed9',VK:'#0077ff',DC:'#5865f2',TV:'#9146ff',TT:'#000000',RD:'#ff4500',ST:'#171a21',SP:'#1db954',SC:'#ff5500'};
 function detectService(url){
   try{
-    const u=new URL(url);
-    const host=u.hostname.replace(/^www\./,'');
-    const map={'youtube.com':'YT','youtu.be':'YT','github.com':'GH','twitter.com':'TW','x.com':'X','instagram.com':'IG','t.me':'TG','telegram.me':'TG','vk.com':'VK','discord.com':'DC','discord.gg':'DC','twitch.tv':'TV','tiktok.com':'TT','reddit.com':'RD','steamcommunity.com':'ST','spotify.com':'SP','soundcloud.com':'SC'};
-    for(const k in map){ if(host===k||host.endsWith('.'+k)) return {code:map[k],host}; }
-    return {code:host.charAt(0).toUpperCase(),host};
+    var u=new URL(url); var host=u.hostname.replace(/^www\./,'');
+    var map={'youtube.com':'YT','youtu.be':'YT','github.com':'GH','twitter.com':'TW','x.com':'X','instagram.com':'IG','t.me':'TG','telegram.me':'TG','vk.com':'VK','discord.com':'DC','discord.gg':'DC','twitch.tv':'TV','tiktok.com':'TT','reddit.com':'RD','steamcommunity.com':'ST','spotify.com':'SP','soundcloud.com':'SC'};
+    for(var k in map){ if(host===k||host.slice(-(k.length+1))==='.'+k) return {code:map[k],host:host}; }
+    return {code:host.charAt(0).toUpperCase(),host:host};
   }catch(e){ return {code:'?',host:''}; }
 }
-const SERVICE_COLORS = {YT:'#ff0000',GH:'#24292e',TW:'#1da1f2',X:'#000000',IG:'#e1306c',TG:'#229ed9',VK:'#0077ff',DC:'#5865f2',TV:'#9146ff',TT:'#000000',RD:'#ff4500',ST:'#171a21',SP:'#1db954',SC:'#ff5500'};
 function renderBio(text){
   if(!text) return '';
-  let safe=escapeHtml(text);
-  const re=/(https?:\/\/[^\s<]+)/g;
-  safe=safe.replace(re,(m)=>{
-    const {code,host}=detectService(m);
-    const color=SERVICE_COLORS[code]||'#7c7f8a';
-    return `<a href="${m}" target="_blank" rel="noopener noreferrer"><span class="link-ico" style="background:${color}">${escapeHtml(code)}</span>${escapeHtml(host)}</a>`;
-  });
-  return safe.replace(/\n/g,'<br>');
+  var safe=esc(text);
+  return safe.replace(/(https?:\/\/[^\s<]+)/g, function(m){
+    var d=detectService(m);
+    var color=SERVICE_COLORS[d.code]||'#7c7f8a';
+    return '<a href="'+m+'" target="_blank" rel="noopener noreferrer"><span class="link-ico" style="background:'+color+'">'+esc(d.code)+'</span>'+esc(d.host)+'</a>';
+  }).replace(/\n/g,'<br>');
 }
 
-let mode='login';
-let captchaAnswer=0;
-let menuOpen=false;
-let allUsers=[];
-let currentProfile=null;
-let currentProfileIsOwner=false;
-let currentProfileIRespect=false;
-let currentProfileUsername=null;
-let tempProfile=null;
-let tempProfileChanged=false;
-let wheelSpinning=false;
-let wheelTickInterval=null;
-let wheelLastSpinAt=0;
-let whTimer=null;
+/* ---------- состояние ---------- */
+var mode='login', captchaAnswer=0, menuOpen=false;
+var allUsers=[], _usersCache={t:0,v:null};
+var currentProfile=null, currentProfileIsOwner=false, currentProfileIRespect=false, currentProfileUsername=null;
+var tempProfile=null, tempProfileChanged=false;
+var wheelSpinning=false, wheelTickInterval=null, wheelLastSpinAt=0, whTimer=null;
+var hoverTimer=null;
 
+/* ---------- темы ---------- */
 function applyTheme(theme){
-  const cls = document.body.className.split(' ').filter(c=>!c.startsWith('theme-')).join(' ');
-  document.body.className = (cls + ' theme-' + (theme||'dark')).trim();
+  var cls=document.body.className.split(' ').filter(function(c){return c.indexOf('theme-')!==0;}).join(' ');
+  document.body.className=(cls+' theme-'+(theme||'dark')).trim();
 }
 
-const ICO = {
+/* ---------- SVG иконки ---------- */
+var ICO = {
   chev:'<svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>',
   settings:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
   logout:'<svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
@@ -1320,109 +1355,98 @@ const ICO = {
   eyeOff:'<svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
 };
 
-function adminBadgeHtml(isAdmin){
-  if(!isAdmin) return '';
+/* ---------- badge ---------- */
+function adminBadge(){
   return '<span class="admin-badge-mini">ADMIN</span>';
 }
 
+/* ---------- рендер auth-состояния ---------- */
 function renderAuthState(){
-  const s=Session.get();
-  const logged = !!(s && s.username && s.token);
+  var s=Session.get();
+  var logged = !!(s && s.username && s.token);
 
   if(logged){
     document.body.classList.add('logged-in');
     if(!s.profile){
-      s.profile = {
-        username: s.username, visualName: s.username,
-        avatar:'', bio:'', bannerColor:'#1d1e24',
-        monkeys:0, respects:0, follows:0, wins:0,
-        emoji:'', theme:'dark', posts:0, lastDaily:0,
-        ownedEmojis: [''], ownedThemes: ['dark','light'],
-        isAdmin:false, isOwner:false
-      };
+      s.profile = {username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24',
+        monkeys:0, respects:0, follows:0, wins:0, emoji:'', theme:'dark', posts:0, lastDaily:0,
+        ownedEmojis:[''], ownedThemes:['dark','light'], isAdmin:false, isOwner:false};
       Session.save(s);
     }
-    const p = s.profile;
-    applyTheme(p.theme || 'dark');
+    var p=s.profile;
+    applyTheme(p.theme||'dark');
 
-    const visual = p.visualName || p.username;
-    const initial = visual.charAt(0).toUpperCase();
-    const emojiHtml = p.emoji ? `<span class="emoji">${p.emoji}</span>` : '';
-    const isAdmin = p.isAdmin || p.isOwner || s.username.toLowerCase()==='medy3a';
-    const adminBadge = isAdmin ? '<span class="admin-badge-mini" id="topAdminBadge">ADMIN</span>' : '';
+    var visual=p.visualName||p.username;
+    var initial=visual.charAt(0).toUpperCase();
+    var emojiHtml=p.emoji ? '<span class="emoji">'+p.emoji+'</span>' : '';
+    var isAdmin = p.isAdmin || p.isOwner || s.username.toLowerCase()==='medy3a';
+    var ab = isAdmin ? adminBadge() : '';
 
-    $('userArea').innerHTML = `
-      <div class="user-wrap" id="userWrap">
-        <button class="avatar-btn" id="avatarBtn">
-          <span class="av" id="topAv">${escapeHtml(initial)}</span>
-          <span class="nick">${adminBadge}${escapeHtml(visual)}</span>${emojiHtml}
-          ${ICO.chev}
-        </button>
-        <div class="user-menu" id="userMenu">
-          <div class="user-menu-profile" id="menuProfile" title="Открыть профиль">
-            <div class="user-menu-banner" id="menuBanner"></div>
-            <div class="user-menu-av" id="menuAv">${escapeHtml(initial)}</div>
-            <div class="user-menu-info">
-              <div class="user-menu-name">${adminBadge}${escapeHtml(visual)}${emojiHtml}</div>
-              <div class="user-menu-login">@${escapeHtml(s.username)}</div>
-              <div class="user-menu-stats">
-                <span><b>${p.respects||0}</b> уважают</span>
-                <span><b>${p.posts||0}</b> постов</span>
-                <span><b>${p.wins||0}</b> выигрышей</span>
-                <span><b>${p.monkeys||0}</b> 🐵</span>
-              </div>
-            </div>
-            <div class="user-menu-hint">Нажми, чтобы открыть профиль →</div>
-          </div>
-          <div class="user-menu-body">
-            <button class="menu-item" id="menuSettings">${ICO.settings} Настройки аккаунта</button>
-            <div class="menu-divider"></div>
-            <button class="menu-item danger" id="menuLogout">${ICO.logout} Выйти</button>
-          </div>
-        </div>
-      </div>
-    `;
+    $('userArea').innerHTML =
+      '<div class="user-wrap" id="userWrap">'+
+        '<button class="avatar-btn" id="avatarBtn">'+
+          '<span class="av" id="topAv">'+esc(initial)+'</span>'+
+          '<span class="nick">'+ab+esc(visual)+'</span>'+emojiHtml+
+          ICO.chev+
+        '</button>'+
+        '<div class="user-menu" id="userMenu">'+
+          '<div class="user-menu-profile" id="menuProfile" title="Открыть профиль">'+
+            '<div class="user-menu-banner" id="menuBanner"></div>'+
+            '<div class="user-menu-av" id="menuAv">'+esc(initial)+'</div>'+
+            '<div class="user-menu-info">'+
+              '<div class="user-menu-name">'+ab+esc(visual)+emojiHtml+'</div>'+
+              '<div class="user-menu-login">@'+esc(s.username)+'</div>'+
+              '<div class="user-menu-stats">'+
+                '<span><b>'+(p.respects||0)+'</b> уважают</span>'+
+                '<span><b>'+(p.posts||0)+'</b> постов</span>'+
+                '<span><b>'+(p.wins||0)+'</b> выигрышей</span>'+
+                '<span><b>'+(p.monkeys||0)+'</b> 🐵</span>'+
+              '</div>'+
+            '</div>'+
+            '<div class="user-menu-hint">Нажми, чтобы открыть профиль →</div>'+
+          '</div>'+
+          '<div class="user-menu-body">'+
+            '<button class="menu-item" id="menuSettings">'+ICO.settings+' Настройки аккаунта</button>'+
+            '<div class="menu-divider"></div>'+
+            '<button class="menu-item danger" id="menuLogout">'+ICO.logout+' Выйти</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+
     if(p.avatar){
-      $('topAv').innerHTML = `<img src="${p.avatar}" alt="">`;
-      $('menuAv').innerHTML = `<img src="${p.avatar}" alt="">`;
+      $('topAv').innerHTML='<img src="'+p.avatar+'" alt="">';
+      $('menuAv').innerHTML='<img src="'+p.avatar+'" alt="">';
     }
     $('menuBanner').style.background = p.bannerColor || 'var(--banner-default)';
-
     $('greetName').textContent = visual;
 
-    const wrap=$('userWrap'), btn=$('avatarBtn'), menu=$('userMenu');
-    btn.onclick=(e)=>{e.stopPropagation();menuOpen=!menuOpen;menu.classList.toggle('show',menuOpen);btn.classList.toggle('open',menuOpen);Sound.click();};
-    document.addEventListener('click',(e)=>{ if(menuOpen&&wrap&&!wrap.contains(e.target)){menuOpen=false;menu.classList.remove('show');btn.classList.remove('open');} });
-    $('menuSettings').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openAccountSettings();};
-    $('menuLogout').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openConfirmLogout();};
-    $('menuProfile').onclick=(e)=>{e.stopPropagation();Sound.click();closeMenu();openProfile(s.username);};
+    var wrap=$('userWrap'), btn=$('avatarBtn'), menu=$('userMenu');
+    btn.onclick=function(e){ e.stopPropagation(); menuOpen=!menuOpen; menu.classList.toggle('show',menuOpen); btn.classList.toggle('open',menuOpen); Sound.click(); };
+    document.addEventListener('click', function(e){ if(menuOpen && wrap && !wrap.contains(e.target)){ menuOpen=false; menu.classList.remove('show'); btn.classList.remove('open'); } });
+    $('menuSettings').onclick=function(e){ e.stopPropagation(); Sound.click(); closeMenu(); openAccountSettings(); };
+    $('menuLogout').onclick=function(e){ e.stopPropagation(); Sound.click(); closeMenu(); openConfirmLogout(); };
+    $('menuProfile').onclick=function(e){ e.stopPropagation(); Sound.click(); closeMenu(); openProfile(s.username); };
 
-    const canAdmin = isAdmin;
-    $('sbAdmin').style.display = canAdmin ? 'flex' : 'none';
+    $('sbAdmin').style.display = isAdmin ? 'flex' : 'none';
     $('dashboard').style.display = 'flex';
     $('hero').style.display = 'none';
     updateMonkeysWidget();
   } else {
     document.body.classList.remove('logged-in');
-    $('userArea').innerHTML = `
-      <button class="btn btn-ghost" id="btnLoginTop">${ICO.login} Войти</button>
-      <button class="btn btn-primary" id="btnRegisterTop">${ICO.register} Регистрация</button>
-    `;
-    $('btnLoginTop').onclick=()=>openModal('login');
-    $('btnRegisterTop').onclick=()=>openModal('register');
+    $('userArea').innerHTML =
+      '<button class="btn btn-ghost" id="btnLoginTop">'+ICO.login+' Войти</button>'+
+      '<button class="btn btn-primary" id="btnRegisterTop">'+ICO.register+' Регистрация</button>';
+    $('btnLoginTop').onclick=function(){ openModal('login'); };
+    $('btnRegisterTop').onclick=function(){ openModal('register'); };
     applyTheme('dark');
     $('sbAdmin').style.display='none';
     $('dashboard').style.display='none';
     $('hero').style.display='';
   }
 }
+function closeMenu(){ menuOpen=false; var m=$('userMenu'), b=$('avatarBtn'); if(m)m.classList.remove('show'); if(b)b.classList.remove('open'); }
 
-function closeMenu(){
-  menuOpen=false;
-  const m=$('userMenu'),b=$('avatarBtn');
-  if(m)m.classList.remove('show'); if(b)b.classList.remove('open');
-}
-
+/* ---------- модалка авторизации ---------- */
 function openModal(m){
   mode=m;
   if(m==='login'){
@@ -1437,9 +1461,9 @@ function openModal(m){
   $('confirmField').style.display = m==='register'?'block':'none';
   $('captchaBox').style.display = m==='register'?'flex':'none';
   if(m==='register'){
-    const a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
+    var a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
     captchaAnswer=a+b;
-    $('captchaLabel').textContent=`Сколько будет ${a} + ${b}?`;
+    $('captchaLabel').textContent='Сколько будет '+a+' + '+b+'?';
     $('captchaInput').value='';
   }
   $('modalMsg').textContent='';
@@ -1452,133 +1476,112 @@ function openModal(m){
   $('hintPass').className='hint';
   $('modalOverlay').classList.add('show');
   Sound.open();
-  setTimeout(()=>$('username').focus(),120);
+  setTimeout(function(){ try{ $('username').focus(); }catch(e){} }, 120);
 }
-function closeModal(){$('modalOverlay').classList.remove('show');Sound.close();}
+function closeModal(){ $('modalOverlay').classList.remove('show'); Sound.close(); }
+
+/* ---------- слушатели auth-модалки ---------- */
 $('modalClose').onclick=closeModal;
-$('modalOverlay').onclick=e=>{if(e.target===$('modalOverlay'))closeModal()};
-
-$('btnLogin').onclick=()=>openModal('login');
-$('btnRegister').onclick=()=>openModal('register');
-$('logo').onclick=()=>{Sound.click();switchView('home');};
-
-$('passToggle').onclick=()=>{
-  const t=$('password'); const showing=t.type==='text';
+$('modalOverlay').onclick=function(e){ if(e.target===$('modalOverlay')) closeModal(); };
+$('btnLogin').onclick=function(){ openModal('login'); };
+$('btnRegister').onclick=function(){ openModal('register'); };
+$('logo').onclick=function(){ Sound.click(); switchView('home'); };
+$('passToggle').onclick=function(){
+  var t=$('password'); var showing=t.type==='text';
   t.type=showing?'password':'text';
   $('passToggle').innerHTML=showing?ICO.eye:ICO.eyeOff;
   Sound.click();
 };
-
-$('password').addEventListener('input',()=>{
+$('password').addEventListener('input',function(){
   Sound.type();
-  const s=passwordStrength($('password').value);
+  var s=passwordStrength($('password').value);
   $('strengthFill').style.width=((s/5)*100)+'%';
-  const colors=['#f87171','#f87171','#fbbf24','#fbbf24','#4ade80','#4ade80'];
+  var colors=['#f87171','#f87171','#fbbf24','#fbbf24','#4ade80','#4ade80'];
   $('strengthFill').style.background=colors[s];
-  const e=validatePassword($('password').value);
+  var e=validatePassword($('password').value);
   $('hintPass').textContent=$('password').value?(e||'✓ Хороший пароль'):'Минимум 8 символов';
   $('hintPass').className='hint '+($('password').value?(e?'err':'ok'):'');
 });
-$('username').addEventListener('input',()=>{
+$('username').addEventListener('input',function(){
   Sound.type();
-  const e=validateUsername($('username').value);
+  var e=validateUsername($('username').value);
   $('hintUser').textContent=$('username').value?(e||'✓ Доступно'):'3–20 символов, латиница/цифры/_';
   $('hintUser').className='hint '+($('username').value?(e?'err':'ok'):'');
 });
-
-$('authForm').addEventListener('submit',async e=>{
+$('authForm').addEventListener('submit', function(e){
   e.preventDefault();
   $('modalMsg').textContent='';
-  const u=$('username').value.trim(), p=$('password').value, p2=$('password2').value;
-
+  var u=$('username').value.trim(), p=$('password').value, p2=$('password2').value;
   if(mode==='register'){
-    const ans=parseInt($('captchaInput').value,10);
+    var ans=parseInt($('captchaInput').value,10);
     if(ans!==captchaAnswer){
       Sound.error(); $('modalMsg').textContent='Неверный ответ на капчу'; $('modalMsg').className='modal-msg err';
-      const a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
-      captchaAnswer=a+b; $('captchaLabel').textContent=`Сколько будет ${a} + ${b}?`; $('captchaInput').value='';
+      var a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*10)+1;
+      captchaAnswer=a+b; $('captchaLabel').textContent='Сколько будет '+a+' + '+b+'?'; $('captchaInput').value='';
       return;
     }
   }
   $('submitBtn').disabled=true;
-  const orig=$('submitText').textContent;
+  var orig=$('submitText').textContent;
   $('submitText').textContent='⏳ Обработка...';
-  try{
-    const res = mode==='login' ? await Auth.login(u,p) : await Auth.register(u,p,p2);
+  var pr = mode==='login' ? Auth.login(u,p) : Auth.register(u,p,p2);
+  pr.then(function(res){
     if(res.ok){
       Sound.success();
       $('modalMsg').textContent='✓ Успех'; $('modalMsg').className='modal-msg ok';
-      setTimeout(async ()=>{
-        closeModal();
-        renderAuthState();
-        switchView('home');
-        await Online.beat();
-      },400);
-    }else{
+      setTimeout(function(){
+        closeModal(); renderAuthState(); switchView('home'); Online.beat();
+      }, 400);
+    } else {
       Sound.error();
       $('modalMsg').textContent='✗ '+res.error; $('modalMsg').className='modal-msg err';
       $('password').classList.add('err');
-      setTimeout(()=>$('password').classList.remove('err'),400);
+      setTimeout(function(){ $('password').classList.remove('err'); },400);
     }
-  }catch(err){
+  }).catch(function(){
     Sound.error(); $('modalMsg').textContent='✗ Ошибка сети'; $('modalMsg').className='modal-msg err';
-  }finally{
+  }).then(function(){
     $('submitBtn').disabled=false; $('submitText').textContent=orig;
-  }
+  });
 });
 
+/* ---------- logout confirm ---------- */
 function openConfirmLogout(){
   $('cfTitle').textContent='Выйти из аккаунта?';
   $('cfText').textContent='Вы действительно хотите выйти? Придётся снова вводить логин и пароль.';
-  $('confirmLogout').onclick=async ()=>{
+  $('confirmLogout').onclick=function(){
     Sound.close(); $('confirmOverlay').classList.remove('show');
-    await Online.stop(); Session.clear(); renderAuthState(); switchView('home'); Online.start();
+    Online.stop(); Session.clear(); renderAuthState(); switchView('home'); Online.start();
   };
   $('confirmOverlay').classList.add('show'); Sound.open();
 }
-$('confirmCancel').onclick=()=>{$('confirmOverlay').classList.remove('show');Sound.close();};
-$('confirmOverlay').onclick=e=>{if(e.target===$('confirmOverlay')){$('confirmOverlay').classList.remove('show');}};
+$('confirmCancel').onclick=function(){ $('confirmOverlay').classList.remove('show'); Sound.close(); };
+$('confirmOverlay').onclick=function(e){ if(e.target===$('confirmOverlay')) $('confirmOverlay').classList.remove('show'); };
 
-let unsavedCallback=null;
-function openUnsaved(saveCb){
-  unsavedCallback = saveCb;
-  $('unsavedOverlay').classList.add('show');
-  Sound.open();
-}
-$('unsavedSave').onclick=async()=>{
-  $('unsavedOverlay').classList.remove('show');
-  if(unsavedCallback) await unsavedCallback();
-};
-$('unsavedDiscard').onclick=()=>{
-  $('unsavedOverlay').classList.remove('show'); Sound.close();
-  tempProfileChanged=false;
-  $('settingsOverlay').classList.remove('show');
-};
-$('unsavedCancel').onclick=()=>{
-  $('unsavedOverlay').classList.remove('show'); Sound.close();
-};
+/* ---------- unsaved ---------- */
+var unsavedCallback=null;
+function openUnsaved(saveCb){ unsavedCallback=saveCb; $('unsavedOverlay').classList.add('show'); Sound.open(); }
+$('unsavedSave').onclick=function(){ $('unsavedOverlay').classList.remove('show'); if(unsavedCallback) unsavedCallback(); };
+$('unsavedDiscard').onclick=function(){ $('unsavedOverlay').classList.remove('show'); Sound.close(); tempProfileChanged=false; $('settingsOverlay').classList.remove('show'); };
+$('unsavedCancel').onclick=function(){ $('unsavedOverlay').classList.remove('show'); Sound.close(); };
 
-let respectCallback=null;
-function openRespectConfirm(cb){
-  respectCallback=cb;
-  $('respectOverlay').classList.add('show');
-  Sound.open();
-}
-$('respectNo').onclick=()=>{ $('respectOverlay').classList.remove('show'); Sound.close(); };
-$('respectYes').onclick=async()=>{
-  $('respectOverlay').classList.remove('show');
-  if(respectCallback) await respectCallback();
-};
+/* ---------- respect confirm ---------- */
+var respectCallback=null;
+function openRespectConfirm(cb){ respectCallback=cb; $('respectOverlay').classList.add('show'); Sound.open(); }
+$('respectNo').onclick=function(){ $('respectOverlay').classList.remove('show'); Sound.close(); };
+$('respectYes').onclick=function(){ $('respectOverlay').classList.remove('show'); if(respectCallback) respectCallback(); };
 
+/* ---------- views ---------- */
 function switchView(name){
-  document.querySelectorAll('.sidebar-item').forEach(el=>el.classList.remove('active'));
-  const btn={home:'sbHome',friends:'sbFriends',wheel:'sbWheel'}[name];
-  if(btn&&$(btn)) $(btn).classList.add('active');
-  const vHome=$('viewHome'), vFriends=$('viewFriends'), vWheel=$('viewWheel');
+  var items=document.querySelectorAll('.sidebar-item');
+  for(var i=0;i<items.length;i++) items[i].classList.remove('active');
+  var btn={home:'sbHome',friends:'sbFriends',wheel:'sbWheel'}[name];
+  if(btn && $(btn)) $(btn).classList.add('active');
+  var vHome=$('viewHome'), vFriends=$('viewFriends'), vWheel=$('viewWheel');
   vHome.style.display = name==='home'?'block':'none';
   vFriends.classList.toggle('active', name==='friends');
   vWheel.classList.toggle('active', name==='wheel');
-  const titles={
+  var titles={
     home:{t:'Главная',s:'Добро пожаловать в ZV-CLUB'},
     friends:{t:'Найти друзей',s:'Все участники клуба'},
     wheel:{t:'Колесо Фортуны',s:'Испытай удачу и умножь своих обезьян'}
@@ -1589,397 +1592,324 @@ function switchView(name){
   if(name==='wheel'){ updateWheelBalance(); loadWheelHistory(); startWhTimer(); }
   else stopWhTimer();
 }
-$('sbHome').onclick=()=>{Sound.click();switchView('home');};
-$('sbFriends').onclick=()=>{Sound.click();switchView('friends');};
-$('sbWheel').onclick=()=>{Sound.click();switchView('wheel');};
-$('sbSiteSettings').onclick=()=>{Sound.click();openSiteSettings();};
-$('sbLogout').onclick=()=>{Sound.click();openConfirmLogout();};
+$('sbHome').onclick=function(){ Sound.click(); switchView('home'); };
+$('sbFriends').onclick=function(){ Sound.click(); switchView('friends'); };
+$('sbWheel').onclick=function(){ Sound.click(); switchView('wheel'); };
+$('sbSiteSettings').onclick=function(){ Sound.click(); openSiteSettings(); };
+$('sbLogout').onclick=function(){ Sound.click(); openConfirmLogout(); };
 
-document.querySelectorAll('.dash-card[data-action]').forEach(card=>{
-  card.onclick=()=>{
-    const a=card.dataset.action;
-    Sound.click();
-    if(a==='friends') switchView('friends');
-    else if(a==='settings') openAccountSettings();
-    else if(a==='wheel') switchView('wheel');
-  };
+/* dash-cards через делегирование */
+document.addEventListener('click', function(e){
+  var card=e.target.closest ? e.target.closest('.dash-card[data-action]') : null;
+  if(!card) return;
+  var a=card.dataset.action;
+  Sound.click();
+  if(a==='friends') switchView('friends');
+  else if(a==='settings') openAccountSettings();
+  else if(a==='wheel') switchView('wheel');
 });
 
+/* ---------- WHEEL ---------- */
 function buildWheel(){
-  const svg = $('wheelSvg');
-  if(!svg) return;
-  svg.innerHTML = '';
-  const N = WHEEL_SEGMENTS.length;
-  const segAngle = 360 / N;
-  const cx = 200, cy = 200, r = 198;
-
-  const bg = document.createElementNS('http://www.w3.org/2000/svg','circle');
-  bg.setAttribute('cx', cx); bg.setAttribute('cy', cy); bg.setAttribute('r', r);
-  bg.setAttribute('fill', '#0e0e11');
+  var svg=$('wheelSvg'); if(!svg) return;
+  svg.innerHTML='';
+  var N=WHEEL_SEGMENTS.length, segAngle=360/N, cx=200, cy=200, r=198;
+  var ns='http://www.w3.org/2000/svg';
+  var bg=document.createElementNS(ns,'circle');
+  bg.setAttribute('cx',cx); bg.setAttribute('cy',cy); bg.setAttribute('r',r); bg.setAttribute('fill','#0e0e11');
   svg.appendChild(bg);
-
-  for(let i=0;i<N;i++){
-    const seg = WHEEL_SEGMENTS[i];
-    const a1 = -90 + i*segAngle;
-    const a2 = -90 + (i+1)*segAngle;
-    const rad1 = a1 * Math.PI / 180;
-    const rad2 = a2 * Math.PI / 180;
-    const x1 = cx + r * Math.cos(rad1);
-    const y1 = cy + r * Math.sin(rad1);
-    const x2 = cx + r * Math.cos(rad2);
-    const y2 = cy + r * Math.sin(rad2);
-    const large = segAngle > 180 ? 1 : 0;
-
-    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d', `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`);
+  for(var i=0;i<N;i++){
+    var seg=WHEEL_SEGMENTS[i];
+    var a1=-90+i*segAngle, a2=-90+(i+1)*segAngle;
+    var rad1=a1*Math.PI/180, rad2=a2*Math.PI/180;
+    var x1=cx+r*Math.cos(rad1), y1=cy+r*Math.sin(rad1);
+    var x2=cx+r*Math.cos(rad2), y2=cy+r*Math.sin(rad2);
+    var large=segAngle>180?1:0;
+    var path=document.createElementNS(ns,'path');
+    path.setAttribute('d','M '+cx+' '+cy+' L '+x1+' '+y1+' A '+r+' '+r+' 0 '+large+' 1 '+x2+' '+y2+' Z');
     path.setAttribute('fill', seg.color);
-    path.setAttribute('stroke', '#0e0e11');
-    path.setAttribute('stroke-width', '2');
+    path.setAttribute('stroke','#0e0e11');
+    path.setAttribute('stroke-width','2');
     svg.appendChild(path);
-
-    const midA = -90 + i*segAngle + segAngle/2;
-    const midRad = midA * Math.PI / 180;
-    const lr = r * 0.68;
-    const lx = cx + lr * Math.cos(midRad);
-    const ly = cy + lr * Math.sin(midRad);
-
-    const text = document.createElementNS('http://www.w3.org/2000/svg','text');
-    text.setAttribute('x', lx);
-    text.setAttribute('y', ly);
-    text.setAttribute('text-anchor', 'middle');
-    text.setAttribute('dominant-baseline', 'middle');
-    text.setAttribute('font-size', '26');
-    text.setAttribute('font-weight', '900');
-    text.setAttribute('fill', '#ffffff');
-    text.setAttribute('style', 'text-shadow:0 2px 6px rgba(0,0,0,.9);paint-order:stroke;stroke:#000;stroke-width:2px;stroke-linejoin:round');
-    text.textContent = seg.label;
+    var midA=-90+i*segAngle+segAngle/2;
+    var midRad=midA*Math.PI/180;
+    var lr=r*0.68;
+    var lx=cx+lr*Math.cos(midRad), ly=cy+lr*Math.sin(midRad);
+    var text=document.createElementNS(ns,'text');
+    text.setAttribute('x',lx); text.setAttribute('y',ly);
+    text.setAttribute('text-anchor','middle'); text.setAttribute('dominant-baseline','middle');
+    text.setAttribute('font-size','26'); text.setAttribute('font-weight','900'); text.setAttribute('fill','#fff');
+    text.setAttribute('style','paint-order:stroke;stroke:#000;stroke-width:2px;stroke-linejoin:round');
+    text.textContent=seg.label;
     svg.appendChild(text);
   }
-
-  const rim = document.createElementNS('http://www.w3.org/2000/svg','circle');
-  rim.setAttribute('cx', cx); rim.setAttribute('cy', cy); rim.setAttribute('r', r-1);
+  var rim=document.createElementNS(ns,'circle');
+  rim.setAttribute('cx',cx); rim.setAttribute('cy',cy); rim.setAttribute('r',r-1);
   rim.setAttribute('fill','none'); rim.setAttribute('stroke','rgba(255,255,255,0.08)'); rim.setAttribute('stroke-width','2');
   svg.appendChild(rim);
 }
-
 function updateWheelBalance(){
-  const s=Session.get();
-  if(!s||!s.profile) return;
-  const bal = s.profile.monkeys || 0;
-  $('wheelBalance').textContent = bal;
-  const inp = $('wheelBetInput');
-  if(inp){
-    inp.max = Math.min(WHEEL_MAX_BET, Math.max(WHEEL_MIN_BET, bal));
-  }
+  var s=Session.get(); if(!s||!s.profile) return;
+  var bal=s.profile.monkeys||0;
+  $('wheelBalance').textContent=bal;
+  var inp=$('wheelBetInput'); if(inp) inp.max=Math.min(WHEEL_MAX_BET, Math.max(WHEEL_MIN_BET, bal));
 }
-
 function setBet(val){
-  const s=Session.get(); if(!s||!s.profile) return;
-  const bal = s.profile.monkeys || 0;
-  let v = parseInt(val,10);
-  if(isNaN(v)) v = WHEEL_MIN_BET;
-  v = Math.max(WHEEL_MIN_BET, Math.min(WHEEL_MAX_BET, v));
-  if(v > bal) v = Math.max(0, bal);
-  $('wheelBetInput').value = v;
+  var s=Session.get(); if(!s||!s.profile) return;
+  var bal=s.profile.monkeys||0;
+  var v=parseInt(val,10); if(isNaN(v)) v=WHEEL_MIN_BET;
+  v=Math.max(WHEEL_MIN_BET, Math.min(WHEEL_MAX_BET, v));
+  if(v>bal) v=Math.max(0,bal);
+  $('wheelBetInput').value=v;
 }
-
-$('wheelMinBtn').onclick = ()=>{ Sound.click(); setBet(WHEEL_MIN_BET); };
-$('wheelMaxBtn').onclick = ()=>{ Sound.click(); setBet(WHEEL_MAX_BET); };
-$('wheelBetInput').addEventListener('input', ()=>{
-  const s=Session.get(); if(!s||!s.profile) return;
-  const bal = s.profile.monkeys || 0;
-  let v = parseInt($('wheelBetInput').value,10);
+$('wheelMinBtn').onclick=function(){ Sound.click(); setBet(WHEEL_MIN_BET); };
+$('wheelMaxBtn').onclick=function(){ Sound.click(); setBet(WHEEL_MAX_BET); };
+$('wheelBetInput').addEventListener('input', function(){
+  var s=Session.get(); if(!s||!s.profile) return;
+  var bal=s.profile.monkeys||0;
+  var v=parseInt($('wheelBetInput').value,10);
   if(isNaN(v)) return;
-  if(v > bal) $('wheelBetInput').value = bal;
+  if(v>bal) $('wheelBetInput').value=bal;
 });
-
 function resetWheelRotor(){
-  const rotor = $('wheelRotor');
-  if(!rotor) return;
-  rotor.style.transition = 'none';
-  rotor.style.transform = 'rotate(0deg)';
-  void rotor.offsetWidth;
+  var r=$('wheelRotor'); if(!r) return;
+  r.style.transition='none'; r.style.transform='rotate(0deg)';
+  void r.offsetWidth;
 }
-
-$('wheelSpinBtn').onclick = async ()=>{
+$('wheelSpinBtn').onclick=function(){
   if(wheelSpinning) return;
-  const now = Date.now();
-  if(now - wheelLastSpinAt < WHEEL_SPIN_COOLDOWN){ Sound.error(); return; }
-  const s=Session.get(); if(!s||!s.token){ Sound.error(); return; }
-  const bal = (s.profile && s.profile.monkeys) || 0;
-  let bet = parseInt($('wheelBetInput').value,10);
-  if(isNaN(bet)) bet = WHEEL_MIN_BET;
-  if(bet < WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Минимальная ставка — 100 🐵</span>'; $('wheelResult').className='wheel-result lose'; return; }
-  if(bal < WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Недостаточно обезьян (мин. 100)</span>'; $('wheelResult').className='wheel-result lose'; return; }
-  if(bet > bal) bet = bal;
-  if(bet > WHEEL_MAX_BET) bet = WHEEL_MAX_BET;
+  var now=nowMs();
+  if(now-wheelLastSpinAt<WHEEL_SPIN_COOLDOWN){ Sound.error(); return; }
+  var s=Session.get(); if(!s||!s.token){ Sound.error(); return; }
+  var bal=(s.profile && s.profile.monkeys)||0;
+  var bet=parseInt($('wheelBetInput').value,10);
+  if(isNaN(bet)) bet=WHEEL_MIN_BET;
+  if(bet<WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Минимальная ставка — 100 🐵</span>'; $('wheelResult').className='wheel-result lose'; return; }
+  if(bal<WHEEL_MIN_BET){ Sound.error(); $('wheelResult').innerHTML='<span>Недостаточно обезьян (мин. 100)</span>'; $('wheelResult').className='wheel-result lose'; return; }
+  if(bet>bal) bet=bal;
+  if(bet>WHEEL_MAX_BET) bet=WHEEL_MAX_BET;
 
-  wheelSpinning = true;
-  wheelLastSpinAt = now;
-
+  wheelSpinning=true; wheelLastSpinAt=now;
   resetWheelRotor();
-
-  $('wheelSpinBtn').disabled = true;
-  $('wheelSpinBtn').textContent = '🎡 Крутится...';
+  $('wheelSpinBtn').disabled=true;
+  $('wheelSpinBtn').textContent='🎡 Крутится...';
   $('wheelResult').className='wheel-result';
-  $('wheelResult').innerHTML = '<span>Крутится...</span>';
+  $('wheelResult').innerHTML='<span>Крутится...</span>';
   Sound.click();
 
-  const cur = Session.get();
-  cur.profile.monkeys = bal - bet;
-  Session.save(cur);
-  updateWheelBalance();
-  updateMonkeysWidget();
+  var cur=Session.get();
+  cur.profile.monkeys=bal-bet; Session.save(cur);
+  updateWheelBalance(); updateMonkeysWidget();
 
-  const res = await api('spinWheel', { username:s.username, token:s.token, bet });
-  if(!res.ok){
-    wheelSpinning=false;
-    $('wheelSpinBtn').disabled=false;
-    $('wheelSpinBtn').textContent='🎡 Крутить колесо';
-    $('wheelResult').className='wheel-result lose';
-    $('wheelResult').innerHTML = `<span>${escapeHtml(res.error||'Ошибка')}</span>`;
-    const c2 = Session.get();
-    c2.profile.monkeys = bal;
-    Session.save(c2);
-    updateWheelBalance();
-    updateMonkeysWidget();
-    Sound.error();
-    return;
-  }
-
-  const segIdx = res.segment;
-  const N = WHEEL_SEGMENTS.length;
-  const segAngle = 360 / N;
-  const midOfSeg = segIdx*segAngle + segAngle/2;
-  const jitter = (Math.random()*segAngle*0.6 - segAngle*0.3);
-  const targetAngle = 360*6 - midOfSeg + jitter;
-  const rotor = $('wheelRotor');
-  rotor.style.transition = 'transform ' + (WHEEL_SPIN_MS/1000) + 's cubic-bezier(.15,.9,.2,1)';
-  void rotor.offsetWidth;
-  rotor.style.transform = `rotate(${targetAngle}deg)`;
-
-  if(wheelTickInterval) clearInterval(wheelTickInterval);
-  wheelTickInterval = setInterval(()=>{
-    if(!wheelSpinning){ clearInterval(wheelTickInterval); wheelTickInterval=null; return; }
-    Sound.wheelTick();
-  }, 110);
-
-  setTimeout(async ()=>{
-    if(wheelTickInterval){ clearInterval(wheelTickInterval); wheelTickInterval=null; }
-
-    const seg = WHEEL_SEGMENTS[segIdx];
-    const winAmount = res.winAmount || 0;
-    const betVal = res.bet || bet;
-
-    let fin = { ok: false };
-    try {
-      fin = await api('finishWheel', {
-        username: s.username,
-        token: s.token,
-        winAmount: winAmount,
-        segType: seg.type,
-        mult: seg.mult,
-        bet: betVal
-      });
-    } catch(e) { fin = { ok: false }; }
-
-    if(fin.ok){
-      const cur2 = Session.get();
-      cur2.profile.monkeys = fin.monkeysFinal;
-      if(winAmount > 0) cur2.profile.wins = (cur2.profile.wins || 0) + 1;
-      Session.save(cur2);
-      updateWheelBalance();
-      updateMonkeysWidget();
-    } else {
-      try {
-        const st = await api('getMyState', { username: s.username, token: s.token });
-        if(st.ok && st.profile){
-          const cur2 = Session.get();
-          cur2.profile = { ...cur2.profile, ...st.profile };
-          Session.save(cur2);
-          updateWheelBalance();
-          updateMonkeysWidget();
-        }
-      } catch(e) {}
-    }
-
-    const profit = winAmount - betVal;
-
-    if(seg.type === 'green'){
-      $('wheelResult').className='wheel-result jackpot';
-      $('wheelResult').innerHTML = `<span class="big">🎉 ДЖЕКПОТ! x3</span><span>Выигрыш: +${winAmount} 🐵 (чистыми +${profit})</span>`;
-      Sound.wheelJackpot();
-      showReward(winAmount);
-    } else if(seg.type === 'red'){
-      $('wheelResult').className='wheel-result win';
-      $('wheelResult').innerHTML = `<span class="big">✅ x2</span><span>Выигрыш: +${winAmount} 🐵 (чистыми +${profit})</span>`;
-      Sound.wheelWin();
-      showReward(winAmount);
-    } else {
+  api('spinWheel',{username:s.username,token:s.token,bet:bet}).then(function(res){
+    if(!res.ok){
+      wheelSpinning=false; $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
       $('wheelResult').className='wheel-result lose';
-      $('wheelResult').innerHTML = `<span class="big">💀 Проигрыш</span><span>Потеряно: −${betVal} 🐵</span>`;
-      Sound.wheelLose();
+      $('wheelResult').innerHTML='<span>'+esc(res.error||'Ошибка')+'</span>';
+      var c2=Session.get(); c2.profile.monkeys=bal; Session.save(c2);
+      updateWheelBalance(); updateMonkeysWidget(); Sound.error();
+      return;
     }
+    var segIdx=res.segment, N=WHEEL_SEGMENTS.length, segAngle=360/N;
+    var midOfSeg=segIdx*segAngle+segAngle/2;
+    var jitter=(Math.random()*segAngle*0.6-segAngle*0.3);
+    var targetAngle=360*6-midOfSeg+jitter;
+    var rotor=$('wheelRotor');
+    rotor.style.transition='transform '+(WHEEL_SPIN_MS/1000)+'s cubic-bezier(.15,.9,.2,1)';
+    void rotor.offsetWidth;
+    rotor.style.transform='rotate('+targetAngle+'deg)';
 
-    wheelSpinning=false;
-    $('wheelSpinBtn').disabled=false;
-    $('wheelSpinBtn').textContent='🎡 Крутить колесо';
-    loadWheelHistory();
+    if(wheelTickInterval) clearInterval(wheelTickInterval);
+    wheelTickInterval=setInterval(function(){
+      if(!wheelSpinning){ clearInterval(wheelTickInterval); wheelTickInterval=null; return; }
+      Sound.wheelTick();
+    }, 130);
 
-    setTimeout(()=>{
-      const r2 = $('wheelRotor');
-      r2.style.transition = 'transform 0.6s cubic-bezier(.2,.8,.25,1)';
-      r2.style.transform = 'rotate(0deg)';
-    }, 1500);
-  }, WHEEL_SPIN_MS);
+    setTimeout(function(){
+      if(wheelTickInterval){ clearInterval(wheelTickInterval); wheelTickInterval=null; }
+      var seg=WHEEL_SEGMENTS[segIdx];
+      var winAmount=res.winAmount||0;
+      var betVal=res.bet||bet;
+
+      api('finishWheel',{username:s.username,token:s.token,winAmount:winAmount,segType:seg.type,mult:seg.mult,bet:betVal}).then(function(fin){
+        if(fin.ok){
+          var cur2=Session.get();
+          cur2.profile.monkeys=fin.monkeysFinal;
+          if(winAmount>0) cur2.profile.wins=(cur2.profile.wins||0)+1;
+          Session.save(cur2);
+          updateWheelBalance(); updateMonkeysWidget();
+        } else {
+          api('getMyState',{username:s.username,token:s.token}).then(function(st){
+            if(st.ok && st.profile){
+              var cur3=Session.get();
+              for(var k in st.profile) cur3.profile[k]=st.profile[k];
+              Session.save(cur3);
+              updateWheelBalance(); updateMonkeysWidget();
+            }
+          });
+        }
+      });
+
+      var profit=winAmount-betVal;
+      if(seg.type==='green'){
+        $('wheelResult').className='wheel-result jackpot';
+        $('wheelResult').innerHTML='<span class="big">🎉 ДЖЕКПОТ! x3</span><span>Выигрыш: +'+winAmount+' 🐵 (чистыми +'+profit+')</span>';
+        Sound.wheelJackpot(); showReward(winAmount);
+      } else if(seg.type==='red'){
+        $('wheelResult').className='wheel-result win';
+        $('wheelResult').innerHTML='<span class="big">✅ x2</span><span>Выигрыш: +'+winAmount+' 🐵 (чистыми +'+profit+')</span>';
+        Sound.wheelWin(); showReward(winAmount);
+      } else {
+        $('wheelResult').className='wheel-result lose';
+        $('wheelResult').innerHTML='<span class="big">💀 Проигрыш</span><span>Потеряно: −'+betVal+' 🐵</span>';
+        Sound.wheelLose();
+      }
+      wheelSpinning=false;
+      $('wheelSpinBtn').disabled=false;
+      $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+      loadWheelHistory();
+      setTimeout(function(){
+        var r2=$('wheelRotor');
+        r2.style.transition='transform 0.6s cubic-bezier(.2,.8,.25,1)';
+        r2.style.transform='rotate(0deg)';
+      }, 1500);
+    }, WHEEL_SPIN_MS);
+  });
 };
 
 function timeAgo(ts){
-  const d = Date.now() - ts;
-  const s = Math.floor(d/1000);
-  if(s < 60) return s+' сек назад';
-  const m = Math.floor(s/60);
-  if(m < 60) return m+' мин назад';
-  const h = Math.floor(m/60);
-  if(h < 24) return h+' ч назад';
-  const dd = Math.floor(h/24);
-  return dd+' дн назад';
+  var d=nowMs()-ts, s=Math.floor(d/1000);
+  if(s<60) return s+' сек назад';
+  var m=Math.floor(s/60); if(m<60) return m+' мин назад';
+  var h=Math.floor(m/60); if(h<24) return h+' ч назад';
+  return Math.floor(h/24)+' дн назад';
 }
-
-async function loadWheelHistory(){
-  const list = $('whList');
-  if(!list) return;
-  const res = await api('getWheelHistory', { limit: 50 }, {cache:true, ttl:10000});
-  if(!res.ok){
-    list.innerHTML = '<div class="wh-empty">Не удалось загрузить</div>';
-    return;
-  }
-  const items = res.history || [];
-  if(!items.length){
-    list.innerHTML = '<div class="wh-empty">Пока никто не играл</div>';
-    return;
-  }
-  list.innerHTML = items.map(h=>{
-    const visual = h.visualName || h.username;
-    const initial = visual.charAt(0).toUpperCase();
-    const av = h.avatar ? `<img src="${h.avatar}" alt="">` : escapeHtml(initial);
-    const emj = h.emoji ? `<span class="emj">${h.emoji}</span>` : '';
-    const cls = h.type === 'green' ? 'jackpot' : (h.type === 'red' ? 'win' : 'lose');
-    let resHtml;
-    if(h.winAmount > 0){
-      const label = h.type==='green' ? 'x3' : 'x2';
-      resHtml = `<span class="wh-res ${cls}">+${h.winAmount}<span class="lbl">${label}</span></span>`;
-    } else {
-      resHtml = `<span class="wh-res lose">−${h.bet}<span class="lbl">проигрыш</span></span>`;
+function loadWheelHistory(){
+  var list=$('whList'); if(!list) return;
+  api('getWheelHistory',{limit:50},{cache:true,ttl:10000}).then(function(res){
+    if(!res.ok){ list.innerHTML='<div class="wh-empty">Не удалось загрузить</div>'; return; }
+    var items=res.history||[];
+    if(!items.length){ list.innerHTML='<div class="wh-empty">Пока никто не играл</div>'; return; }
+    var html='';
+    for(var i=0;i<items.length;i++){
+      var h=items[i];
+      var visual=h.visualName||h.username;
+      var initial=visual.charAt(0).toUpperCase();
+      var av=h.avatar?'<img src="'+h.avatar+'" alt="">':esc(initial);
+      var emj=h.emoji?'<span class="emj">'+h.emoji+'</span>':'';
+      var cls=h.type==='green'?'jackpot':(h.type==='red'?'win':'lose');
+      var resHtml;
+      if(h.winAmount>0){
+        var label=h.type==='green'?'x3':'x2';
+        resHtml='<span class="wh-res '+cls+'">+'+h.winAmount+'<span class="lbl">'+label+'</span></span>';
+      } else {
+        resHtml='<span class="wh-res lose">−'+h.bet+'<span class="lbl">проигрыш</span></span>';
+      }
+      var when=h.createdAt?timeAgo(h.createdAt):'';
+      html+='<div class="wh-item '+cls+'">'+
+        '<div class="wh-av">'+av+'</div>'+
+        '<div class="wh-info"><div class="wh-name">'+esc(visual)+emj+'</div>'+
+        '<div class="wh-sub">Ставка: <b>'+h.bet+'</b> 🐵 · '+esc(when)+'</div></div>'+
+        resHtml+'</div>';
     }
-    const when = h.createdAt ? timeAgo(h.createdAt) : '';
-    return `<div class="wh-item ${cls}">
-      <div class="wh-av">${av}</div>
-      <div class="wh-info">
-        <div class="wh-name">${escapeHtml(visual)}${emj}</div>
-        <div class="wh-sub">Ставка: <b>${h.bet}</b> 🐵 · ${escapeHtml(when)}</div>
-      </div>
-      ${resHtml}
-    </div>`;
-  }).join('');
+    list.innerHTML=html;
+  });
 }
+function startWhTimer(){ stopWhTimer(); whTimer=setInterval(loadWheelHistory, 20000); }
+function stopWhTimer(){ if(whTimer){ clearInterval(whTimer); whTimer=null; } }
+$('whRefresh').onclick=function(){ Sound.click(); loadWheelHistory(); };
 
-function startWhTimer(){
-  stopWhTimer();
-  whTimer = setInterval(()=>{ loadWheelHistory(); }, 15000);
-}
-function stopWhTimer(){
-  if(whTimer){ clearInterval(whTimer); whTimer=null; }
-}
-$('whRefresh').onclick = ()=>{ Sound.click(); loadWheelHistory(); };
-
-let _usersCache = {t:0, v:null};
-async function loadUsers(force){
-  const grid=$('usersGrid');
-  if(!force && _usersCache.v && Date.now()-_usersCache.t < USERS_CACHE_TTL){
-    allUsers = _usersCache.v;
+/* ---------- users ---------- */
+function loadUsers(force){
+  var grid=$('usersGrid');
+  if(!force && _usersCache.v && nowMs()-_usersCache.t<USERS_CACHE_TTL){
+    allUsers=_usersCache.v;
     $('statUsers').textContent=allUsers.length+' пользователей зарегистрировано';
     $('usersCount').textContent=allUsers.length+' участников';
-    renderUsers(allUsers);
-    return;
+    renderUsers(allUsers); return;
   }
   grid.innerHTML='<div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:80px"></div>';
-  const s=Session.get();
-  try{
-    const res=await api('getUsers',{me:s?.username||''},{cache:true, ttl:USERS_CACHE_TTL});
+  var s=Session.get();
+  api('getUsers',{me:(s&&s.username)||''},{cache:true,ttl:USERS_CACHE_TTL}).then(function(res){
     if(!res.ok){ grid.innerHTML='<div style="color:var(--danger);font-size:13px;padding:14px;">Ошибка загрузки</div>'; return; }
     allUsers=res.users||[];
-    _usersCache = {t:Date.now(), v:allUsers};
+    _usersCache={t:nowMs(),v:allUsers};
     $('statUsers').textContent=allUsers.length+' пользователей зарегистрировано';
     $('usersCount').textContent=allUsers.length+' участников';
     renderUsers(allUsers);
-  }catch(e){
+  }).catch(function(){
     grid.innerHTML='<div style="color:var(--danger);font-size:13px;padding:14px;">Нет связи с сервером</div>';
-  }
+  });
 }
 function renderUsers(users){
-  const grid=$('usersGrid');
+  var grid=$('usersGrid');
   if(!users.length){ grid.innerHTML='<div style="color:var(--muted);font-size:13px;padding:14px;">Пока никого нет</div>'; return; }
-  const frag = document.createDocumentFragment();
-  users.forEach((u,i)=>{
-    const visual=u.visualName||u.username;
-    const initial=visual.charAt(0).toUpperCase();
-    const avInner=u.avatar?`<img loading="lazy" src="${u.avatar}" alt="">`:escapeHtml(initial);
-    const emj=u.emoji?`<span class="emj">${u.emoji}</span>`:'';
-    const isAdmin = u.isAdmin || false;
-    const adminBadge = isAdmin ? '<span class="admin-badge-mini">ADMIN</span>' : '';
-    const div = document.createElement('div');
+  var frag=document.createDocumentFragment();
+  for(var i=0;i<users.length;i++){
+    var u=users[i];
+    var visual=u.visualName||u.username;
+    var initial=visual.charAt(0).toUpperCase();
+    var avInner=u.avatar?'<img loading="lazy" src="'+u.avatar+'" alt="">':esc(initial);
+    var emj=u.emoji?'<span class="emj">'+u.emoji+'</span>':'';
+    var ab=u.isAdmin?adminBadge():'';
+    var div=document.createElement('div');
     div.className='user-card';
-    div.style.animationDelay = (Math.min(i,12)*30)+'ms';
-    div.dataset.username = u.username;
-    div.innerHTML = `<div class="av">${avInner}</div><div class="info"><div class="name">${adminBadge}${escapeHtml(visual)}${emj}</div><div class="login">@${escapeHtml(u.username)}</div></div>`;
+    div.style.animationDelay=(Math.min(i,12)*30)+'ms';
+    div.dataset.username=u.username;
+    div.innerHTML='<div class="av">'+avInner+'</div><div class="info"><div class="name">'+ab+esc(visual)+emj+'</div><div class="login">@'+esc(u.username)+'</div></div>';
     frag.appendChild(div);
-  });
-  grid.innerHTML='';
-  grid.appendChild(frag);
-  grid.querySelectorAll('.user-card').forEach(card=>{
-    const uname=card.dataset.username;
-    card.addEventListener('mouseenter',()=>showHover(uname,card));
-    card.addEventListener('mouseleave',hideHover);
-    card.addEventListener('click',()=>openProfile(uname));
-  });
+  }
+  grid.innerHTML=''; grid.appendChild(frag);
 }
+/* делегирование hover/click на карточки */
+$('usersGrid').addEventListener('mouseover', function(e){
+  var c=e.target.closest ? e.target.closest('.user-card') : null;
+  if(c) showHover(c.dataset.username, c);
+});
+$('usersGrid').addEventListener('mouseout', function(e){
+  var c=e.target.closest ? e.target.closest('.user-card') : null;
+  if(c) hideHover();
+});
+$('usersGrid').addEventListener('click', function(e){
+  var c=e.target.closest ? e.target.closest('.user-card') : null;
+  if(c) openProfile(c.dataset.username);
+});
 
-let hoverTimer=null;
-function showHover(uname,anchor){
+function showHover(uname, anchor){
   clearTimeout(hoverTimer);
-  const u=allUsers.find(x=>x.username===uname); if(!u) return;
-  const hc=$('hoverCard');
+  var u=null;
+  for(var i=0;i<allUsers.length;i++){ if(allUsers[i].username===uname){ u=allUsers[i]; break; } }
+  if(!u) return;
+  var hc=$('hoverCard');
   $('hoverBanner').style.background=u.bannerColor||'var(--banner-default)';
-  const visual=u.visualName||u.username;
-  const av=$('hoverAv');
-  if(u.avatar) av.innerHTML=`<img src="${u.avatar}" alt="">`; else av.textContent=visual.charAt(0).toUpperCase();
-  const isAdmin = u.isAdmin || false;
-  const adminBadge = isAdmin ? '<span class="admin-badge-mini">ADMIN</span>' : '';
-  $('hoverName').innerHTML=adminBadge+escapeHtml(visual)+(u.emoji?` <span style="font-size:14px">${u.emoji}</span>`:'');
+  var visual=u.visualName||u.username;
+  var av=$('hoverAv');
+  if(u.avatar) av.innerHTML='<img src="'+u.avatar+'" alt="">'; else av.textContent=visual.charAt(0).toUpperCase();
+  var ab=u.isAdmin?adminBadge():'';
+  $('hoverName').innerHTML=ab+esc(visual)+(u.emoji?' <span style="font-size:14px">'+u.emoji+'</span>':'');
   $('hoverLogin').textContent='@'+u.username;
   $('hoverBio').innerHTML=u.bio?renderBio(u.bio):'<span style="opacity:.5">Нет описания</span>';
   $('hoverRespects').textContent=u.respects||0;
   $('hoverPosts').textContent=u.posts||0;
   $('hoverWins').textContent=u.wins||0;
   $('hoverMonkeys').textContent=u.monkeys||0;
-  const r=anchor.getBoundingClientRect();
-  let left=r.right+12, top=r.top;
+  var r=anchor.getBoundingClientRect();
+  var left=r.right+12, top=r.top;
   if(left+290>window.innerWidth) left=r.left-282;
   if(top+300>window.innerHeight) top=window.innerHeight-310;
   if(top<60) top=60;
   hc.style.left=left+'px'; hc.style.top=top+'px';
   hc.classList.add('show');
 }
-function hideHover(){ hoverTimer=setTimeout(()=>$('hoverCard').classList.remove('show'),120); }
-$('hoverCard').addEventListener('mouseenter',()=>clearTimeout(hoverTimer));
-$('hoverCard').addEventListener('mouseleave',hideHover);
+function hideHover(){ hoverTimer=setTimeout(function(){ $('hoverCard').classList.remove('show'); },120); }
+$('hoverCard').addEventListener('mouseenter', function(){ clearTimeout(hoverTimer); });
+$('hoverCard').addEventListener('mouseleave', hideHover);
 
-const ACCOUNT_SECTIONS = { main: renderAccountMain, password: renderAccountPassword };
-
+/* ---------- account settings ---------- */
+var ACCOUNT_SECTIONS = { main: renderAccountMain, password: renderAccountPassword };
 function openAccountSettings(){
-  const s=Session.get(); if(!s) return;
-  const p=s.profile||{ username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24' };
+  var s=Session.get(); if(!s) return;
+  var p=s.profile||{username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24'};
   tempProfile={
     username:s.username, token:s.token,
     visualName:p.visualName||s.username,
@@ -1990,1273 +1920,944 @@ function openAccountSettings(){
   Sound.open();
   renderAccountSection('main');
 }
-
 function closeAccountSettings(){
-  if(tempProfileChanged){
-    openUnsaved(async ()=>{ await saveAccountChanges(); });
-    return;
-  }
-  $('settingsOverlay').classList.remove('show');
-  Sound.close();
+  if(tempProfileChanged){ openUnsaved(saveAccountChanges); return; }
+  $('settingsOverlay').classList.remove('show'); Sound.close();
 }
 $('settingsClose').onclick=closeAccountSettings;
-$('settingsOverlay').onclick=e=>{if(e.target===$('settingsOverlay'))closeAccountSettings();};
-
-document.querySelectorAll('#settingsOverlay .settings-nav-item').forEach(btn=>{
-  btn.onclick=()=>{ Sound.click(); renderAccountSection(btn.dataset.section); };
+$('settingsOverlay').onclick=function(e){ if(e.target===$('settingsOverlay')) closeAccountSettings(); };
+document.querySelectorAll('#settingsOverlay .settings-nav-item').forEach(function(btn){
+  btn.onclick=function(){ Sound.click(); renderAccountSection(btn.dataset.section); };
 });
-
 function renderAccountSection(sec){
-  document.querySelectorAll('#settingsOverlay .settings-nav-item').forEach(b=>{
-    b.classList.toggle('active', b.dataset.section===sec);
-  });
-  const c = ACCOUNT_SECTIONS[sec];
-  if(c) c();
+  document.querySelectorAll('#settingsOverlay .settings-nav-item').forEach(function(b){ b.classList.toggle('active', b.dataset.section===sec); });
+  var c=ACCOUNT_SECTIONS[sec]; if(c) c();
 }
-
 function renderAccountMain(){
-  $('settingsContent').innerHTML = `
-    <h2>Аккаунт</h2>
-    <div class="section-sub">Основные настройки профиля</div>
-
-    <div class="field">
-      <label for="setVisualName">Визуальный ник (для всех)</label>
-      <input type="text" id="setVisualName" maxlength="32" value="${escapeHtml(tempProfile.visualName)}" placeholder="Можно на русском">
-      <div class="hint" id="setVisualHint">Отображается другим. Эмодзи запрещены.</div>
-    </div>
-
-    <div class="field">
-      <label for="setLoginName">Ник для входа (логин)</label>
-      <input type="text" id="setLoginName" value="${escapeHtml(tempProfile.username)}" disabled style="opacity:.6">
-      <div class="hint">Смена логина недоступна</div>
-    </div>
-
-    <div class="field">
-      <label>Описание профиля</label>
-      <div class="bio-editor">
-        <div class="bio-toolbar">
-          <button class="bio-tool" data-tool="bold"><b>B</b></button>
-          <button class="bio-tool" data-tool="italic"><i>I</i></button>
-          <button class="bio-tool" data-tool="strike"><s>S</s></button>
-          <button class="bio-tool" data-tool="link"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
-        </div>
-        <textarea class="bio-textarea" id="setBio" maxlength="500" placeholder="Расскажи о себе… ссылки станут кликабельными">${escapeHtml(tempProfile.bio)}</textarea>
-        <div class="bio-hint"><span>Ссылки автоматически с иконкой</span><span id="bioCount">${(tempProfile.bio||'').length}/500</span></div>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Баннер профиля</label>
-      <div class="color-palette" id="colorPalette"></div>
-      <div class="color-custom">
-        <input type="color" id="bannerColorPick" value="${tempProfile.bannerColor}">
-        <span class="cc-val" id="bannerColorVal">${tempProfile.bannerColor.toUpperCase()}</span>
-        <input type="text" id="bannerColorHex" value="${tempProfile.bannerColor.toUpperCase()}" maxlength="7">
-      </div>
-    </div>
-
-    <div class="settings-foot">
-      <button class="btn btn-ghost" id="setCancel">Закрыть</button>
-      <button class="btn btn-primary" id="setSave">Сохранить</button>
-    </div>
-  `;
-  bindAccountMain();
-  updatePreview();
-  renderPalette();
+  $('settingsContent').innerHTML =
+    '<h2>Аккаунт</h2>'+
+    '<div class="section-sub">Основные настройки профиля</div>'+
+    '<div class="field"><label for="setVisualName">Визуальный ник (для всех)</label>'+
+      '<input type="text" id="setVisualName" maxlength="32" value="'+esc(tempProfile.visualName)+'" placeholder="Можно на русском">'+
+      '<div class="hint" id="setVisualHint">Отображается другим. Эмодзи запрещены.</div></div>'+
+    '<div class="field"><label for="setLoginName">Ник для входа (логин)</label>'+
+      '<input type="text" id="setLoginName" value="'+esc(tempProfile.username)+'" disabled style="opacity:.6">'+
+      '<div class="hint">Смена логина недоступна</div></div>'+
+    '<div class="field"><label>Описание профиля</label>'+
+      '<div class="bio-editor"><div class="bio-toolbar">'+
+        '<button class="bio-tool" data-tool="bold"><b>B</b></button>'+
+        '<button class="bio-tool" data-tool="italic"><i>I</i></button>'+
+        '<button class="bio-tool" data-tool="strike"><s>S</s></button>'+
+        '<button class="bio-tool" data-tool="link"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>'+
+      '</div>'+
+      '<textarea class="bio-textarea" id="setBio" maxlength="500" placeholder="Расскажи о себе… ссылки станут кликабельными">'+esc(tempProfile.bio)+'</textarea>'+
+      '<div class="bio-hint"><span>Ссылки автоматически с иконкой</span><span id="bioCount">'+(tempProfile.bio||'').length+'/500</span></div></div></div>'+
+    '<div class="field"><label>Баннер профиля</label>'+
+      '<div class="color-palette" id="colorPalette"></div>'+
+      '<div class="color-custom"><input type="color" id="bannerColorPick" value="'+tempProfile.bannerColor+'">'+
+      '<span class="cc-val" id="bannerColorVal">'+tempProfile.bannerColor.toUpperCase()+'</span>'+
+      '<input type="text" id="bannerColorHex" value="'+tempProfile.bannerColor.toUpperCase()+'" maxlength="7"></div></div>'+
+    '<div class="settings-foot"><button class="btn btn-ghost" id="setCancel">Закрыть</button>'+
+      '<button class="btn btn-primary" id="setSave">Сохранить</button></div>';
+  bindAccountMain(); updatePreview(); renderPalette();
 }
-
 function renderPalette(){
-  const COLORS = [
-    '#1d1e24','#26282f','#32353d','#0e0e11',
-    '#7c5cff','#22d3ee','#f87171','#4ade80',
-    '#fbbf24','#f59e0b','#ec4899','#8b5cf6',
-    '#3b82f6','#14b8a6','#ef4444','#a3a3a3',
-    '#000000','#ffffff','#ff6b6b','#4ecdc4',
-    '#1a535c','#ff9f1c','#2ec4b6','#e71d36'
-  ];
-  const p = $('colorPalette');
-  p.innerHTML = COLORS.map(c => `<div class="color-swatch${c.toLowerCase()===tempProfile.bannerColor.toLowerCase()?' selected':''}" data-color="${c}" style="background:${c}"></div>`).join('');
-  p.querySelectorAll('.color-swatch').forEach(sw=>{
-    sw.onclick=()=>{ setBannerColor(sw.dataset.color); Sound.click(); };
-  });
+  var COLORS=['#1d1e24','#26282f','#32353d','#0e0e11','#7c5cff','#22d3ee','#f87171','#4ade80','#fbbf24','#f59e0b','#ec4899','#8b5cf6','#3b82f6','#14b8a6','#ef4444','#a3a3a3','#000000','#ffffff','#ff6b6b','#4ecdc4','#1a535c','#ff9f1c','#2ec4b6','#e71d36'];
+  var p=$('colorPalette');
+  p.innerHTML=COLORS.map(function(c){ return '<div class="color-swatch'+(c.toLowerCase()===tempProfile.bannerColor.toLowerCase()?' selected':'')+'" data-color="'+c+'" style="background:'+c+'"></div>'; }).join('');
+  p.querySelectorAll('.color-swatch').forEach(function(sw){ sw.onclick=function(){ setBannerColor(sw.dataset.color); Sound.click(); }; });
 }
-
 function setBannerColor(c){
-  tempProfile.bannerColor = c;
-  $('bannerColorPick').value = c;
-  $('bannerColorHex').value = c.toUpperCase();
-  $('bannerColorVal').textContent = c.toUpperCase();
-  $('previewBanner').style.background = c;
-  renderPalette();
-  markProfileChanged();
+  tempProfile.bannerColor=c;
+  $('bannerColorPick').value=c;
+  $('bannerColorHex').value=c.toUpperCase();
+  $('bannerColorVal').textContent=c.toUpperCase();
+  $('previewBanner').style.background=c;
+  renderPalette(); markProfileChanged();
 }
-
 function bindAccountMain(){
-  const vn=$('setVisualName'), bio=$('setBio'), bioCount=$('bioCount');
-  vn.oninput=()=>{
+  var vn=$('setVisualName'), bio=$('setBio'), bioCount=$('bioCount');
+  vn.oninput=function(){
     Sound.type();
-    tempProfile.visualName = vn.value;
-    const err=validateVisualName(vn.value);
-    const hint=$('setVisualHint');
-    hint.textContent = err ? err : 'Отображается другим. Эмодзи запрещены.';
+    tempProfile.visualName=vn.value;
+    var err=validateVisualName(vn.value);
+    var hint=$('setVisualHint');
+    hint.textContent=err?err:'Отображается другим. Эмодзи запрещены.';
     hint.className='hint '+(err?'err':'');
-    markProfileChanged();
-    updatePreview();
+    markProfileChanged(); updatePreview();
   };
-  bio.oninput=()=>{
+  bio.oninput=function(){
     Sound.type();
-    tempProfile.bio = bio.value;
-    bioCount.textContent = bio.value.length + '/500';
-    markProfileChanged();
-    updatePreview();
+    tempProfile.bio=bio.value;
+    bioCount.textContent=bio.value.length+'/500';
+    markProfileChanged(); updatePreview();
   };
   $('setCancel').onclick=closeAccountSettings;
-  $('setSave').onclick=async()=>{ await saveAccountChanges(); };
-  $('bannerColorPick').oninput=(e)=>{ setBannerColor(e.target.value); };
-  $('bannerColorHex').oninput=(e)=>{
-    const v=e.target.value;
+  $('setSave').onclick=saveAccountChanges;
+  $('bannerColorPick').oninput=function(e){ setBannerColor(e.target.value); };
+  $('bannerColorHex').oninput=function(e){
+    var v=e.target.value;
     if(/^#[0-9a-fA-F]{6}$/.test(v)) setBannerColor(v.toLowerCase());
   };
-  document.querySelectorAll('.bio-tool').forEach(t=>{
-    t.onclick=()=>{
-      const ta=$('setBio'); const tool=t.dataset.tool;
-      const start=ta.selectionStart, end=ta.selectionEnd;
-      const wrapMap={bold:'**',italic:'*',strike:'~~'};
-      const sel = ta.value.substring(start,end) || (tool==='link'?'https://example.com':'текст');
-      let ins;
-      if(tool==='link') ins = sel;
-      else { const w=wrapMap[tool]; ins = w+sel+w; }
-      ta.value = ta.value.substring(0,start)+ins+ta.value.substring(end);
-      tempProfile.bio = ta.value;
-      bioCount.textContent = ta.value.length+'/500';
-      markProfileChanged();
-      updatePreview();
-      ta.focus();
+  document.querySelectorAll('.bio-tool').forEach(function(t){
+    t.onclick=function(){
+      var ta=$('setBio'); var tool=t.dataset.tool;
+      var start=ta.selectionStart, end=ta.selectionEnd;
+      var wrapMap={bold:'**',italic:'*',strike:'~~'};
+      var sel=ta.value.substring(start,end)||(tool==='link'?'https://example.com':'текст');
+      var ins;
+      if(tool==='link') ins=sel;
+      else { var w=wrapMap[tool]; ins=w+sel+w; }
+      ta.value=ta.value.substring(0,start)+ins+ta.value.substring(end);
+      tempProfile.bio=ta.value;
+      bioCount.textContent=ta.value.length+'/500';
+      markProfileChanged(); updatePreview(); ta.focus();
     };
   });
 }
-
 function markProfileChanged(){ tempProfileChanged=true; }
-
 function updatePreview(){
-  const vn=tempProfile.visualName||tempProfile.username;
+  var vn=tempProfile.visualName||tempProfile.username;
   $('previewName').textContent=vn;
   $('previewLogin').textContent='@'+tempProfile.username;
   if(tempProfile.avatar){
-    $('previewAv').innerHTML=`<img src="${tempProfile.avatar}" alt=""><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
-  }else{
-    $('previewAv').innerHTML=`<span>${escapeHtml(vn.charAt(0).toUpperCase())}</span><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>`;
+    $('previewAv').innerHTML='<img src="'+tempProfile.avatar+'" alt=""><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>';
+  } else {
+    $('previewAv').innerHTML='<span>'+esc(vn.charAt(0).toUpperCase())+'</span><div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>';
   }
-  $('previewBanner').style.background = tempProfile.bannerColor;
-  $('previewBio').innerHTML = tempProfile.bio ? renderBio(tempProfile.bio) : '<span style="opacity:.5">Нет описания</span>';
-  if(!$('previewAv').onclick) $('previewAv').onclick=()=>$('avatarInput').click();
+  $('previewBanner').style.background=tempProfile.bannerColor;
+  $('previewBio').innerHTML=tempProfile.bio?renderBio(tempProfile.bio):'<span style="opacity:.5">Нет описания</span>';
 }
-$('previewAv').onclick=()=>$('avatarInput').click();
-$('avatarInput').addEventListener('change',(e)=>{
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=(ev)=>{
-    const img=new Image();
-    img.onload=()=>{
-      const size=256;
-      const cvs=document.createElement('canvas');
-      cvs.width=size;cvs.height=size;
-      const cx=cvs.getContext('2d');
-      const minSide=Math.min(img.width,img.height);
-      const sx=(img.width-minSide)/2, sy=(img.height-minSide)/2;
+$('previewAv').onclick=function(){ $('avatarInput').click(); };
+$('avatarInput').addEventListener('change', function(e){
+  var file=e.target.files[0]; if(!file) return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    var img=new Image();
+    img.onload=function(){
+      var size=256;
+      var cvs=document.createElement('canvas'); cvs.width=size; cvs.height=size;
+      var cx=cvs.getContext('2d');
+      var minSide=Math.min(img.width,img.height);
+      var sx=(img.width-minSide)/2, sy=(img.height-minSide)/2;
       cx.drawImage(img,sx,sy,minSide,minSide,0,0,size,size);
       tempProfile.avatar=cvs.toDataURL('image/jpeg',0.85);
-      updatePreview();
-      markProfileChanged();
-      Sound.success();
+      updatePreview(); markProfileChanged(); Sound.success();
     };
     img.src=ev.target.result;
   };
   reader.readAsDataURL(file);
   e.target.value='';
 });
-
-async function saveAccountChanges(){
-  const s=Session.get(); if(!s) return;
-  const vnErr=validateVisualName(tempProfile.visualName);
-  if(vnErr){ toastAccount(vnErr,true); Sound.error(); return; }
-
-  const res=await api('updateProfile',{
+function saveAccountChanges(){
+  var s=Session.get(); if(!s) return Promise.resolve();
+  var vnErr=validateVisualName(tempProfile.visualName);
+  if(vnErr){ toastAccount(vnErr,true); Sound.error(); return Promise.resolve(); }
+  return api('updateProfile',{
     username:s.username, token:s.token,
-    visualName: tempProfile.visualName,
-    avatar: tempProfile.avatar,
-    bio: tempProfile.bio,
-    bannerColor: tempProfile.bannerColor
+    visualName:tempProfile.visualName,
+    avatar:tempProfile.avatar,
+    bio:tempProfile.bio,
+    bannerColor:tempProfile.bannerColor
+  }).then(function(res){
+    if(res.ok){
+      var cur=Session.get();
+      for(var k in res.profile) cur.profile[k]=res.profile[k];
+      Session.save(cur);
+      tempProfileChanged=false;
+      renderAuthState();
+      _cache={};
+      toastAccount('Сохранено ✓',false);
+      Sound.success();
+      setTimeout(function(){ $('settingsOverlay').classList.remove('show'); },600);
+    } else {
+      toastAccount('Ошибка: '+(res.error||'?'),true); Sound.error();
+    }
   });
-  if(res.ok){
-    const cur=Session.get();
-    cur.profile = { ...cur.profile, ...res.profile };
-    Session.save(cur);
-    tempProfileChanged=false;
-    renderAuthState();
-    _apiCache.clear();
-    toastAccount('Сохранено ✓',false);
-    Sound.success();
-    setTimeout(()=>{ $('settingsOverlay').classList.remove('show'); },600);
-  }else{
-    toastAccount('Ошибка: '+(res.error||'?'),true);
-    Sound.error();
-  }
 }
 function toastAccount(text,isErr){
-  const t=$('settingsToast');
-  t.textContent=text;
-  t.classList.toggle('err',!!isErr);
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
+  var t=$('settingsToast');
+  t.textContent=text; t.classList.toggle('err',!!isErr); t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); },2500);
 }
-
 function renderAccountPassword(){
-  $('settingsContent').innerHTML = `
-    <h2>Сменить пароль</h2>
-    <div class="section-sub">Пароль можно сменить в любой момент.</div>
-    <div class="field">
-      <label for="oldPass">Текущий пароль</label>
-      <input type="password" id="oldPass" maxlength="64" placeholder="••••••••">
-    </div>
-    <div class="field">
-      <label for="newPass">Новый пароль</label>
-      <input type="password" id="newPass" maxlength="64" placeholder="••••••••">
-      <div class="hint" id="newPassHint">Минимум 8 символов</div>
-    </div>
-    <div class="field">
-      <label for="newPass2">Повторите новый пароль</label>
-      <input type="password" id="newPass2" maxlength="64" placeholder="••••••••">
-    </div>
-    <div class="settings-foot">
-      <button class="btn btn-ghost" id="pwdCancel">Закрыть</button>
-      <button class="btn btn-primary" id="pwdSave">Сменить пароль</button>
-    </div>
-  `;
+  $('settingsContent').innerHTML =
+    '<h2>Сменить пароль</h2>'+
+    '<div class="section-sub">Пароль можно сменить в любой момент.</div>'+
+    '<div class="field"><label for="oldPass">Текущий пароль</label><input type="password" id="oldPass" maxlength="64" placeholder="••••••••"></div>'+
+    '<div class="field"><label for="newPass">Новый пароль</label><input type="password" id="newPass" maxlength="64" placeholder="••••••••"><div class="hint" id="newPassHint">Минимум 8 символов</div></div>'+
+    '<div class="field"><label for="newPass2">Повторите новый пароль</label><input type="password" id="newPass2" maxlength="64" placeholder="••••••••"></div>'+
+    '<div class="settings-foot"><button class="btn btn-ghost" id="pwdCancel">Закрыть</button><button class="btn btn-primary" id="pwdSave">Сменить пароль</button></div>';
   $('pwdCancel').onclick=closeAccountSettings;
-  $('newPass').oninput=()=>{
-    const e=validatePassword($('newPass').value);
-    $('newPassHint').textContent = $('newPass').value ? (e||'✓ Хороший пароль') : 'Минимум 8 символов';
-    $('newPassHint').className = 'hint '+($('newPass').value?(e?'err':'ok'):'');
+  $('newPass').oninput=function(){
+    var e=validatePassword($('newPass').value);
+    $('newPassHint').textContent=$('newPass').value?(e||'✓ Хороший пароль'):'Минимум 8 символов';
+    $('newPassHint').className='hint '+($('newPass').value?(e?'err':'ok'):'');
   };
-  $('pwdSave').onclick=async()=>{
-    const s=Session.get(); if(!s) return;
-    const oldP=$('oldPass').value, newP=$('newPass').value, newP2=$('newPass2').value;
+  $('pwdSave').onclick=function(){
+    var s=Session.get(); if(!s) return;
+    var oldP=$('oldPass').value, newP=$('newPass').value, newP2=$('newPass2').value;
     if(!oldP){ toastAccount('Введите текущий пароль',true); Sound.error(); return; }
-    const eP=validatePassword(newP); if(eP){ toastAccount(eP,true); Sound.error(); return; }
+    var eP=validatePassword(newP); if(eP){ toastAccount(eP,true); Sound.error(); return; }
     if(newP!==newP2){ toastAccount('Пароли не совпадают',true); Sound.error(); return; }
-
-    const sr=await api('getSalt',{username:s.username});
-    if(!sr.ok){ toastAccount('Ошибка сервера',true); return; }
-    const oldHash=await sha256(sr.salt+oldP);
-    const newSalt=randomSalt();
-    const newHash=await sha256(newSalt+newP);
-
-    const res=await api('changePassword',{
-      username:s.username, token:s.token,
-      oldHash, salt:newSalt, newHash
+    api('getSalt',{username:s.username}).then(function(sr){
+      if(!sr.ok){ toastAccount('Ошибка сервера',true); return; }
+      return sha256(sr.salt+oldP).then(function(oldHash){
+        var newSalt=randomSalt();
+        return sha256(newSalt+newP).then(function(newHash){
+          return api('changePassword',{username:s.username,token:s.token,oldHash:oldHash,salt:newSalt,newHash:newHash});
+        });
+      });
+    }).then(function(res){
+      if(res && res.ok){
+        Sound.success(); toastAccount('Пароль изменён ✓',false);
+        $('oldPass').value=''; $('newPass').value=''; $('newPass2').value='';
+      } else if(res){
+        Sound.error(); toastAccount(res.error||'Ошибка',true);
+      }
     });
-    if(res.ok){
-      Sound.success();
-      toastAccount('Пароль изменён ✓',false);
-      $('oldPass').value=''; $('newPass').value=''; $('newPass2').value='';
-    }else{
-      Sound.error();
-      toastAccount(res.error||'Ошибка',true);
-    }
   };
 }
 
-const SITE_SECTIONS = { main: renderSiteMain, themes: renderSiteThemes, extra: renderSiteExtra };
-
+/* ---------- SITE SETTINGS (эмодзи/темы) ---------- */
+var SITE_SECTIONS = { main: renderSiteMain, themes: renderSiteThemes, extra: renderSiteExtra };
 function openSiteSettings(){
-  const s=Session.get(); if(!s) return;
+  var s=Session.get(); if(!s) return;
   $('siteSettingsOverlay').classList.add('show');
   Sound.open();
   renderSiteSection('main');
 }
-function closeSiteSettings(){
-  $('siteSettingsOverlay').classList.remove('show');
-  Sound.close();
-}
+function closeSiteSettings(){ $('siteSettingsOverlay').classList.remove('show'); Sound.close(); }
 $('siteSettingsClose').onclick=closeSiteSettings;
-$('siteSettingsOverlay').onclick=e=>{if(e.target===$('siteSettingsOverlay'))closeSiteSettings();};
-document.querySelectorAll('#siteSettingsOverlay .settings-nav-item').forEach(btn=>{
-  btn.onclick=()=>{ Sound.click(); renderSiteSection(btn.dataset.ssection); };
+$('siteSettingsOverlay').onclick=function(e){ if(e.target===$('siteSettingsOverlay')) closeSiteSettings(); };
+document.querySelectorAll('#siteSettingsOverlay .settings-nav-item').forEach(function(btn){
+  btn.onclick=function(){ Sound.click(); renderSiteSection(btn.dataset.ssection); };
 });
 function renderSiteSection(sec){
-  document.querySelectorAll('#siteSettingsOverlay .settings-nav-item').forEach(b=>{
-    b.classList.toggle('active', b.dataset.ssection===sec);
-  });
-  const fn = SITE_SECTIONS[sec];
-  if(fn) fn();
+  document.querySelectorAll('#siteSettingsOverlay .settings-nav-item').forEach(function(b){ b.classList.toggle('active', b.dataset.ssection===sec); });
+  var fn=SITE_SECTIONS[sec]; if(fn) fn();
 }
-
 function getOwned(p){
   return {
-    emojis: Array.isArray(p.ownedEmojis) ? p.ownedEmojis : [''],
-    themes: Array.isArray(p.ownedThemes) ? p.ownedThemes : ['dark','light']
+    emojis: Array.isArray(p.ownedEmojis)?p.ownedEmojis:[''],
+    themes: Array.isArray(p.ownedThemes)?p.ownedThemes:['dark','light']
   };
 }
 
+/* ВАЖНО: теперь показываем ВСЁ, что есть в ownedEmojis/ownedThemes.
+   Если админ выдал секретный эмодзи/тему через adminUpdateUser —
+   он попадает в owned* и сразу становится доступен для установки. */
 function renderSiteMain(){
-  const s=Session.get();
-  const p = s.profile || {};
-  const curEmoji = p.emoji || '';
-  const monkeys = p.monkeys || 0;
-  const owned = getOwned(p).emojis;
+  var s=Session.get();
+  var p=s.profile||{};
+  var curEmoji=p.emoji||'';
+  var monkeys=p.monkeys||0;
+  var owned=getOwned(p).emojis;
 
-  $('siteSettingsContent').innerHTML = `
-    <h2>Главное</h2>
-    <div class="section-sub">Эмодзи рядом с ником. У вас: <b style="color:#fbbf24">🐵 ${monkeys}</b></div>
-    <div class="emoji-grid" id="emojiGrid"></div>
-  `;
-  const grid=$('emojiGrid');
+  $('siteSettingsContent').innerHTML =
+    '<h2>Главное</h2>'+
+    '<div class="section-sub">Эмодзи рядом с ником. У вас: <b style="color:#fbbf24">🐵 '+monkeys+'</b></div>'+
+    '<div class="emoji-grid" id="emojiGrid"></div>';
 
-  const all = EMOJI_LIST.slice();
-  SECRET_EMOJI.forEach(sec => {
-    const has = owned.includes(sec);
-    if(has) all.push({ emoji: sec, label:'Секретный', price:-1, secret:true });
-  });
+  var all=[];
+  /* обычные эмодзи */
+  for(var i=0;i<EMOJI_LIST.length;i++) all.push(EMOJI_LIST[i]);
+  /* все секретные, которые уже есть в owned (выданы админом) */
+  for(var j=0;j<SECRET_EMOJI.length;j++){
+    var sec=SECRET_EMOJI[j];
+    if(owned.indexOf(sec)!==-1){
+      var found=false;
+      for(var k=0;k<all.length;k++) if(all[k].emoji===sec) found=true;
+      if(!found) all.push({emoji:sec, label:'Секретный', price:-1, secret:true});
+    }
+  }
 
-  grid.innerHTML = all.map(item=>{
-    const has = owned.includes(item.emoji);
-    const selected = curEmoji===item.emoji;
-    const lockClass = (!has && item.price>0) ? 'locked' : '';
-    let tag;
-    if(selected) tag = `<div class="e-owned">✓ выбрано</div>`;
-    else if(has) tag = `<div class="e-owned">✓ куплено</div>`;
-    else if(item.price>0) tag = `<div class="e-price">🐵 ${item.price}</div>`;
-    else if(item.price===-1) tag = `<div class="e-price" style="color:#ff8fc4">секрет</div>`;
-    else tag = `<div class="e-free">бесплатно</div>`;
-    return `<div class="emoji-item ${selected?'selected':''} ${lockClass}" data-emoji="${escapeHtml(item.emoji)}" data-price="${item.price}" data-owned="${has}">
-      ${item.secret?'<span class="e-secret">secret</span>':''}
-      <div class="e-big">${item.emoji||'∅'}</div>
-      <div class="e-label">${escapeHtml(item.label)}</div>
-      ${tag}
-    </div>`;
+  var grid=$('emojiGrid');
+  grid.innerHTML=all.map(function(item){
+    var has=owned.indexOf(item.emoji)!==-1;
+    var selected=curEmoji===item.emoji;
+    var lockClass=(!has && item.price>0)?'locked':'';
+    var tag;
+    if(selected) tag='<div class="e-owned">✓ выбрано</div>';
+    else if(has) tag='<div class="e-owned">✓ куплено</div>';
+    else if(item.price>0) tag='<div class="e-price">🐵 '+item.price+'</div>';
+    else if(item.price===-1) tag='<div class="e-price" style="color:#ff8fc4">секрет</div>';
+    else tag='<div class="e-free">бесплатно</div>';
+    return '<div class="emoji-item '+(selected?'selected':'')+' '+lockClass+'" data-emoji="'+esc(item.emoji)+'" data-price="'+item.price+'" data-owned="'+has+'">'+
+      (item.secret?'<span class="e-secret">secret</span>':'')+
+      '<div class="e-big">'+(item.emoji||'∅')+'</div>'+
+      '<div class="e-label">'+esc(item.label)+'</div>'+
+      tag+'</div>';
   }).join('');
 
-  grid.querySelectorAll('.emoji-item').forEach(el=>{
-    el.onclick=async ()=>{
-      const emoji=el.dataset.emoji;
-      const price=parseInt(el.dataset.price,10);
-      const has=el.dataset.owned==='true';
+  grid.querySelectorAll('.emoji-item').forEach(function(el){
+    el.onclick=function(){
+      var emoji=el.dataset.emoji;
+      var price=parseInt(el.dataset.price,10);
+      var has=el.dataset.owned==='true';
       if(price===-1 && !has){ Sound.error(); return; }
       if(has){
         if(curEmoji===emoji) return;
-        const r = await api('setEmoji',{username:s.username,token:s.token,emoji});
-        if(r.ok){
-          const cur=Session.get();
-          cur.profile.emoji = emoji;
-          Session.save(cur);
-          renderAuthState(); Sound.success(); renderSiteMain();
-        } else { Sound.error(); }
+        api('setEmoji',{username:s.username,token:s.token,emoji:emoji}).then(function(r){
+          if(r.ok){
+            var cur=Session.get(); cur.profile.emoji=emoji; Session.save(cur);
+            renderAuthState(); Sound.success(); renderSiteMain();
+          } else { Sound.error(); }
+        });
         return;
       }
       if(price>0){
-        openBuyConfirm(emoji, price, 'эмодзи', async ()=>{
-          const r=await api('buyEmoji',{username:s.username,token:s.token,emoji});
-          if(r.ok){
-            const cur=Session.get();
-            cur.profile.monkeys=r.monkeys;
-            cur.profile.emoji=emoji;
-            cur.profile.ownedEmojis = r.ownedEmojis || [...owned, emoji];
-            Session.save(cur);
-            renderAuthState();
-            updateMonkeysWidget();
-            Sound.buy();
-            toastSite('Куплено ✓',false);
-            renderSiteMain();
-          }else{ Sound.error(); toastSite(r.error||'Ошибка',true); }
+        openBuyConfirm(emoji, price, 'эмодзи', function(){
+          api('buyEmoji',{username:s.username,token:s.token,emoji:emoji}).then(function(r){
+            if(r.ok){
+              var cur=Session.get();
+              cur.profile.monkeys=r.monkeys;
+              cur.profile.emoji=emoji;
+              cur.profile.ownedEmojis=r.ownedEmojis||owned.concat([emoji]);
+              Session.save(cur);
+              renderAuthState(); updateMonkeysWidget();
+              Sound.buy(); toastSite('Куплено ✓',false); renderSiteMain();
+            } else { Sound.error(); toastSite(r.error||'Ошибка',true); }
+          });
         });
       } else {
-        const r = await api('setEmoji',{username:s.username,token:s.token,emoji});
-        if(r.ok){
-          const cur=Session.get(); cur.profile.emoji=emoji;
-          if(!owned.includes(emoji)) cur.profile.ownedEmojis=[...owned, emoji];
-          Session.save(cur);
-          renderAuthState(); Sound.success(); renderSiteMain();
-        }
+        api('setEmoji',{username:s.username,token:s.token,emoji:emoji}).then(function(r){
+          if(r.ok){
+            var cur=Session.get(); cur.profile.emoji=emoji;
+            if(owned.indexOf(emoji)===-1) cur.profile.ownedEmojis=owned.concat([emoji]);
+            Session.save(cur);
+            renderAuthState(); Sound.success(); renderSiteMain();
+          }
+        });
       }
     };
   });
 }
 
 function renderSiteThemes(){
-  const s=Session.get();
-  const p = s.profile || {};
-  const curTheme = p.theme || 'dark';
-  const monkeys = p.monkeys || 0;
-  const owned = getOwned(p).themes;
+  var s=Session.get();
+  var p=s.profile||{};
+  var curTheme=p.theme||'dark';
+  var monkeys=p.monkeys||0;
+  var owned=getOwned(p).themes;
 
-  $('siteSettingsContent').innerHTML = `
-    <h2>Темы</h2>
-    <div class="section-sub">У вас: <b style="color:#fbbf24">🐵 ${monkeys}</b></div>
-    <div class="theme-grid" id="themeGrid"></div>
-  `;
-  const all = THEME_LIST.slice();
-  SECRET_THEMES.forEach(sec => {
-    const has = owned.includes(sec.id);
-    if(has) all.push({ ...sec, secret:true });
-  });
+  $('siteSettingsContent').innerHTML =
+    '<h2>Темы</h2>'+
+    '<div class="section-sub">У вас: <b style="color:#fbbf24">🐵 '+monkeys+'</b></div>'+
+    '<div class="theme-grid" id="themeGrid"></div>';
 
-  const grid=$('themeGrid');
-  grid.innerHTML = all.map(t=>{
-    const selected = curTheme===t.id;
-    const has = owned.includes(t.id);
-    const lock = (!has && t.price>0) ? 'locked' : '';
-    let tag;
-    if(selected) tag = `<div class="theme-owned">✓ выбрано</div>`;
-    else if(has) tag = `<div class="theme-owned">✓ куплено</div>`;
-    else if(t.secret) tag = `<div class="theme-price" style="color:#ff8fc4">секрет</div>`;
-    else if(t.price>0) tag = `<div class="theme-price">🐵 ${t.price}</div>`;
-    else tag = `<div class="theme-free">бесплатно</div>`;
-    return `<div class="theme-item ${selected?'selected':''} ${lock}" data-theme="${t.id}" data-price="${t.price||0}" data-owned="${has}">
-      ${t.secret?'<span class="theme-secret">secret</span>':''}
-      <div class="theme-preview" style="background:${t.preview}"></div>
-      <div class="theme-name">${escapeHtml(t.name)}</div>
-      ${tag}
-    </div>`;
+  var all=[];
+  for(var i=0;i<THEME_LIST.length;i++) all.push(THEME_LIST[i]);
+  for(var j=0;j<SECRET_THEMES.length;j++){
+    var sec=SECRET_THEMES[j];
+    if(owned.indexOf(sec.id)!==-1){
+      var found=false;
+      for(var k=0;k<all.length;k++) if(all[k].id===sec.id) found=true;
+      if(!found) all.push({id:sec.id, name:sec.name, preview:sec.preview, price:-1, secret:true});
+    }
+  }
+
+  var grid=$('themeGrid');
+  grid.innerHTML=all.map(function(t){
+    var selected=curTheme===t.id;
+    var has=owned.indexOf(t.id)!==-1;
+    var lock=(!has && t.price>0)?'locked':'';
+    var tag;
+    if(selected) tag='<div class="theme-owned">✓ выбрано</div>';
+    else if(has) tag='<div class="theme-owned">✓ куплено</div>';
+    else if(t.secret) tag='<div class="theme-price" style="color:#ff8fc4">секрет</div>';
+    else if(t.price>0) tag='<div class="theme-price">🐵 '+t.price+'</div>';
+    else tag='<div class="theme-free">бесплатно</div>';
+    return '<div class="theme-item '+(selected?'selected':'')+' '+lock+'" data-theme="'+t.id+'" data-price="'+(t.price||0)+'" data-owned="'+has+'">'+
+      (t.secret?'<span class="theme-secret">secret</span>':'')+
+      '<div class="theme-preview" style="background:'+t.preview+'"></div>'+
+      '<div class="theme-name">'+esc(t.name)+'</div>'+
+      tag+'</div>';
   }).join('');
 
-  grid.querySelectorAll('.theme-item').forEach(el=>{
-    el.onclick=async ()=>{
-      const theme=el.dataset.theme;
-      const price=parseInt(el.dataset.price,10);
-      const has=el.dataset.owned==='true';
+  grid.querySelectorAll('.theme-item').forEach(function(el){
+    el.onclick=function(){
+      var theme=el.dataset.theme;
+      var price=parseInt(el.dataset.price,10);
+      var has=el.dataset.owned==='true';
       if(price===-1 && !has){ Sound.error(); return; }
       if(has){
         if(curTheme===theme) return;
-        const r = await api('setTheme',{username:s.username,token:s.token,theme});
-        if(r.ok){
-          const cur=Session.get(); cur.profile.theme=theme; Session.save(cur);
-          applyTheme(theme); renderAuthState(); Sound.success(); renderSiteThemes();
-        } else { Sound.error(); }
+        api('setTheme',{username:s.username,token:s.token,theme:theme}).then(function(r){
+          if(r.ok){
+            var cur=Session.get(); cur.profile.theme=theme; Session.save(cur);
+            applyTheme(theme); renderAuthState(); Sound.success(); renderSiteThemes();
+          } else { Sound.error(); }
+        });
         return;
       }
       if(price>0){
-        openBuyConfirm(theme, price, 'тему', async ()=>{
-          const r=await api('buyTheme',{username:s.username,token:s.token,theme});
-          if(r.ok){
-            const cur=Session.get();
-            cur.profile.monkeys=r.monkeys;
-            cur.profile.theme=theme;
-            cur.profile.ownedThemes = r.ownedThemes || [...owned, theme];
-            Session.save(cur);
-            applyTheme(theme);
-            renderAuthState();
-            updateMonkeysWidget();
-            Sound.buy();
-            toastSite('Куплено ✓',false);
-            renderSiteThemes();
-          }else{ Sound.error(); toastSite(r.error||'Ошибка',true); }
+        openBuyConfirm(theme, price, 'тему', function(){
+          api('buyTheme',{username:s.username,token:s.token,theme:theme}).then(function(r){
+            if(r.ok){
+              var cur=Session.get();
+              cur.profile.monkeys=r.monkeys;
+              cur.profile.theme=theme;
+              cur.profile.ownedThemes=r.ownedThemes||owned.concat([theme]);
+              Session.save(cur);
+              applyTheme(theme); renderAuthState(); updateMonkeysWidget();
+              Sound.buy(); toastSite('Куплено ✓',false); renderSiteThemes();
+            } else { Sound.error(); toastSite(r.error||'Ошибка',true); }
+          });
         });
       } else {
-        const r = await api('setTheme',{username:s.username,token:s.token,theme});
-        if(r.ok){
-          const cur=Session.get(); cur.profile.theme=theme;
-          if(!owned.includes(theme)) cur.profile.ownedThemes=[...owned, theme];
-          Session.save(cur);
-          applyTheme(theme); renderAuthState(); Sound.success(); renderSiteThemes();
-        }
+        api('setTheme',{username:s.username,token:s.token,theme:theme}).then(function(r){
+          if(r.ok){
+            var cur=Session.get(); cur.profile.theme=theme;
+            if(owned.indexOf(theme)===-1) cur.profile.ownedThemes=owned.concat([theme]);
+            Session.save(cur);
+            applyTheme(theme); renderAuthState(); Sound.success(); renderSiteThemes();
+          }
+        });
       }
     };
   });
 }
-
 function toastSite(text,isErr){
-  const t=$('siteSettingsToast');
-  t.textContent=text;
-  t.classList.toggle('err',!!isErr);
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
+  var t=$('siteSettingsToast');
+  t.textContent=text; t.classList.toggle('err',!!isErr); t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); },2200);
 }
-
 function renderSiteExtra(){
-  const soundOn = Sound.isEnabled();
-  $('siteSettingsContent').innerHTML = `
-    <h2>Дополнительно</h2>
-    <div class="section-sub">Прочие настройки</div>
-    <div class="toggle-row" style="margin-bottom:10px;">
-      <div>
-        <div class="tr-title">Звуки на сайте</div>
-        <div class="tr-sub">Клики, успех, ошибки</div>
-      </div>
-      <button class="toggle ${soundOn?'on':''}" id="toggleSound"></button>
-    </div>
-    <div class="toggle-row">
-      <div>
-        <div class="tr-title">Сменить тему</div>
-        <div class="tr-sub">Открой вкладку «Темы»</div>
-      </div>
-      <button class="btn btn-ghost" id="openThemesBtn">Открыть</button>
-    </div>
-  `;
-  $('toggleSound').onclick=()=>{
-    const on=!$('toggleSound').classList.contains('on');
+  var soundOn=Sound.isEnabled();
+  $('siteSettingsContent').innerHTML =
+    '<h2>Дополнительно</h2>'+
+    '<div class="section-sub">Прочие настройки</div>'+
+    '<div class="toggle-row" style="margin-bottom:10px;"><div><div class="tr-title">Звуки на сайте</div><div class="tr-sub">Клики, успех, ошибки</div></div>'+
+      '<button class="toggle '+(soundOn?'on':'')+'" id="toggleSound"></button></div>'+
+    '<div class="toggle-row"><div><div class="tr-title">Сменить тему</div><div class="tr-sub">Открой вкладку «Темы»</div></div>'+
+      '<button class="btn btn-ghost" id="openThemesBtn">Открыть</button></div>';
+  $('toggleSound').onclick=function(){
+    var on=!$('toggleSound').classList.contains('on');
     $('toggleSound').classList.toggle('on',on);
-    Sound.setEnabled(on);
-    if(on) Sound.click();
+    Sound.setEnabled(on); if(on) Sound.click();
   };
-  $('openThemesBtn').onclick=()=>renderSiteSection('themes');
+  $('openThemesBtn').onclick=function(){ renderSiteSection('themes'); };
 }
-
-let buyCallback=null;
+var buyCallback=null;
 function openBuyConfirm(item, price, kind, cb){
-  buyCallback = cb;
-  $('buyTitle').textContent = 'Покупка';
-  $('buyText').innerHTML = `Купить ${kind} <b>${escapeHtml(item)}</b> за <b style="color:#fbbf24">🐵 ${price}</b>?<br><span style="color:var(--muted);font-size:12px">Покупается навсегда</span>`;
-  $('buyOverlay').classList.add('show');
-  Sound.open();
+  buyCallback=cb;
+  $('buyTitle').textContent='Покупка';
+  $('buyText').innerHTML='Купить '+kind+' <b>'+esc(item)+'</b> за <b style="color:#fbbf24">🐵 '+price+'</b>?<br><span style="color:var(--muted);font-size:12px">Покупается навсегда</span>';
+  $('buyOverlay').classList.add('show'); Sound.open();
 }
-$('buyCancel').onclick=()=>{$('buyOverlay').classList.remove('show');Sound.close();};
-$('buyConfirm').onclick=async()=>{
-  $('buyOverlay').classList.remove('show');
-  if(buyCallback) await buyCallback();
-};
+$('buyCancel').onclick=function(){ $('buyOverlay').classList.remove('show'); Sound.close(); };
+$('buyConfirm').onclick=function(){ $('buyOverlay').classList.remove('show'); if(buyCallback) buyCallback(); };
 
+/* ---------- monkeys widget ---------- */
 function updateMonkeysWidget(){
-  const s=Session.get(); if(!s||!s.profile) return;
-  const p=s.profile;
-  $('monkeysCount').textContent = p.monkeys || 0;
+  var s=Session.get(); if(!s||!s.profile) return;
+  var p=s.profile;
+  $('monkeysCount').textContent=p.monkeys||0;
   updateWheelBalance();
-  const last = p.lastDaily ? Number(p.lastDaily) : 0;
-  const now = Date.now();
-  const dayMs = 24*60*60*1000;
-  const btn = $('dailyBtn');
-  const title = $('dailyTitle');
-  const sub = $('dailySub');
-
-  if(!last || now - last >= dayMs){
-    btn.classList.add('ready');
-    btn.classList.remove('locked');
-    title.textContent = 'Забрать награду!';
-    sub.textContent = 'Доступно сейчас 🎁';
-  }else{
-    btn.classList.add('locked');
-    btn.classList.remove('ready');
-    title.textContent = 'Ежедневная награда';
+  var last=p.lastDaily?Number(p.lastDaily):0;
+  var now=nowMs();
+  var dayMs=24*60*60*1000;
+  var btn=$('dailyBtn'), title=$('dailyTitle'), sub=$('dailySub');
+  if(!last || now-last>=dayMs){
+    btn.classList.add('ready'); btn.classList.remove('locked');
+    title.textContent='Забрать награду!';
+    sub.textContent='Доступно сейчас 🎁';
+  } else {
+    btn.classList.add('locked'); btn.classList.remove('ready');
+    title.textContent='Ежедневная награда';
     updateTimer();
   }
 }
 function bumpMonkeys(){
-  const el=$('mwCountWrap');
-  if(!el) return;
-  el.classList.remove('bump');
-  void el.offsetWidth;
-  el.classList.add('bump');
+  var el=$('mwCountWrap'); if(!el) return;
+  el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
 }
 function updateTimer(){
-  const s=Session.get(); if(!s||!s.profile) return;
-  const last = s.profile.lastDaily ? Number(s.profile.lastDaily) : 0;
-  const next = last + 24*60*60*1000;
-  const now = Date.now();
-  if(now >= next){ updateMonkeysWidget(); return; }
-  const diff = next - now;
-  const h = Math.floor(diff/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  const sec = Math.floor((diff%60000)/1000);
-  $('dailySub').textContent = `Через ${h}ч ${m}м ${sec}с`;
+  var s=Session.get(); if(!s||!s.profile) return;
+  var last=s.profile.lastDaily?Number(s.profile.lastDaily):0;
+  var next=last+24*60*60*1000;
+  var now=nowMs();
+  if(now>=next){ updateMonkeysWidget(); return; }
+  var diff=next-now;
+  var h=Math.floor(diff/3600000);
+  var m=Math.floor((diff%3600000)/60000);
+  var sec=Math.floor((diff%60000)/1000);
+  $('dailySub').textContent='Через '+h+'ч '+m+'м '+sec+'с';
 }
 setInterval(updateTimer, 1000);
-
-$('dailyBtn').onclick=async ()=>{
-  const s=Session.get(); if(!s) return;
-  const res=await api('claimDaily',{username:s.username,token:s.token});
-  if(res.ok){
-    const cur=Session.get();
-    cur.profile.monkeys = res.monkeys;
-    cur.profile.lastDaily = res.nextAt - 24*60*60*1000;
-    Session.save(cur);
-    showReward(res.reward);
-    Sound.reward();
-    updateMonkeysWidget();
-    bumpMonkeys();
-  }else if(res.error && res.nextAt){
-    const cur=Session.get();
-    cur.profile.lastDaily = res.nextAt - 24*60*60*1000;
-    Session.save(cur);
-    updateMonkeysWidget();
-  }
+$('dailyBtn').onclick=function(){
+  var s=Session.get(); if(!s) return;
+  api('claimDaily',{username:s.username,token:s.token}).then(function(res){
+    if(res.ok){
+      var cur=Session.get();
+      cur.profile.monkeys=res.monkeys;
+      cur.profile.lastDaily=res.nextAt-24*60*60*1000;
+      Session.save(cur);
+      showReward(res.reward); Sound.reward();
+      updateMonkeysWidget(); bumpMonkeys();
+    } else if(res.error && res.nextAt){
+      var cur2=Session.get();
+      cur2.profile.lastDaily=res.nextAt-24*60*60*1000;
+      Session.save(cur2);
+      updateMonkeysWidget();
+    }
+  });
 };
-
 function showReward(amount){
-  $('rpAmount').textContent = '+' + amount;
-  const p=$('rewardPopup');
-  p.classList.add('show');
-  Sound.reward();
-  setTimeout(()=>p.classList.remove('show'), 2000);
+  $('rpAmount').textContent='+'+amount;
+  var p=$('rewardPopup'); p.classList.add('show'); Sound.reward();
+  setTimeout(function(){ p.classList.remove('show'); }, 2000);
 }
 
-async function openProfile(username){
+/* ---------- profile ---------- */
+function openProfile(username){
   Sound.open();
   $('profileOverlay').classList.add('show');
-  $('profileBody').innerHTML = '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>';
-  currentProfileUsername = username;
-
-  const s = Session.get();
-  const res = await api('getProfile', { username, me: s?.username||'' });
-  if(!res.ok){
-    $('profileBody').innerHTML = '<div style="padding:40px;text-align:center;color:var(--danger)">Не найдено</div>';
-    return;
-  }
-  currentProfile = res.profile;
-  currentProfileIsOwner = res.isOwner;
-  currentProfileIRespect = res.iRespect;
-
-  renderProfile();
-  loadProfilePosts();
-}
-function closeProfile(){
-  $('profileOverlay').classList.remove('show');
-  Sound.close();
-}
-$('profileClose').onclick=closeProfile;
-$('profileOverlay').onclick=e=>{if(e.target===$('profileOverlay'))closeProfile();};
-
-function renderProfile(){
-  const p=currentProfile;
-  $('profileBanner').style.background = p.bannerColor || 'var(--banner-default)';
-  const visual = p.visualName || p.username;
-  const av = $('profileAv');
-  if(p.avatar) av.innerHTML = `<img src="${p.avatar}" alt="">`; else av.textContent = visual.charAt(0).toUpperCase();
-  const isAdmin = p.isAdmin || false;
-  const adminBadge = isAdmin ? '<span class="admin-badge-mini">ADMIN</span>' : '';
-  $('profileName').innerHTML = adminBadge + escapeHtml(visual) + (p.emoji?` <span class="emj">${p.emoji}</span>`:'');
-  $('profileLogin').textContent = '@' + p.username;
-  $('profileBio').innerHTML = p.bio ? renderBio(p.bio) : '';
-  $('profileRespects').textContent = p.respects || 0;
-  $('profilePosts').textContent = p.posts || 0;
-  $('profileWins').textContent = p.wins || 0;
-  $('profileMonkeys').textContent = p.monkeys || 0;
-
-  const actions=$('profileActions');
-  if(currentProfileIsOwner){
-    actions.innerHTML = `<button class="btn btn-ghost" id="editProfileBtn">✏️ Редактировать профиль</button>`;
-    $('editProfileBtn').onclick=()=>{ closeProfile(); openAccountSettings(); };
-  }else{
-    actions.innerHTML = `<button class="respect-btn ${currentProfileIRespect?'active':''}" id="respectBtn">
-      <span class="ico">${currentProfileIRespect?'🔥':'❤️'}</span>
-      <span>${currentProfileIRespect?'Уважаю':'Уважение?'}</span>
-    </button>`;
-    $('respectBtn').onclick = () => {
-      if(currentProfileIRespect){
-        openRespectConfirm(async ()=>{ await toggleRespect(); });
-      }else{
-        animateRespect($('respectBtn'));
-        setTimeout(toggleRespect, 500);
-      }
-    };
-  }
-}
-function animateRespect(btn){
-  btn.style.transform = 'scale(1.15)';
-  setTimeout(()=>{ btn.style.transform=''; }, 400);
-  Sound.respect();
-}
-async function toggleRespect(){
-  const s=Session.get(); if(!s) return;
-  const res = await api('toggleRespect',{from:s.username, token:s.token, to:currentProfileUsername});
-  if(res.ok){
-    currentProfileIRespect = res.respect;
-    currentProfile.respects = res.count;
+  $('profileBody').innerHTML='<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>';
+  currentProfileUsername=username;
+  var s=Session.get();
+  api('getProfile',{username:username, me:(s&&s.username)||''}).then(function(res){
+    if(!res.ok){
+      $('profileBody').innerHTML='<div style="padding:40px;text-align:center;color:var(--danger)">Не найдено</div>';
+      return;
+    }
+    currentProfile=res.profile;
+    currentProfileIsOwner=res.isOwner;
+    currentProfileIRespect=res.iRespect;
     renderProfile();
-    Sound.success();
-  }
+    loadProfilePosts();
+  });
 }
-
-async function loadProfilePosts(){
-  const res = await api('getPosts',{ username: currentProfileUsername });
-  const posts = res.ok ? res.posts : [];
-  const body=$('profileBody');
-  const canPost = currentProfileIsOwner;
-
-  body.innerHTML = `
-    ${canPost ? `
-    <div class="post-composer">
-      <textarea id="postText" placeholder="Что нового?"></textarea>
-      <div class="post-composer-foot">
-        <div class="post-composer-btns">
-          <button class="post-ico-btn" id="postImgBtn" title="Фото">📷</button>
-          <button class="post-ico-btn" id="postVidBtn" title="Видео">🎬</button>
-          <button class="post-ico-btn" id="postAudBtn" title="Голосовое">🎤</button>
-        </div>
-        <button class="btn btn-primary" id="postSend">Опубликовать</button>
-      </div>
-    </div>
-    <input type="file" id="postFileImg" accept="image/*" style="display:none">
-    <input type="file" id="postFileVid" accept="video/*" style="display:none">
-    ` : ''}
-    <div class="posts-list" id="postsList"></div>
-  `;
-
-  const list=$('postsList');
-  if(!posts.length){
-    list.innerHTML = `<div class="post-empty">Пока нет публикаций</div>`;
-  }else{
-    list.innerHTML = posts.map(p=>{
-      const date = p.createdAt ? new Date(p.createdAt).toLocaleString('ru-RU') : '';
-      const del = canPost ? `<button class="post-del" data-id="${p.id}" title="Удалить">×</button>` : '';
-      let content='';
-      if(p.type==='text') content = `<div class="post-content">${escapeHtml(p.content).replace(/\n/g,'<br>')}</div>`;
-      else if(p.type==='image') content = `<img loading="lazy" src="${p.content}" alt=""><div class="post-content" style="margin-top:8px">${escapeHtml(p.meta||'')}</div>`;
-      else if(p.type==='video') content = `<video src="${p.content}" controls></video><div class="post-content" style="margin-top:8px">${escapeHtml(p.meta||'')}</div>`;
-      else if(p.type==='audio') content = `<audio src="${p.content}" controls></audio>`;
-      return `<div class="post-card" data-id="${p.id}">
-        <div class="post-head">
-          <div class="post-date">${date}</div>
-          ${del}
-        </div>
-        ${content}
-      </div>`;
-    }).join('');
-    list.querySelectorAll('.post-del').forEach(b=>{
-      b.onclick=async()=>{
-        const id=b.dataset.id;
-        const s=Session.get();
-        const r=await api('deletePost',{username:s.username,token:s.token,id});
-        if(r.ok){ Sound.success(); loadProfilePosts(); }
-      };
-    });
-  }
-
-  if(canPost){
-    $('postSend').onclick = async()=>{
-      const text=$('postText').value.trim();
-      if(!text){ Sound.error(); return; }
-      const s=Session.get();
-      const r=await api('addPost',{username:s.username,token:s.token,type:'text',content:text});
-      if(r.ok){ $('postText').value=''; Sound.success(); loadProfilePosts(); }
+function closeProfile(){ $('profileOverlay').classList.remove('show'); Sound.close(); }
+$('profileClose').onclick=closeProfile;
+$('profileOverlay').onclick=function(e){ if(e.target===$('profileOverlay')) closeProfile(); };
+function renderProfile(){
+  var p=currentProfile;
+  $('profileBanner').style.background=p.bannerColor||'var(--banner-default)';
+  var visual=p.visualName||p.username;
+  var av=$('profileAv');
+  if(p.avatar) av.innerHTML='<img src="'+p.avatar+'" alt="">'; else av.textContent=visual.charAt(0).toUpperCase();
+  var ab=p.isAdmin?adminBadge():'';
+  $('profileName').innerHTML=ab+esc(visual)+(p.emoji?' <span class="emj">'+p.emoji+'</span>':'');
+  $('profileLogin').textContent='@'+p.username;
+  $('profileBio').innerHTML=p.bio?renderBio(p.bio):'';
+  $('profileRespects').textContent=p.respects||0;
+  $('profilePosts').textContent=p.posts||0;
+  $('profileWins').textContent=p.wins||0;
+  $('profileMonkeys').textContent=p.monkeys||0;
+  var actions=$('profileActions');
+  if(currentProfileIsOwner){
+    actions.innerHTML='<button class="btn btn-ghost" id="editProfileBtn">✏️ Редактировать профиль</button>';
+    $('editProfileBtn').onclick=function(){ closeProfile(); openAccountSettings(); };
+  } else {
+    actions.innerHTML='<button class="respect-btn '+(currentProfileIRespect?'active':'')+'" id="respectBtn"><span class="ico">'+(currentProfileIRespect?'🔥':'❤️')+'</span><span>'+(currentProfileIRespect?'Уважаю':'Уважение?')+'</span></button>';
+    $('respectBtn').onclick=function(){
+      if(currentProfileIRespect){ openRespectConfirm(toggleRespect); }
+      else { animateRespect($('respectBtn')); setTimeout(toggleRespect, 500); }
     };
-    $('postImgBtn').onclick=()=>$('postFileImg').click();
-    $('postVidBtn').onclick=()=>$('postFileVid').click();
-    $('postAudBtn').onclick=()=>alert('Голосовые пока не готовы');
-    $('postFileImg').onchange=(e)=>uploadPostFile(e,'image');
-    $('postFileVid').onchange=(e)=>uploadPostFile(e,'video');
   }
 }
-
+function animateRespect(btn){ btn.style.transform='scale(1.15)'; setTimeout(function(){ btn.style.transform=''; },400); Sound.respect(); }
+function toggleRespect(){
+  var s=Session.get(); if(!s) return;
+  api('toggleRespect',{from:s.username, token:s.token, to:currentProfileUsername}).then(function(res){
+    if(res.ok){ currentProfileIRespect=res.respect; currentProfile.respects=res.count; renderProfile(); Sound.success(); }
+  });
+}
+function loadProfilePosts(){
+  api('getPosts',{username:currentProfileUsername}).then(function(res){
+    var posts=res.ok?res.posts:[];
+    var body=$('profileBody');
+    var canPost=currentProfileIsOwner;
+    var html='';
+    if(canPost){
+      html+='<div class="post-composer"><textarea id="postText" placeholder="Что нового?"></textarea>'+
+        '<div class="post-composer-foot"><div class="post-composer-btns">'+
+          '<button class="post-ico-btn" id="postImgBtn" title="Фото">📷</button>'+
+          '<button class="post-ico-btn" id="postVidBtn" title="Видео">🎬</button>'+
+          '<button class="post-ico-btn" id="postAudBtn" title="Голосовое">🎤</button>'+
+        '</div><button class="btn btn-primary" id="postSend">Опубликовать</button></div></div>'+
+        '<input type="file" id="postFileImg" accept="image/*" style="display:none">'+
+        '<input type="file" id="postFileVid" accept="video/*" style="display:none">';
+    }
+    html+='<div class="posts-list" id="postsList"></div>';
+    body.innerHTML=html;
+    var list=$('postsList');
+    if(!posts.length){ list.innerHTML='<div class="post-empty">Пока нет публикаций</div>'; }
+    else {
+      list.innerHTML=posts.map(function(p){
+        var date=p.createdAt?new Date(p.createdAt).toLocaleString('ru-RU'):'';
+        var del=canPost?'<button class="post-del" data-id="'+p.id+'" title="Удалить">×</button>':'';
+        var content='';
+        if(p.type==='text') content='<div class="post-content">'+esc(p.content).replace(/\n/g,'<br>')+'</div>';
+        else if(p.type==='image') content='<img loading="lazy" src="'+p.content+'" alt=""><div class="post-content" style="margin-top:8px">'+esc(p.meta||'')+'</div>';
+        else if(p.type==='video') content='<video src="'+p.content+'" controls></video><div class="post-content" style="margin-top:8px">'+esc(p.meta||'')+'</div>';
+        else if(p.type==='audio') content='<audio src="'+p.content+'" controls></audio>';
+        return '<div class="post-card" data-id="'+p.id+'"><div class="post-head"><div class="post-date">'+date+'</div>'+del+'</div>'+content+'</div>';
+      }).join('');
+      list.querySelectorAll('.post-del').forEach(function(b){
+        b.onclick=function(){
+          var id=b.dataset.id; var s=Session.get();
+          api('deletePost',{username:s.username,token:s.token,id:id}).then(function(r){
+            if(r.ok){ Sound.success(); loadProfilePosts(); }
+          });
+        };
+      });
+    }
+    if(canPost){
+      $('postSend').onclick=function(){
+        var text=$('postText').value.trim();
+        if(!text){ Sound.error(); return; }
+        var s=Session.get();
+        api('addPost',{username:s.username,token:s.token,type:'text',content:text}).then(function(r){
+          if(r.ok){ $('postText').value=''; Sound.success(); loadProfilePosts(); }
+        });
+      };
+      $('postImgBtn').onclick=function(){ $('postFileImg').click(); };
+      $('postVidBtn').onclick=function(){ $('postFileVid').click(); };
+      $('postAudBtn').onclick=function(){ alert('Голосовые пока не готовы'); };
+      $('postFileImg').onchange=function(e){ uploadPostFile(e,'image'); };
+      $('postFileVid').onchange=function(e){ uploadPostFile(e,'video'); };
+    }
+  });
+}
 function uploadPostFile(e, type){
-  const f=e.target.files[0]; if(!f) return;
-  if(f.size > 500*1024){ Sound.error(); alert('Файл слишком большой (макс. 500 КБ)'); return; }
-  const reader=new FileReader();
-  reader.onload=async(ev)=>{
-    const s=Session.get();
-    const r=await api('addPost',{username:s.username,token:s.token,type,content:ev.target.result});
-    if(r.ok){ Sound.success(); loadProfilePosts(); }
-    else{ Sound.error(); alert(r.error); }
+  var f=e.target.files[0]; if(!f) return;
+  if(f.size>500*1024){ Sound.error(); alert('Файл слишком большой (макс. 500 КБ)'); return; }
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    var s=Session.get();
+    api('addPost',{username:s.username,token:s.token,type:type,content:ev.target.result}).then(function(r){
+      if(r.ok){ Sound.success(); loadProfilePosts(); }
+      else { Sound.error(); alert(r.error); }
+    });
   };
   reader.readAsDataURL(f);
   e.target.value='';
 }
 
-/* =========================================================
-   ADMIN
-   ========================================================= */
-$('sbAdmin').onclick=()=>{ Sound.click(); openAdminPanel(); };
-$('adminClose').onclick=()=>{ $('adminOverlay').classList.remove('show'); Sound.close(); };
-$('adminOverlay').onclick=e=>{ if(e.target===$('adminOverlay')){ $('adminOverlay').classList.remove('show'); } };
+/* ---------- ADMIN ---------- */
+$('sbAdmin').onclick=function(){ Sound.click(); openAdminPanel(); };
+$('adminClose').onclick=function(){ $('adminOverlay').classList.remove('show'); Sound.close(); };
+$('adminOverlay').onclick=function(e){ if(e.target===$('adminOverlay')) $('adminOverlay').classList.remove('show'); };
 
-let adminUsersCache=[];
-let adminSearchQuery='';
-let adminBusy=false;
-let adminMe = null;
+var adminUsersCache=[], adminSearchQuery='', adminBusy=false, adminMe=null;
 
-async function openAdminPanel(){
-  const s=Session.get(); if(!s) return;
-  adminBusy = false;
-  $('adminOverlay').classList.add('show');
-  Sound.open();
-
-  const st = await api('adminStatus', { username: s.username });
-  if(!st.ok || !st.isAdmin){
-    $('adminWrap').innerHTML = `<div class="admin-login"><h2>🔒 Админ-панель</h2><div class="al-sub">У вас нет доступа.</div></div>`;
-    return;
-  }
-  adminMe = st;
-
-  const token = sessionStorage.getItem('zv_admin_token');
-  if(token && !st.needsSetup){
-    adminFetchUsers();
-    return;
-  }
-  if(st.needsSetup){
-    renderAdminSetup();
-  } else {
-    renderAdminLogin();
-  }
-}
-
-function renderAdminSetup(){
-  const s=Session.get();
-  $('adminWrap').innerHTML = `
-    <div class="admin-login">
-      <h2>🔑 Настройка админ-пары</h2>
-      <div class="al-sub">Задайте свой пароль и кодовое слово. Они будут использоваться при входе в админ-панель.</div>
-      <div class="field">
-        <label>Логин</label>
-        <input type="text" value="${escapeHtml(s.username)}" disabled style="opacity:.6">
-      </div>
-      <div class="field">
-        <label>Пароль</label>
-        <input type="password" id="setupPass" placeholder="минимум 8 символов" autocomplete="new-password">
-      </div>
-      <div class="field">
-        <label>Повторите пароль</label>
-        <input type="password" id="setupPass2" placeholder="повторите" autocomplete="new-password">
-      </div>
-      <div class="field">
-        <label>Кодовое слово</label>
-        <input type="text" id="setupCode" placeholder="например, ваше секретное слово" autocomplete="off">
-      </div>
-      <button class="btn btn-primary btn-block" id="setupBtn" style="margin-top:10px">Создать пару</button>
-      <div class="modal-msg" id="setupMsg"></div>
-    </div>
-  `;
-  $('setupBtn').onclick = async ()=>{
-    if(adminBusy) return;
-    adminBusy = true;
-    const p1 = $('setupPass').value;
-    const p2 = $('setupPass2').value;
-    const code = $('setupCode').value.trim();
-    $('setupMsg').textContent = '';
-
-    if(p1.length < 8){ $('setupMsg').textContent = 'Пароль минимум 8 символов'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
-    if(p1 !== p2){ $('setupMsg').textContent = 'Пароли не совпадают'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
-    if(code.length < 3){ $('setupMsg').textContent = 'Кодовое слово минимум 3 символа'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
-
-    const salt = randomSalt();
-    const hash = await sha256(salt + p1);
-    try {
-      const r = await api('adminSetup', { username: s.username, salt, hash, code });
-      if(!r.ok){
-        Sound.error();
-        $('setupMsg').textContent = r.error || 'Ошибка';
-        $('setupMsg').className='modal-msg err';
-        adminBusy = false;
-        return;
-      }
-      Sound.success();
-      $('setupMsg').textContent = '✓ Пара создана. Входим…';
-      $('setupMsg').className='modal-msg ok';
-      setTimeout(()=>renderAdminLogin(), 600);
-    } catch(err) {
-      Sound.error();
-      $('setupMsg').textContent = 'Ошибка сети';
-      $('setupMsg').className='modal-msg err';
-    } finally {
-      adminBusy = false;
+function openAdminPanel(){
+  var s=Session.get(); if(!s) return;
+  adminBusy=false;
+  $('adminOverlay').classList.add('show'); Sound.open();
+  api('adminStatus',{username:s.username}).then(function(st){
+    if(!st.ok || !st.isAdmin){
+      $('adminWrap').innerHTML='<div class="admin-login"><h2>🔒 Админ-панель</h2><div class="al-sub">У вас нет доступа.</div></div>';
+      return;
     }
-  };
+    adminMe=st;
+    var token=sessionStorage.getItem('zv_admin_token');
+    if(token && !st.needsSetup){ adminFetchUsers(); return; }
+    if(st.needsSetup) renderAdminSetup();
+    else renderAdminLogin();
+  });
 }
-
-function renderAdminLogin(){
-  const s=Session.get();
-  const isOwner = adminMe && adminMe.isOwner;
-  $('adminWrap').innerHTML = `
-    <div class="admin-login">
-      <h2>🔒 Админ-панель</h2>
-      <div class="al-sub">${isOwner ? 'Вход владельца' : 'Введите свой пароль и кодовое слово'}</div>
-      <div class="field">
-        <label>Пароль</label>
-        <input type="password" id="admPass" placeholder="пароль" autocomplete="off">
-      </div>
-      <div class="field">
-        <label>Кодовое слово</label>
-        <input type="password" id="admCode" placeholder="кодовое слово" autocomplete="off">
-      </div>
-      <button class="btn btn-primary btn-block" id="admLoginBtn" style="margin-top:10px">Войти</button>
-      <div class="modal-msg" id="admMsg"></div>
-    </div>
-  `;
-  const submit = async ()=>{
+function renderAdminSetup(){
+  var s=Session.get();
+  $('adminWrap').innerHTML='<div class="admin-login"><h2>🔑 Настройка админ-пары</h2>'+
+    '<div class="al-sub">Задайте свой пароль и кодовое слово. Они будут использоваться при входе в админ-панель.</div>'+
+    '<div class="field"><label>Логин</label><input type="text" value="'+esc(s.username)+'" disabled style="opacity:.6"></div>'+
+    '<div class="field"><label>Пароль</label><input type="password" id="setupPass" placeholder="минимум 8 символов" autocomplete="new-password"></div>'+
+    '<div class="field"><label>Повторите пароль</label><input type="password" id="setupPass2" placeholder="повторите" autocomplete="new-password"></div>'+
+    '<div class="field"><label>Кодовое слово</label><input type="text" id="setupCode" placeholder="например, ваше секретное слово" autocomplete="off"></div>'+
+    '<button class="btn btn-primary btn-block" id="setupBtn" style="margin-top:10px">Создать пару</button>'+
+    '<div class="modal-msg" id="setupMsg"></div></div>';
+  $('setupBtn').onclick=function(){
     if(adminBusy) return;
     adminBusy=true;
-    const password=$('admPass').value;
-    const code=$('admCode').value;
-    $('admMsg').textContent='';
-    try {
-      let payload = { username: s.username, password, code };
-      if(!isOwner){
-        const sr = await api('adminGetSalt', { username: s.username });
-        if(!sr.ok){
-          Sound.error();
-          $('admMsg').textContent = sr.error || 'Пара не найдена';
-          $('admMsg').className='modal-msg err';
-          adminBusy=false;
-          return;
-        }
-        const hash = await sha256(sr.salt + password);
-        payload = { username: s.username, hash, code };
+    var p1=$('setupPass').value, p2=$('setupPass2').value, code=$('setupCode').value.trim();
+    $('setupMsg').textContent='';
+    if(p1.length<8){ $('setupMsg').textContent='Пароль минимум 8 символов'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
+    if(p1!==p2){ $('setupMsg').textContent='Пароли не совпадают'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
+    if(code.length<3){ $('setupMsg').textContent='Кодовое слово минимум 3 символа'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
+    var salt=randomSalt();
+    sha256(salt+p1).then(function(hash){
+      return api('adminSetup',{username:s.username,salt:salt,hash:hash,code:code});
+    }).then(function(r){
+      if(!r.ok){
+        Sound.error();
+        $('setupMsg').textContent=r.error||'Ошибка';
+        $('setupMsg').className='modal-msg err';
+        adminBusy=false; return;
       }
-      const r=await api('adminLogin', payload);
+      Sound.success();
+      $('setupMsg').textContent='✓ Пара создана. Входим…';
+      $('setupMsg').className='modal-msg ok';
+      setTimeout(renderAdminLogin, 600);
+    }).catch(function(){ Sound.error(); $('setupMsg').textContent='Ошибка сети'; $('setupMsg').className='modal-msg err'; })
+      .then(function(){ adminBusy=false; });
+  };
+}
+function renderAdminLogin(){
+  var s=Session.get();
+  var isOwner=adminMe && adminMe.isOwner;
+  $('adminWrap').innerHTML='<div class="admin-login"><h2>🔒 Админ-панель</h2>'+
+    '<div class="al-sub">'+(isOwner?'Вход владельца':'Введите свой пароль и кодовое слово')+'</div>'+
+    '<div class="field"><label>Пароль</label><input type="password" id="admPass" placeholder="пароль" autocomplete="off"></div>'+
+    '<div class="field"><label>Кодовое слово</label><input type="password" id="admCode" placeholder="кодовое слово" autocomplete="off"></div>'+
+    '<button class="btn btn-primary btn-block" id="admLoginBtn" style="margin-top:10px">Войти</button>'+
+    '<div class="modal-msg" id="admMsg"></div></div>';
+  function submit(){
+    if(adminBusy) return;
+    adminBusy=true;
+    var password=$('admPass').value, code=$('admCode').value;
+    $('admMsg').textContent='';
+    var pr;
+    if(isOwner){
+      pr=api('adminLogin',{username:s.username,password:password,code:code});
+    } else {
+      pr=api('adminGetSalt',{username:s.username}).then(function(sr){
+        if(!sr.ok) throw new Error(sr.error||'Пара не найдена');
+        return sha256(sr.salt+password).then(function(hash){
+          return api('adminLogin',{username:s.username,hash:hash,code:code});
+        });
+      });
+    }
+    pr.then(function(r){
       if(r.ok){
         sessionStorage.setItem('zv_admin_token', r.adminToken);
         Sound.success();
         adminFetchUsers();
-      }else{
+      } else {
         Sound.error();
-        $('admMsg').textContent = r.error||'Ошибка';
+        $('admMsg').textContent=r.error||'Ошибка';
         $('admMsg').className='modal-msg err';
       }
-    } catch(err) {
+    }).catch(function(err){
       Sound.error();
-      $('admMsg').textContent = 'Ошибка сети';
+      $('admMsg').textContent=err.message||'Ошибка сети';
       $('admMsg').className='modal-msg err';
-    } finally {
-      adminBusy=false;
-    }
-  };
-  $('admLoginBtn').onclick = submit;
-  $('admPass').addEventListener('keydown', (e)=>{ if(e.key==='Enter') $('admCode').focus(); });
-  $('admCode').addEventListener('keydown', (e)=>{ if(e.key==='Enter') submit(); });
-  setTimeout(()=>$('admPass').focus(), 150);
+    }).then(function(){ adminBusy=false; });
+  }
+  $('admLoginBtn').onclick=submit;
+  $('admPass').addEventListener('keydown', function(e){ if(e.key==='Enter') $('admCode').focus(); });
+  $('admCode').addEventListener('keydown', function(e){ if(e.key==='Enter') submit(); });
+  setTimeout(function(){ try{ $('admPass').focus(); }catch(e){} }, 150);
 }
-
-async function adminFetchUsers(){
-  adminBusy = false;
-  const token=sessionStorage.getItem('zv_admin_token')||'';
+function adminFetchUsers(){
+  adminBusy=false;
+  var token=sessionStorage.getItem('zv_admin_token')||'';
   if(!token){ renderAdminLogin(); return; }
-  $('adminWrap').innerHTML = `
-    <div class="admin-shell">
-      <div class="admin-topbar">
-        <h2>👑 Админ-панель</h2>
-        <div class="admin-search">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="admSearch" placeholder="Поиск по нику…" autocomplete="off">
-        </div>
-        <div class="admin-stats" id="admStats"><span class="admin-stat">Загрузка…</span></div>
-      </div>
-      <div class="admin-body" id="admBody">
-        <div class="skeleton skeleton-card"></div>
-        <div class="skeleton skeleton-card"></div>
-        <div class="skeleton skeleton-card"></div>
-      </div>
-    </div>
-  `;
-  $('admSearch').addEventListener('input', debounce((e)=>{
-    adminSearchQuery = e.target.value.toLowerCase().trim();
+  $('adminWrap').innerHTML='<div class="admin-shell"><div class="admin-topbar">'+
+    '<h2>👑 Админ-панель</h2>'+
+    '<div class="admin-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'+
+    '<input type="text" id="admSearch" placeholder="Поиск по нику…" autocomplete="off"></div>'+
+    '<div class="admin-stats" id="admStats"><span class="admin-stat">Загрузка…</span></div></div>'+
+    '<div class="admin-body" id="admBody"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div></div></div>';
+  $('admSearch').addEventListener('input', function(e){
+    adminSearchQuery=e.target.value.toLowerCase().trim();
     renderAdminGrid();
-  }, 200));
-
-  const r=await api('adminListUsers',{adminToken:token});
-  if(!r.ok){
-    sessionStorage.removeItem('zv_admin_token');
-    renderAdminLogin(); return;
-  }
-  adminUsersCache = r.users || [];
-  updateAdminStats();
-  renderAdminGrid();
+  });
+  api('adminListUsers',{adminToken:token}).then(function(r){
+    if(!r.ok){ sessionStorage.removeItem('zv_admin_token'); renderAdminLogin(); return; }
+    adminUsersCache=r.users||[];
+    updateAdminStats();
+    renderAdminGrid();
+  });
 }
-
 function updateAdminStats(){
-  const stats = $('admStats');
-  if(!stats) return;
-  const totalMonkeys = adminUsersCache.reduce((s,u)=>s+(u.monkeys||0),0);
-  const totalRespects = adminUsersCache.reduce((s,u)=>s+(u.respects||0),0);
-  const totalWins = adminUsersCache.reduce((s,u)=>s+(u.wins||0),0);
-  stats.innerHTML = `
-    <span class="admin-stat">👥 <b>${adminUsersCache.length}</b></span>
-    <span class="admin-stat">🐵 <b>${totalMonkeys}</b></span>
-    <span class="admin-stat">❤️ <b>${totalRespects}</b></span>
-    <span class="admin-stat">🏆 <b>${totalWins}</b></span>
-  `;
+  var stats=$('admStats'); if(!stats) return;
+  var tm=0,tr=0,tw=0;
+  for(var i=0;i<adminUsersCache.length;i++){
+    tm+=adminUsersCache[i].monkeys||0;
+    tr+=adminUsersCache[i].respects||0;
+    tw+=adminUsersCache[i].wins||0;
+  }
+  stats.innerHTML='<span class="admin-stat">👥 <b>'+adminUsersCache.length+'</b></span>'+
+    '<span class="admin-stat">🐵 <b>'+tm+'</b></span>'+
+    '<span class="admin-stat">❤️ <b>'+tr+'</b></span>'+
+    '<span class="admin-stat">🏆 <b>'+tw+'</b></span>';
 }
-
 function renderAdminGrid(){
-  const body = $('admBody');
-  if(!body) return;
-  adminBusy = false;
-  let users = adminUsersCache;
+  var body=$('admBody'); if(!body) return;
+  adminBusy=false;
+  var users=adminUsersCache;
   if(adminSearchQuery){
-    users = users.filter(u =>
-      (u.username||'').toLowerCase().includes(adminSearchQuery) ||
-      (u.visualName||'').toLowerCase().includes(adminSearchQuery)
-    );
+    users=users.filter(function(u){
+      return (u.username||'').toLowerCase().indexOf(adminSearchQuery)!==-1 ||
+             (u.visualName||'').toLowerCase().indexOf(adminSearchQuery)!==-1;
+    });
   }
-  if(!users.length){
-    body.innerHTML = '<div class="admin-empty">Никого не найдено</div>';
-    return;
-  }
-  const allEmojis = EMOJI_LIST.concat(SECRET_EMOJI.map(e=>({emoji:e, label:'Секрет', price:-1, secret:true})));
-  const allThemes = THEME_LIST.concat(SECRET_THEMES.map(t=>({...t, secret:true})));
-
-  body.innerHTML = `<div class="admin-grid">${users.map(u=>adminCardHtml(u, allEmojis, allThemes)).join('')}</div>`;
-
-  body.querySelectorAll('.admin-card').forEach(card=>{
-    const uname = card.dataset.u;
-    const user = adminUsersCache.find(x=>x.username===uname);
-    if(!user) return;
-
-    const token=()=>sessionStorage.getItem('zv_admin_token');
-
-    card.querySelectorAll('.adm-emoji-picker button').forEach(b=>{
-      b.addEventListener('click', async (e)=>{
+  if(!users.length){ body.innerHTML='<div class="admin-empty">Никого не найдено</div>'; return; }
+  var allEmojis=EMOJI_LIST.concat(SECRET_EMOJI.map(function(e){ return {emoji:e,label:'Секрет',price:-1,secret:true}; }));
+  var allThemes=THEME_LIST.concat(SECRET_THEMES.map(function(t){ var o={}; for(var k in t) o[k]=t[k]; o.secret=true; return o; }));
+  body.innerHTML='<div class="admin-grid">'+users.map(function(u){ return adminCardHtml(u, allEmojis, allThemes); }).join('')+'</div>';
+  /* делегирование кликов по админ-карточкам */
+  body.querySelectorAll('.admin-card').forEach(function(card){
+    var uname=card.dataset.u;
+    var token=function(){ return sessionStorage.getItem('zv_admin_token'); };
+    card.querySelectorAll('.adm-emoji-picker button').forEach(function(b){
+      b.addEventListener('click', function(e){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const eVal = b.dataset.e;
-        adminBusy = true;
-        try {
-          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, emoji: eVal });
+        var eVal=b.dataset.e; adminBusy=true;
+        api('adminUpdateUser',{adminToken:token(), username:uname, emoji:eVal}).then(function(r){
           if(r.ok){
             Sound.success();
-            const idx = adminUsersCache.findIndex(x=>x.username===uname);
-            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
-            const idx2 = allUsers.findIndex(x=>x.username===uname);
-            if(idx2 >= 0 && r.user){
-              allUsers[idx2].emoji = r.user.emoji;
-              allUsers[idx2].visualName = r.user.visualName;
-              allUsers[idx2].monkeys = r.user.monkeys;
-            }
-            if($('viewFriends') && $('viewFriends').classList.contains('active')){
-              renderUsers(allUsers);
-            }
+            var idx=adminUsersCache.findIndex(function(x){return x.username===uname;});
+            if(idx>=0 && r.user) adminUsersCache[idx]=r.user;
+            var idx2=allUsers.findIndex(function(x){return x.username===uname;});
+            if(idx2>=0 && r.user){ allUsers[idx2].emoji=r.user.emoji; allUsers[idx2].visualName=r.user.visualName; allUsers[idx2].monkeys=r.user.monkeys; }
+            if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsers(allUsers);
             renderAdminGrid();
-          }else{ Sound.error(); }
-        } finally { adminBusy = false; }
+          } else Sound.error();
+        }).then(function(){ adminBusy=false; });
       });
     });
-
-    card.querySelectorAll('.adm-theme-picker button').forEach(b=>{
-      b.addEventListener('click', async (e)=>{
+    card.querySelectorAll('.adm-theme-picker button').forEach(function(b){
+      b.addEventListener('click', function(e){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const tVal = b.dataset.t;
-        adminBusy = true;
-        try {
-          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, theme: tVal });
+        var tVal=b.dataset.t; adminBusy=true;
+        api('adminUpdateUser',{adminToken:token(), username:uname, theme:tVal}).then(function(r){
           if(r.ok){
             Sound.success();
-            const idx = adminUsersCache.findIndex(x=>x.username===uname);
-            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
-            const idx2 = allUsers.findIndex(x=>x.username===uname);
-            if(idx2 >= 0 && r.user) allUsers[idx2].theme = r.user.theme;
-            if($('viewFriends') && $('viewFriends').classList.contains('active')){
-              renderUsers(allUsers);
-            }
+            var idx=adminUsersCache.findIndex(function(x){return x.username===uname;});
+            if(idx>=0 && r.user) adminUsersCache[idx]=r.user;
+            var idx2=allUsers.findIndex(function(x){return x.username===uname;});
+            if(idx2>=0 && r.user) allUsers[idx2].theme=r.user.theme;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsers(allUsers);
             renderAdminGrid();
-          }else{ Sound.error(); }
-        } finally { adminBusy = false; }
+          } else Sound.error();
+        }).then(function(){ adminBusy=false; });
       });
     });
-
-    card.querySelectorAll('.adm-give-btn').forEach(b=>{
-      b.addEventListener('click', async (e)=>{
+    card.querySelectorAll('.adm-give-btn').forEach(function(b){
+      b.addEventListener('click', function(e){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const amount = parseInt(b.dataset.amount,10);
-        adminBusy = true;
-        try {
-          const r = await api('adminGive', { adminToken: token(), username: uname, amount });
+        var amount=parseInt(b.dataset.amount,10); adminBusy=true;
+        api('adminGive',{adminToken:token(), username:uname, amount:amount}).then(function(r){
           if(r.ok){
             Sound.success();
-            const idx = adminUsersCache.findIndex(x=>x.username===uname);
-            if(idx >= 0) adminUsersCache[idx].monkeys = r.monkeys;
-            const idx2 = allUsers.findIndex(x=>x.username===uname);
-            if(idx2 >= 0) allUsers[idx2].monkeys = r.monkeys;
-            if($('viewFriends') && $('viewFriends').classList.contains('active')){
-              renderUsers(allUsers);
-            }
+            var idx=adminUsersCache.findIndex(function(x){return x.username===uname;});
+            if(idx>=0) adminUsersCache[idx].monkeys=r.monkeys;
+            var idx2=allUsers.findIndex(function(x){return x.username===uname;});
+            if(idx2>=0) allUsers[idx2].monkeys=r.monkeys;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsers(allUsers);
             renderAdminGrid();
-          }else{ Sound.error(); }
-        } finally { adminBusy = false; }
+          } else Sound.error();
+        }).then(function(){ adminBusy=false; });
       });
     });
-
-    const setMonBtn = card.querySelector('.adm-set-mon');
+    var setMonBtn=card.querySelector('.adm-set-mon');
     if(setMonBtn){
-      setMonBtn.addEventListener('click', async (e)=>{
+      setMonBtn.addEventListener('click', function(e){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const inp = card.querySelector('.adm-mon-input');
-        const val = parseInt(inp.value,10);
-        if(isNaN(val) || val < 0) { Sound.error(); return; }
-        adminBusy = true;
-        try {
-          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, monkeys: val });
+        var inp=card.querySelector('.adm-mon-input');
+        var val=parseInt(inp.value,10);
+        if(isNaN(val)||val<0){ Sound.error(); return; }
+        adminBusy=true;
+        api('adminUpdateUser',{adminToken:token(), username:uname, monkeys:val}).then(function(r){
           if(r.ok){
             Sound.success();
-            const idx = adminUsersCache.findIndex(x=>x.username===uname);
-            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
-            const idx2 = allUsers.findIndex(x=>x.username===uname);
-            if(idx2 >= 0 && r.user) allUsers[idx2].monkeys = r.user.monkeys;
-            if($('viewFriends') && $('viewFriends').classList.contains('active')){
-              renderUsers(allUsers);
-            }
+            var idx=adminUsersCache.findIndex(function(x){return x.username===uname;});
+            if(idx>=0 && r.user) adminUsersCache[idx]=r.user;
+            var idx2=allUsers.findIndex(function(x){return x.username===uname;});
+            if(idx2>=0 && r.user) allUsers[idx2].monkeys=r.user.monkeys;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsers(allUsers);
             renderAdminGrid();
-          }else{ Sound.error(); }
-        } finally { adminBusy = false; }
+          } else Sound.error();
+        }).then(function(){ adminBusy=false; });
       });
     }
-
-    const saveVnBtn = card.querySelector('.adm-save-vn');
+    var saveVnBtn=card.querySelector('.adm-save-vn');
     if(saveVnBtn){
-      saveVnBtn.addEventListener('click', async (e)=>{
+      saveVnBtn.addEventListener('click', function(e){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const inp = card.querySelector('.adm-vn-input');
-        const vn = inp.value.trim();
-        adminBusy = true;
-        try {
-          const r = await api('adminUpdateUser', { adminToken: token(), username: uname, visualName: vn });
+        var inp=card.querySelector('.adm-vn-input');
+        var vn=inp.value.trim(); adminBusy=true;
+        api('adminUpdateUser',{adminToken:token(), username:uname, visualName:vn}).then(function(r){
           if(r.ok){
             Sound.success();
-            const idx = adminUsersCache.findIndex(x=>x.username===uname);
-            if(idx >= 0 && r.user) adminUsersCache[idx] = r.user;
-            const idx2 = allUsers.findIndex(x=>x.username===uname);
-            if(idx2 >= 0 && r.user) allUsers[idx2].visualName = r.user.visualName;
-            if($('viewFriends') && $('viewFriends').classList.contains('active')){
-              renderUsers(allUsers);
-            }
+            var idx=adminUsersCache.findIndex(function(x){return x.username===uname;});
+            if(idx>=0 && r.user) adminUsersCache[idx]=r.user;
+            var idx2=allUsers.findIndex(function(x){return x.username===uname;});
+            if(idx2>=0 && r.user) allUsers[idx2].visualName=r.user.visualName;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsers(allUsers);
             renderAdminGrid();
-          }else{ Sound.error(); }
-        } finally { adminBusy = false; }
+          } else Sound.error();
+        }).then(function(){ adminBusy=false; });
       });
     }
-
-    const admBtn = card.querySelector('.adm-toggle-admin');
+    var admBtn=card.querySelector('.adm-toggle-admin');
     if(admBtn){
-      admBtn.addEventListener('click', async (e)=>{
+      admBtn.addEventListener('click', function(e){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        const newState = !user.isAdmin;
-        adminBusy = true;
-        try {
-          const r = await api('adminSetAdmin', { adminToken: token(), username: uname, isAdmin: newState });
+        var user=adminUsersCache.find(function(x){return x.username===uname;});
+        var newState=!user.isAdmin; adminBusy=true;
+        api('adminSetAdmin',{adminToken:token(), username:uname, isAdmin:newState}).then(function(r){
           if(r.ok){
             Sound.success();
-            const idx = adminUsersCache.findIndex(x=>x.username===uname);
-            if(idx >= 0) adminUsersCache[idx].isAdmin = r.isAdmin;
-            const idx2 = allUsers.findIndex(x=>x.username===uname);
-            if(idx2 >= 0) allUsers[idx2].isAdmin = r.isAdmin;
-            if($('viewFriends') && $('viewFriends').classList.contains('active')){
-              renderUsers(allUsers);
-            }
+            var idx=adminUsersCache.findIndex(function(x){return x.username===uname;});
+            if(idx>=0) adminUsersCache[idx].isAdmin=r.isAdmin;
+            var idx2=allUsers.findIndex(function(x){return x.username===uname;});
+            if(idx2>=0) allUsers[idx2].isAdmin=r.isAdmin;
+            if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsers(allUsers);
             renderAdminGrid();
-          }else{ Sound.error(); alert(r.error||'Ошибка'); }
-        } finally { adminBusy = false; }
+          } else { Sound.error(); alert(r.error||'Ошибка'); }
+        }).then(function(){ adminBusy=false; });
       });
     }
   });
 }
-
 function adminCardHtml(u, allEmojis, allThemes){
-  const visual = u.visualName || u.username;
-  const initial = visual.charAt(0).toUpperCase();
-  const avInner = u.avatar ? `<img src="${u.avatar}" alt="">` : escapeHtml(initial);
-  const emj = u.emoji ? `<span class="emj">${u.emoji}</span>` : '';
-  const ownedEmojis = Array.isArray(u.ownedEmojis) ? u.ownedEmojis : [];
-  const ownedThemes = Array.isArray(u.ownedThemes) ? u.ownedThemes : [];
-  const isAdmin = u.isAdmin || false;
-  const adminBadge = isAdmin ? '<span class="admin-badge admin">ADMIN</span>' : '';
-
-  return `<div class="admin-card" data-u="${escapeHtml(u.username)}">
-    <div class="admin-card-head">
-      <div class="admin-card-av">${avInner}</div>
-      <div style="min-width:0;flex:1">
-        <div class="admin-card-name">${adminBadge}${escapeHtml(visual)}${emj}
-          ${u.isAdmin ? '' : ''}
-        </div>
-        <div class="admin-card-login">@${escapeHtml(u.username)}</div>
-      </div>
-      <div class="admin-card-stats">
-        <span>🐵 <b>${u.monkeys||0}</b></span>
-        <span>❤️ <b>${u.respects||0}</b></span>
-        <span>🏆 <b>${u.wins||0}</b></span>
-      </div>
-    </div>
-
-    <div class="admin-row">
-      <label>Ник</label>
-      <input type="text" class="adm-vn-input" value="${escapeHtml(u.visualName||'')}" maxlength="32">
-      <button class="btn btn-ghost adm-save-vn">OK</button>
-    </div>
-
-    <div class="admin-row">
-      <label>🐵</label>
-      <div class="admin-monkeys-set">
-        <input type="number" class="adm-mon-input" value="${u.monkeys||0}" min="0">
-        <button class="btn btn-ghost adm-set-mon">Set</button>
-      </div>
-    </div>
-
-    <div class="admin-mono-row">
-      <button class="btn btn-ghost adm-give-btn" data-amount="100">+100</button>
-      <button class="btn btn-ghost adm-give-btn" data-amount="1000">+1000</button>
-      <button class="btn btn-ghost adm-give-btn" data-amount="10000">+10к</button>
-      <button class="btn btn-ghost adm-give-btn" data-amount="-100">−100</button>
-      <button class="btn btn-ghost adm-give-btn" data-amount="-1000">−1000</button>
-    </div>
-
-    <div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px">
-      <label style="min-width:0">Эмодзи</label>
-      <div class="adm-emoji-picker">
-        ${allEmojis.map(e=>`<button data-e="${escapeHtml(e.emoji)}" class="${u.emoji===e.emoji?'selected':''}" title="${escapeHtml(e.label)}">${e.emoji||'∅'}</button>`).join('')}
-      </div>
-    </div>
-
-    <div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px">
-      <label style="min-width:0">Тема</label>
-      <div class="adm-theme-picker">
-        ${allThemes.map(t=>`<button data-t="${t.id}" class="${u.theme===t.id?'selected':''}">${escapeHtml(t.name)}</button>`).join('')}
-      </div>
-    </div>
-
-    <div class="admin-mono-row">
-      <button class="btn btn-ghost adm-toggle-admin ${u.isAdmin?'admin-give-admin':''}" style="flex:1;justify-content:center">
-        ${u.isAdmin ? '− Снять админку' : '+ Выдать админку'}
-      </button>
-    </div>
-  </div>`;
+  var visual=u.visualName||u.username;
+  var initial=visual.charAt(0).toUpperCase();
+  var avInner=u.avatar?'<img src="'+u.avatar+'" alt="">':esc(initial);
+  var emj=u.emoji?'<span class="emj">'+u.emoji+'</span>':'';
+  var adminBadgeHtml2=u.isAdmin?'<span class="admin-badge admin">ADMIN</span>':'';
+  return '<div class="admin-card" data-u="'+esc(u.username)+'">'+
+    '<div class="admin-card-head"><div class="admin-card-av">'+avInner+'</div>'+
+      '<div style="min-width:0;flex:1"><div class="admin-card-name">'+adminBadgeHtml2+esc(visual)+emj+'</div>'+
+        '<div class="admin-card-login">@'+esc(u.username)+'</div></div>'+
+      '<div class="admin-card-stats"><span>🐵 <b>'+(u.monkeys||0)+'</b></span><span>❤️ <b>'+(u.respects||0)+'</b></span><span>🏆 <b>'+(u.wins||0)+'</b></span></div>'+
+    '</div>'+
+    '<div class="admin-row"><label>Ник</label><input type="text" class="adm-vn-input" value="'+esc(u.visualName||'')+'" maxlength="32"><button class="btn btn-ghost adm-save-vn">OK</button></div>'+
+    '<div class="admin-row"><label>🐵</label><div class="admin-monkeys-set"><input type="number" class="adm-mon-input" value="'+(u.monkeys||0)+'" min="0"><button class="btn btn-ghost adm-set-mon">Set</button></div></div>'+
+    '<div class="admin-mono-row">'+
+      '<button class="btn btn-ghost adm-give-btn" data-amount="100">+100</button>'+
+      '<button class="btn btn-ghost adm-give-btn" data-amount="1000">+1000</button>'+
+      '<button class="btn btn-ghost adm-give-btn" data-amount="10000">+10к</button>'+
+      '<button class="btn btn-ghost adm-give-btn" data-amount="-100">−100</button>'+
+      '<button class="btn btn-ghost adm-give-btn" data-amount="-1000">−1000</button>'+
+    '</div>'+
+    '<div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px"><label style="min-width:0">Эмодзи</label>'+
+      '<div class="adm-emoji-picker">'+allEmojis.map(function(e){ return '<button data-e="'+esc(e.emoji)+'" class="'+(u.emoji===e.emoji?'selected':'')+'" title="'+esc(e.label)+'">'+(e.emoji||'∅')+'</button>'; }).join('')+'</div></div>'+
+    '<div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px"><label style="min-width:0">Тема</label>'+
+      '<div class="adm-theme-picker">'+allThemes.map(function(t){ return '<button data-t="'+t.id+'" class="'+(u.theme===t.id?'selected':'')+'">'+esc(t.name)+'</button>'; }).join('')+'</div></div>'+
+    '<div class="admin-mono-row"><button class="btn btn-ghost adm-toggle-admin '+(u.isAdmin?'admin-give-admin':'')+'" style="flex:1;justify-content:center">'+(u.isAdmin?'− Снять админку':'+ Выдать админку')+'</button></div>'+
+  '</div>';
 }
 
-/* Ripple effect on .btn */
-document.addEventListener('pointerdown', (e)=>{
-  const btn = e.target.closest('.btn');
+/* ---------- ripple ---------- */
+document.addEventListener('pointerdown', function(e){
+  var btn=e.target.closest ? e.target.closest('.btn') : null;
   if(!btn) return;
-  const r = btn.getBoundingClientRect();
+  var r=btn.getBoundingClientRect();
   btn.style.setProperty('--rx', ((e.clientX-r.left)/r.width*100)+'%');
   btn.style.setProperty('--ry', ((e.clientY-r.top)/r.height*100)+'%');
 });
 
+/* ---------- init ---------- */
 (function init(){
   buildWheel();
   renderAuthState();
   Online.start();
   switchView('home');
-  window.addEventListener('pagehide', ()=>{ Online.stop(); });
+  window.addEventListener('pagehide', function(){ Online.stop(); });
 })();
 </script>
-<style>
-/* ADMIN badge mini */
-.admin-badge-mini {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  padding: 1px 5px;
-  border-radius: 4px;
-  background: var(--admin-badge-bg, #fff);
-  color: var(--admin-badge-fg, #0e0e11);
-  line-height: 1.4;
-  text-transform: uppercase;
-  flex-shrink: 0;
-  margin-right: 4px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.25);
-  vertical-align: middle;
-}
-.user-card .info .name .admin-badge-mini,
-.hover-name .admin-badge-mini,
-.profile-name .admin-badge-mini,
-.user-menu-name .admin-badge-mini {
-  margin-right: 2px;
-}
-.avatar-btn .nick .admin-badge-mini {
-  margin-right: 1px;
-}
-</style>
 </body>
 </html>

@@ -1024,12 +1024,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 <script>
 /* ============================================================
    ULTRA-LITE CLIENT — минимум лагов даже на плохом хостинге
-   - один общий JSONP-хелпер с таймаутом
-   - никаких лишних слушателей, всё делегировано
-   - кэш DOM-элементов по id
-   - rAF-батчинг для частых апдейтов
-   - минимум innerHTML — только там где надо
-   - убраны тяжёлые анимации на слабых устройствах
    ============================================================ */
 
 var API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
@@ -2144,9 +2138,8 @@ function getOwned(p){
   };
 }
 
-/* ВАЖНО: теперь показываем ВСЁ, что есть в ownedEmojis/ownedThemes.
-   Если админ выдал секретный эмодзи/тему через adminUpdateUser —
-   он попадает в owned* и сразу становится доступен для установки. */
+/* Показываем ВСЁ, что есть в ownedEmojis/ownedThemes.
+   Секретные, выданные админом, сразу доступны для установки. */
 function renderSiteMain(){
   var s=Session.get();
   var p=s.profile||{};
@@ -2160,9 +2153,7 @@ function renderSiteMain(){
     '<div class="emoji-grid" id="emojiGrid"></div>';
 
   var all=[];
-  /* обычные эмодзи */
   for(var i=0;i<EMOJI_LIST.length;i++) all.push(EMOJI_LIST[i]);
-  /* все секретные, которые уже есть в owned (выданы админом) */
   for(var j=0;j<SECRET_EMOJI.length;j++){
     var sec=SECRET_EMOJI[j];
     if(owned.indexOf(sec)!==-1){
@@ -2202,7 +2193,10 @@ function renderSiteMain(){
           if(r.ok){
             var cur=Session.get(); cur.profile.emoji=emoji; Session.save(cur);
             renderAuthState(); Sound.success(); renderSiteMain();
-          } else { Sound.error(); }
+          } else {
+            Sound.error();
+            toastSite(r.error||'Не удалось установить',true);
+          }
         });
         return;
       }
@@ -2227,6 +2221,9 @@ function renderSiteMain(){
             if(owned.indexOf(emoji)===-1) cur.profile.ownedEmojis=owned.concat([emoji]);
             Session.save(cur);
             renderAuthState(); Sound.success(); renderSiteMain();
+          } else {
+            Sound.error();
+            toastSite(r.error||'Не удалось установить',true);
           }
         });
       }
@@ -2287,7 +2284,10 @@ function renderSiteThemes(){
           if(r.ok){
             var cur=Session.get(); cur.profile.theme=theme; Session.save(cur);
             applyTheme(theme); renderAuthState(); Sound.success(); renderSiteThemes();
-          } else { Sound.error(); }
+          } else {
+            Sound.error();
+            toastSite(r.error||'Не удалось установить',true);
+          }
         });
         return;
       }
@@ -2312,6 +2312,9 @@ function renderSiteThemes(){
             if(owned.indexOf(theme)===-1) cur.profile.ownedThemes=owned.concat([theme]);
             Session.save(cur);
             applyTheme(theme); renderAuthState(); Sound.success(); renderSiteThemes();
+          } else {
+            Sound.error();
+            toastSite(r.error||'Не удалось установить',true);
           }
         });
       }
@@ -2690,7 +2693,6 @@ function renderAdminGrid(){
   var allEmojis=EMOJI_LIST.concat(SECRET_EMOJI.map(function(e){ return {emoji:e,label:'Секрет',price:-1,secret:true}; }));
   var allThemes=THEME_LIST.concat(SECRET_THEMES.map(function(t){ var o={}; for(var k in t) o[k]=t[k]; o.secret=true; return o; }));
   body.innerHTML='<div class="admin-grid">'+users.map(function(u){ return adminCardHtml(u, allEmojis, allThemes); }).join('')+'</div>';
-  /* делегирование кликов по админ-карточкам */
   body.querySelectorAll('.admin-card').forEach(function(card){
     var uname=card.dataset.u;
     var token=function(){ return sessionStorage.getItem('zv_admin_token'); };

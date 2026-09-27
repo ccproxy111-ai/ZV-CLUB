@@ -94,6 +94,22 @@ body.theme-divine .dash-card.awards{
   background-size:400% 400%;
   animation:awardsShift 8s ease infinite;
 }
+body.theme-divine .main::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(96,165,250,.08), transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(251,191,36,.06), transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(168,85,247,.05), transparent 60%);
+  animation:divineAura 12s ease infinite;
+}
+@keyframes divineAura{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+body.theme-divine .hero-title::after{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:120%;height:120%;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle, rgba(96,165,250,.15), transparent 70%);
+  animation:divineGlow 8s ease infinite;
+}
+@keyframes divineGlow{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.15)}}
 body.theme-obsidian{background:linear-gradient(135deg,#0a0510,#1a0a2a,#0a0510,#2a0a3a);background-size:300% 300%;animation:obsShift 25s ease infinite;--bg:#0a0510;--bg2:#14081c;--bg3:#1e0f2a;--bg4:#2a1638;--fg:#e8d8ff;--muted:#8a6fa8;--muted2:#5a4770;--border:#22102e;--border2:#3a1f4a;--header-bg:rgba(10,5,16,.8);--sidebar-bg:rgba(10,5,16,.8);--btn-primary-bg:linear-gradient(135deg,#a855f7,#6366f1);--btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#b975ff,#7c7cf5);--av-bg:linear-gradient(135deg,#3a1f4a,#22102e);--av-fg:#e8d8ff;--av-border:#3a1f4a;--banner-default:#1e0f2a;--shader-opacity:.5;--admin-badge-bg:#fff;--admin-badge-fg:#0a0510}
 @keyframes obsShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 body.theme-rgb{background:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8b00ff,#ff0000);background-size:400% 400%;animation:rgbShift 10s linear infinite;--bg:rgba(10,10,15,.6);--bg2:rgba(20,20,30,.85);--bg3:rgba(30,30,45,.88);--bg4:rgba(45,45,65,.92);--fg:#ffffff;--muted:#e0e0f0;--muted2:#b0b0c0;--border:rgba(255,255,255,.3);--border2:rgba(255,255,255,.5);--header-bg:rgba(10,10,15,.72);--sidebar-bg:rgba(10,10,15,.72);--btn-primary-bg:linear-gradient(135deg,#ff0000,#00ff00,#0000ff);--btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#ff00ff,#00ffff,#ffff00);--av-bg:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff);--av-fg:#ffffff;--av-border:rgba(255,255,255,.5);--banner-default:rgba(30,30,45,.8);--shader-opacity:0;--admin-badge-bg:#fff;--admin-badge-fg:#0e0e11}
@@ -368,7 +384,7 @@ body.logged-in .main{padding-left:calc(var(--sidebar-w) + 30px);align-items:flex
 .hero-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;background:var(--bg2);border:1px solid var(--border);font-size:12px;color:var(--muted);margin-bottom:26px;backdrop-filter:blur(8px);animation:fadeUp .8s var(--ease)}
 .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.hero-title{font-size:clamp(44px,7vw,84px);font-weight:800;letter-spacing:-2.5px;margin-bottom:16px;line-height:1;color:var(--fg)}
+.hero-title{font-size:clamp(44px,7vw,84px);font-weight:800;letter-spacing:-2.5px;margin-bottom:16px;line-height:1;color:var(--fg);position:relative}
 .hero-title .accent{color:var(--muted);font-weight:300}
 .hero-sub{color:var(--muted);font-size:17px;margin-bottom:36px}
 .hero-sub .sv{color:var(--fg);font-weight:700;letter-spacing:.3px}
@@ -977,9 +993,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .preview-panel{width:100%;border-left:none;border-top:1px solid var(--border)}
 }
 
-/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
 @media(max-width:640px){
-  /* Шапка */
   .header{
     padding:0 10px;
     height:50px;
@@ -1001,7 +1015,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .btn{padding:7px 10px;font-size:11px}
   .btn svg{width:12px;height:12px}
 
-  /* Сайдбар — выезжающая панель снизу */
   .sidebar{
     position:fixed;
     top:auto;
@@ -1076,7 +1089,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
     color:#ffcc33;
   }
 
-  /* Основной контент */
   .main{
     padding:70px 14px 80px;
   }
@@ -1085,7 +1097,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
     padding-bottom:80px;
   }
 
-  /* Дашборд */
   .dash-grid{
     grid-template-columns:1fr 1fr;
     gap:10px;
@@ -1106,12 +1117,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .dash-card.awards .awards-desc{font-size:11px}
   .dash-card.awards .awards-cta{font-size:11px;padding:7px 12px}
 
-  /* Герой */
   .hero-title{font-size:clamp(32px,10vw,48px);letter-spacing:-1.5px}
   .hero-sub{font-size:14px}
   .hero-actions .btn-lg{padding:10px 16px;font-size:13px}
 
-  /* Пользователи */
   .users-grid{
     grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
     gap:8px;
@@ -1127,7 +1136,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .user-card .info .login{font-size:10px}
   .user-card .online-label{font-size:8.5px}
 
-  /* Модалки */
   .modal{
     padding:20px 16px;
     border-radius:12px;
@@ -1145,7 +1153,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .captcha-box .cap-word{font-size:18px;letter-spacing:5px}
   .captcha-box input{font-size:12px;padding:6px 9px}
 
-  /* Настройки */
   .settings-layout{min-height:auto;max-height:85vh}
   .settings-nav{
     display:flex;
@@ -1177,7 +1184,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .settings-foot .btn{width:100%;justify-content:center;padding:10px}
   .settings-foot .btn-danger{margin-right:0}
 
-  /* Обезьяны виджет */
   .monkeys-widget{
     bottom:66px;
     right:8px;
@@ -1199,7 +1205,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .mw-daily-title{font-size:10px}
   .mw-daily-sub{font-size:9px}
 
-  /* Профиль */
   .profile-banner{height:90px}
   .profile-head{
     flex-direction:column;
@@ -1235,7 +1240,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .profile-tab{padding:9px 12px;font-size:12px}
   .profile-body{padding:14px}
 
-  /* Колесо */
   .wheel-stage{width:min(280px,80vw);height:min(280px,80vw)}
   .wheel-pointer{border-left-width:12px;border-right-width:12px;border-top-width:22px}
   .wheel-pointer::after{width:14px;height:14px;top:-22px;left:-7px}
@@ -1261,7 +1265,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .wh-sub{font-size:9px}
   .wh-res{font-size:11px}
 
-  /* Заработок */
   .earn-hero h1{font-size:24px}
   .earn-hero p{font-size:12px}
   .earn-grid{grid-template-columns:1fr;gap:10px}
@@ -1286,7 +1289,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .clicker-zone .cz-ico{font-size:50px}
   .clicker-zone .cz-txt{font-size:11px}
 
-  /* Логи */
   .logs-modal{max-width:calc(100vw - 20px)}
   .logs-head{padding:16px 18px 12px}
   .logs-head h2{font-size:17px}
@@ -1297,7 +1299,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .log-title{font-size:13px}
   .log-list li{font-size:11px;padding-left:14px}
 
-  /* Админ */
   .admin-topbar{padding:10px 12px;gap:8px}
   .admin-topbar h2{font-size:14px}
   .admin-search{min-width:120px}
@@ -1318,7 +1319,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .adm-emoji-picker button{padding:4px 7px;font-size:14px}
   .adm-theme-picker button{padding:4px 8px;font-size:10px}
 
-  /* Прочее */
   .reward-popup{padding:18px 28px;font-size:22px;border-radius:14px}
   .reward-popup .rp-label{font-size:10px}
   .status-badge{font-size:9px;padding:2px 6px}
@@ -1655,7 +1655,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
         <label for="username">Имя пользователя</label>
         <div class="input-wrap">
           <svg class="inp-ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <input type="text" id="username" maxlength="20" required placeholder="nickname">
+          <input type="text" id="username" maxlength="20" required placeholder="nickname" autocapitalize="off" autocorrect="off" spellcheck="false">
         </div>
         <small class="hint" id="hintUser">3–20 символов, латиница/цифры/_</small>
       </div>
@@ -1663,7 +1663,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
         <label for="password">Пароль</label>
         <div class="input-wrap">
           <svg class="inp-ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <input type="password" id="password" maxlength="64" required placeholder="••••••••">
+          <input type="password" id="password" maxlength="64" required placeholder="••••••••" autocapitalize="off" autocorrect="off" spellcheck="false">
           <button type="button" class="pass-toggle" id="passToggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
         </div>
         <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
@@ -1673,7 +1673,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
         <label for="password2">Повторите пароль</label>
         <div class="input-wrap">
           <svg class="inp-ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <input type="password" id="password2" maxlength="64" placeholder="••••••••">
+          <input type="password" id="password2" maxlength="64" placeholder="••••••••" autocapitalize="off" autocorrect="off" spellcheck="false">
         </div>
       </div>
       <div class="captcha-box" id="captchaBox" style="display:none;">
@@ -1681,7 +1681,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
         <div style="flex:1">
           <label>Введите слово</label>
           <div class="cap-word" id="captchaWord">ZV</div>
-          <input type="text" id="captchaInput" placeholder="СЛОВО" autocomplete="off" maxlength="8" style="margin-top:8px">
+          <input type="text" id="captchaInput" placeholder="СЛОВО" autocomplete="off" maxlength="8" autocapitalize="characters" autocorrect="off" spellcheck="false" style="margin-top:8px">
         </div>
       </div>
       <div class="modal-actions">
@@ -1756,11 +1756,11 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
       <div class="confirm-text">Это действие <b>необратимо</b>. Все данные, посты, обезьяны и уважение будут удалены навсегда.</div>
       <div class="field" style="text-align:left">
         <label for="delUser">Введите ваш юзернейм</label>
-        <input type="text" id="delUser" placeholder="username" autocomplete="off" style="padding-left:13px">
+        <input type="text" id="delUser" placeholder="username" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" style="padding-left:13px">
       </div>
       <div class="field" style="text-align:left">
         <label for="delPass">Введите пароль</label>
-        <input type="password" id="delPass" placeholder="••••••••" autocomplete="off" style="padding-left:13px">
+        <input type="password" id="delPass" placeholder="••••••••" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" style="padding-left:13px">
       </div>
       <div class="confirm-actions" style="margin-top:10px">
         <button class="btn btn-ghost" id="delCancel">Отмена</button>
@@ -1997,6 +1997,15 @@ var WHEEL_MIN_BET = 100;
 var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
+  {
+    ver: 'BETA 0.14', cls: 'v2', title: 'Фикс логина на мобилке + мобильная адаптация + божественная тема',
+    items: [
+      { tag: 'fix', text: 'Исправлен баг с «Неверное имя или пароль» на мобильных устройствах — теперь автокоррекция и автокапитализация полей отключены.' },
+      { tag: 'fix', text: 'Исправлена ошибка загрузки участников в разделе «Найти друзей» на телефонах.' },
+      { tag: 'new', text: 'Полная мобильная адаптация: нижняя навигация, адаптивные карточки, профиль, колесо, заработок, настройки.' },
+      { tag: 'upd', text: 'Тема «Божественная»: сочный визуал — переливы, свечения, аура, анимированные градиенты текста и кнопок.' }
+    ]
+  },
   {
     ver: 'BETA 0.13', cls: 'v2', title: 'Мобильная адаптация и исправления',
     items: [
@@ -3723,9 +3732,9 @@ function renderAccountPassword(){
   $('settingsContent').innerHTML =
     '<h2>Сменить пароль</h2>'+
     '<div class="section-sub">Пароль можно сменить в любой момент.</div>'+
-    '<div class="field"><label for="oldPass">Текущий пароль</label><input type="password" id="oldPass" maxlength="64" placeholder="••••••••" style="padding-left:13px"></div>'+
-    '<div class="field"><label for="newPass">Новый пароль</label><input type="password" id="newPass" maxlength="64" placeholder="••••••••" style="padding-left:13px"><div class="hint" id="newPassHint">Минимум 8 символов</div></div>'+
-    '<div class="field"><label for="newPass2">Повторите новый пароль</label><input type="password" id="newPass2" maxlength="64" placeholder="••••••••" style="padding-left:13px"></div>'+
+    '<div class="field"><label for="oldPass">Текущий пароль</label><input type="password" id="oldPass" maxlength="64" placeholder="••••••••" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
+    '<div class="field"><label for="newPass">Новый пароль</label><input type="password" id="newPass" maxlength="64" placeholder="••••••••" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"><div class="hint" id="newPassHint">Минимум 8 символов</div></div>'+
+    '<div class="field"><label for="newPass2">Повторите новый пароль</label><input type="password" id="newPass2" maxlength="64" placeholder="••••••••" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
     '<div class="settings-foot"><button class="btn btn-ghost" id="pwdCancel">Закрыть</button><button class="btn btn-primary" id="pwdSave">Сменить пароль</button></div>';
   $('pwdCancel').onclick=closeAccountSettings;
   $('newPass').oninput=function(){
@@ -4046,7 +4055,7 @@ function startMath(){
     '<div class="math-timer"><div class="math-timer-fill" id="mathTimerFill"></div></div>'+
     '<div class="math-question" id="mathQuestion">—</div>'+
     '<div class="math-answer-row">'+
-      '<input type="number" id="mathAnswer" placeholder="Ответ" autocomplete="off">'+
+      '<input type="number" id="mathAnswer" placeholder="Ответ" autocomplete="off" inputmode="numeric">'+
       '<button class="btn btn-primary" id="mathSubmit">OK</button>'+
     '</div>';
   $('mathSubmit').onclick=submitMath;
@@ -4280,9 +4289,9 @@ function renderAdminSetup(){
   $('adminWrap').innerHTML='<div class="admin-login"><h2>🔑 Настройка админ-пары</h2>'+
     '<div class="al-sub">Задайте свой пароль и кодовое слово. Они будут использоваться при входе в админ-панель.</div>'+
     '<div class="field"><label>Логин</label><input type="text" value="'+esc(s.username)+'" disabled style="opacity:.6;padding-left:13px"></div>'+
-    '<div class="field"><label>Пароль</label><input type="password" id="setupPass" placeholder="минимум 8 символов" autocomplete="new-password" style="padding-left:13px"></div>'+
-    '<div class="field"><label>Повторите пароль</label><input type="password" id="setupPass2" placeholder="повторите" autocomplete="new-password" style="padding-left:13px"></div>'+
-    '<div class="field"><label>Кодовое слово</label><input type="text" id="setupCode" placeholder="например, ваше секретное слово" autocomplete="off" style="padding-left:13px"></div>'+
+    '<div class="field"><label>Пароль</label><input type="password" id="setupPass" placeholder="минимум 8 символов" autocomplete="new-password" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
+    '<div class="field"><label>Повторите пароль</label><input type="password" id="setupPass2" placeholder="повторите" autocomplete="new-password" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
+    '<div class="field"><label>Кодовое слово</label><input type="text" id="setupCode" placeholder="например, ваше секретное слово" autocomplete="off" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
     '<button class="btn btn-primary btn-block" id="setupBtn" style="margin-top:10px">Создать пару</button>'+
     '<div class="modal-msg" id="setupMsg"></div></div>';
   $('setupBtn').onclick=function(){
@@ -4316,8 +4325,8 @@ function renderAdminLogin(){
   var isOwner=adminMe && adminMe.isOwner;
   $('adminWrap').innerHTML='<div class="admin-login"><h2>🔒 Админ-панель</h2>'+
     '<div class="al-sub">'+(isOwner?'Вход владельца':'Введите свой пароль и кодовое слово')+'</div>'+
-    '<div class="field"><label>Пароль</label><input type="password" id="admPass" placeholder="пароль" autocomplete="off" style="padding-left:13px"></div>'+
-    '<div class="field"><label>Кодовое слово</label><input type="password" id="admCode" placeholder="кодовое слово" autocomplete="off" style="padding-left:13px"></div>'+
+    '<div class="field"><label>Пароль</label><input type="password" id="admPass" placeholder="пароль" autocomplete="off" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
+    '<div class="field"><label>Кодовое слово</label><input type="password" id="admCode" placeholder="кодовое слово" autocomplete="off" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
     '<button class="btn btn-primary btn-block" id="admLoginBtn" style="margin-top:10px">Войти</button>'+
     '<div class="modal-msg" id="admMsg"></div></div>';
   function submit(){
@@ -4364,7 +4373,7 @@ function adminFetchUsers(){
   $('adminWrap').innerHTML='<div class="admin-shell"><div class="admin-topbar">'+
     '<h2>👑 Админ-панель</h2>'+
     '<div class="admin-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'+
-    '<input type="text" id="admSearch" placeholder="Поиск по нику…" autocomplete="off"></div>'+
+    '<input type="text" id="admSearch" placeholder="Поиск по нику…" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
     '<div class="admin-stats" id="admStats"><span class="admin-stat">Загрузка…</span></div></div>'+
     '<div class="admin-body" id="admBody"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div></div></div>';
   $('admSearch').addEventListener('input', function(e){

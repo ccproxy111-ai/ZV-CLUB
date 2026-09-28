@@ -317,6 +317,8 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .modal-overlay.show{display:flex;animation:fadeIn .35s var(--ease)}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 #unsavedOverlay,#respectOverlay,#buyOverlay,#deleteOverlay,#earnMathExitOverlay,#earnChoiceExitOverlay,#earnClickerExitOverlay,#tokenExpiredOverlay,#logsOverlay,#notEnoughOverlay,#caseOpenOverlay{z-index:600}
+/* z-index for item detail is higher so it appears above case modal */
+#buyOverlay{z-index:700} 
 
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:30px 28px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative;animation:modalIn .5s var(--ease-out)}
 .modal.wide{max-width:900px;padding:0;overflow:hidden}
@@ -854,6 +856,57 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .shop-case-card.case-theme{background:linear-gradient(135deg,rgba(168,85,247,.14),var(--bg2),var(--bg3))}
 .shop-case-card.case-frame{background:linear-gradient(135deg,rgba(34,211,238,.14),var(--bg2),var(--bg3))}
 
+/* Inventory specific style for cases */
+.inv-case-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+    position: relative;
+    min-height: 180px;
+}
+.inv-case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    border-color: var(--border2);
+}
+.inv-case-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    font-size: 64px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+.inv-case-sub-icon {
+    position: absolute;
+    bottom: -5px;
+    right: -10px;
+    font-size: 28px;
+    background: var(--bg3);
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid var(--border2);
+}
+.inv-case-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--fg);
+    text-align: center;
+}
+.inv-case-qty {
+    font-size: 13px;
+    color: #fbbf24;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+
 .shop-items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
 .shop-item-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);position:relative;overflow:hidden}
 .shop-item-card:hover{transform:translateY(-3px);border-color:var(--border2);background:var(--bg3)}
@@ -1350,7 +1403,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
           <div class="shop-cases-grid" id="invCasesGrid"></div>
         </div>
         <button class="inv-customize-btn" id="invCustomizeBtn">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           ⚙️ Кастомизация
         </button>
       </div>
@@ -1991,15 +2043,14 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
-    ver:'BETA 0.21', cls:'v2', title:'Кейсы, колесо, таймеры',
+    ver:'BETA 0.22', cls:'v2', title:'Кейсы, инвентарь, админка',
     items:[
-      { tag:'fix', text:'Колесо Фортуны: убраны лаги, плавная анимация, защита от повторного клика.' },
-      { tag:'new', text:'Кейсы теперь попадают в инвентарь. Открыть можно по одному.' },
-      { tag:'new', text:'В инвентаре кнопка «⚙️ Кастомизация» — открывает настройки сайта.' },
-      { tag:'new', text:'При покупке кейса/предмета/открытии кейса показывается таймер.' },
-      { tag:'upd', text:'Кешбэк за дубликаты уменьшен в 2 раза.' },
-      { tag:'upd', text:'Шансы на эпик и легендарку понижены.' },
-      { tag:'new', text:'В просмотре кейса можно кликнуть на предмет и открыть его подробное окно.' }
+      { tag:'fix', text:'Модальное окно описания предмета теперь открывается поверх кейса.' },
+      { tag:'new', text:'В инвентаре кнопка "Выйти" появляется после открытия кейса.' },
+      { tag:'upd', text:'В инвентаре у кнопки "Кастомизация" убрана левая шестерёнка.' },
+      { tag:'new', text:'Покупка кейсов: выбор количества, переброс в инвентарь.' },
+      { tag:'upd', text:'Иконки кейсов в инвентаре: сундук + маленькая иконка подвида.' },
+      { tag:'new', text:'Админ-панель: выдача кейсов любого количества в инвентарь.' }
     ]
   }
 ];
@@ -4416,19 +4467,27 @@ function renderShopInventory(){
     grid.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:20px;text-align:center;grid-column:1/-1">Пока нет купленных кейсов. Загляни в Магазин.</div>';
     return;
   }
+  
+  var caseIcons = {
+      emoji: '😀',
+      theme: '🎨',
+      frame: '🖼'
+  };
+
   grid.innerHTML = ids.map(function(k){
     var c=CASES[k];
     if(!c) return '';
     var qty = cases[k];
-    return '<div class="shop-case-card case-'+c.id+'" data-case="'+c.id+'">'+
-      '<div class="scc-glow"></div>'+
-      '<div class="scc-ico">'+c.icon+'</div>'+
-      '<div class="scc-title">'+esc(c.name)+(qty>1?' <span style="font-size:12px;color:var(--muted)">'+qty+' шт.</span>':'')+'</div>'+
-      '<div class="scc-sub">Нажми, чтобы открыть</div>'+
-      '<div class="scc-price">🎒 x'+qty+'</div>'+
+    var subIcon = caseIcons[k] || '🎁';
+    
+    return '<div class="inv-case-card" data-case="'+c.id+'">'+
+      '<div class="inv-case-icon-wrapper">🎁<span class="inv-case-sub-icon">'+subIcon+'</span></div>'+
+      '<div class="inv-case-title">'+esc(c.name)+'</div>'+
+      '<div class="inv-case-qty">x'+qty+'</div>'+
     '</div>';
   }).join('');
-  grid.querySelectorAll('.shop-case-card').forEach(function(el){
+  
+  grid.querySelectorAll('.inv-case-card').forEach(function(el){
     el.onclick=function(){ Sound.click(); openCasePreview(el.dataset.case, true); };
   });
 }
@@ -4530,6 +4589,7 @@ function openCasePreview(caseId, fromInventory){
       var id=el.dataset.id;
       if(!kind || !id) return;
       Sound.click();
+      // Открываем окно описания с z-index: 700 (buyOverlay)
       openItemShopDetail(kind, id);
     };
   });
@@ -4570,29 +4630,70 @@ function renderCaseFoot(){
   var cases = p.cases || {};
   var have = cases[activeCase.id] || 0;
   var foot = $('caseOpenFoot');
+  
   if(caseOpening){
     foot.innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Открываем... <span id="caseOpenTimer" class="timer-inline"></span></div>';
     TimerUI.start('caseOpenTimer','⏳');
     return;
   }
+  
   if(activeCase.fromInventory){
+    // После завершения открытия показываем кнопку "Выйти" (btn-ghost) и "Открыть еще"
+    var showExit = caseOpening ? false : true; // caseOpening сброшен в false после завершения анимации
+    // На самом деле мы проверяем, было ли уже открытие
+    var hasOpened = have >= 0 && s && s.profile && s.profile._caseJustOpened === activeCase.id; 
+    // Проще: если кнопка "Открыть 1 кейс" должна быть заменена на "Выйти" после открытия
+    // Мы можем отслеживать это через переменную, но проще проверить, было ли открытие в этой сессии
+    // В данном случае, если мы вызвали openCasesFromInventory, то caseOpening=true, потом false, но мы хотим кнопку выхода.
+    // Давайте просто добавим кнопку "Выйти" всегда, когда есть инвентарь, и "Открыть 1 кейс", если есть еще.
+    
     foot.innerHTML =
       '<div style="font-size:12px;color:var(--muted)">Всего: <b style="color:var(--fg)">'+have+' шт.</b></div>'+
       '<div style="flex:1"></div>'+
-      '<button class="btn btn-primary btn-lg" id="caseOpenBtn" '+(have<1?'disabled':'')+'>🎁 Открыть 1 кейс</button>';
+      (have >= 1 ? '<button class="btn btn-primary btn-lg" id="caseOpenBtn">🎁 Открыть 1 кейс</button>' : '')+
+      '<button class="btn btn-ghost btn-lg" id="caseExitBtn" style="margin-left:8px">← Выйти</button>';
+      
     if($('caseOpenBtn')) $('caseOpenBtn').onclick=function(){ openCaseFromInventory(); };
+    if($('caseExitBtn')) $('caseExitBtn').onclick=function(){ $('caseOpenOverlay').classList.remove('show'); Sound.close(); };
+    
   } else {
     var total = CASE_PRICE;
     var enough = monkeys >= total;
+    
+    // Если открытие уже произошло (не из инвентаря), кнопка "Выйти"
+    var qtyHtml = 
+      '<div class="case-qty">' +
+        '<label>Кол-во</label>' +
+        '<button id="caseQtyMinus">−</button>' +
+        '<input type="number" id="caseQtyInput" value="1" min="1" max="99">' +
+        '<button id="caseQtyPlus">+</button>' +
+      '</div>';
+      
     foot.innerHTML =
-      '<div class="case-total">🐵 '+total+'</div>'+
+      qtyHtml +
+      '<div class="case-total">🐵 <span id="caseTotalPrice">'+CASE_PRICE+'</span></div>'+
       '<div style="flex:1"></div>'+
-      '<button class="btn btn-primary btn-lg" id="caseBuyBtn" '+(enough?'':'disabled')+'>🛒 Купить 1 кейс</button>';
-    if($('caseBuyBtn')) $('caseBuyBtn').onclick=function(){ buyCases(); };
-    if(!enough){
-      var btn=$('caseBuyBtn');
-      if(btn) btn.textContent = '🐵 Не хватает '+(total-monkeys);
+      '<button class="btn btn-primary btn-lg" id="caseBuyBtn" '+(enough?'':'disabled')+'>🛒 Купить</button>'+
+      '<button class="btn btn-ghost btn-lg" id="caseExitBtn" style="margin-left:8px">← Выйти</button>';
+      
+    var qtyInput = $('caseQtyInput');
+    function updateCaseTotal(){
+        var q = parseInt(qtyInput.value, 10) || 1;
+        if (q < 1) q = 1;
+        if (q > 99) q = 99;
+        qtyInput.value = q;
+        $('caseTotalPrice').textContent = CASE_PRICE * q;
+        var btn = $('caseBuyBtn');
+        if (btn) btn.disabled = (monkeys < CASE_PRICE * q);
     }
+    $('caseQtyMinus').onclick = function(){ var q = parseInt(qtyInput.value, 10) || 1; q--; if (q < 1) q = 1; qtyInput.value = q; updateCaseTotal(); };
+    $('caseQtyPlus').onclick = function(){ var q = parseInt(qtyInput.value, 10) || 1; q++; if (q > 99) q = 99; qtyInput.value = q; updateCaseTotal(); };
+    qtyInput.oninput = updateCaseTotal;
+    
+    if($('caseBuyBtn')) $('caseBuyBtn').onclick=function(){ buyCases(); };
+    if($('caseExitBtn')) $('caseExitBtn').onclick=function(){ $('caseOpenOverlay').classList.remove('show'); Sound.close(); };
+    
+    updateCaseTotal();
   }
 }
 $('caseOpenClose').onclick=function(){ if(caseOpening) return; $('caseOpenOverlay').classList.remove('show'); Sound.close(); };
@@ -4601,18 +4702,25 @@ $('caseOpenOverlay').onclick=function(e){ if(e.target===$('caseOpenOverlay') && 
 function buyCases(){
   var s=Session.get(); if(!s||!s.token) return;
   var p = s.profile;
-  if((p.monkeys||0) < CASE_PRICE){ Sound.error(); return; }
+  var qty = parseInt($('caseQtyInput').value, 10) || 1;
+  var total = CASE_PRICE * qty;
+  if((p.monkeys||0) < total){ Sound.error(); return; }
   TimerUI.start('caseBuyTimer','⏳');
   $('caseOpenFoot').innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Покупка... <span id="caseBuyTimer" class="timer-inline"></span></div>';
-  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:1},{post:true,retry:2}).then(function(r){
+  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:2}).then(function(r){
     TimerUI.stop('caseBuyTimer');
     if(r.ok){
       Session.patchProfile({monkeys:r.monkeys, cases:r.cases||{}});
       updateMonkeysWidget();
       Sound.buy();
-      activeCase.fromInventory = true;
-      renderCaseFoot();
-      toastSite('Кейс куплен — в инвентаре!', false);
+      $('caseOpenOverlay').classList.remove('show'); // Закрываем окно кейса
+      // Перебрасываем в инвентарь
+      switchView('shop');
+      shopView = 'inventory';
+      document.querySelectorAll('.shop-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.shopview==='inventory'); });
+      document.querySelectorAll('.shop-view').forEach(function(view){ view.classList.toggle('active', view.id==='shopViewInventory'); });
+      renderShop();
+      toastSite('Кейс(ы) куплены — в инвентаре!', false);
     } else {
       Sound.error();
       if(r.error==='Bad token') handleBadToken();
@@ -4651,7 +4759,7 @@ function openCasesFromInventory(qty){
       updateMonkeysWidget();
       showCaseResults(r.results);
       caseOpening=false;
-      renderCaseFoot();
+      renderCaseFoot(); // Обновляем кнопки (теперь появится "Выйти")
       renderShop();
     });
   }).catch(function(){
@@ -5476,10 +5584,58 @@ function adminCardHtml(u, allEmojis, allThemes, allFrames){
       '<div class="adm-theme-picker">'+allThemes.map(function(t){ return '<button data-t="'+t.id+'" class="'+(u.theme===t.id?'selected':'')+'">'+esc(t.name)+(t.secret?'<span class="secret-mark">secret</span>':'')+'</button>'; }).join('')+'</div></div>'+
     '<div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px"><label style="min-width:0">Рамка</label>'+
       '<div class="adm-frame-picker">'+allFrames.map(function(f){ return '<button data-f="'+f.id+'" class="'+(u.frame===f.id?'selected':'')+'">'+esc(f.name)+(f.secret?'<span class="secret-mark">secret</span>':'')+'</button>'; }).join('')+'</div></div>'+
+    // НОВАЯ СТРОКА: Выдача кейсов
+    '<div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px"><label style="min-width:0">🎁 Кейсы</label>'+
+      '<div style="display:flex;gap:5px;flex-wrap:wrap">'+
+        '<button class="adm-action-btn success adm-give-case" data-case="emoji" data-qty="1">+😀 x1</button>'+
+        '<button class="adm-action-btn success adm-give-case" data-case="theme" data-qty="1">+🎨 x1</button>'+
+        '<button class="adm-action-btn success adm-give-case" data-case="frame" data-qty="1">+🖼 x1</button>'+
+        '<button class="adm-action-btn gold adm-give-case" data-case="emoji" data-qty="10">+😀 x10</button>'+
+        '<button class="adm-action-btn gold adm-give-case" data-case="theme" data-qty="10">+🎨 x10</button>'+
+        '<button class="adm-action-btn gold adm-give-case" data-case="frame" data-qty="10">+🖼 x10</button>'+
+      '</div></div>'+
     '<div class="admin-mono-row"><button class="adm-action-btn violet adm-toggle-admin full" style="flex:1">'+(u.isAdmin?'− Снять админку':'+ Выдать админку')+'</button></div>'+
     '<div class="admin-mono-row"><button class="adm-action-btn danger adm-delete full" style="flex:1">🗑 Удалить аккаунт</button></div>'+
   '</div>';
 }
+
+// Обработчик выдачи кейсов
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.adm-give-case');
+    if (!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    if(adminBusy) return;
+    
+    var card = btn.closest('.admin-card');
+    if (!card) return;
+    var uname = card.dataset.u;
+    var caseId = btn.dataset.case;
+    var qty = parseInt(btn.dataset.qty, 10) || 1;
+    var token = sessionStorage.getItem('zv_admin_token');
+    
+    adminBusy = true;
+    api('adminGiveCases', { adminToken: token, username: uname, caseId: caseId, qty: qty }, { post: true, retry: 2 }).then(function(r) {
+        if (r.ok) {
+            Sound.success();
+            // Обновляем данные пользователя в кеше
+            var found = _findAdminUser(uname);
+            if (found) { found.u.cases = r.cases; }
+            // Если это мы сами - обновляем сессию
+            var s = Session.get();
+            if (s && s.username === uname) {
+                Session.patchProfile({ cases: r.cases });
+            }
+            // Обновляем отображение
+            renderAdminGrid();
+            _flashCard(uname);
+            alert('Выдано ' + qty + ' кейс(ов) пользователю @' + uname);
+        } else {
+            Sound.error();
+            alert(r.error || 'Ошибка выдачи');
+        }
+    }).then(function() { adminBusy = false; });
+});
+
 
 document.addEventListener('pointerdown', function(e){
   var btn=e.target.closest ? e.target.closest('.btn') : null;

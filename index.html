@@ -872,8 +872,8 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .case-open-head .cs-sub{font-size:12.5px;color:var(--muted);margin-top:5px}
 .case-open-body{padding:24px 28px;overflow-y:auto;flex:1}
 .case-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-.case-preview-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;position:relative;transition:transform .3s var(--ease)}
-.case-preview-item:hover{transform:translateY(-2px)}
+.case-preview-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;position:relative;transition:transform .3s var(--ease);cursor:pointer}
+.case-preview-item:hover{transform:translateY(-2px);border-color:var(--border2);background:var(--bg2)}
 .case-preview-item .cp-visual{font-size:32px;line-height:1}
 .case-preview-item .cp-visual.theme-v{width:100%;height:36px;border-radius:6px;border:1px solid var(--border)}
 .case-preview-item .cp-visual.frame-v{width:44px;height:44px;border-radius:50%;background:var(--av-bg);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--av-fg)}
@@ -1171,6 +1171,11 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .theme-preview-timer.show{display:flex}
 .theme-preview-timer .tpt-ico{font-size:20px}
 .theme-preview-timer .tpt-time{font-variant-numeric:tabular-nums;color:var(--gold);font-size:18px;font-weight:900;min-width:32px;text-align:center}
+
+/* Кастомизация в инвентаре */
+.inv-customize-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;margin-top:6px;border-radius:14px;border:1px dashed var(--border2);background:var(--bg2);color:var(--muted);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease)}
+.inv-customize-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg);transform:translateY(-2px)}
+.inv-customize-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
 <body class="theme-dark">
@@ -1344,6 +1349,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
           <div class="shop-block-title">🎁 Кейсы <span class="cnt" id="invCasesCount"></span></div>
           <div class="shop-cases-grid" id="invCasesGrid"></div>
         </div>
+        <button class="inv-customize-btn" id="invCustomizeBtn">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          ⚙️ Кастомизация
+        </button>
       </div>
     </section>
 
@@ -1879,10 +1888,10 @@ var CLICKER_ANTIBOT_EVERY = 80;
 var CASE_PRICE = 750;
 
 var RARITY = {
-  common:    { label:'Обычный',    cls:'common',    cashback:0.10 },
-  rare:      { label:'Редкий',     cls:'rare',      cashback:0.20 },
-  epic:      { label:'Эпический',  cls:'epic',      cashback:0.40 },
-  legendary: { label:'Легендарный',cls:'legendary', cashback:0.50 }
+  common:    { label:'Обычный',    cls:'common',    cashback:0.05 },
+  rare:      { label:'Редкий',     cls:'rare',      cashback:0.10 },
+  epic:      { label:'Эпический',  cls:'epic',      cashback:0.20 },
+  legendary: { label:'Легендарный',cls:'legendary', cashback:0.25 }
 };
 
 var EMOJI_LIST = [
@@ -1982,17 +1991,15 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
-    ver:'BETA 0.20', cls:'v2', title:'Магазин, кейсы, оптимизация',
+    ver:'BETA 0.21', cls:'v2', title:'Кейсы, колесо, таймеры',
     items:[
-      { tag:'new', text:'Добавлена вкладка "Магазин" с кейсами, эмодзи, темами и рамками.' },
-      { tag:'new', text:'Кейсы: 3 вида (эмодзи, темы, рамки). Редкости: Common / Rare / Epic / Legendary.' },
-      { tag:'new', text:'Инвентарь: купленные кейсы стакаются, можно открывать по одному.' },
-      { tag:'new', text:'Эксклюзивный эмодзи 💥 (Взрыв) — только из кейсов.' },
-      { tag:'fix', text:'Колесо Фортуны: плавная анимация ease-in-out, подпрыгивание при старте.' },
-      { tag:'fix', text:'Колесо: убраны лаги и бесконечная прокрутка.' },
-      { tag:'fix', text:'Аватары теперь ровные круги везде (профиль, карточки, hover).' },
-      { tag:'fix', text:'Bold/Italic/Strike в описании теперь реально работают.' },
-      { tag:'upd', text:'В настройках покупка отключена — теперь только выбор. Покупать в Магазине.' }
+      { tag:'fix', text:'Колесо Фортуны: убраны лаги, плавная анимация, защита от повторного клика.' },
+      { tag:'new', text:'Кейсы теперь попадают в инвентарь. Открыть можно по одному.' },
+      { tag:'new', text:'В инвентаре кнопка «⚙️ Кастомизация» — открывает настройки сайта.' },
+      { tag:'new', text:'При покупке кейса/предмета/открытии кейса показывается таймер.' },
+      { tag:'upd', text:'Кешбэк за дубликаты уменьшен в 2 раза.' },
+      { tag:'upd', text:'Шансы на эпик и легендарку понижены.' },
+      { tag:'new', text:'В просмотре кейса можно кликнуть на предмет и открыть его подробное окно.' }
     ]
   }
 ];
@@ -2588,7 +2595,7 @@ var choiceState={active:false,busy:false,revealed:false};
 var clickerState={active:false,clicks:0,earned:0,lastClick:0,antibot:false,lastAntibot:0};
 var themePreviewTimer=null, themePreviewCountdown=null, themePreviewActive=false, themePreviewOriginal='dark';
 var shopView='market';
-var activeCase=null, caseQty=1, caseOpening=false;
+var activeCase=null, caseOpening=false;
 
 function applyTheme(theme){
   var cls=document.body.className.split(' ').filter(function(c){return c.indexOf('theme-')!==0 && c!=='low-perf';}).join(' ');
@@ -2658,7 +2665,8 @@ function renderAuthState(force){
       '<div class="user-wrap" id="userWrap">'+
         '<button class="avatar-btn" id="avatarBtn">'+
           '<span class="av" id="topAv">'+esc(initial)+'</span>'+
-          '<span class="nick">'+ab+esc(visual)+'</span>'+emojiHtml+ICO.chev+
+          '<span class="nick">'+ab+esc(visual)+'</span>'+
+          emojiHtml+ICO.chev+
         '</button>'+
         '<div class="user-menu" id="userMenu">'+
           '<div class="user-menu-profile" id="menuProfile" title="Открыть профиль">'+
@@ -3915,7 +3923,7 @@ function renderAccountPassword(){
   };
 }
 
-/* ========== SITE SETTINGS (теперь только выбор, без покупки) ========== */
+/* ========== SITE SETTINGS ========== */
 var SITE_SECTIONS = { emoji: renderSiteEmoji, frames: renderSiteFrames, themes: renderSiteThemes, extra: renderSiteExtra };
 function openSiteSettings(){
   var s=Session.get(); if(!s) return;
@@ -4006,7 +4014,6 @@ function renderSiteEmoji(){
       var s2=Session.get();
       if(!s2 || !s2.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
       if(!has && price>0){
-        // отправляем в магазин
         Sound.click();
         $('siteSettingsOverlay').classList.remove('show');
         switchView('shop');
@@ -4018,7 +4025,6 @@ function renderSiteEmoji(){
         return;
       }
       if(!has && price===0){
-        // бесплатный
         TimerUI.start('siteSettingsTimer','⏳');
         Session.patchProfile({emoji:emoji});
         _lastAuthRenderKey=''; renderAuthState(true);
@@ -4311,6 +4317,11 @@ document.querySelectorAll('.shop-tab').forEach(function(tab){
     Sound.click();
   };
 });
+$('invCustomizeBtn').onclick=function(){
+  Sound.click();
+  openSiteSettings();
+  setTimeout(function(){ renderSiteSection('extra'); }, 100);
+};
 
 function renderShop(){
   if(shopView==='market') renderShopMarket();
@@ -4490,7 +4501,6 @@ function openCasePreview(caseId, fromInventory){
   var c = CASES[caseId];
   if(!c) return;
   activeCase = { id:caseId, fromInventory:!!fromInventory };
-  caseQty = 1;
   caseOpening = false;
 
   var s=Session.get();
@@ -4503,7 +4513,7 @@ function openCasePreview(caseId, fromInventory){
   $('caseOpenSub').textContent = fromInventory ? ('В инвентаре: '+have+' шт.') : c.desc;
 
   var bodyHtml = '';
-  bodyHtml += '<div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px">Возможные предметы</div>';
+  bodyHtml += '<div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px">Возможные предметы (нажми для подробностей)</div>';
   bodyHtml += '<div class="case-preview-grid">';
   c.items.forEach(function(it){
     bodyHtml += casePreviewCell(it, p);
@@ -4512,6 +4522,17 @@ function openCasePreview(caseId, fromInventory){
   bodyHtml += '<div id="caseRouletteWrap" style="display:none"><div class="case-roulette"><div class="case-roulette-marker"></div><div class="case-roulette-strip" id="caseStrip"></div></div></div>';
   bodyHtml += '<div id="caseResultWrap"></div>';
   $('caseOpenBody').innerHTML = bodyHtml;
+
+  // клики по предметам
+  $('caseOpenBody').querySelectorAll('.case-preview-item').forEach(function(el){
+    el.onclick=function(){
+      var kind=el.dataset.kind;
+      var id=el.dataset.id;
+      if(!kind || !id) return;
+      Sound.click();
+      openItemShopDetail(kind, id);
+    };
+  });
 
   renderCaseFoot();
 
@@ -4535,7 +4556,7 @@ function casePreviewCell(it, p){
     var f = FRAME_LIST.find(function(x){return x.id===it.id;});
     visual='<div class="cp-visual frame-v av-frame '+(f?f.css:'')+'"><div class="av-inner">?</div></div>';
   }
-  return '<div class="case-preview-item rarity-'+RARITY[r].cls+'">'+
+  return '<div class="case-preview-item rarity-'+RARITY[r].cls+'" data-kind="'+it.kind+'" data-id="'+esc(it.id)+'">'+
     visual+
     '<div class="cp-name">'+esc(it.name)+'</div>'+
     rarityBadge(r)+
@@ -4550,40 +4571,23 @@ function renderCaseFoot(){
   var have = cases[activeCase.id] || 0;
   var foot = $('caseOpenFoot');
   if(caseOpening){
-    foot.innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Открываем...</div>';
+    foot.innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Открываем... <span id="caseOpenTimer" class="timer-inline"></span></div>';
+    TimerUI.start('caseOpenTimer','⏳');
     return;
   }
   if(activeCase.fromInventory){
     foot.innerHTML =
-      '<div class="case-qty">'+
-        '<label>Кол-во</label>'+
-        '<button id="caseMinus">−</button>'+
-        '<input type="number" id="caseQtyInput" value="1" min="1" max="'+have+'" readonly>'+
-        '<button id="casePlus">+</button>'+
-      '</div>'+
       '<div style="font-size:12px;color:var(--muted)">Всего: <b style="color:var(--fg)">'+have+' шт.</b></div>'+
       '<div style="flex:1"></div>'+
-      '<button class="btn btn-primary btn-lg" id="caseOpenBtn" '+(have<1?'disabled':'')+'>🎁 Открыть ('+caseQty+' шт.)</button>';
-    var inp=$('caseQtyInput');
-    if(inp) inp.value = Math.min(caseQty, have);
-    if($('caseMinus')) $('caseMinus').onclick=function(){ if(caseQty>1) caseQty--; renderCaseFoot(); Sound.click(); };
-    if($('casePlus')) $('casePlus').onclick=function(){ if(caseQty<have) caseQty++; renderCaseFoot(); Sound.click(); };
+      '<button class="btn btn-primary btn-lg" id="caseOpenBtn" '+(have<1?'disabled':'')+'>🎁 Открыть 1 кейс</button>';
     if($('caseOpenBtn')) $('caseOpenBtn').onclick=function(){ openCaseFromInventory(); };
   } else {
-    var total = CASE_PRICE * caseQty;
+    var total = CASE_PRICE;
     var enough = monkeys >= total;
     foot.innerHTML =
-      '<div class="case-qty">'+
-        '<label>Кол-во</label>'+
-        '<button id="caseMinus">−</button>'+
-        '<input type="number" id="caseQtyInput" value="'+caseQty+'" min="1" max="99" readonly>'+
-        '<button id="casePlus">+</button>'+
-      '</div>'+
       '<div class="case-total">🐵 '+total+'</div>'+
       '<div style="flex:1"></div>'+
-      '<button class="btn btn-primary btn-lg" id="caseBuyBtn" '+(enough?'':'disabled')+'>🛒 Купить и открыть</button>';
-    if($('caseMinus')) $('caseMinus').onclick=function(){ if(caseQty>1) caseQty--; renderCaseFoot(); Sound.click(); };
-    if($('casePlus')) $('casePlus').onclick=function(){ if(caseQty<99) caseQty++; renderCaseFoot(); Sound.click(); };
+      '<button class="btn btn-primary btn-lg" id="caseBuyBtn" '+(enough?'':'disabled')+'>🛒 Купить 1 кейс</button>';
     if($('caseBuyBtn')) $('caseBuyBtn').onclick=function(){ buyCases(); };
     if(!enough){
       var btn=$('caseBuyBtn');
@@ -4596,27 +4600,24 @@ $('caseOpenOverlay').onclick=function(e){ if(e.target===$('caseOpenOverlay') && 
 
 function buyCases(){
   var s=Session.get(); if(!s||!s.token) return;
-  var total = CASE_PRICE * caseQty;
   var p = s.profile;
-  if((p.monkeys||0) < total){ Sound.error(); return; }
-  TimerUI.start('siteSettingsTimer','⏳');
-  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:caseQty},{post:true,retry:2}).then(function(r){
-    TimerUI.stop('siteSettingsTimer');
+  if((p.monkeys||0) < CASE_PRICE){ Sound.error(); return; }
+  TimerUI.start('caseBuyTimer','⏳');
+  $('caseOpenFoot').innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Покупка... <span id="caseBuyTimer" class="timer-inline"></span></div>';
+  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:1},{post:true,retry:2}).then(function(r){
+    TimerUI.stop('caseBuyTimer');
     if(r.ok){
       Session.patchProfile({monkeys:r.monkeys, cases:r.cases||{}});
       updateMonkeysWidget();
       Sound.buy();
-      // теперь открываем из инвентаря
       activeCase.fromInventory = true;
-      caseOpening = true;
       renderCaseFoot();
-      setTimeout(function(){
-        openCasesFromInventory(caseQty);
-      }, 100);
+      toastSite('Кейс куплен — в инвентаре!', false);
     } else {
       Sound.error();
       if(r.error==='Bad token') handleBadToken();
       else toastSite(r.error||'Ошибка',true);
+      renderCaseFoot();
     }
   });
 }
@@ -4624,9 +4625,8 @@ function openCaseFromInventory(){
   var s=Session.get(); if(!s||!s.token) return;
   var cases = (s.profile.cases)||{};
   var have = cases[activeCase.id]||0;
-  var qty = Math.min(caseQty, have);
-  if(qty<1) return;
-  openCasesFromInventory(qty);
+  if(have<1) return;
+  openCasesFromInventory(1);
 }
 function openCasesFromInventory(qty){
   var s=Session.get(); if(!s||!s.token) return;
@@ -4636,9 +4636,8 @@ function openCasesFromInventory(qty){
   if(wrap) wrap.style.display='block';
   var resWrap = $('caseResultWrap');
   if(resWrap) resWrap.innerHTML='';
-  TimerUI.start('siteSettingsTimer','⏳');
   api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:2}).then(function(r){
-    TimerUI.stop('siteSettingsTimer');
+    TimerUI.stop('caseOpenTimer');
     if(!r.ok){
       Sound.error();
       if(r.error==='Bad token') handleBadToken();
@@ -4647,9 +4646,7 @@ function openCasesFromInventory(qty){
       renderCaseFoot();
       return;
     }
-    // r.results = [{rarity, item, isDuplicate, cashback}], r.cases, r.monkeys
     animateCaseRoulette(r.results, function(){
-      // после анимации применяем
       Session.patchProfile({monkeys:r.monkeys, cases:r.cases||{}});
       updateMonkeysWidget();
       showCaseResults(r.results);
@@ -4658,7 +4655,7 @@ function openCasesFromInventory(qty){
       renderShop();
     });
   }).catch(function(){
-    TimerUI.stop('siteSettingsTimer');
+    TimerUI.stop('caseOpenTimer');
     Sound.error();
     caseOpening=false;
     renderCaseFoot();
@@ -4669,14 +4666,12 @@ function animateCaseRoulette(results, onDone){
   var strip = $('caseStrip');
   if(!strip){ onDone(); return; }
   var c = CASES[activeCase.id];
-  // Составляем последовательность из 60 ячеек, победитель — в позиции 50
   var WIN_POS = 50;
   var TOTAL = 60;
   var seq = [];
   for(var i=0;i<TOTAL;i++){
     if(i===WIN_POS){ seq.push(results[0]); }
     else {
-      // случайный предмет из кейса, но с правильными редкостями
       var r = weightedRandomRarity();
       var pool = c.items.filter(function(x){ return x.rarity===r; });
       if(!pool.length) pool = c.items;
@@ -4728,8 +4723,8 @@ function rouletteCell(r){
 }
 function weightedRandomRarity(){
   var r = Math.random()*100;
-  if(r < 60) return 'common';
-  if(r < 90) return 'rare';
+  if(r < 62) return 'common';
+  if(r < 92) return 'rare';
   if(r < 99) return 'epic';
   return 'legendary';
 }
@@ -5494,7 +5489,7 @@ document.addEventListener('pointerdown', function(e){
   btn.style.setProperty('--ry', ((e.clientY-r.top)/r.height*100)+'%');
 });
 
-/* ========== BUY CONFIRM (для магазина и настроек) ========== */
+/* ========== BUY CONFIRM ========== */
 var buyCallback=null;
 var buyPreviewTheme=null;
 var buyPreviewName=null;

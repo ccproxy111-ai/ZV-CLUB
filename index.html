@@ -37,79 +37,6 @@ body.theme-toxic{--bg:#0d1a0d;--bg2:#122612;--bg3:#183018;--bg4:#1f3d1f;--fg:#dc
 body.theme-scarlet{--bg:#1a0e0e;--bg2:#261212;--bg3:#331818;--bg4:#401e1e;--fg:#ffe4e4;--muted:#c98a8a;--muted2:#8a5a5a;--border:#2a1212;--border2:#4a2020;--header-bg:rgba(26,14,14,.78);--sidebar-bg:rgba(26,14,14,.78);--btn-primary-bg:#f87171;--btn-primary-fg:#1a0e0e;--btn-primary-bg-hover:#ff8a8a;--av-bg:linear-gradient(135deg,#4a2020,#2a1212);--av-fg:#ffe4e4;--av-border:#4a2020;--banner-default:#331818;--shader-opacity:.55;--admin-badge-bg:#fff;--admin-badge-fg:#1a0e0e}
 body.theme-divine{background:linear-gradient(135deg,#c8e8ff,#ffffff,#fff8dc,#c8e8ff,#e0f0ff,#fff0d0,#c8e8ff);background-size:600% 600%;animation:divineShift 18s ease infinite;--bg:#f4f9ff;--bg2:#ffffff;--bg3:#e6f2ff;--bg4:#d6ebff;--fg:#0a2540;--muted:#5f7f9e;--muted2:#8aa8c0;--border:#c8ddf0;--border2:#a8c8e0;--header-bg:rgba(255,255,255,.78);--sidebar-bg:rgba(255,255,255,.78);--btn-primary-bg:linear-gradient(135deg,#60a5fa,#a5b4fc);--btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#7cb1fb,#b9c5fd);--av-bg:linear-gradient(135deg,#a5d8ff,#fff8dc);--av-fg:#0a2540;--av-border:#a8c8e0;--banner-default:#e6f2ff;--shader-opacity:.25;--admin-badge-bg:#0e0e11;--admin-badge-fg:#fff}
 @keyframes divineShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-body.theme-divine .dash-card,
-body.theme-divine .user-card,
-body.theme-divine .post-card,
-body.theme-divine .modal,
-body.theme-divine .settings-layout,
-body.theme-divine .wheel-panel,
-body.theme-divine .wheel-history{
-  box-shadow:0 0 0 1px rgba(200,220,255,.5), 0 8px 32px rgba(160,200,255,.18);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  background:rgba(255,255,255,.7);
-  transition:box-shadow .6s ease, background .6s ease;
-}
-body.theme-divine .dash-card:hover,
-body.theme-divine .user-card:hover{
-  box-shadow:0 0 0 1px rgba(180,210,255,.8), 0 12px 48px rgba(160,200,255,.35);
-  background:rgba(255,255,255,.85);
-}
-body.theme-divine .header,
-body.theme-divine .sidebar{
-  background:rgba(255,255,255,.72);
-  border-color:rgba(200,220,255,.4);
-}
-body.theme-divine .logo,
-body.theme-divine .hero-title{
-  background:linear-gradient(135deg,#3b82f6,#fbbf24,#60a5fa,#f59e0b,#3b82f6);
-  background-size:300% 300%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:divineText 6s ease infinite;
-}
-@keyframes divineText{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-body.theme-divine .hero-badge .dot{
-  box-shadow:0 0 12px rgba(96,165,250,.9), 0 0 24px rgba(251,191,36,.5);
-  animation:divinePulse 2s ease infinite;
-}
-@keyframes divinePulse{0%,100%{box-shadow:0 0 12px rgba(96,165,250,.9),0 0 24px rgba(251,191,36,.5)}50%{box-shadow:0 0 20px rgba(96,165,250,1),0 0 40px rgba(251,191,36,.8)}}
-body.theme-divine .btn-primary{
-  background:linear-gradient(135deg,#60a5fa,#fbbf24,#60a5fa);
-  background-size:200% 200%;
-  animation:divineBtn 4s ease infinite;
-  color:#fff;
-  text-shadow:0 1px 4px rgba(0,0,0,.15);
-}
-@keyframes divineBtn{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-body.theme-divine .avatar-btn .av,
-body.theme-divine .user-card .av,
-body.theme-divine .profile-av,
-body.theme-divine .preview-av{
-  box-shadow:0 0 16px rgba(96,165,250,.4), 0 0 32px rgba(251,191,36,.2);
-}
-body.theme-divine .dash-card.awards{
-  background:linear-gradient(120deg,#60a5fa,#fbbf24,#a5b4fc,#f59e0b,#60a5fa);
-  background-size:400% 400%;
-  animation:awardsShift 8s ease infinite;
-}
-body.theme-divine .main::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(96,165,250,.08), transparent 50%),
-    radial-gradient(ellipse at 80% 30%, rgba(251,191,36,.06), transparent 55%),
-    radial-gradient(ellipse at 50% 80%, rgba(168,85,247,.05), transparent 60%);
-  animation:divineAura 12s ease infinite;
-}
-@keyframes divineAura{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
-body.theme-divine .hero-title::after{
-  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:120%;height:120%;pointer-events:none;z-index:-1;
-  background:radial-gradient(circle, rgba(96,165,250,.15), transparent 70%);
-  animation:divineGlow 8s ease infinite;
-}
-@keyframes divineGlow{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.15)}}
 body.theme-obsidian{background:linear-gradient(135deg,#0a0510,#1a0a2a,#0a0510,#2a0a3a);background-size:300% 300%;animation:obsShift 25s ease infinite;--bg:#0a0510;--bg2:#14081c;--bg3:#1e0f2a;--bg4:#2a1638;--fg:#e8d8ff;--muted:#8a6fa8;--muted2:#5a4770;--border:#22102e;--border2:#3a1f4a;--header-bg:rgba(10,5,16,.8);--sidebar-bg:rgba(10,5,16,.8);--btn-primary-bg:linear-gradient(135deg,#a855f7,#6366f1);--btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#b975ff,#7c7cf5);--av-bg:linear-gradient(135deg,#3a1f4a,#22102e);--av-fg:#e8d8ff;--av-border:#3a1f4a;--banner-default:#1e0f2a;--shader-opacity:.5;--admin-badge-bg:#fff;--admin-badge-fg:#0a0510}
 @keyframes obsShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 body.theme-rgb{background:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8b00ff,#ff0000);background-size:400% 400%;animation:rgbShift 10s linear infinite;--bg:rgba(10,10,15,.6);--bg2:rgba(20,20,30,.85);--bg3:rgba(30,30,45,.88);--bg4:rgba(45,45,65,.92);--fg:#ffffff;--muted:#e0e0f0;--muted2:#b0b0c0;--border:rgba(255,255,255,.3);--border2:rgba(255,255,255,.5);--header-bg:rgba(10,10,15,.72);--sidebar-bg:rgba(10,10,15,.72);--btn-primary-bg:linear-gradient(135deg,#ff0000,#00ff00,#0000ff);--btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#ff00ff,#00ffff,#ffff00);--av-bg:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff);--av-fg:#ffffff;--av-border:rgba(255,255,255,.5);--banner-default:rgba(30,30,45,.8);--shader-opacity:0;--admin-badge-bg:#fff;--admin-badge-fg:#0e0e11}
@@ -344,6 +271,26 @@ body.logged-in .header{left:var(--sidebar-w)}
 .btn-block{width:100%;justify-content:center}
 .btn::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--rx,50%) var(--ry,50%),rgba(255,255,255,.25),transparent 60%);opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
 .btn:active::after{opacity:1;transition:none}
+
+/* ==== TimerUI ==== */
+.timer-ui{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11.5px;font-weight:700;color:var(--muted);
+  background:var(--bg2);border:1px solid var(--border);
+  padding:3px 9px;border-radius:999px;
+  font-variant-numeric:tabular-nums;
+}
+.timer-ui .sp{
+  width:9px;height:9px;border-radius:50%;
+  border:2px solid var(--muted);border-top-color:var(--fg);
+  animation:timerSpin .7s linear infinite;
+}
+@keyframes timerSpin{to{transform:rotate(360deg)}}
+.timer-ui.hidden{display:none}
+.timer-inline{
+  display:inline-block;font-variant-numeric:tabular-nums;
+  font-size:11px;color:var(--muted);margin-left:6px;
+}
 
 .sidebar{position:fixed;top:56px;left:0;bottom:0;width:var(--sidebar-w);background:var(--sidebar-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-right:1px solid var(--border);display:none;flex-direction:column;gap:8px;padding:12px 8px;z-index:99;transition:width .45s var(--ease),background .5s ease,border-color .5s ease;overflow:hidden}
 body.logged-in .sidebar{display:flex}
@@ -614,7 +561,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .preview-panel{width:280px;flex-shrink:0;background:var(--bg);border-left:1px solid var(--border);padding:24px 18px;display:flex;flex-direction:column;align-items:center;overflow-y:auto}
 .preview-panel h3{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:16px;text-align:center}
 .preview-card{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5)}
-.preview-banner{height:80px;background:var(--banner-default);transition:background .5s ease}
+.preview-banner{height:80px;background:var(--banner-default);transition:background .5s ease,filter .5s ease}
 .preview-body{padding:0 16px 16px;margin-top:-32px;text-align:center}
 .preview-av{width:64px;height:64px;border-radius:50%;background:var(--av-bg);border:3px solid var(--bg2);margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;text-transform:uppercase;color:var(--av-fg);overflow:hidden;position:relative;cursor:pointer;transition:transform .35s var(--ease)}
 .preview-av:hover{transform:scale(1.06)}
@@ -668,7 +615,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .respect-btn.active .ico{transform:scale(1.2) rotate(-10deg)}
 
 .profile-header{padding:0;background:var(--bg2);flex-shrink:0;position:relative;border-bottom:1px solid var(--border)}
-.profile-banner{height:140px;position:relative;background:var(--banner-default);transition:background .5s ease}
+.profile-banner{height:140px;position:relative;background:var(--banner-default);transition:background .5s ease,filter .5s ease}
 .profile-banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.25) 100%)}
 .profile-close{position:absolute;top:12px;right:12px;z-index:5;background:rgba(0,0,0,.5);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .35s var(--ease),transform .4s var(--ease)}
 .profile-close:hover{background:rgba(0,0,0,.7);transform:rotate(90deg)}
@@ -743,6 +690,16 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .theme-free{font-size:11px;color:var(--muted);font-weight:600;margin-top:3px}
 .theme-secret{position:absolute;top:8px;right:8px;font-size:10px;padding:2px 6px;background:rgba(255,80,160,.15);border:1px solid rgba(255,80,160,.35);border-radius:999px;color:#ff8fc4}
 .theme-item.pop{animation:emojiPop .9s var(--ease)}
+.theme-preview-mini{
+  position:absolute;bottom:8px;right:8px;
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(0,0,0,.55);border:1px solid var(--border2);
+  color:#fff;font-size:11px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .3s var(--ease),transform .3s var(--ease),opacity .3s var(--ease);
+  opacity:.7;z-index:2;
+}
+.theme-preview-mini:hover{background:rgba(0,0,0,.85);transform:scale(1.15);opacity:1}
 
 .frame-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px}
 .frame-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:border-color .35s var(--ease),background .35s var(--ease),transform .3s var(--ease);position:relative;overflow:hidden}
@@ -1748,6 +1705,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
             </div>
 
             <button class="wheel-spin-btn" id="wheelSpinBtn">🎡 Крутить колесо</button>
+            <div class="timer-inline" id="wheelSpinTimer"></div>
 
             <div class="wheel-result" id="wheelResult">
               <span>Поставь ставку и крути!</span>
@@ -2150,7 +2108,7 @@ var WHEEL_SPIN_MS = 4000;
 var WHEEL_SPIN_COOLDOWN = 600;
 var USERS_CACHE_TTL = 30000;
 var THEME_PREVIEW_DURATION = 10;
-var CLICKER_ANTIBOT_MIN_DELAY = 120;
+var CLICKER_ANTIBOT_MIN_DELAY = 80;
 var CLICKER_ANTIBOT_EVERY = 80;
 
 var EMOJI_LIST = [
@@ -2208,126 +2166,15 @@ var UPDATE_LOGS = [
   {
     ver: 'BETA 0.19', cls: 'v2', title: 'Оптимизация, стабильность, предпросмотр, погода',
     items: [
-      { tag: 'new', text: 'Божественная тема: добавлены прозрачные эмодзи погодных условий (солнце, дождь, облака и т.д.).' },
-      { tag: 'new', text: 'Предпросмотр темы: кнопка «Просмотреть тему» с таймером на 10 секунд.' },
-      { tag: 'new', text: 'Улучшена производительность и скорость загрузки сайта.' },
-      { tag: 'fix', text: 'Убраны баганные цифры у рамки «Хакерская».' },
-      { tag: 'fix', text: 'Аватарки в больших профилях теперь ровные круглые.' },
-      { tag: 'fix', text: 'Логин с телефона теперь работает корректно.' },
-      { tag: 'fix', text: 'Кликер: убран звук задержки при нажатии, добавлена защита от автокликера.' },
-      { tag: 'fix', text: 'Антибот-кнопка теперь появляется в случайном месте экрана.' },
-      { tag: 'fix', text: 'Кнопка «ZV-CLUB» в шапке открывает главную страницу.' },
-      { tag: 'fix', text: 'Поиск друзей всегда пустой до ввода, загрузка быстрее.' },
-      { tag: 'fix', text: 'Статус «В сети» выровнен по центру.' },
-      { tag: 'fix', text: 'Аватар в предпросмотре больше не приближен.' },
-      { tag: 'fix', text: 'Сохранение градиентового баннера работает корректно.' },
-      { tag: 'fix', text: 'Редактор описания профиля: кнопки утолщения, курсива и подчёркивания работают.' },
-      { tag: 'upd', text: 'Сайт стал ещё быстрее и отзывчивее.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.18', cls: 'v2', title: 'Мега-удобство, предпросмотр тем, скорость',
-    items: [
-      { tag: 'new', text: 'Предпросмотр темы: кнопка «Просмотреть тему» с таймером на 10 секунд.' },
-      { tag: 'new', text: 'Админ-панель: функция «Откатить ежедневный подарок».' },
-      { tag: 'new', text: 'Плавные анимации рамок ruby, sapphire, hacker, rgb без резких переключений.' },
-      { tag: 'new', text: 'Хакерская рамка: цифры теперь поверх аватарки.' },
-      { tag: 'fix', text: 'Исправлен баг с исчезновением обезьян в режимах заработка.' },
-      { tag: 'fix', text: 'Колесо фортуны крутится мгновенно при нажатии.' },
-      { tag: 'fix', text: 'Аватар в настройках сайта больше не приближен.' },
-      { tag: 'fix', text: 'Логин/регистрация: исправлена ошибка «неверный пароль».' },
-      { tag: 'fix', text: 'Админ-выдача обезьян: обновление мгновенное.' },
+      { tag: 'new', text: 'Таймеры загрузки: вход, сохранение настроек, применение тем/эмодзи/рамок, покупки, колесо.' },
+      { tag: 'new', text: 'Мини-кнопка предпросмотра темы в правом нижнем углу карточки.' },
+      { tag: 'new', text: 'Звуки нажатий в кликере, задержка уменьшена.' },
+      { tag: 'fix', text: 'Колесо Фортуны: убран баг бесконечной прокрутки.' },
+      { tag: 'fix', text: 'Колесо Фортуны: не переносит ставку между аккаунтами.' },
+      { tag: 'fix', text: 'Градиентовый баннер теперь сохраняется и меняет яркость.' },
+      { tag: 'fix', text: 'Bold/Italic/Strike в описании реально оборачивают текст.' },
+      { tag: 'fix', text: 'Божественная тема: прозрачные эмодзи погоды.' },
       { tag: 'upd', text: 'Сайт стал быстрее и отзывчивее.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.17', cls: 'v2', title: 'Мега-удобство, скорость, исправления',
-    items: [
-      { tag: 'new', text: 'Сохранение с индикатором прогресса и таймером.' },
-      { tag: 'new', text: 'Рамки с плавными анимациями переливов (ruby, sapphire, hacker, rgb).' },
-      { tag: 'fix', text: 'Исправлен баг с исчезновением обезьян в режимах заработка.' },
-      { tag: 'fix', text: 'Колесо фортуны крутится мгновенно при нажатии.' },
-      { tag: 'fix', text: 'Аватар в настройках сайта больше не приближен.' },
-      { tag: 'fix', text: 'Логин/регистрация: исправлена ошибка «неверный пароль».' },
-      { tag: 'upd', text: 'Сайт стал быстрее и отзывчивее.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.16', cls: 'v2', title: 'Рамки, отзывчивость, градиент баннера',
-    items: [
-      { tag: 'new', text: 'Рамки теперь отображаются в полном профиле и в предпросмотре настроек.' },
-      { tag: 'new', text: 'В настройках аккаунта добавлен градиент баннера с настройкой направления и яркости.' },
-      { tag: 'new', text: 'Кнопка «Удалить аккаунт» перенесена вниз навигации и сделана менее яркой.' },
-      { tag: 'new', text: 'В панели «Информация» появился предпросмотр профиля и кнопка заработка.' },
-      { tag: 'fix', text: 'Хакерская рамка: цифры теперь НА рамке, а не за аватаркой.' },
-      { tag: 'fix', text: 'Рамки стали жирнее и менее светящимися. Светятся только рубин, сапфир, хакер и RGB.' },
-      { tag: 'fix', text: 'Чёрная рамка заменена на тёмно-серую.' },
-      { tag: 'fix', text: 'Зелёный кружок статуса больше не сплюснут.' },
-      { tag: 'fix', text: 'Кружок статуса в полном профиле теперь поверх аватарки.' },
-      { tag: 'fix', text: 'Статус «В сети» выровнен по центру.' },
-      { tag: 'fix', text: 'Исправлен баг с откатом обезьян после игр.' },
-      { tag: 'upd', text: 'Сайт стал отзывчивее: мгновенные переходы, меньше задержек.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.15', cls: 'v2', title: 'Рамки, починка мобильного логина, математика и админка',
-    items: [
-      { tag: 'new', text: 'Добавлены рамки аватара: 9 обычных + секретная RGB.' },
-      { tag: 'new', text: 'В админ-панели теперь можно менять уважения, выигрыши и аватар любого пользователя.' },
-      { tag: 'new', text: 'Секретные эмодзи и темы в админке помечены значком secret.' },
-      { tag: 'fix', text: 'Починен вход на телефоне: отключены автокоррекция, автокапитализация и подсказки.' },
-      { tag: 'fix', text: 'Математика: неправильный ответ завершает игру с показом заработанного.' },
-      { tag: 'fix', text: 'Исправлен баг с откатом обезьян после игр.' },
-      { tag: 'fix', text: 'Тема «Бездна» больше не обрезается на ПК.' },
-      { tag: 'upd', text: 'Раздел «Главное» переименован в «Эмодзи», добавлен раздел «Рамки аватара».' },
-      { tag: 'upd', text: 'Панель «Информация» показывает баланс и кнопку «Заработать обезьян».' }
-    ]
-  },
-  {
-    ver: 'BETA 0.14', cls: 'v2', title: 'Фикс логина на мобилке + мобильная адаптация + божественная тема',
-    items: [
-      { tag: 'fix', text: 'Исправлен баг с «Неверное имя или пароль» на мобильных устройствах.' },
-      { tag: 'fix', text: 'Исправлена ошибка загрузки участников в разделе «Найти друзей» на телефонах.' },
-      { tag: 'new', text: 'Полная мобильная адаптация: нижняя навигация, адаптивные карточки, профиль, колесо, заработок, настройки.' },
-      { tag: 'upd', text: 'Тема «Божественная»: сочный визуал — переливы, свечения, аура, анимированные градиенты текста и кнопок.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.13', cls: 'v2', title: 'Мобильная адаптация и исправления',
-    items: [
-      { tag: 'new', text: 'Полная мобильная версия: нижняя навигация, адаптивные карточки, профиль, колесо, заработок.' },
-      { tag: 'fix', text: 'Исправлена ошибка «Неверный пароль» при входе — теперь пароль проверяется корректно.' },
-      { tag: 'fix', text: 'Убран пробел между шапкой и левой панелью на ПК.' },
-      { tag: 'upd', text: 'Тема «Божественная»: усилены переливы, добавлены анимации свечения и градиентов.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.12', cls: 'v2', title: 'Обновление интерфейса и механик',
-    items: [
-      { tag: 'new', text: 'Кнопка LOGS в шапке — история обновлений сайта в едином дизайне.' },
-      { tag: 'new', text: 'Ежедневная награда теперь начисляется локально мгновенно, сервер подтверждает в фоне.' },
-      { tag: 'upd', text: 'Тема «Бездна»: молнии переделаны в реалистичные SVG-полилинии с резким появлением и плавным затуханием.' },
-      { tag: 'fix', text: 'Убран лишний пробел между онлайн-бейджем и логотипом в шапке.' },
-      { tag: 'fix', text: 'Поиск друзей больше не подставляет ваш ник при первом открытии.' },
-      { tag: 'fix', text: 'Онлайн-статус в карточках профилей — полностью зелёный кружок и подпись «в сети» / «не в сети».' },
-      { tag: 'upd', text: 'Админ-панель: кнопки приведены к единому дизайну сайта.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.11', cls: 'v1', title: 'Профили, статусы, темы',
-    items: [
-      { tag: 'new', text: 'Онлайн-статус пользователей: «в сети» / «не в сети» в профилях и карточках.' },
-      { tag: 'new', text: 'Темы «Бездна» (25000 🐵) и «Обезьяны» (50000 🐵).' },
-      { tag: 'new', text: 'Режим для слабых устройств — отключает анимации, blur и шейдеры.' },
-      { tag: 'upd', text: 'Колесо: шанс x3 увеличен до 4%.' }
-    ]
-  },
-  {
-    ver: 'BETA 0.10', cls: '', title: 'Первая стабильная версия',
-    items: [
-      { tag: 'new', text: 'Регистрация, вход, профили, посты, уважение.' },
-      { tag: 'new', text: 'Колесо Фортуны, ежедневная награда, режимы заработка.' },
-      { tag: 'new', text: 'Магазин эмодзи и тем оформления.' }
     ]
   }
 ];
@@ -2337,6 +2184,29 @@ function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){retu
 function nowMs(){ return Date.now(); }
 function rIC(fn){ (window.requestIdleCallback||function(f){setTimeout(f,1)})(fn); }
 function faviconUrl(host){ return 'https://www.google.com/s2/favicons?domain='+encodeURIComponent(host)+'&sz=64'; }
+
+/* ===== TimerUI ===== */
+var TimerUI = (function(){
+  var timers = {};
+  function fmt(sec){ return sec.toFixed(1)+'с'; }
+  function start(elId, label){
+    var el = $(elId);
+    if(!el) return;
+    stop(elId);
+    if(!el.classList.contains('timer-ui') && !el.classList.contains('timer-inline')) el.classList.add('timer-inline');
+    el.classList.remove('hidden');
+    var t0 = nowMs();
+    timers[elId] = setInterval(function(){
+      el.textContent = (label ? label+' ' : '') + fmt((nowMs()-t0)/1000);
+    }, 100);
+  }
+  function stop(elId){
+    if(timers[elId]){ clearInterval(timers[elId]); delete timers[elId]; }
+    var el = $(elId);
+    if(el){ el.classList.add('hidden'); el.textContent=''; }
+  }
+  return { start:start, stop:stop };
+})();
 
 var Sound = (function(){
   var ctx=null, enabled=localStorage.getItem('zv_sound')!=='off';
@@ -2915,7 +2785,7 @@ var mode='login', captchaAnswer='', menuOpen=false;
 var allUsers=[], _usersCache={t:0,v:null}, usersSearchQuery='';
 var currentProfile=null, currentProfileIsOwner=false, currentProfileIRespect=false, currentProfileUsername=null;
 var tempProfile=null, tempProfileChanged=false;
-var wheelSpinning=false, wheelTickInterval=null, wheelLastSpinAt=0, whTimer=null;
+var wheelSpinning=false, wheelSpinLock=false, wheelTickInterval=null, wheelLastSpinAt=0, whTimer=null;
 var wheelBuilt=false;
 var hoverTimer=null;
 var _lastAuthRenderKey='';
@@ -3187,6 +3057,11 @@ function openConfirmLogout(){
   $('confirmLogout').onclick=function(){
     Sound.close(); $('confirmOverlay').classList.remove('show');
     Online.stop(); Session.clear(); _lastAuthRenderKey=''; renderAuthState(true); switchView('home'); Online.start();
+    // сброс колеса при смене аккаунта
+    wheelSpinning=false; wheelSpinLock=false; wheelLastSpinAt=0;
+    if(wheelTickInterval){ clearInterval(wheelTickInterval); wheelTickInterval=null; }
+    var r=$('wheelRotor'); if(r){ r.style.transition='none'; r.style.transform='rotate(0deg)'; void r.offsetWidth; }
+    var inp=$('wheelBetInput'); if(inp) inp.value='100';
   };
   $('confirmOverlay').classList.add('show'); Sound.open();
 }
@@ -3403,7 +3278,7 @@ function resetWheelRotor(){
   void r.offsetWidth;
 }
 $('wheelSpinBtn').onclick=function(){
-  if(wheelSpinning) return;
+  if(wheelSpinning || wheelSpinLock) return;
   initWheelIfNeeded();
   var now=nowMs();
   if(now-wheelLastSpinAt<WHEEL_SPIN_COOLDOWN){ Sound.error(); return; }
@@ -3416,20 +3291,23 @@ $('wheelSpinBtn').onclick=function(){
   if(bet>bal) bet=bal;
   if(bet>WHEEL_MAX_BET) bet=WHEEL_MAX_BET;
 
-  wheelSpinning=true; wheelLastSpinAt=now;
+  wheelSpinning=true; wheelSpinLock=true; wheelLastSpinAt=now;
   resetWheelRotor();
   $('wheelSpinBtn').disabled=true;
   $('wheelSpinBtn').textContent='🎡 Крутится...';
   $('wheelResult').className='wheel-result';
-  $('wheelResult').innerHTML='<span>Крутится...</span>';
+  $('wheelResult').innerHTML='<span>Подготовка...</span>';
   Sound.click();
+  TimerUI.start('wheelSpinTimer','⏳');
 
   Session.patchProfile({monkeys: bal-bet});
   updateWheelBalance(); updateMonkeysWidget();
 
   api('spinWheel',{username:s.username,token:s.token,bet:bet},{post:true,retry:2}).then(function(res){
     if(!res.ok){
-      wheelSpinning=false; $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+      wheelSpinning=false; wheelSpinLock=false;
+      $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+      TimerUI.stop('wheelSpinTimer');
       if(res.error==='Bad token'){
         $('wheelResult').innerHTML='<span>Сессия истекла — войдите заново</span>';
         $('wheelResult').className='wheel-result lose';
@@ -3450,6 +3328,7 @@ $('wheelSpinBtn').onclick=function(){
     rotor.style.transition='transform '+(WHEEL_SPIN_MS/1000)+'s cubic-bezier(.15,.9,.2,1)';
     void rotor.offsetWidth;
     rotor.style.transform='rotate('+targetAngle+'deg)';
+    $('wheelResult').innerHTML='<span>Крутится...</span>';
 
     if(wheelTickInterval) clearInterval(wheelTickInterval);
     wheelTickInterval=setInterval(function(){
@@ -3491,9 +3370,10 @@ $('wheelSpinBtn').onclick=function(){
         $('wheelResult').innerHTML='<span class="big">💀 Проигрыш</span><span>Потеряно: −'+betVal+' 🐵</span>';
         Sound.wheelLose();
       }
-      wheelSpinning=false;
+      wheelSpinning=false; wheelSpinLock=false;
       $('wheelSpinBtn').disabled=false;
       $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+      TimerUI.stop('wheelSpinTimer');
       loadWheelHistory();
       setTimeout(function(){
         var r2=$('wheelRotor');
@@ -3501,6 +3381,11 @@ $('wheelSpinBtn').onclick=function(){
         r2.style.transform='rotate(0deg)';
       }, 1500);
     }, WHEEL_SPIN_MS);
+  }).catch(function(){
+    wheelSpinning=false; wheelSpinLock=false;
+    $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+    TimerUI.stop('wheelSpinTimer');
+    Sound.error();
   });
 };
 
@@ -3812,6 +3697,14 @@ $('profileOverlay').onclick=function(e){ if(e.target===$('profileOverlay')) clos
 function renderProfile(){
   var p=currentProfile;
   $('profileBanner').style.background=p.bannerColor||'var(--banner-default)';
+  if(p.bannerGradient){
+    var dir=p.bannerGradientDir||'135';
+    var c1=p.bannerColor, c2=p.bannerGradientColor||'#7c5cff';
+    $('profileBanner').style.background='linear-gradient('+dir+'deg,'+c1+','+c2+')';
+    $('profileBanner').style.filter='brightness('+((p.bannerGradientBright||100)/100)+')';
+  } else {
+    $('profileBanner').style.filter='';
+  }
   var visual=p.visualName||p.username;
   var av=$('profileAv');
   var isOn=OnlineUsers.isOnline(p.username);
@@ -4097,6 +3990,11 @@ function updatePreview(){
   $('previewAv').innerHTML = '<div class="av-frame '+frameCls+'" style="width:64px;height:64px"><div class="av-inner">'+inner+'</div></div>'+
     '<div class="edit-overlay"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>';
   $('previewBanner').style.background=getBannerStyle();
+  if(tempProfile.bannerGradient){
+    $('previewBanner').style.filter='brightness('+((tempProfile.bannerGradientBright||100)/100)+')';
+  } else {
+    $('previewBanner').style.filter='';
+  }
   $('previewBio').innerHTML=tempProfile.bio?renderBio(tempProfile.bio):'<span style="opacity:.5">Нет описания</span>';
   if(tempProfile.avatar){ $('avResetWrap').style.display='block'; }
   else { $('avResetWrap').style.display='none'; }
@@ -4296,11 +4194,13 @@ function renderSiteEmoji(){
       if(!s2 || !s2.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
       if(has){
         if(curEmoji===emoji) return;
+        TimerUI.start('siteSettingsTimer','⏳');
         Session.patchProfile({emoji:emoji});
         _lastAuthRenderKey=''; renderAuthState(true);
         Sound.success();
         renderSiteEmoji();
         api('setEmoji',{username:s2.username,token:s2.token,emoji:emoji},{post:true,retry:2}).then(function(r){
+          TimerUI.stop('siteSettingsTimer');
           if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteEmoji(); }
         });
         return;
@@ -4315,7 +4215,9 @@ function renderSiteEmoji(){
         openBuyConfirm(emoji, price, 'эмодзи', function(){
           var s3=Session.get();
           if(!s3 || !s3.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
+          TimerUI.start('siteSettingsTimer','⏳');
           api('buyEmoji',{username:s3.username,token:s3.token,emoji:emoji},{post:true,retry:2}).then(function(r){
+            TimerUI.stop('siteSettingsTimer');
             if(r.ok){
               Session.patchProfile({monkeys:r.monkeys, emoji:emoji, ownedEmojis:r.ownedEmojis||[]});
               _lastAuthRenderKey=''; renderAuthState(true); updateMonkeysWidget();
@@ -4385,11 +4287,13 @@ function renderSiteFrames(){
       if(!s2 || !s2.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
       if(has){
         if(curFrame===frame) return;
+        TimerUI.start('siteSettingsTimer','⏳');
         Session.patchProfile({frame:frame});
         _lastAuthRenderKey=''; renderAuthState(true);
         Sound.success();
         renderSiteFrames();
         api('setFrame',{username:s2.username,token:s2.token,frame:frame},{post:true,retry:2}).then(function(r){
+          TimerUI.stop('siteSettingsTimer');
           if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteFrames(); }
         });
         return;
@@ -4404,7 +4308,9 @@ function renderSiteFrames(){
         openBuyConfirm(name, price, 'рамку', function(){
           var s3=Session.get();
           if(!s3 || !s3.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
+          TimerUI.start('siteSettingsTimer','⏳');
           api('buyFrame',{username:s3.username,token:s3.token,frame:frame},{post:true,retry:2}).then(function(r){
+            TimerUI.stop('siteSettingsTimer');
             if(r.ok){
               Session.patchProfile({monkeys:r.monkeys, frame:frame, ownedFrames:r.ownedFrames||[]});
               _lastAuthRenderKey=''; renderAuthState(true); updateMonkeysWidget();
@@ -4484,11 +4390,14 @@ function renderSiteThemes(){
       (t.secret?'<span class="theme-secret">secret</span>':'')+
       '<div class="theme-preview" style="background:'+t.preview+'"></div>'+
       '<div class="theme-name">'+(t.icon?t.icon+' ':'')+esc(t.name)+'</div>'+
-      tag+'</div>';
+      tag+
+      '<button class="theme-preview-mini" data-preview="'+t.id+'" title="Предпросмотр">👁</button>'+
+      '</div>';
   }).join('');
 
   grid.querySelectorAll('.theme-item').forEach(function(el){
-    el.onclick=function(){
+    el.onclick=function(e){
+      if(e.target.closest('.theme-preview-mini')) return;
       var theme=el.dataset.theme;
       var price=parseInt(el.dataset.price,10);
       var has=el.dataset.owned==='true';
@@ -4498,12 +4407,14 @@ function renderSiteThemes(){
       if(!s2 || !s2.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
       if(has){
         if(curTheme===theme) return;
+        TimerUI.start('siteSettingsTimer','⏳');
         Session.patchProfile({theme:theme});
         applyTheme(theme);
         _lastAuthRenderKey=''; renderAuthState(true);
         Sound.success();
         renderSiteThemes();
         api('setTheme',{username:s2.username,token:s2.token,theme:theme},{post:true,retry:2}).then(function(r){
+          TimerUI.stop('siteSettingsTimer');
           if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteThemes(); }
         });
         return;
@@ -4518,7 +4429,9 @@ function renderSiteThemes(){
         openBuyConfirm(name, price, 'тему', function(){
           var s3=Session.get();
           if(!s3 || !s3.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
+          TimerUI.start('siteSettingsTimer','⏳');
           api('buyTheme',{username:s3.username,token:s3.token,theme:theme},{post:true,retry:2}).then(function(r){
+            TimerUI.stop('siteSettingsTimer');
             if(r.ok){
               Session.patchProfile({monkeys:r.monkeys, theme:theme, ownedThemes:r.ownedThemes||[]});
               applyTheme(theme);
@@ -4532,6 +4445,15 @@ function renderSiteThemes(){
           });
         }, theme, name);
       }
+    };
+  });
+  grid.querySelectorAll('.theme-preview-mini').forEach(function(btn){
+    btn.onclick=function(e){
+      e.stopPropagation();
+      var id=btn.dataset.preview;
+      var name=(btn.closest('.theme-item')||{}).dataset && btn.closest('.theme-item').dataset.name;
+      startThemePreview(id, name||id);
+      Sound.click();
     };
   });
 }
@@ -4861,6 +4783,7 @@ $('clickerZone').onclick=function(){
   clickerState.clicks++; clickerState.earned++;
   $('clickerClicks').textContent=clickerState.clicks;
   $('clickerEarned').textContent=clickerState.earned;
+  Sound.type();
   var s=Session.get();
   if(!s||!s.token) return;
   Session.patchProfile({monkeys:(s.profile.monkeys||0)+1});

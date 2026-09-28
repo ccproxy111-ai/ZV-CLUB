@@ -1404,7 +1404,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .av-frame.frame-blue{box-shadow:0 0 0 4px #3b82f6}
 .av-frame.frame-ruby{
   box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6);
-  animation:frameRuby 1.2s ease-in-out infinite alternate;
+  animation:frameRuby 2s ease-in-out infinite alternate;
 }
 @keyframes frameRuby{
   0%{box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6)}
@@ -1412,7 +1412,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 }
 .av-frame.frame-sapphire{
   box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6);
-  animation:frameSapphire 1.2s ease-in-out infinite alternate;
+  animation:frameSapphire 2s ease-in-out infinite alternate;
 }
 @keyframes frameSapphire{
   0%{box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6)}
@@ -1420,7 +1420,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 }
 .av-frame.frame-hacker{
   box-shadow:0 0 0 4px #000000, 0 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,.7);
-  animation:frameHacker 1s ease-in-out infinite alternate;
+  animation:frameHacker 2s ease-in-out infinite alternate;
   overflow:visible;
   position:relative;
 }
@@ -1453,7 +1453,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   100%{transform:translateY(-50%)}
 }
 .av-frame.frame-rgb{
-  animation:frameRgb 2s ease-in-out infinite alternate;
+  animation:frameRgb 3s ease-in-out infinite alternate;
 }
 @keyframes frameRgb{
   0%{box-shadow:0 0 0 4px #ff0000, 0 0 0 8px #00ff00, 0 0 16px rgba(255,0,0,.6)}
@@ -1503,6 +1503,12 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .site-earn-btn{width:100%;justify-content:center;margin-bottom:14px}
 .site-preview{margin-top:14px;border-top:1px solid var(--border);padding-top:14px;width:100%}
 .site-preview .sp-title{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;text-align:center}
+
+/* Theme preview timer */
+.theme-preview-timer{position:fixed;bottom:90px;right:20px;z-index:999;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:12px 16px;box-shadow:0 8px 30px rgba(0,0,0,.5);font-size:14px;font-weight:700;color:var(--fg);display:none;align-items:center;gap:10px}
+.theme-preview-timer.show{display:flex}
+.theme-preview-timer .tpt-ico{font-size:20px}
+.theme-preview-timer .tpt-time{font-variant-numeric:tabular-nums;color:var(--gold);font-size:18px;font-weight:900;min-width:32px;text-align:center}
 </style>
 </head>
 <body class="theme-dark">
@@ -1786,6 +1792,13 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 <div class="reward-popup" id="rewardPopup">
   <span class="rp-label">Получено</span>
   <span class="rp-val"><span>🐵</span><span id="rpAmount">+0</span></span>
+</div>
+
+<div class="theme-preview-timer" id="themePreviewTimer">
+  <span class="tpt-ico">👁</span>
+  <span>Предпросмотр темы:</span>
+  <span class="tpt-time" id="themePreviewTime">10</span>
+  <span>сек</span>
 </div>
 
 <div class="hover-card" id="hoverCard">
@@ -2100,9 +2113,12 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
       <div class="confirm-icon blue"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10h8"/></svg></div>
       <div class="confirm-title" id="buyTitle">Покупка</div>
       <div class="confirm-text" id="buyText"></div>
-      <div class="confirm-actions">
-        <button class="btn btn-ghost" id="buyCancel">Отмена</button>
-        <button class="btn btn-primary" id="buyConfirm">Купить</button>
+      <div class="confirm-actions" style="flex-direction:column;gap:8px;">
+        <button class="btn btn-primary" id="buyPreviewBtn" style="width:100%;justify-content:center;display:none">👁 Просмотреть тему (10 сек)</button>
+        <div style="display:flex;gap:10px;width:100%">
+          <button class="btn btn-ghost" id="buyCancel" style="flex:1;justify-content:center">Отмена</button>
+          <button class="btn btn-primary" id="buyConfirm" style="flex:1;justify-content:center">Купить</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2139,6 +2155,7 @@ var QUEUE_TIMEOUT = 45000;
 var WHEEL_SPIN_MS = 4000;
 var WHEEL_SPIN_COOLDOWN = 600;
 var USERS_CACHE_TTL = 30000;
+var THEME_PREVIEW_DURATION = 10;
 
 var EMOJI_LIST = [
   { emoji:'', label:'Без эмодзи', price:0 },
@@ -2193,11 +2210,25 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
+    ver: 'BETA 0.18', cls: 'v2', title: 'Мега-удобство, предпросмотр тем, скорость',
+    items: [
+      { tag: 'new', text: 'Предпросмотр темы: кнопка «Просмотреть тему» с таймером на 10 секунд.' },
+      { tag: 'new', text: 'Админ-панель: функция «Откатить ежедневный подарок».' },
+      { tag: 'new', text: 'Плавные анимации рамок ruby, sapphire, hacker, rgb без резких переключений.' },
+      { tag: 'new', text: 'Хакерская рамка: цифры теперь поверх аватарки.' },
+      { tag: 'fix', text: 'Исправлен баг с исчезновением обезьян в режимах заработка.' },
+      { tag: 'fix', text: 'Колесо фортуны крутится мгновенно при нажатии.' },
+      { tag: 'fix', text: 'Аватар в настройках сайта больше не приближен.' },
+      { tag: 'fix', text: 'Логин/регистрация: исправлена ошибка «неверный пароль».' },
+      { tag: 'fix', text: 'Админ-выдача обезьян: обновление мгновенное.' },
+      { tag: 'upd', text: 'Сайт стал быстрее и отзывчивее.' }
+    ]
+  },
+  {
     ver: 'BETA 0.17', cls: 'v2', title: 'Мега-удобство, скорость, исправления',
     items: [
       { tag: 'new', text: 'Сохранение с индикатором прогресса и таймером.' },
       { tag: 'new', text: 'Рамки с плавными анимациями переливов (ruby, sapphire, hacker, rgb).' },
-      { tag: 'new', text: 'Хакерская рамка: цифры теперь видны поверх рамки.' },
       { tag: 'fix', text: 'Исправлен баг с исчезновением обезьян в режимах заработка.' },
       { tag: 'fix', text: 'Колесо фортуны крутится мгновенно при нажатии.' },
       { tag: 'fix', text: 'Аватар в настройках сайта больше не приближен.' },
@@ -2519,7 +2550,7 @@ var Session = (function(){
   function scheduleFlush(){
     _dirty=true;
     if(_flushTimer) return;
-    _flushTimer=setTimeout(function(){ _flushTimer=null; flush(); }, 200);
+    _flushTimer=setTimeout(function(){ _flushTimer=null; flush(); }, 100);
   }
   return {
     get:function(){ return load(); },
@@ -2851,6 +2882,11 @@ var earnMode=null;
 var mathState={active:false,correct:0,earned:0,timer:null,deadline:0,question:null,answer:0,total:0};
 var choiceState={active:false,busy:false,revealed:false};
 var clickerState={active:false,clicks:0,earned:0,lastClick:0,antibot:false};
+
+var themePreviewTimer=null;
+var themePreviewCountdown=null;
+var themePreviewActive=false;
+var themePreviewOriginal='dark';
 
 function applyTheme(theme){
   var cls=document.body.className.split(' ').filter(function(c){return c.indexOf('theme-')!==0 && c!=='low-perf';}).join(' ');
@@ -4060,7 +4096,11 @@ function saveAccountChanges(){
       visualName:tempProfile.visualName,
       avatar:tempProfile.avatar,
       bio:tempProfile.bio,
-      bannerColor:tempProfile.bannerColor
+      bannerColor:tempProfile.bannerColor,
+      bannerGradient:tempProfile.bannerGradient ? '1' : '0',
+      bannerGradientColor:tempProfile.bannerGradientColor,
+      bannerGradientDir:tempProfile.bannerGradientDir,
+      bannerGradientBright:tempProfile.bannerGradientBright
     },{post:true,retry:3}).then(function(res){
       if(res.ok){
         Session.patchProfile(res.profile);
@@ -4339,6 +4379,31 @@ function renderSiteFrames(){
   });
 }
 
+function startThemePreview(themeId, themeName){
+  stopThemePreview();
+  themePreviewActive=true;
+  themePreviewOriginal=document.body.className.match(/theme-(\w+)/);
+  themePreviewOriginal=themePreviewOriginal?themePreviewOriginal[1]:'dark';
+  applyTheme(themeId);
+  var remaining=THEME_PREVIEW_DURATION;
+  $('themePreviewTime').textContent=remaining;
+  $('themePreviewTimer').classList.add('show');
+  themePreviewCountdown=setInterval(function(){
+    remaining--;
+    $('themePreviewTime').textContent=remaining;
+    if(remaining<=0){ stopThemePreview(); }
+  }, 1000);
+  toastSite('Предпросмотр темы «'+themeName+'» — '+THEME_PREVIEW_DURATION+' сек', false);
+}
+function stopThemePreview(){
+  if(themePreviewCountdown){ clearInterval(themePreviewCountdown); themePreviewCountdown=null; }
+  if(themePreviewActive){
+    themePreviewActive=false;
+    applyTheme(themePreviewOriginal);
+  }
+  $('themePreviewTimer').classList.remove('show');
+}
+
 function renderSiteThemes(){
   var s=Session.get(); if(!s) return;
   var p=s.profile||{};
@@ -4423,7 +4488,7 @@ function renderSiteThemes(){
               renderSiteThemes();
             }
           });
-        });
+        }, theme, name);
       }
     };
   });
@@ -4473,14 +4538,26 @@ function renderSiteExtra(){
   $('openThemesBtn').onclick=function(){ renderSiteSection('themes'); };
 }
 var buyCallback=null;
-function openBuyConfirm(item, price, kind, cb){
+var buyPreviewTheme=null;
+var buyPreviewName=null;
+function openBuyConfirm(item, price, kind, cb, themeId, themeName){
   buyCallback=cb;
+  buyPreviewTheme=themeId||null;
+  buyPreviewName=themeName||null;
   $('buyTitle').textContent='Покупка';
   $('buyText').innerHTML='Купить '+kind+' <b>'+esc(item)+'</b> за <b style="color:#fbbf24">🐵 '+price+'</b>?<br><span style="color:var(--muted);font-size:12px">Покупается навсегда</span>';
+  if(themeId){
+    $('buyPreviewBtn').style.display='flex';
+    $('buyPreviewBtn').textContent='👁 Просмотреть тему ('+THEME_PREVIEW_DURATION+' сек)';
+  } else {
+    $('buyPreviewBtn').style.display='none';
+  }
   $('buyOverlay').classList.add('show'); Sound.open();
 }
-$('buyCancel').onclick=function(){ $('buyOverlay').classList.remove('show'); Sound.close(); };
-$('buyConfirm').onclick=function(){ $('buyOverlay').classList.remove('show'); if(buyCallback) buyCallback(); };
+$('buyCancel').onclick=function(){ $('buyOverlay').classList.remove('show'); stopThemePreview(); Sound.close(); };
+$('buyConfirm').onclick=function(){ $('buyOverlay').classList.remove('show'); stopThemePreview(); if(buyCallback) buyCallback(); };
+$('buyPreviewBtn').onclick=function(){ if(buyPreviewTheme){ startThemePreview(buyPreviewTheme, buyPreviewName); } };
+$('buyOverlay').onclick=function(e){ if(e.target===$('buyOverlay')){ $('buyOverlay').classList.remove('show'); stopThemePreview(); Sound.close(); } };
 
 function closeEarnMode(){
   if(earnMode==='math') stopMath();
@@ -5136,6 +5213,24 @@ function renderAdminGrid(){
         }).then(function(){ adminBusy=false; });
       });
     }
+    var resetDailyBtn=card.querySelector('.adm-reset-daily');
+    if(resetDailyBtn){
+      resetDailyBtn.addEventListener('click', function(e){
+        e.preventDefault(); e.stopPropagation();
+        if(adminBusy) return;
+        if(!confirm('Откатить ежедневный подарок @'+uname+'? Он сможет забрать его снова.')) return;
+        adminBusy=true;
+        api('adminResetDaily',{adminToken:token(), username:uname},{post:true,retry:2}).then(function(r){
+          if(r.ok){
+            Sound.success();
+            var found=_findAdminUser(uname);
+            if(found){ found.u.lastDaily=0; }
+            alert('Ежедневный подарок откачен для @'+uname);
+            _flashCard(uname);
+          } else { Sound.error(); alert(r.error||'Ошибка'); }
+        }).then(function(){ adminBusy=false; });
+      });
+    }
   });
 }
 $('adminAvatarInput').addEventListener('change', function(e){
@@ -5185,6 +5280,9 @@ function adminCardHtml(u, allEmojis, allThemes, allFrames){
       '<button class="adm-action-btn success adm-give-btn" data-amount="10000">+10к</button>'+
       '<button class="adm-action-btn danger adm-give-btn" data-amount="-100">−100</button>'+
       '<button class="adm-action-btn danger adm-give-btn" data-amount="-1000">−1000</button>'+
+    '</div>'+
+    '<div class="admin-mono-row">'+
+      '<button class="adm-action-btn gold adm-reset-daily full" style="flex:1">🎁 Откатить ежедневный подарок</button>'+
     '</div>'+
     '<div class="admin-row" style="flex-direction:column;align-items:stretch;gap:5px"><label style="min-width:0">Эмодзи</label>'+
       '<div class="adm-emoji-picker">'+allEmojis.map(function(e){ return '<button data-e="'+esc(e.emoji)+'" class="'+(u.emoji===e.emoji?'selected':'')+'" title="'+esc(e.label)+'">'+(e.emoji||'∅')+(e.secret?'<span class="secret-mark">secret</span>':'')+'</button>'; }).join('')+'</div></div>'+

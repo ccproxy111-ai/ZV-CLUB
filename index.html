@@ -221,6 +221,28 @@ body.theme-monkey .monkey-emoji-layer{
 }
 body.theme-monkey #bg-shader{opacity:.15;filter:sepia(.6) saturate(.7)}
 
+body.theme-divine .divine-weather-layer{
+  display:block;
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  overflow:hidden;
+}
+.divine-weather-layer{display:none}
+.divine-weather{
+  position:absolute;
+  font-size:48px;
+  opacity:.18;
+  animation:divineFloat linear infinite;
+  user-select:none;
+  will-change:transform, opacity;
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.6));
+}
+@keyframes divineFloat{
+  0%{transform:translateY(110vh) rotate(0deg) scale(.8);opacity:0}
+  10%{opacity:.25}
+  90%{opacity:.25}
+  100%{transform:translateY(-20vh) rotate(360deg) scale(1.1);opacity:0}
+}
+
 body.low-perf *,
 body.low-perf *::before,
 body.low-perf *::after{
@@ -232,7 +254,8 @@ body.low-perf *::after{
 }
 body.low-perf #bg-shader{display:none !important}
 body.low-perf .abyss-bolt-layer,
-body.low-perf .monkey-emoji-layer{display:none !important}
+body.low-perf .monkey-emoji-layer,
+body.low-perf .divine-weather-layer{display:none !important}
 body.low-perf::before,
 body.low-perf::after{display:none !important}
 body.low-perf .header,
@@ -300,7 +323,7 @@ body.logged-in .header{left:var(--sidebar-w)}
   box-shadow:0 0 8px rgba(74,222,128,.9);animation:statusPulse 2s ease infinite;
 }
 
-.status-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.status-badge{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
 .status-badge.online{background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.35)}
 .status-badge.offline{background:rgba(124,127,138,.12);color:var(--muted);border:1px solid var(--border2)}
 .status-dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.9)}
@@ -1029,7 +1052,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .clicker-zone .cz-txt{font-size:14px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;pointer-events:none}
 .clicker-stats{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--muted)}
 .clicker-stats b{color:var(--fg);font-weight:800}
-.clicker-antibot{width:100%;max-width:420px;background:var(--bg3);border:1px solid rgba(251,191,36,.4);border-radius:14px;padding:16px;display:none;flex-direction:column;gap:10px;align-items:center;animation:pop .5s var(--ease)}
+.clicker-antibot{width:100%;max-width:420px;background:var(--bg3);border:1px solid rgba(251,191,36,.4);border-radius:14px;padding:16px;display:none;flex-direction:column;gap:10px;align-items:center;animation:pop .5s var(--ease);position:fixed;z-index:500;pointer-events:auto;box-shadow:0 10px 40px rgba(0,0,0,.5)}
 .clicker-antibot.show{display:flex}
 
 @media(max-width:1000px){
@@ -1393,7 +1416,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .user-menu-name .admin-badge-mini{margin-right:2px}
 .avatar-btn .nick .admin-badge-mini{margin-right:1px}
 
-/* ===== Рамки аватара ===== */
 .av-frame{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;isolation:isolate}
 .av-frame .av-inner{position:relative;z-index:2;border-radius:50%;overflow:hidden;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
 .av-frame.frame-none{box-shadow:none}
@@ -1428,30 +1450,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   0%{box-shadow:0 0 0 4px #000000, 0 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,.7)}
   100%{box-shadow:0 0 0 4px #00ff41, 0 0 0 8px #000000, 0 0 16px rgba(0,255,65,.7)}
 }
-.av-frame.frame-hacker .hacker-digits{
-  position:absolute;
-  top:0;left:0;right:0;bottom:0;
-  border-radius:50%;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:3;
-  font-family:ui-monospace,monospace;
-  font-size:7px;
-  line-height:1.3;
-  color:#00ff41;
-  text-shadow:0 0 4px #00ff41,0 0 8px #00ff41;
-  opacity:1;
-  animation:hackerScroll 2.5s linear infinite;
-  display:flex;flex-wrap:wrap;align-content:flex-start;justify-content:center;
-  padding-top:6px;
-  text-align:center;
-  word-break:break-all;
-  background:rgba(0,0,0,.25);
-}
-@keyframes hackerScroll{
-  0%{transform:translateY(0)}
-  100%{transform:translateY(-50%)}
-}
 .av-frame.frame-rgb{
   animation:frameRgb 3s ease-in-out infinite alternate;
 }
@@ -1463,7 +1461,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   100%{box-shadow:0 0 0 4px #ff0000, 0 0 0 8px #00ff00, 0 0 16px rgba(255,0,0,.6)}
 }
 
-/* Fix avatar sizes in user cards and profiles */
 .user-card .av-frame{width:60px;height:60px}
 .user-card .av-frame .av-inner img{width:100%;height:100%;object-fit:cover}
 .hover-av .av-frame{width:52px;height:52px}
@@ -1472,7 +1469,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .profile-av{display:flex;align-items:center;justify-content:center;position:relative;overflow:visible}
 .user-card .av-wrap{display:flex;align-items:center;justify-content:center;position:relative}
 
-/* Status circle positioning */
 .user-card .av-status,
 .hover-av .av-status,
 .profile-av .av-status{
@@ -1492,11 +1488,9 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .profile-av .av-status.online{background:#22c55e !important;box-shadow:0 0 14px rgba(34,197,94,.95),0 0 0 3px rgba(34,197,94,.25) !important}
 .profile-av .av-status.offline{background:#5a5d68 !important;box-shadow:0 0 0 3px rgba(90,93,104,.25) !important}
 
-/* Preview avatar frame */
 .preview-av .av-frame{width:64px;height:64px;border:3px solid var(--bg2);box-sizing:content-box}
 .preview-av .av-frame.frame-none{border:3px solid var(--bg2)}
 
-/* Site info panel */
 .site-info-card{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(251,191,36,.05));border:1px solid rgba(251,191,36,.4);border-radius:14px;padding:18px 14px;text-align:center;margin-bottom:14px}
 .site-info-card .si-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px}
 .site-info-card .si-val{font-size:26px;font-weight:900;color:#fbbf24;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -1504,7 +1498,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .site-preview{margin-top:14px;border-top:1px solid var(--border);padding-top:14px;width:100%}
 .site-preview .sp-title{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;text-align:center}
 
-/* Theme preview timer */
 .theme-preview-timer{position:fixed;bottom:90px;right:20px;z-index:999;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:12px 16px;box-shadow:0 8px 30px rgba(0,0,0,.5);font-size:14px;font-weight:700;color:var(--fg);display:none;align-items:center;gap:10px}
 .theme-preview-timer.show{display:flex}
 .theme-preview-timer .tpt-ico{font-size:20px}
@@ -1516,6 +1509,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 <canvas id="bg-shader"></canvas>
 <div class="abyss-bolt-layer" aria-hidden="true"></div>
 <div class="monkey-emoji-layer" id="monkeyEmojiLayer" aria-hidden="true"></div>
+<div class="divine-weather-layer" id="divineWeatherLayer" aria-hidden="true"></div>
 
 <header class="header">
   <div class="header-left">
@@ -2156,6 +2150,8 @@ var WHEEL_SPIN_MS = 4000;
 var WHEEL_SPIN_COOLDOWN = 600;
 var USERS_CACHE_TTL = 30000;
 var THEME_PREVIEW_DURATION = 10;
+var CLICKER_ANTIBOT_MIN_DELAY = 120;
+var CLICKER_ANTIBOT_EVERY = 80;
 
 var EMOJI_LIST = [
   { emoji:'', label:'Без эмодзи', price:0 },
@@ -2209,6 +2205,26 @@ var WHEEL_MIN_BET = 100;
 var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
+  {
+    ver: 'BETA 0.19', cls: 'v2', title: 'Оптимизация, стабильность, предпросмотр, погода',
+    items: [
+      { tag: 'new', text: 'Божественная тема: добавлены прозрачные эмодзи погодных условий (солнце, дождь, облака и т.д.).' },
+      { tag: 'new', text: 'Предпросмотр темы: кнопка «Просмотреть тему» с таймером на 10 секунд.' },
+      { tag: 'new', text: 'Улучшена производительность и скорость загрузки сайта.' },
+      { tag: 'fix', text: 'Убраны баганные цифры у рамки «Хакерская».' },
+      { tag: 'fix', text: 'Аватарки в больших профилях теперь ровные круглые.' },
+      { tag: 'fix', text: 'Логин с телефона теперь работает корректно.' },
+      { tag: 'fix', text: 'Кликер: убран звук задержки при нажатии, добавлена защита от автокликера.' },
+      { tag: 'fix', text: 'Антибот-кнопка теперь появляется в случайном месте экрана.' },
+      { tag: 'fix', text: 'Кнопка «ZV-CLUB» в шапке открывает главную страницу.' },
+      { tag: 'fix', text: 'Поиск друзей всегда пустой до ввода, загрузка быстрее.' },
+      { tag: 'fix', text: 'Статус «В сети» выровнен по центру.' },
+      { tag: 'fix', text: 'Аватар в предпросмотре больше не приближен.' },
+      { tag: 'fix', text: 'Сохранение градиентового баннера работает корректно.' },
+      { tag: 'fix', text: 'Редактор описания профиля: кнопки утолщения, курсива и подчёркивания работают.' },
+      { tag: 'upd', text: 'Сайт стал ещё быстрее и отзывчивее.' }
+    ]
+  },
   {
     ver: 'BETA 0.18', cls: 'v2', title: 'Мега-удобство, предпросмотр тем, скорость',
     items: [
@@ -2869,6 +2885,32 @@ function clearMonkeyEmojis(){
   if(layer) layer.innerHTML='';
 }
 
+function spawnDivineWeather(){
+  var layer=$('divineWeatherLayer');
+  if(!layer) return;
+  if(LowPerf.isOn()){ layer.innerHTML=''; return; }
+  var isDivine = document.body.classList.contains('theme-divine');
+  if(!isDivine){ layer.innerHTML=''; return; }
+  if(layer.childElementCount > 0) return;
+  var count = 18;
+  var html = '';
+  var emojis = ['☀️','🌤️','🌧️','⛅','🌦️','🌈','❄️','🌪️','🌫️','☁️','🌥️','🌩️'];
+  for(var i=0;i<count;i++){
+    var left = Math.random()*100;
+    var dur = 25 + Math.random()*25;
+    var delay = -Math.random()*50;
+    var size = 32 + Math.random()*64;
+    var emoji = emojis[Math.floor(Math.random()*emojis.length)];
+    var opacity = 0.1 + Math.random()*0.25;
+    html += '<div class="divine-weather" style="left:'+left.toFixed(2)+'%;font-size:'+size.toFixed(0)+'px;animation-duration:'+dur.toFixed(1)+'s;animation-delay:'+delay.toFixed(1)+'s;opacity:'+opacity.toFixed(2)+'">'+emoji+'</div>';
+  }
+  layer.innerHTML = html;
+}
+function clearDivineWeather(){
+  var layer=$('divineWeatherLayer');
+  if(layer) layer.innerHTML='';
+}
+
 var mode='login', captchaAnswer='', menuOpen=false;
 var allUsers=[], _usersCache={t:0,v:null}, usersSearchQuery='';
 var currentProfile=null, currentProfileIsOwner=false, currentProfileIRespect=false, currentProfileUsername=null;
@@ -2881,7 +2923,7 @@ var _lastAuthRenderKey='';
 var earnMode=null;
 var mathState={active:false,correct:0,earned:0,timer:null,deadline:0,question:null,answer:0,total:0};
 var choiceState={active:false,busy:false,revealed:false};
-var clickerState={active:false,clicks:0,earned:0,lastClick:0,antibot:false};
+var clickerState={active:false,clicks:0,earned:0,lastClick:0,antibot:false,lastAntibot:0};
 
 var themePreviewTimer=null;
 var themePreviewCountdown=null;
@@ -2894,6 +2936,7 @@ function applyTheme(theme){
   document.body.className=(cls+' theme-'+(theme||'dark')+lp).trim();
   if(theme==='monkey'){ setTimeout(spawnMonkeyEmojis, 50); } else { clearMonkeyEmojis(); }
   if(theme==='abyss'){ setTimeout(ensureAbyssBolts, 50); } else { var l=document.querySelector('.abyss-bolt-layer'); if(l) l.innerHTML=''; }
+  if(theme==='divine'){ setTimeout(spawnDivineWeather, 50); } else { clearDivineWeather(); }
 }
 
 function frameClass(frameId){
@@ -2904,7 +2947,7 @@ function frameClass(frameId){
 function avatarWithFrame(avatar, initial, frameId, cls){
   var f = frameId || 'none';
   var inner = avatar ? '<img src="'+avatar+'" alt="">' : esc(initial);
-  var hackerDigits = (f==='hacker') ? '<div class="hacker-digits">10101110 0101 1010 0111 1001 0011 1010 1100 0101 1110 1001 0011 0101 1010 0111 1100 0011 1010 0101 1110 1001 0011 1010 1100 0101</div>' : '';
+  var hackerDigits = '';
   return '<div class="'+(cls||'av-frame')+' '+frameClass(f)+'">'+hackerDigits+'<div class="av-inner">'+inner+'</div></div>';
 }
 
@@ -4323,8 +4366,7 @@ function renderSiteFrames(){
     else if(f.secret) tag='<div class="f-price" style="color:#ff8fc4">секрет</div>';
     else if(f.price>0) tag='<div class="f-price">🐵 '+f.price+'</div>';
     else tag='<div class="f-free">бесплатно</div>';
-    var hackerDigits = (f.id==='hacker') ? '<div class="hacker-digits">10101110 0101 1010 0111 1001 0011 1010 1100</div>' : '';
-    var visual = '<div class="frame-preview av-frame '+(f.css||'')+'" style="width:54px;height:54px">'+hackerDigits+'<div class="av-inner">?</div></div>';
+    var visual = '<div class="frame-preview av-frame '+(f.css||'')+'" style="width:54px;height:54px"><div class="av-inner">?</div></div>';
     return '<div class="frame-item '+(selected?'selected':'')+' '+lock+'" data-frame="'+f.id+'" data-price="'+(f.price||0)+'" data-owned="'+has+'" data-name="'+esc(f.name)+'">'+
       (f.secret?'<span class="f-secret">secret</span>':'')+
       visual+
@@ -4528,10 +4570,11 @@ function renderSiteExtra(){
     var on=!$('toggleLowPerf').classList.contains('on');
     $('toggleLowPerf').classList.toggle('on',on);
     LowPerf.set(on);
-    if(on){ clearMonkeyEmojis(); var l=document.querySelector('.abyss-bolt-layer'); if(l) l.innerHTML=''; }
+    if(on){ clearMonkeyEmojis(); clearDivineWeather(); var l=document.querySelector('.abyss-bolt-layer'); if(l) l.innerHTML=''; }
     else {
       if(document.body.classList.contains('theme-monkey')){ setTimeout(spawnMonkeyEmojis, 50); }
       if(document.body.classList.contains('theme-abyss')){ setTimeout(ensureAbyssBolts, 50); }
+      if(document.body.classList.contains('theme-divine')){ setTimeout(spawnDivineWeather, 50); }
     }
     Sound.click();
   };
@@ -4790,20 +4833,34 @@ function resetChoiceRound(){
 }
 
 function startClicker(){
-  clickerState.active=true; clickerState.clicks=0; clickerState.earned=0; clickerState.antibot=false; clickerState.lastClick=0;
+  clickerState.active=true; clickerState.clicks=0; clickerState.earned=0; clickerState.antibot=false; clickerState.lastClick=0; clickerState.lastAntibot=0;
   $('clickerClicks').textContent='0'; $('clickerEarned').textContent='0';
   $('clickerAntibot').classList.remove('show');
+  $('clickerAntibot').style.position='fixed';
+  $('clickerAntibot').style.left='';
+  $('clickerAntibot').style.top='';
 }
-function stopClicker(){ clickerState.active=false; }
+function stopClicker(){ clickerState.active=false; $('clickerAntibot').classList.remove('show'); }
+
+function positionAntibotButton(){
+  var el=$('clickerAntibot');
+  if(!el) return;
+  var w = Math.min(window.innerWidth - 40, 360);
+  var h = 120;
+  var left = Math.random() * (window.innerWidth - w - 20) + 10;
+  var top = Math.random() * (window.innerHeight - h - 20) + 10;
+  el.style.left = left + 'px';
+  el.style.top = top + 'px';
+}
+
 $('clickerZone').onclick=function(){
   if(!clickerState.active || clickerState.antibot) return;
   var now=nowMs();
-  if(now-clickerState.lastClick<60){ Sound.error(); return; }
+  if(now-clickerState.lastClick<CLICKER_ANTIBOT_MIN_DELAY){ return; }
   clickerState.lastClick=now;
   clickerState.clicks++; clickerState.earned++;
   $('clickerClicks').textContent=clickerState.clicks;
   $('clickerEarned').textContent=clickerState.earned;
-  Sound.click();
   var s=Session.get();
   if(!s||!s.token) return;
   Session.patchProfile({monkeys:(s.profile.monkeys||0)+1});
@@ -4811,8 +4868,9 @@ $('clickerZone').onclick=function(){
   api('clickerReward',{username:s.username,token:s.token,amount:1},{post:true,retry:2}).then(function(r){
     if(r && r.error==='Bad token') handleBadToken();
   });
-  if(clickerState.clicks%100===0){
+  if(clickerState.clicks%CLICKER_ANTIBOT_EVERY===0 && clickerState.clicks>0){
     clickerState.antibot=true;
+    positionAntibotButton();
     $('clickerAntibot').classList.add('show');
     Sound.error();
   }
@@ -5310,10 +5368,14 @@ document.addEventListener('pointerdown', function(e){
   Online.start();
   switchView('home');
   ensureAbyssBolts();
+  if(document.body.classList.contains('theme-divine')) spawnDivineWeather();
   setTimeout(silentSync, 2000);
   setInterval(function(){ rIC(silentSync); }, 60000);
   window.addEventListener('pagehide', function(){ Session.flushNow(); Online.stop(); });
   setInterval(function(){ rIC(refreshVisibleStatuses); }, 30000);
+  window.addEventListener('resize', function(){
+    if(clickerState.antibot) positionAntibotButton();
+  });
 })();
 </script>
 </body>

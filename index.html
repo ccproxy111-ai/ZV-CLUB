@@ -60,48 +60,16 @@ body.theme-abyss::before{
     radial-gradient(ellipse at 20% 30%, rgba(120,140,255,.04), transparent 50%),
     radial-gradient(ellipse at 80% 70%, rgba(180,120,255,.03), transparent 55%);
 }
-.abyss-bolt-layer{
-  display:none;
-  position:fixed;inset:0;pointer-events:none;z-index:1;
-  overflow:hidden;
-}
+.abyss-bolt-layer{display:none;position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
 body.theme-abyss .abyss-bolt-layer{display:block}
-.abyss-bolt{
-  position:absolute;
-  top:-10%;
-  width:220px;
-  height:120%;
-  pointer-events:none;
-  opacity:0;
-  filter:drop-shadow(0 0 12px rgba(180,200,255,.9)) drop-shadow(0 0 28px rgba(140,170,255,.6));
-}
+.abyss-bolt{position:absolute;top:-10%;width:220px;height:120%;pointer-events:none;opacity:0;filter:drop-shadow(0 0 12px rgba(180,200,255,.9)) drop-shadow(0 0 28px rgba(140,170,255,.6));}
 .abyss-bolt svg{width:100%;height:100%;display:block}
-.abyss-bolt polyline{
-  fill:none;
-  stroke:#eaf0ff;
-  stroke-width:2.2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  filter:drop-shadow(0 0 4px #cfe0ff);
-}
-.abyss-bolt polyline.branch{
-  stroke-width:1.3;
-  stroke:#b9c8ff;
-  opacity:.85;
-}
+.abyss-bolt polyline{fill:none;stroke:#eaf0ff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px #cfe0ff);}
+.abyss-bolt polyline.branch{stroke-width:1.3;stroke:#b9c8ff;opacity:.85;}
 .abyss-bolt.b1{left:12%;animation:boltFlash 7s ease-out infinite}
 .abyss-bolt.b2{left:48%;width:260px;animation:boltFlash 9s ease-out 2.5s infinite}
 .abyss-bolt.b3{left:74%;width:200px;animation:boltFlash 11s ease-out 5s infinite}
-@keyframes boltFlash{
-  0%   {opacity:0;}
-  0.6% {opacity:1;}
-  1.4% {opacity:0.35;}
-  2.2% {opacity:1;}
-  3.5% {opacity:0.55;}
-  5%   {opacity:0.15;}
-  8%   {opacity:0;}
-  100% {opacity:0;}
-}
+@keyframes boltFlash{0%{opacity:0}0.6%{opacity:1}1.4%{opacity:.35}2.2%{opacity:1}3.5%{opacity:.55}5%{opacity:.15}8%{opacity:0}100%{opacity:0}}
 body.theme-abyss #bg-shader{opacity:0}
 body.theme-abyss .dash-card.awards{box-shadow:0 12px 40px rgba(140,170,255,.2), inset 0 0 0 1px rgba(255,255,255,.1)}
 
@@ -115,104 +83,40 @@ body.theme-monkey{
   --banner-default:#4a3018;--shader-opacity:.15;
   --admin-badge-bg:#f5d78a;--admin-badge-fg:#3a2615;
   background:#3a2615;
-  background-image:
-    linear-gradient(135deg, rgba(122,79,42,.6), rgba(74,48,24,.6), rgba(107,68,35,.6), rgba(122,79,42,.6));
+  background-image:linear-gradient(135deg, rgba(122,79,42,.6), rgba(74,48,24,.6), rgba(107,68,35,.6), rgba(122,79,42,.6));
   background-size:400% 400%;
   animation:monkeyHue 20s ease-in-out infinite;
   position:relative;
 }
-@keyframes monkeyHue{
-  0%,100%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-}
-body.theme-monkey .monkey-emoji-layer{
-  display:block;
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  overflow:hidden;
-}
+@keyframes monkeyHue{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+body.theme-monkey .monkey-emoji-layer{display:block;position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .monkey-emoji-layer{display:none}
-.monkey-float{
-  position:absolute;
-  font-size:64px;
-  opacity:.12;
-  filter:sepia(.6) hue-rotate(-15deg) saturate(.9) blur(1px);
-  animation:monkeyFloatY linear infinite;
-  user-select:none;
-  will-change:transform, opacity;
-}
-@keyframes monkeyFloatY{
-  0%{transform:translateY(110vh) rotate(0deg) scale(1);opacity:0}
-  10%{opacity:.14}
-  90%{opacity:.14}
-  100%{transform:translateY(-20vh) rotate(360deg) scale(1.1);opacity:0}
-}
+.monkey-float{position:absolute;font-size:64px;opacity:.12;filter:sepia(.6) hue-rotate(-15deg) saturate(.9) blur(1px);animation:monkeyFloatY linear infinite;user-select:none;will-change:transform, opacity;}
+@keyframes monkeyFloatY{0%{transform:translateY(110vh) rotate(0deg) scale(1);opacity:0}10%{opacity:.14}90%{opacity:.14}100%{transform:translateY(-20vh) rotate(360deg) scale(1.1);opacity:0}}
 body.theme-monkey #bg-shader{opacity:.15;filter:sepia(.6) saturate(.7)}
 
-body.theme-divine .divine-weather-layer{
-  display:block;
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  overflow:hidden;
-}
+body.theme-divine .divine-weather-layer{display:block;position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .divine-weather-layer{display:none}
-.divine-weather{
-  position:absolute;
-  font-size:48px;
-  opacity:.18;
-  animation:divineFloat linear infinite;
-  user-select:none;
-  will-change:transform, opacity;
-  filter:drop-shadow(0 0 8px rgba(255,255,255,.6));
-}
-@keyframes divineFloat{
-  0%{transform:translateY(110vh) rotate(0deg) scale(.8);opacity:0}
-  10%{opacity:.25}
-  90%{opacity:.25}
-  100%{transform:translateY(-20vh) rotate(360deg) scale(1.1);opacity:0}
-}
+.divine-weather{position:absolute;font-size:48px;opacity:.18;animation:divineFloat linear infinite;user-select:none;will-change:transform, opacity;filter:drop-shadow(0 0 8px rgba(255,255,255,.6));}
+@keyframes divineFloat{0%{transform:translateY(110vh) rotate(0deg) scale(.8);opacity:0}10%{opacity:.25}90%{opacity:.25}100%{transform:translateY(-20vh) rotate(360deg) scale(1.1);opacity:0}}
 
-body.low-perf *,
-body.low-perf *::before,
-body.low-perf *::after{
-  animation-duration:.001s !important;
-  animation-delay:0s !important;
-  animation-iteration-count:1 !important;
-  transition-duration:.05s !important;
-  transition-delay:0s !important;
-}
+body.low-perf *,body.low-perf *::before,body.low-perf *::after{animation-duration:.001s !important;animation-delay:0s !important;animation-iteration-count:1 !important;transition-duration:.05s !important;transition-delay:0s !important;}
 body.low-perf #bg-shader{display:none !important}
-body.low-perf .abyss-bolt-layer,
-body.low-perf .monkey-emoji-layer,
-body.low-perf .divine-weather-layer{display:none !important}
-body.low-perf::before,
-body.low-perf::after{display:none !important}
-body.low-perf .header,
-body.low-perf .sidebar,
-body.low-perf .modal,
-body.low-perf .user-menu,
-body.low-perf .hover-card{
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-}
+body.low-perf .abyss-bolt-layer,body.low-perf .monkey-emoji-layer,body.low-perf .divine-weather-layer{display:none !important}
+body.low-perf::before,body.low-perf::after{display:none !important}
+body.low-perf .header,body.low-perf .sidebar,body.low-perf .modal,body.low-perf .user-menu,body.low-perf .hover-card{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
 body.low-perf .wheel-glow{display:none !important}
 body.low-perf .wheel-rotor{box-shadow:0 0 0 8px #1a1a22, 0 0 0 12px #2a2a35 !important}
 body.low-perf .online .dot::after{display:none !important}
-body.low-perf .dash-card.awards{
-  animation:none !important;
-  background:linear-gradient(120deg,#a855f7,#ec4899) !important;
-  background-size:100% 100% !important;
-}
 body.low-perf *{content-visibility:auto !important;contain-intrinsic-size:auto 80px}
 body.low-perf .reward-popup{transition:opacity .05s !important}
-body.low-perf .monkeys-widget{box-shadow:none !important}
-body.low-perf .respect-btn.active{box-shadow:none !important}
-body.low-perf .preview-card{box-shadow:0 4px 12px rgba(0,0,0,.3) !important}
 
 html,body{height:100%;background:var(--bg);color:var(--fg);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s ease,color .5s ease}
 #bg-shader{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;opacity:var(--shader-opacity);transition:opacity .6s ease}
 @media (max-width:640px){#bg-shader{display:none}}
 
-.users-grid,.posts-list,.admin-grid,.wh-list,.emoji-grid,.theme-grid,.earn-grid{contain:layout style paint}
-.user-card,.post-card,.admin-card,.wh-item,.emoji-item,.theme-item,.earn-card{content-visibility:auto;contain-intrinsic-size:auto 90px}
+.users-grid,.posts-list,.admin-grid,.wh-list,.emoji-grid,.theme-grid,.earn-grid,.shop-cases-grid,.shop-items-grid{contain:layout style paint}
+.user-card,.post-card,.admin-card,.wh-item,.emoji-item,.theme-item,.earn-card,.shop-case-card,.shop-item-card{content-visibility:auto;contain-intrinsic-size:auto 90px}
 .wheel-rotor,.wheel-glow{will-change:transform}
 
 .header{position:fixed;top:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:var(--header-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:100;transition:left .45s var(--ease),background .5s ease,border-color .5s ease}
@@ -234,21 +138,11 @@ body.logged-in .header{left:var(--sidebar-w)}
 .online.err .dot{background:var(--muted2);box-shadow:none}
 .online.err .dot::after{display:none}
 
-.logs-btn{
-  display:flex;align-items:center;gap:6px;
-  padding:8px 14px;border-radius:9px;
-  background:var(--bg2);border:1px solid var(--border);
-  color:var(--muted);font-family:inherit;font-size:12.5px;font-weight:700;
-  letter-spacing:.6px;text-transform:uppercase;cursor:pointer;
-  transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease);
-}
+.logs-btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:9px;background:var(--bg2);border:1px solid var(--border);color:var(--muted);font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease);}
 .logs-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg);transform:translateY(-1px)}
 .logs-btn:active{transform:scale(.97)}
 .logs-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.logs-btn .live{
-  width:6px;height:6px;border-radius:50%;background:#4ade80;
-  box-shadow:0 0 8px rgba(74,222,128,.9);animation:statusPulse 2s ease infinite;
-}
+.logs-btn .live{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.9);animation:statusPulse 2s ease infinite;}
 
 .status-badge{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
 .status-badge.online{background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.35)}
@@ -272,25 +166,12 @@ body.logged-in .header{left:var(--sidebar-w)}
 .btn::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--rx,50%) var(--ry,50%),rgba(255,255,255,.25),transparent 60%);opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
 .btn:active::after{opacity:1;transition:none}
 
-/* ==== TimerUI ==== */
-.timer-ui{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11.5px;font-weight:700;color:var(--muted);
-  background:var(--bg2);border:1px solid var(--border);
-  padding:3px 9px;border-radius:999px;
-  font-variant-numeric:tabular-nums;
-}
-.timer-ui .sp{
-  width:9px;height:9px;border-radius:50%;
-  border:2px solid var(--muted);border-top-color:var(--fg);
-  animation:timerSpin .7s linear infinite;
-}
+/* TimerUI */
+.timer-ui{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--muted);background:var(--bg2);border:1px solid var(--border);padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums;}
+.timer-ui .sp{width:9px;height:9px;border-radius:50%;border:2px solid var(--muted);border-top-color:var(--fg);animation:timerSpin .7s linear infinite;}
 @keyframes timerSpin{to{transform:rotate(360deg)}}
 .timer-ui.hidden{display:none}
-.timer-inline{
-  display:inline-block;font-variant-numeric:tabular-nums;
-  font-size:11px;color:var(--muted);margin-left:6px;
-}
+.timer-inline{display:inline-block;font-variant-numeric:tabular-nums;font-size:11px;color:var(--muted);margin-left:6px;}
 
 .sidebar{position:fixed;top:56px;left:0;bottom:0;width:var(--sidebar-w);background:var(--sidebar-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-right:1px solid var(--border);display:none;flex-direction:column;gap:8px;padding:12px 8px;z-index:99;transition:width .45s var(--ease),background .5s ease,border-color .5s ease;overflow:hidden}
 body.logged-in .sidebar{display:flex}
@@ -313,6 +194,9 @@ body.logged-in .sidebar{display:flex}
 .sidebar-item.earn{border-color:rgba(74,222,128,.35)}
 .sidebar-item.earn:hover{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.6);color:#4ade80}
 .sidebar-item.earn.active{background:rgba(74,222,128,.18);border-color:rgba(74,222,128,.6);color:#4ade80}
+.sidebar-item.shop{border-color:rgba(251,191,36,.35)}
+.sidebar-item.shop:hover{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.6);color:#fbbf24}
+.sidebar-item.shop.active{background:rgba(251,191,36,.18);border-color:rgba(251,191,36,.6);color:#fbbf24}
 
 .user-wrap{position:relative}
 .avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:border-color .3s var(--ease),background .3s var(--ease);color:var(--fg)}
@@ -372,24 +256,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .dash-card h3{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--fg)}
 .dash-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
 
-.dash-card.awards{
-  grid-column:span 2;
-  position:relative;
-  border:none;
-  overflow:hidden;
-  padding:22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  min-height:200px;
-  color:#fff;
-  cursor:pointer;
-  text-decoration:none;
-  background:linear-gradient(120deg,#ff004c,#ff7a00,#ffd400,#3aff6c,#00e0ff,#5b5bff,#c400ff,#ff004c);
-  background-size:300% 300%;
-  animation:awardsShift 12s ease infinite;
-  box-shadow:0 12px 40px rgba(196,0,255,.35), inset 0 0 0 1px rgba(255,255,255,.15);
-}
+.dash-card.awards{grid-column:span 2;position:relative;border:none;overflow:hidden;padding:22px;display:flex;flex-direction:column;justify-content:center;min-height:200px;color:#fff;cursor:pointer;text-decoration:none;background:linear-gradient(120deg,#ff004c,#ff7a00,#ffd400,#3aff6c,#00e0ff,#5b5bff,#c400ff,#ff004c);background-size:300% 300%;animation:awardsShift 12s ease infinite;box-shadow:0 12px 40px rgba(196,0,255,.35), inset 0 0 0 1px rgba(255,255,255,.15);}
 @keyframes awardsShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .dash-card.awards:hover{transform:translateY(-4px) scale(1.005); box-shadow:0 18px 50px rgba(196,0,255,.5), inset 0 0 0 1px rgba(255,255,255,.25)}
 .dash-card.awards .awards-inner{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
@@ -398,10 +265,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .dash-card.awards .awards-desc{font-size:12.5px;color:#fff;opacity:.92;max-width:520px;line-height:1.55;margin-top:4px}
 .dash-card.awards .awards-cta{margin-top:12px;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:9px 16px;border-radius:999px;background:rgba(0,0,0,.35);color:#fff;font-weight:800;font-size:13px;backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .dash-card.awards .awards-cta svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:640px){
-  .dash-card.awards{grid-column:span 1}
-  .dash-card.awards .awards-title{font-size:22px}
-}
+@media(max-width:640px){.dash-card.awards{grid-column:span 1}.dash-card.awards .awards-title{font-size:22px}}
 
 .users-section{display:none;flex-direction:column;gap:14px}
 .users-section.active{display:flex}
@@ -413,13 +277,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .users-search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2}
 
 .users-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
-.user-card{
-  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
-  padding:16px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:10px;aspect-ratio:1/1;
-  transition:border-color .35s var(--ease),background .35s var(--ease),transform .3s var(--ease);
-  cursor:pointer;text-align:center;position:relative;
-}
+.user-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;aspect-ratio:1/1;transition:border-color .35s var(--ease),background .35s var(--ease),transform .3s var(--ease);cursor:pointer;text-align:center;position:relative;}
 .user-card:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-3px)}
 .user-card .av-wrap{position:relative;display:inline-block}
 .user-card .av{width:60px;height:60px;border-radius:50%;background:var(--av-bg);border:1px solid var(--av-border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;text-transform:uppercase;color:var(--av-fg);overflow:hidden}
@@ -458,7 +316,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .modal-overlay{position:fixed;inset:0;background:rgba(8,8,10,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
 .modal-overlay.show{display:flex;animation:fadeIn .35s var(--ease)}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-#unsavedOverlay,#respectOverlay,#buyOverlay,#deleteOverlay,#earnMathExitOverlay,#earnChoiceExitOverlay,#earnClickerExitOverlay,#tokenExpiredOverlay,#logsOverlay,#notEnoughOverlay{z-index:600}
+#unsavedOverlay,#respectOverlay,#buyOverlay,#deleteOverlay,#earnMathExitOverlay,#earnChoiceExitOverlay,#earnClickerExitOverlay,#tokenExpiredOverlay,#logsOverlay,#notEnoughOverlay,#caseOpenOverlay{z-index:600}
 
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:30px 28px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative;animation:modalIn .5s var(--ease-out)}
 .modal.wide{max-width:900px;padding:0;overflow:hidden}
@@ -678,6 +536,17 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .emoji-item.pop{animation:emojiPop .9s var(--ease)}
 @keyframes emojiPop{0%{transform:scale(1)}40%{transform:scale(1.14)}100%{transform:scale(1)}}
 
+.rarity-common{border-color:#6b7280 !important}
+.rarity-rare{border-color:#22c55e !important;box-shadow:0 0 12px rgba(34,197,94,.25) inset}
+.rarity-epic{border-color:#a855f7 !important;box-shadow:0 0 12px rgba(168,85,247,.3) inset}
+.rarity-legendary{border-color:#fbbf24 !important;box-shadow:0 0 16px rgba(251,191,36,.35) inset;animation:legendaryGlow 2.4s ease-in-out infinite}
+@keyframes legendaryGlow{0%,100%{box-shadow:0 0 16px rgba(251,191,36,.35) inset}50%{box-shadow:0 0 24px rgba(251,191,36,.6) inset}}
+.rarity-badge{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.rarity-badge.common{background:rgba(107,114,128,.2);color:#9ca3af;border:1px solid rgba(107,114,128,.4)}
+.rarity-badge.rare{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.4)}
+.rarity-badge.epic{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.45)}
+.rarity-badge.legendary{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.5)}
+
 .theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .theme-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;transition:border-color .35s var(--ease),background .35s var(--ease),transform .3s var(--ease);position:relative;overflow:hidden}
 .theme-item:hover{border-color:var(--border2);background:var(--bg2);transform:translateY(-3px)}
@@ -690,15 +559,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .theme-free{font-size:11px;color:var(--muted);font-weight:600;margin-top:3px}
 .theme-secret{position:absolute;top:8px;right:8px;font-size:10px;padding:2px 6px;background:rgba(255,80,160,.15);border:1px solid rgba(255,80,160,.35);border-radius:999px;color:#ff8fc4}
 .theme-item.pop{animation:emojiPop .9s var(--ease)}
-.theme-preview-mini{
-  position:absolute;bottom:8px;right:8px;
-  width:22px;height:22px;border-radius:50%;
-  background:rgba(0,0,0,.55);border:1px solid var(--border2);
-  color:#fff;font-size:11px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .3s var(--ease),transform .3s var(--ease),opacity .3s var(--ease);
-  opacity:.7;z-index:2;
-}
+.theme-preview-mini{position:absolute;bottom:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.55);border:1px solid var(--border2);color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s var(--ease),transform .3s var(--ease),opacity .3s var(--ease);opacity:.7;z-index:2;}
 .theme-preview-mini:hover{background:rgba(0,0,0,.85);transform:scale(1.15);opacity:1}
 
 .frame-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px}
@@ -768,47 +629,23 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .admin-monkeys-set input{flex:1;min-width:60px}
 
 .adm-emoji-picker{display:flex;flex-wrap:wrap;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:8px;max-height:130px;overflow-y:auto}
-.adm-emoji-picker button{
-  background:var(--bg);border:1px solid var(--border);border-radius:8px;
-  padding:6px 9px;font-size:16px;cursor:pointer;line-height:1;font-family:inherit;
-  transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease);
-  position:relative;
-}
+.adm-emoji-picker button{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 9px;font-size:16px;cursor:pointer;line-height:1;font-family:inherit;transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease);position:relative;}
 .adm-emoji-picker button:hover{background:var(--bg3);border-color:var(--border2);transform:translateY(-2px) scale(1.08);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 .adm-emoji-picker button.selected{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok) inset,0 0 10px rgba(74,222,128,.25);background:var(--bg3)}
 .adm-emoji-picker button .secret-mark{position:absolute;top:-4px;right:-4px;font-size:8px;padding:1px 4px;background:rgba(255,80,160,.9);border-radius:999px;color:#fff;font-weight:800;letter-spacing:.3px}
 .adm-theme-picker{display:flex;flex-wrap:wrap;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:8px}
-.adm-theme-picker button{
-  background:var(--bg);border:1px solid var(--border);border-radius:8px;
-  padding:6px 12px;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--muted);
-  font-family:inherit;letter-spacing:.3px;
-  transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease);
-  position:relative;
-}
+.adm-theme-picker button{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--muted);font-family:inherit;letter-spacing:.3px;transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease);position:relative;}
 .adm-theme-picker button:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 .adm-theme-picker button.selected{border-color:var(--ok);color:var(--fg);background:var(--bg3);box-shadow:0 0 0 1px var(--ok) inset}
 .adm-theme-picker button .secret-mark{position:absolute;top:-4px;right:-4px;font-size:8px;padding:1px 4px;background:rgba(255,80,160,.9);border-radius:999px;color:#fff;font-weight:800;letter-spacing:.3px}
 
 .adm-frame-picker{display:flex;flex-wrap:wrap;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:8px}
-.adm-frame-picker button{
-  background:var(--bg);border:1px solid var(--border);border-radius:8px;
-  padding:6px 12px;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--muted);
-  font-family:inherit;letter-spacing:.3px;
-  transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease);
-  position:relative;
-}
+.adm-frame-picker button{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--muted);font-family:inherit;letter-spacing:.3px;transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease);position:relative;}
 .adm-frame-picker button:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 .adm-frame-picker button.selected{border-color:var(--ok);color:var(--fg);background:var(--bg3);box-shadow:0 0 0 1px var(--ok) inset}
 .adm-frame-picker button .secret-mark{position:absolute;top:-4px;right:-4px;font-size:8px;padding:1px 4px;background:rgba(255,80,160,.9);border-radius:999px;color:#fff;font-weight:800;letter-spacing:.3px}
 
-.adm-action-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  padding:8px 14px;border-radius:9px;font-size:11.5px;font-weight:700;
-  font-family:inherit;cursor:pointer;border:1px solid var(--border);
-  background:var(--bg2);color:var(--fg);
-  transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease),box-shadow .3s var(--ease);
-  white-space:nowrap;
-}
+.adm-action-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 14px;border-radius:9px;font-size:11.5px;font-weight:700;font-family:inherit;cursor:pointer;border:1px solid var(--border);background:var(--bg2);color:var(--fg);transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease),box-shadow .3s var(--ease);white-space:nowrap;}
 .adm-action-btn:hover{background:var(--bg3);border-color:var(--border2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .adm-action-btn:active{transform:scale(.97)}
 .adm-action-btn.primary{background:var(--btn-primary-bg);color:var(--btn-primary-fg);border-color:transparent}
@@ -830,40 +667,21 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .skeleton-card{height:120px;margin-bottom:12px}
 
 .logs-modal{max-width:760px;padding:0;overflow:hidden;display:flex;flex-direction:column;max-height:88vh}
-.logs-head{
-  padding:22px 28px 18px;border-bottom:1px solid var(--border);
-  background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(34,211,238,.08),transparent 70%);
-  position:relative;
-}
-.logs-head h2{font-size:22px;font-weight:900;letter-spacing:.5px;display:flex;align-items:center;gap:10px;
-  background:linear-gradient(135deg,#a855f7,#22d3ee,#4ade80);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.logs-head{padding:22px 28px 18px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(34,211,238,.08),transparent 70%);position:relative;}
+.logs-head h2{font-size:22px;font-weight:900;letter-spacing:.5px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#a855f7,#22d3ee,#4ade80);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .logs-head .logs-sub{font-size:12.5px;color:var(--muted);margin-top:6px}
 .logs-body{padding:20px 28px 26px;overflow-y:auto}
-.log-item{
-  display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--border);
-}
+.log-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--border);}
 .log-item:last-child{border-bottom:none}
-.log-ver{
-  flex-shrink:0;min-width:74px;font-size:11px;font-weight:900;letter-spacing:.6px;
-  text-transform:uppercase;color:var(--fg);
-  padding:5px 10px;border-radius:999px;height:fit-content;
-  background:var(--bg3);border:1px solid var(--border2);
-  text-align:center;
-}
+.log-ver{flex-shrink:0;min-width:74px;font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--fg);padding:5px 10px;border-radius:999px;height:fit-content;background:var(--bg3);border:1px solid var(--border2);text-align:center;}
 .log-ver.v2{background:linear-gradient(135deg,#a855f7,#6366f1);color:#fff;border-color:transparent}
 .log-ver.v1{background:linear-gradient(135deg,#22d3ee,#4ade80);color:#04202a;border-color:transparent}
 .log-content{flex:1;min-width:0}
 .log-title{font-size:14.5px;font-weight:800;color:var(--fg);margin-bottom:6px}
 .log-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:5px}
 .log-list li{font-size:12.5px;color:var(--muted);line-height:1.6;padding-left:18px;position:relative}
-.log-list li::before{
-  content:'▸';position:absolute;left:0;top:0;color:#a855f7;font-weight:900;
-}
-.log-tag{
-  display:inline-block;font-size:9.5px;font-weight:900;letter-spacing:.4px;
-  padding:2px 7px;border-radius:999px;text-transform:uppercase;margin-right:6px;
-  background:var(--bg3);border:1px solid var(--border2);color:var(--muted);
-}
+.log-list li::before{content:'▸';position:absolute;left:0;top:0;color:#a855f7;font-weight:900;}
+.log-tag{display:inline-block;font-size:9.5px;font-weight:900;letter-spacing:.4px;padding:2px 7px;border-radius:999px;text-transform:uppercase;margin-right:6px;background:var(--bg3);border:1px solid var(--border2);color:var(--muted);}
 .log-tag.new{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.4);color:#4ade80}
 .log-tag.fix{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.4);color:#fbbf24}
 .log-tag.upd{background:rgba(34,211,238,.15);border-color:rgba(34,211,238,.4);color:#22d3ee}
@@ -880,7 +698,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .wheel-stage{position:relative;width:min(440px,86vw);height:min(440px,86vw);margin:0 auto;display:flex;align-items:center;justify-content:center}
 .wheel-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid #fbbf24;filter:drop-shadow(0 6px 10px rgba(251,191,36,.6));z-index:5}
 .wheel-pointer::after{content:'';position:absolute;top:-30px;left:-10px;width:20px;height:20px;border-radius:50%;background:#fbbf24;box-shadow:0 0 16px rgba(251,191,36,.9)}
-.wheel-rotor{width:100%;height:100%;border-radius:50%;position:relative;box-shadow:0 0 0 10px #1a1a22,0 0 0 14px #2a2a35,0 0 60px rgba(168,85,247,.35),inset 0 0 40px rgba(0,0,0,.6);transition:transform 6s cubic-bezier(.15,.9,.2,1);background:#0e0e11}
+.wheel-rotor{width:100%;height:100%;border-radius:50%;position:relative;box-shadow:0 0 0 10px #1a1a22,0 0 0 14px #2a2a35,0 0 60px rgba(168,85,247,.35),inset 0 0 40px rgba(0,0,0,.6);background:#0e0e11}
 .wheel-svg{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:50%}
 .wheel-hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26%;height:26%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3a4a,#0e0e11);border:3px solid #fbbf24;display:flex;align-items:center;justify-content:center;z-index:4;box-shadow:0 0 24px rgba(251,191,36,.5),inset 0 0 12px rgba(0,0,0,.8)}
 .wheel-hub span{font-size:clamp(18px,3.6vw,26px);font-weight:900;color:#fbbf24;text-shadow:0 0 12px rgba(251,191,36,.8)}
@@ -1012,6 +830,87 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .clicker-antibot{width:100%;max-width:420px;background:var(--bg3);border:1px solid rgba(251,191,36,.4);border-radius:14px;padding:16px;display:none;flex-direction:column;gap:10px;align-items:center;animation:pop .5s var(--ease);position:fixed;z-index:500;pointer-events:auto;box-shadow:0 10px 40px rgba(0,0,0,.5)}
 .clicker-antibot.show{display:flex}
 
+/* SHOP */
+.shop-section{display:none;flex-direction:column;gap:18px;width:100%}
+.shop-section.active{display:flex;animation:fadeUp .5s var(--ease)}
+.shop-tabs{display:flex;gap:8px;padding:6px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;align-self:flex-start}
+.shop-tab{padding:9px 20px;border-radius:9px;border:none;background:transparent;color:var(--muted);font-family:inherit;font-weight:700;font-size:13.5px;cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease)}
+.shop-tab:hover{color:var(--fg)}
+.shop-tab.active{background:var(--bg4);color:var(--fg)}
+.shop-view{display:none;flex-direction:column;gap:26px}
+.shop-view.active{display:flex}
+.shop-block-title{font-size:15px;font-weight:800;color:var(--fg);text-transform:uppercase;letter-spacing:1px;padding:0 4px;display:flex;align-items:center;gap:8px}
+.shop-block-title .cnt{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0}
+
+.shop-cases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.shop-case-card{position:relative;border:1px solid var(--border2);border-radius:16px;padding:22px 18px;background:linear-gradient(135deg,var(--bg2),var(--bg3));cursor:pointer;overflow:hidden;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
+.shop-case-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.5);border-color:var(--border2)}
+.shop-case-card .scc-glow{position:absolute;inset:-50%;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.08),transparent 55%);pointer-events:none}
+.shop-case-card .scc-ico{font-size:64px;line-height:1;margin-bottom:10px;filter:drop-shadow(0 6px 20px rgba(0,0,0,.5))}
+.shop-case-card .scc-title{font-size:17px;font-weight:900;color:var(--fg);letter-spacing:.3px}
+.shop-case-card .scc-sub{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5;min-height:34px}
+.shop-case-card .scc-price{margin-top:12px;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:900;color:#fbbf24;padding:7px 14px;border-radius:999px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);align-self:flex-start}
+.shop-case-card.case-emoji{background:linear-gradient(135deg,rgba(251,191,36,.14),var(--bg2),var(--bg3))}
+.shop-case-card.case-theme{background:linear-gradient(135deg,rgba(168,85,247,.14),var(--bg2),var(--bg3))}
+.shop-case-card.case-frame{background:linear-gradient(135deg,rgba(34,211,238,.14),var(--bg2),var(--bg3))}
+
+.shop-items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.shop-item-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);position:relative;overflow:hidden}
+.shop-item-card:hover{transform:translateY(-3px);border-color:var(--border2);background:var(--bg3)}
+.shop-item-card .sic-visual{height:70px;display:flex;align-items:center;justify-content:center;font-size:42px}
+.shop-item-card .sic-visual .theme-preview{width:100%;height:44px;border-radius:8px;border:1px solid var(--border)}
+.shop-item-card .sic-visual .frame-preview{width:56px;height:56px;border-radius:50%;background:var(--av-bg);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--av-fg)}
+.shop-item-card .sic-name{font-size:13px;font-weight:700;color:var(--fg);text-align:center}
+.shop-item-card .sic-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:auto}
+.shop-item-card .sic-price{font-size:12px;font-weight:800;color:#fbbf24;padding:3px 9px;border-radius:999px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25)}
+.shop-item-card .sic-owned{font-size:11px;font-weight:800;color:#4ade80;padding:3px 9px;border-radius:999px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25)}
+.shop-item-card.owned{opacity:.95}
+
+.case-open-modal{max-width:960px;padding:0;overflow:hidden;max-height:92vh;display:flex;flex-direction:column}
+.case-open-head{padding:22px 28px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(168,85,247,.08),transparent 70%)}
+.case-open-head h2{font-size:22px;font-weight:900;color:var(--fg);display:flex;align-items:center;gap:10px}
+.case-open-head .cs-sub{font-size:12.5px;color:var(--muted);margin-top:5px}
+.case-open-body{padding:24px 28px;overflow-y:auto;flex:1}
+.case-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.case-preview-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;position:relative;transition:transform .3s var(--ease)}
+.case-preview-item:hover{transform:translateY(-2px)}
+.case-preview-item .cp-visual{font-size:32px;line-height:1}
+.case-preview-item .cp-visual.theme-v{width:100%;height:36px;border-radius:6px;border:1px solid var(--border)}
+.case-preview-item .cp-visual.frame-v{width:44px;height:44px;border-radius:50%;background:var(--av-bg);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--av-fg)}
+.case-preview-item .cp-name{font-size:11px;color:var(--fg);font-weight:600}
+.case-preview-item .cp-owned{font-size:9px;color:#4ade80;font-weight:800;letter-spacing:.3px}
+.case-open-foot{padding:16px 28px 22px;border-top:1px solid var(--border);display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--bg)}
+.case-qty{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:6px 10px}
+.case-qty label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.case-qty button{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--fg);font-size:16px;font-weight:900;cursor:pointer;font-family:inherit;transition:background .25s var(--ease)}
+.case-qty button:hover{background:var(--bg4)}
+.case-qty input{width:56px;padding:6px;background:transparent;border:none;color:var(--fg);font-size:15px;font-weight:900;text-align:center;font-family:inherit;outline:none}
+.case-total{font-size:14px;font-weight:800;color:#fbbf24;display:flex;align-items:center;gap:6px}
+
+.case-roulette{position:relative;height:130px;background:var(--bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:16px 0;box-shadow:inset 0 0 30px rgba(0,0,0,.5)}
+.case-roulette-marker{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:3px;background:#fbbf24;box-shadow:0 0 18px #fbbf24;z-index:3;pointer-events:none}
+.case-roulette-marker::before{content:'';position:absolute;top:-4px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid #fbbf24}
+.case-roulette-marker::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:10px solid #fbbf24}
+.case-roulette-strip{position:absolute;top:0;bottom:0;left:0;display:flex;align-items:center;gap:8px;padding:8px;will-change:transform}
+.case-roulette-cell{flex-shrink:0;width:110px;height:calc(100% - 16px);border-radius:8px;border:2px solid var(--border);background:var(--bg2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8px}
+.case-roulette-cell .crv{font-size:30px;line-height:1}
+.case-roulette-cell .crv.theme-v{width:100%;height:34px;border-radius:6px;border:1px solid var(--border)}
+.case-roulette-cell .crv.frame-v{width:40px;height:40px;border-radius:50%;background:var(--av-bg);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--av-fg)}
+.case-roulette-cell .crn{font-size:10px;color:var(--muted);font-weight:700;text-align:center;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.case-roulette-cell.common{border-color:rgba(107,114,128,.6)}
+.case-roulette-cell.rare{border-color:rgba(34,197,94,.7);box-shadow:0 0 10px rgba(34,197,94,.2)}
+.case-roulette-cell.epic{border-color:rgba(168,85,247,.75);box-shadow:0 0 12px rgba(168,85,247,.25)}
+.case-roulette-cell.legendary{border-color:rgba(251,191,36,.85);box-shadow:0 0 16px rgba(251,191,36,.4);background:linear-gradient(135deg,rgba(251,191,36,.12),var(--bg2))}
+
+.case-result-card{margin-top:14px;padding:16px;border-radius:12px;text-align:center;font-size:14px;font-weight:700;background:var(--bg);border:1px solid var(--border);display:flex;flex-direction:column;gap:6px;align-items:center}
+.case-result-card.common{border-color:rgba(107,114,128,.5)}
+.case-result-card.rare{border-color:rgba(34,197,94,.55);background:linear-gradient(135deg,rgba(34,197,94,.08),var(--bg))}
+.case-result-card.epic{border-color:rgba(168,85,247,.6);background:linear-gradient(135deg,rgba(168,85,247,.1),var(--bg))}
+.case-result-card.legendary{border-color:rgba(251,191,36,.7);background:linear-gradient(135deg,rgba(251,191,36,.12),var(--bg))}
+.case-result-card .crc-big{font-size:44px;line-height:1}
+.case-result-card .crc-name{font-size:15px;font-weight:900;color:var(--fg)}
+.case-result-card .crc-cashback{font-size:12px;color:#fbbf24;font-weight:700}
+
 @media(max-width:1000px){
   .wheel-layout{grid-template-columns:1fr}
   .wheel-history{max-height:420px}
@@ -1024,10 +923,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 }
 
 @media(max-width:640px){
-  .header{
-    padding:0 10px;
-    height:50px;
-  }
+  .header{padding:0 10px;height:50px;}
   body.logged-in .header{left:0}
   .online .lbl{display:none}
   .online{padding:4px 8px;font-size:11px;margin-right:6px}
@@ -1045,103 +941,24 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .btn{padding:7px 10px;font-size:11px}
   .btn svg{width:12px;height:12px}
 
-  .sidebar{
-    position:fixed;
-    top:auto;
-    bottom:0;
-    left:0;
-    right:0;
-    width:100%;
-    height:auto;
-    flex-direction:row;
-    justify-content:space-around;
-    padding:6px 4px;
-    border-right:none;
-    border-top:1px solid var(--border);
-    background:var(--sidebar-bg);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    z-index:200;
-    gap:2px;
-    overflow:visible;
-    transform:translateY(0);
-    transition:transform .35s var(--ease), background .5s ease;
-  }
-  body.logged-in .sidebar{
-    transform:translateY(0);
-  }
+  .sidebar{position:fixed;top:auto;bottom:0;left:0;right:0;width:100%;height:auto;flex-direction:row;justify-content:space-around;padding:6px 4px;border-right:none;border-top:1px solid var(--border);background:var(--sidebar-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:200;gap:2px;overflow:visible;transform:translateY(0);transition:transform .35s var(--ease), background .5s ease;}
   .sidebar:hover{width:100%}
-  .sidebar-item{
-    flex-direction:column;
-    gap:3px;
-    padding:6px 4px;
-    border-radius:10px;
-    font-size:9px;
-    border:none;
-    background:transparent;
-    min-width:0;
-    flex:1;
-    justify-content:center;
-    align-items:center;
-    color:var(--muted);
-    transition:background .25s var(--ease),color .25s var(--ease);
-  }
-  .sidebar-item:hover{
-    background:var(--bg2);
-    color:var(--fg);
-    transform:none;
-  }
+  .sidebar-item{flex-direction:column;gap:3px;padding:6px 4px;border-radius:10px;font-size:9px;border:none;background:transparent;min-width:0;flex:1;justify-content:center;align-items:center;color:var(--muted);transition:background .25s var(--ease),color .25s var(--ease);}
+  .sidebar-item:hover{background:var(--bg2);color:var(--fg);transform:none;}
   .sidebar-item .ico{width:20px;height:20px}
   .sidebar-item .ico svg{width:18px;height:18px}
-  .sidebar-item .lbl{
-    opacity:1;
-    font-size:8.5px;
-    font-weight:600;
-    letter-spacing:.2px;
-    text-align:center;
-    line-height:1.1;
-  }
+  .sidebar-item .lbl{opacity:1;font-size:8.5px;font-weight:600;letter-spacing:.2px;text-align:center;line-height:1.1;}
   .sidebar-spacer{display:none}
-  .sidebar-item.logout{
-    border:none;
-    background:transparent;
-  }
-  .sidebar-item.logout:hover{
-    background:rgba(248,113,113,.12);
-    color:var(--danger);
-  }
-  .sidebar-item.admin{
-    border:none;
-    background:transparent;
-  }
-  .sidebar-item.admin:hover{
-    background:rgba(255,200,50,.1);
-    color:#ffcc33;
-  }
+  .sidebar-item.logout,.sidebar-item.admin,.sidebar-item.shop{border:none;background:transparent;}
 
-  .main{
-    padding:70px 14px 80px;
-  }
-  body.logged-in .main{
-    padding-left:14px;
-    padding-bottom:80px;
-  }
+  .main{padding:70px 14px 80px;}
+  body.logged-in .main{padding-left:14px;padding-bottom:80px;}
 
-  .dash-grid{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-  .dash-card{
-    padding:14px;
-    border-radius:10px;
-  }
+  .dash-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .dash-card{padding:14px;border-radius:10px;}
   .dash-card h3{font-size:12px}
   .dash-card p{font-size:11px}
-  .dash-card.awards{
-    grid-column:span 2;
-    min-height:auto;
-    padding:16px;
-  }
+  .dash-card.awards{grid-column:span 2;min-height:auto;padding:16px;}
   .dash-card.awards .awards-title{font-size:20px}
   .dash-card.awards .awards-sub{font-size:12px}
   .dash-card.awards .awards-desc{font-size:11px}
@@ -1151,28 +968,16 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .hero-sub{font-size:14px}
   .hero-actions .btn-lg{padding:10px 16px;font-size:13px}
 
-  .users-grid{
-    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
-    gap:8px;
-  }
-  .user-card{
-    padding:10px 6px;
-    border-radius:10px;
-    gap:6px;
-  }
+  .users-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;}
+  .user-card{padding:10px 6px;border-radius:10px;gap:6px;}
   .user-card .av{width:44px;height:44px;font-size:16px}
   .user-card .av-status{width:12px;height:12px}
   .user-card .info .name{font-size:12px}
   .user-card .info .login{font-size:10px}
   .user-card .online-label{font-size:8.5px}
 
-  .modal{
-    padding:20px 16px;
-    border-radius:12px;
-    max-width:calc(100vw - 20px);
-  }
-  .modal.wide{max-width:calc(100vw - 20px)}
-  .modal.profile{max-width:calc(100vw - 20px)}
+  .modal{padding:20px 16px;border-radius:12px;max-width:calc(100vw - 20px);}
+  .modal.wide,.modal.profile{max-width:calc(100vw - 20px)}
   .modal-title{font-size:16px;margin-bottom:16px}
   .confirm-title{font-size:15px}
   .confirm-text{font-size:12px}
@@ -1184,49 +989,19 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .captcha-box input{font-size:12px;padding:6px 9px}
 
   .settings-layout{min-height:auto;max-height:85vh}
-  .settings-nav{
-    display:flex;
-    overflow-x:auto;
-    padding:8px 10px;
-    gap:6px;
-    flex-shrink:0;
-    border-bottom:1px solid var(--border);
-  }
-  .settings-nav h3{display:none}
-  .settings-nav-item{
-    padding:7px 12px;
-    font-size:12px;
-    margin-bottom:0;
-    white-space:nowrap;
-    flex-shrink:0;
-  }
+  .settings-nav{display:flex;overflow-x:auto;padding:8px 10px;gap:6px;flex-shrink:0;border-bottom:1px solid var(--border);}
+  .settings-nav-item{padding:7px 12px;font-size:12px;margin-bottom:0;white-space:nowrap;flex-shrink:0;}
   .settings-nav-item svg{width:14px;height:14px}
   .settings-content{padding:16px 14px}
   .settings-content h2{font-size:15px}
-  .settings-content .section-sub{font-size:11px}
   .preview-panel{display:none}
   .bio-textarea{min-height:70px;font-size:13px}
   .color-palette{grid-template-columns:repeat(6,1fr)}
-  .settings-foot{
-    flex-direction:column-reverse;
-    gap:6px;
-  }
+  .settings-foot{flex-direction:column-reverse;gap:6px;}
   .settings-foot .btn{width:100%;justify-content:center;padding:10px}
   .settings-foot .btn-danger{margin-right:0}
 
-  .monkeys-widget{
-    bottom:66px;
-    right:8px;
-    left:8px;
-    min-width:auto;
-    padding:10px 12px;
-    border-radius:12px;
-    flex-direction:row;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-  }
-  .mw-head{gap:6px}
+  .monkeys-widget{bottom:66px;right:8px;left:8px;min-width:auto;padding:10px 12px;border-radius:12px;flex-direction:row;align-items:center;justify-content:space-between;gap:8px;}
   .mw-label{font-size:9px}
   .mw-count{font-size:16px}
   .mw-count .mw-ico{font-size:18px}
@@ -1236,31 +1011,15 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .mw-daily-sub{font-size:9px}
 
   .profile-banner{height:90px}
-  .profile-head{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    padding:0 14px 14px;
-    margin-top:-40px;
-    gap:8px;
-  }
-  .profile-av{
-    width:72px;
-    height:72px;
-    font-size:26px;
-    border-width:3px;
-  }
+  .profile-head{flex-direction:column;align-items:center;text-align:center;padding:0 14px 14px;margin-top:-40px;gap:8px;}
+  .profile-av{width:72px;height:72px;font-size:26px;border-width:3px;}
   .profile-av .av-status{width:14px;height:14px}
   .profile-info{padding-top:0;width:100%}
   .profile-name{font-size:18px;justify-content:center}
   .profile-login-row{justify-content:center}
   .profile-login{font-size:11px}
   .profile-bio{font-size:12px;text-align:center}
-  .profile-stats-row{
-    justify-content:center;
-    gap:10px;
-    margin-top:10px;
-  }
+  .profile-stats-row{justify-content:center;gap:10px;margin-top:10px;}
   .profile-stat{min-width:40px}
   .profile-stat .v{font-size:14px}
   .profile-stat .l{font-size:8.5px}
@@ -1322,32 +1081,30 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .logs-modal{max-width:calc(100vw - 20px)}
   .logs-head{padding:16px 18px 12px}
   .logs-head h2{font-size:17px}
-  .logs-head .logs-sub{font-size:11px}
   .logs-body{padding:14px 18px 18px}
   .log-item{flex-direction:column;gap:8px;padding:10px 0}
   .log-ver{min-width:auto;align-self:flex-start;font-size:9px;padding:3px 8px}
-  .log-title{font-size:13px}
-  .log-list li{font-size:11px;padding-left:14px}
 
   .admin-topbar{padding:10px 12px;gap:8px}
   .admin-topbar h2{font-size:14px}
-  .admin-search{min-width:120px}
-  .admin-search input{padding:7px 9px 7px 28px;font-size:12px}
-  .admin-search svg{width:13px;height:13px;left:9px}
-  .admin-stats{gap:4px}
-  .admin-stat{padding:4px 7px;font-size:9.5px}
   .admin-body{padding:10px 12px 18px}
   .admin-grid{grid-template-columns:1fr;gap:10px}
   .admin-card{padding:10px;border-radius:10px}
-  .admin-card-av{width:34px;height:34px;font-size:13px}
-  .admin-card-name{font-size:12px}
-  .admin-card-login{font-size:10px}
-  .admin-card-stats span{font-size:9.5px;padding:2px 6px}
-  .admin-row label{font-size:9px;min-width:auto}
-  .admin-row input{padding:6px 8px;font-size:11px}
-  .adm-action-btn{padding:6px 10px;font-size:10px}
-  .adm-emoji-picker button{padding:4px 7px;font-size:14px}
-  .adm-theme-picker button{padding:4px 8px;font-size:10px}
+
+  .shop-cases-grid{grid-template-columns:1fr;gap:12px}
+  .shop-items-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+  .case-open-modal{max-width:calc(100vw - 20px)}
+  .case-open-head{padding:16px 18px 12px}
+  .case-open-head h2{font-size:17px}
+  .case-open-body{padding:14px 18px}
+  .case-preview-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+  .case-open-foot{padding:12px 18px 16px;gap:8px}
+  .case-roulette{height:100px}
+  .case-roulette-cell{width:90px}
+  .case-roulette-cell .crv{font-size:24px}
+  .case-roulette-cell .crv.theme-v{height:26px}
+  .case-roulette-cell .crv.frame-v{width:32px;height:32px;font-size:13px}
+  .case-roulette-cell .crn{font-size:9px}
 
   .reward-popup{padding:18px 28px;font-size:22px;border-radius:14px}
   .reward-popup .rp-label{font-size:10px}
@@ -1360,93 +1117,48 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   .dash-card.awards{grid-column:span 1}
   .sidebar-item .lbl{font-size:7.5px}
 }
-.admin-badge-mini{
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:8px;font-weight:900;letter-spacing:.5px;padding:1px 5px;border-radius:4px;
-  background:var(--admin-badge-bg, #fff);color:var(--admin-badge-fg, #0e0e11);
-  line-height:1.4;text-transform:uppercase;flex-shrink:0;margin-right:4px;
-  box-shadow:0 0 6px rgba(0,0,0,.25);vertical-align:middle;
-}
-.user-card .info .name .admin-badge-mini,
-.hover-name .admin-badge-mini,
-.profile-name .admin-badge-mini,
-.user-menu-name .admin-badge-mini{margin-right:2px}
+.admin-badge-mini{display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;letter-spacing:.5px;padding:1px 5px;border-radius:4px;background:var(--admin-badge-bg, #fff);color:var(--admin-badge-fg, #0e0e11);line-height:1.4;text-transform:uppercase;flex-shrink:0;margin-right:4px;box-shadow:0 0 6px rgba(0,0,0,.25);vertical-align:middle;}
+.user-card .info .name .admin-badge-mini,.hover-name .admin-badge-mini,.profile-name .admin-badge-mini,.user-menu-name .admin-badge-mini{margin-right:2px}
 .avatar-btn .nick .admin-badge-mini{margin-right:1px}
 
-.av-frame{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;isolation:isolate}
-.av-frame .av-inner{position:relative;z-index:2;border-radius:50%;overflow:hidden;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+/* ─── Avatar frames: ровные круги ─── */
+.av-frame{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;isolation:isolate;aspect-ratio:1/1;box-sizing:border-box}
+.av-frame .av-inner{position:relative;z-index:2;border-radius:50%;overflow:hidden;width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .av-frame.frame-none{box-shadow:none}
 .av-frame.frame-white{box-shadow:0 0 0 4px #ffffff}
 .av-frame.frame-black{box-shadow:0 0 0 4px #3a3d47}
 .av-frame.frame-red{box-shadow:0 0 0 4px #ef4444}
 .av-frame.frame-gold{box-shadow:0 0 0 4px #fbbf24}
 .av-frame.frame-blue{box-shadow:0 0 0 4px #3b82f6}
-.av-frame.frame-ruby{
-  box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6);
-  animation:frameRuby 2s ease-in-out infinite alternate;
-}
-@keyframes frameRuby{
-  0%{box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6)}
-  100%{box-shadow:0 0 0 4px #ffffff, 0 0 0 8px #dc2626, 0 0 16px rgba(220,38,38,.6)}
-}
-.av-frame.frame-sapphire{
-  box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6);
-  animation:frameSapphire 2s ease-in-out infinite alternate;
-}
-@keyframes frameSapphire{
-  0%{box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6)}
-  100%{box-shadow:0 0 0 4px #ffffff, 0 0 0 8px #1d4ed8, 0 0 16px rgba(29,78,216,.6)}
-}
-.av-frame.frame-hacker{
-  box-shadow:0 0 0 4px #000000, 0 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,.7);
-  animation:frameHacker 2s ease-in-out infinite alternate;
-  overflow:visible;
-  position:relative;
-}
-@keyframes frameHacker{
-  0%{box-shadow:0 0 0 4px #000000, 0 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,.7)}
-  100%{box-shadow:0 0 0 4px #00ff41, 0 0 0 8px #000000, 0 0 16px rgba(0,255,65,.7)}
-}
-.av-frame.frame-rgb{
-  animation:frameRgb 3s ease-in-out infinite alternate;
-}
-@keyframes frameRgb{
-  0%{box-shadow:0 0 0 4px #ff0000, 0 0 0 8px #00ff00, 0 0 16px rgba(255,0,0,.6)}
-  25%{box-shadow:0 0 0 4px #ff7f00, 0 0 0 8px #ffff00, 0 0 16px rgba(255,127,0,.6)}
-  50%{box-shadow:0 0 0 4px #00ff00, 0 0 0 8px #00ffff, 0 0 16px rgba(0,255,0,.6)}
-  75%{box-shadow:0 0 0 4px #0000ff, 0 0 0 8px #8b00ff, 0 0 16px rgba(0,0,255,.6)}
-  100%{box-shadow:0 0 0 4px #ff0000, 0 0 0 8px #00ff00, 0 0 16px rgba(255,0,0,.6)}
-}
+.av-frame.frame-ruby{box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6);animation:frameRuby 2s ease-in-out infinite alternate;}
+@keyframes frameRuby{0%{box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6)}100%{box-shadow:0 0 0 4px #ffffff, 0 0 0 8px #dc2626, 0 0 16px rgba(220,38,38,.6)}}
+.av-frame.frame-sapphire{box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6);animation:frameSapphire 2s ease-in-out infinite alternate;}
+@keyframes frameSapphire{0%{box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6)}100%{box-shadow:0 0 0 4px #ffffff, 0 0 0 8px #1d4ed8, 0 0 16px rgba(29,78,216,.6)}}
+.av-frame.frame-hacker{box-shadow:0 0 0 4px #000000, 0 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,.7);animation:frameHacker 2s ease-in-out infinite alternate;overflow:visible;position:relative;}
+@keyframes frameHacker{0%{box-shadow:0 0 0 4px #000000, 0 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,.7)}100%{box-shadow:0 0 0 4px #00ff41, 0 0 0 8px #000000, 0 0 16px rgba(0,255,65,.7)}}
+.av-frame.frame-rgb{animation:frameRgb 3s ease-in-out infinite alternate;}
+@keyframes frameRgb{0%{box-shadow:0 0 0 4px #ff0000, 0 0 0 8px #00ff00, 0 0 16px rgba(255,0,0,.6)}25%{box-shadow:0 0 0 4px #ff7f00, 0 0 0 8px #ffff00, 0 0 16px rgba(255,127,0,.6)}50%{box-shadow:0 0 0 4px #00ff00, 0 0 0 8px #00ffff, 0 0 16px rgba(0,255,0,.6)}75%{box-shadow:0 0 0 4px #0000ff, 0 0 0 8px #8b00ff, 0 0 16px rgba(0,0,255,.6)}100%{box-shadow:0 0 0 4px #ff0000, 0 0 0 8px #00ff00, 0 0 16px rgba(255,0,0,.6)}}
 
 .user-card .av-frame{width:60px;height:60px}
-.user-card .av-frame .av-inner img{width:100%;height:100%;object-fit:cover}
+.user-card .av-frame .av-inner img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 .hover-av .av-frame{width:52px;height:52px}
 .profile-av .av-frame{width:104px;height:104px}
-.hover-av{display:flex;align-items:center;justify-content:center;position:relative;overflow:visible}
-.profile-av{display:flex;align-items:center;justify-content:center;position:relative;overflow:visible}
-.user-card .av-wrap{display:flex;align-items:center;justify-content:center;position:relative}
+.hover-av{display:flex;align-items:center;justify-content:center;position:relative;overflow:visible;width:52px;height:52px;border-radius:50%}
+.profile-av{display:flex;align-items:center;justify-content:center;position:relative;overflow:visible;width:104px;height:104px;border-radius:50%}
+.user-card .av-wrap{display:flex;align-items:center;justify-content:center;position:relative;width:60px;height:60px;border-radius:50%}
 
-.user-card .av-status,
-.hover-av .av-status,
-.profile-av .av-status{
-  position:absolute !important;
-  right:-2px !important;
-  bottom:-2px !important;
-  width:16px !important;
-  height:16px !important;
-  border-radius:50% !important;
-  z-index:10 !important;
-}
+.user-card .av-status,.hover-av .av-status,.profile-av .av-status{position:absolute !important;right:-2px !important;bottom:-2px !important;width:16px !important;height:16px !important;border-radius:50% !important;z-index:10 !important;}
 .profile-av .av-status{width:20px !important;height:20px !important;right:2px !important;bottom:2px !important}
-.user-card .av-status.online{background:#22c55e !important;box-shadow:0 0 10px rgba(34,197,94,.95),0 0 0 2px rgba(34,197,94,.25) !important}
-.user-card .av-status.offline{background:#5a5d68 !important;box-shadow:0 0 0 2px rgba(90,93,104,.25) !important}
-.hover-av .av-status.online{background:#22c55e !important;box-shadow:0 0 10px rgba(34,197,94,.95),0 0 0 2px rgba(34,197,94,.25) !important}
-.hover-av .av-status.offline{background:#5a5d68 !important;box-shadow:0 0 0 2px rgba(90,93,104,.25) !important}
-.profile-av .av-status.online{background:#22c55e !important;box-shadow:0 0 14px rgba(34,197,94,.95),0 0 0 3px rgba(34,197,94,.25) !important}
-.profile-av .av-status.offline{background:#5a5d68 !important;box-shadow:0 0 0 3px rgba(90,93,104,.25) !important}
 
-.preview-av .av-frame{width:64px;height:64px;border:3px solid var(--bg2);box-sizing:content-box}
-.preview-av .av-frame.frame-none{border:3px solid var(--bg2)}
+/* Bio formatting */
+.bio-fmt-bold{font-weight:900}
+.bio-fmt-italic{font-style:italic}
+.bio-fmt-strike{text-decoration:line-through}
+
+.preview-av{width:64px;height:64px;border-radius:50%;background:transparent;border:none;margin:0 auto;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;transition:transform .35s var(--ease)}
+.preview-av .av-frame{width:64px;height:64px;border-radius:50%}
+.preview-av .edit-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s var(--ease);z-index:5;pointer-events:none}
+.preview-av:hover .edit-overlay{opacity:1}
 
 .site-info-card{background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(251,191,36,.05));border:1px solid rgba(251,191,36,.4);border-radius:14px;padding:18px 14px;text-align:center;margin-bottom:14px}
 .site-info-card .si-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px}
@@ -1511,6 +1223,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
     <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></span>
     <span class="lbl">Колесо Фортуны</span>
   </button>
+  <button class="sidebar-item shop" id="sbShop">
+    <span class="ico"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+    <span class="lbl">Магазин</span>
+  </button>
   <button class="sidebar-item admin" id="sbAdmin" style="display:none;">
     <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
     <span class="lbl">Админ-панель</span>
@@ -1561,6 +1277,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
           <h3>⚡ Настрой свой профиль</h3>
           <p>Открой настройки аккаунта: аватар, баннер, описание.</p>
         </div>
+        <div class="dash-card" data-action="shop">
+          <h3>🛒 Магазин</h3>
+          <p>Кейсы, эмодзи, темы и рамки. Всё за обезьян!</p>
+        </div>
         <div class="dash-card" data-action="earn">
           <h3>💰 Заработок обезьян</h3>
           <p>Три режима: математика, 1 или 2, кликер. Зарабатывай 🐵 без риска.</p>
@@ -1594,6 +1314,39 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
       <div class="users-grid" id="usersGrid"></div>
     </section>
 
+    <section id="viewShop" class="shop-section">
+      <div class="shop-tabs">
+        <button class="shop-tab active" data-shopview="market">🛒 Магазин</button>
+        <button class="shop-tab" data-shopview="inventory">🎒 Инвентарь</button>
+      </div>
+
+      <div class="shop-view active" id="shopViewMarket">
+        <div>
+          <div class="shop-block-title">🎁 Кейсы</div>
+          <div class="shop-cases-grid" id="shopCasesGrid"></div>
+        </div>
+        <div>
+          <div class="shop-block-title">😀 Эмодзи</div>
+          <div class="shop-items-grid" id="shopEmojiGrid"></div>
+        </div>
+        <div>
+          <div class="shop-block-title">🎨 Темы</div>
+          <div class="shop-items-grid" id="shopThemeGrid"></div>
+        </div>
+        <div>
+          <div class="shop-block-title">🖼 Рамки</div>
+          <div class="shop-items-grid" id="shopFrameGrid"></div>
+        </div>
+      </div>
+
+      <div class="shop-view" id="shopViewInventory">
+        <div>
+          <div class="shop-block-title">🎁 Кейсы <span class="cnt" id="invCasesCount"></span></div>
+          <div class="shop-cases-grid" id="invCasesGrid"></div>
+        </div>
+      </div>
+    </section>
+
     <section id="viewEarn" class="earn-section">
       <div class="earn-hero">
         <h1>💰 ЗАРАБОТОК ОБЕЗЬЯН</h1>
@@ -1620,7 +1373,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
           <div class="ec-ico">👆</div>
           <div class="ec-title">Кликер</div>
           <div class="ec-sub">Жми и зарабатывай</div>
-          <div class="ec-desc">Каждый клик — +1 🐵. Есть микро-задержка и антибот-проверка каждые 100 нажатий.</div>
+          <div class="ec-desc">Каждый клик — +1 🐵. Есть микро-задержка и антибот-проверка каждые 80 нажатий.</div>
         </div>
       </div>
 
@@ -2089,6 +1842,18 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
   </div>
 </div>
 
+<div class="modal-overlay" id="caseOpenOverlay">
+  <div class="modal case-open-modal">
+    <button class="modal-close" id="caseOpenClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="case-open-head">
+      <h2 id="caseOpenTitle">🎁 Кейс</h2>
+      <div class="cs-sub" id="caseOpenSub">Возможные предметы</div>
+    </div>
+    <div class="case-open-body" id="caseOpenBody"></div>
+    <div class="case-open-foot" id="caseOpenFoot"></div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="adminOverlay">
   <div class="modal wide" id="adminModal" style="max-height:88vh;display:flex;flex-direction:column;max-width:1000px">
     <button class="modal-close" id="adminClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -2099,55 +1864,108 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 <input type="file" id="adminAvatarInput" accept="image/*" style="display:none">
 
 <script>
+/* ========== КОНСТАНТЫ ========== */
 var API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 var HEARTBEAT_MS = 25000;
 var FETCH_TIMEOUT = 20000;
 var POST_TIMEOUT = 30000;
 var QUEUE_TIMEOUT = 45000;
-var WHEEL_SPIN_MS = 4000;
-var WHEEL_SPIN_COOLDOWN = 600;
+var WHEEL_SPIN_MS = 5200;
+var WHEEL_SPIN_COOLDOWN = 800;
 var USERS_CACHE_TTL = 30000;
 var THEME_PREVIEW_DURATION = 10;
 var CLICKER_ANTIBOT_MIN_DELAY = 80;
 var CLICKER_ANTIBOT_EVERY = 80;
+var CASE_PRICE = 750;
+
+var RARITY = {
+  common:    { label:'Обычный',    cls:'common',    cashback:0.10 },
+  rare:      { label:'Редкий',     cls:'rare',      cashback:0.20 },
+  epic:      { label:'Эпический',  cls:'epic',      cashback:0.40 },
+  legendary: { label:'Легендарный',cls:'legendary', cashback:0.50 }
+};
 
 var EMOJI_LIST = [
-  { emoji:'', label:'Без эмодзи', price:0 },
-  { emoji:'🐔', label:'Петух', price:0 },
-  { emoji:'😧', label:'Шок', price:500 },
-  { emoji:'🔥', label:'Огонь', price:1000 },
-  { emoji:'😈', label:'Демон', price:5000 },
-  { emoji:'💎', label:'Алмаз', price:10000 },
-  { emoji:'⚡', label:'Молния', price:50000 }
+  { emoji:'',       label:'Без эмодзи', price:0 },
+  { emoji:'🐔',     label:'Петух',      price:0 },
+  { emoji:'😧',     label:'Шок',        price:500,    rarity:'common' },
+  { emoji:'🔥',     label:'Огонь',      price:1000,   rarity:'common' },
+  { emoji:'😈',     label:'Демон',      price:5000,   rarity:'rare' },
+  { emoji:'💎',     label:'Алмаз',      price:10000,  rarity:'epic' },
+  { emoji:'⚡',     label:'Молния',     price:50000,  rarity:'epic' },
+  { emoji:'💥',     label:'Взрыв',      price:0,      rarity:'legendary', caseOnly:true }
 ];
 var SECRET_EMOJI = ['❤️‍🔥'];
 
 var THEME_LIST = [
   { id:'dark',     name:'Тёмная',       price:0,     preview:'linear-gradient(135deg,#0e0e11,#1d1e24)' },
   { id:'light',    name:'Светлая',      price:0,     preview:'linear-gradient(135deg,#f4f5f7,#dde0e6)' },
-  { id:'moon',     name:'Лунная',       price:500,   preview:'linear-gradient(135deg,#161823,#262a3a,#161823)' },
-  { id:'ocean',    name:'Океаническая', price:1500,  preview:'linear-gradient(135deg,#08161c,#1c4252,#08161c)' },
-  { id:'toxic',    name:'Токсичная',    price:3000,  preview:'linear-gradient(135deg,#0d1a0d,#204520,#0d1a0d)' },
-  { id:'scarlet',  name:'Алая',         price:3000,  preview:'linear-gradient(135deg,#1a0e0e,#4a2020,#1a0e0e)' },
-  { id:'divine',   name:'Божественная', price:5000,  preview:'linear-gradient(135deg,#c8e8ff,#ffffff,#fff8dc,#c8e8ff)' },
-  { id:'obsidian', name:'Обсидиан',     price:10000, preview:'linear-gradient(135deg,#0a0510,#2a0a3a,#0a0510)' },
-  { id:'abyss',    name:'Бездна',       price:25000, preview:'linear-gradient(135deg,#000000,#0a0a0d,#000000)', icon:'🌑' },
-  { id:'monkey',   name:'Обезьяны',     price:50000, preview:'linear-gradient(135deg,#3a2615,#5a3a1e,#3a2615)', icon:'🐵' }
+  { id:'moon',     name:'Лунная',       price:500,   preview:'linear-gradient(135deg,#161823,#262a3a,#161823)', rarity:'common' },
+  { id:'ocean',    name:'Океаническая', price:1500,  preview:'linear-gradient(135deg,#08161c,#1c4252,#08161c)', rarity:'common' },
+  { id:'toxic',    name:'Токсичная',    price:3000,  preview:'linear-gradient(135deg,#0d1a0d,#204520,#0d1a0d)', rarity:'rare' },
+  { id:'scarlet',  name:'Алая',         price:3000,  preview:'linear-gradient(135deg,#1a0e0e,#4a2020,#1a0e0e)', rarity:'rare' },
+  { id:'divine',   name:'Божественная', price:5000,  preview:'linear-gradient(135deg,#c8e8ff,#ffffff,#fff8dc,#c8e8ff)', rarity:'epic' },
+  { id:'obsidian', name:'Обсидиан',     price:10000, preview:'linear-gradient(135deg,#0a0510,#2a0a3a,#0a0510)', rarity:'epic' },
+  { id:'abyss',    name:'Бездна',       price:25000, preview:'linear-gradient(135deg,#000000,#0a0a0d,#000000)', icon:'🌑', rarity:'legendary' },
+  { id:'monkey',   name:'Обезьяны',     price:50000, preview:'linear-gradient(135deg,#3a2615,#5a3a1e,#3a2615)', icon:'🐵', rarity:'legendary' }
 ];
 var SECRET_THEMES = [{ id:'rgb', name:'RGB', preview:'linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)' }];
 
 var FRAME_LIST = [
-  { id:'none',     name:'Без рамки', price:0,    css:'',                    preview:'none' },
-  { id:'white',    name:'Белая',     price:100,  css:'frame-white' },
-  { id:'black',    name:'Тёмно-серая', price:100,  css:'frame-black' },
-  { id:'red',      name:'Красная',   price:200,  css:'frame-red' },
-  { id:'gold',     name:'Золотая',   price:300,  css:'frame-gold' },
-  { id:'blue',     name:'Синяя',     price:500,  css:'frame-blue' },
-  { id:'ruby',     name:'Рубин',     price:1000, css:'frame-ruby' },
-  { id:'sapphire', name:'Сапфир',    price:2500, css:'frame-sapphire' },
-  { id:'hacker',   name:'Хакерская', price:5000, css:'frame-hacker' }
+  { id:'none',     name:'Без рамки',    price:0,    css:'',                    rarity:null },
+  { id:'white',    name:'Белая',        price:100,  css:'frame-white',         rarity:'common' },
+  { id:'black',    name:'Тёмно-серая',  price:100,  css:'frame-black',         rarity:'common' },
+  { id:'red',      name:'Красная',      price:200,  css:'frame-red',           rarity:'rare' },
+  { id:'gold',     name:'Золотая',      price:300,  css:'frame-gold',          rarity:'rare' },
+  { id:'blue',     name:'Синяя',        price:500,  css:'frame-blue',          rarity:'rare' },
+  { id:'ruby',     name:'Рубин',        price:1000, css:'frame-ruby',          rarity:'epic' },
+  { id:'sapphire', name:'Сапфир',       price:2500, css:'frame-sapphire',      rarity:'epic' },
+  { id:'hacker',   name:'Хакерская',    price:5000, css:'frame-hacker',        rarity:'legendary' }
 ];
 var SECRET_FRAMES = [{ id:'rgb', name:'RGB', price:-1, css:'frame-rgb' }];
+
+var CASES = {
+  emoji: {
+    id:'emoji', name:'Кейс с эмодзи', icon:'😀', price:CASE_PRICE,
+    desc:'Случайный эмодзи из коллекции. Возможен эксклюзив!',
+    items:[
+      { kind:'emoji', id:'😧', name:'Шок',    rarity:'common' },
+      { kind:'emoji', id:'🔥', name:'Огонь',  rarity:'common' },
+      { kind:'emoji', id:'😈', name:'Демон',  rarity:'rare' },
+      { kind:'emoji', id:'💎', name:'Алмаз',  rarity:'epic' },
+      { kind:'emoji', id:'⚡', name:'Молния', rarity:'epic' },
+      { kind:'emoji', id:'💥', name:'Взрыв',  rarity:'legendary' }
+    ]
+  },
+  theme: {
+    id:'theme', name:'Кейс с темами', icon:'🎨', price:CASE_PRICE,
+    desc:'Случайная тема оформления. Обычные, редкие, эпические и легендарные.',
+    items:[
+      { kind:'theme', id:'moon',     name:'Лунная',       rarity:'common' },
+      { kind:'theme', id:'ocean',    name:'Океаническая', rarity:'common' },
+      { kind:'theme', id:'toxic',    name:'Токсичная',    rarity:'rare' },
+      { kind:'theme', id:'scarlet',  name:'Алая',         rarity:'rare' },
+      { kind:'theme', id:'divine',   name:'Божественная', rarity:'epic' },
+      { kind:'theme', id:'obsidian', name:'Обсидиан',     rarity:'epic' },
+      { kind:'theme', id:'abyss',    name:'Бездна',       rarity:'legendary' },
+      { kind:'theme', id:'monkey',   name:'Обезьяны',     rarity:'legendary' }
+    ]
+  },
+  frame: {
+    id:'frame', name:'Кейс с рамками', icon:'🖼', price:CASE_PRICE,
+    desc:'Случайная рамка аватара. От белой до легендарной хакерской.',
+    items:[
+      { kind:'frame', id:'white',    name:'Белая',       rarity:'common' },
+      { kind:'frame', id:'black',    name:'Тёмно-серая', rarity:'common' },
+      { kind:'frame', id:'red',      name:'Красная',     rarity:'rare' },
+      { kind:'frame', id:'gold',     name:'Золотая',     rarity:'rare' },
+      { kind:'frame', id:'blue',     name:'Синяя',       rarity:'rare' },
+      { kind:'frame', id:'ruby',     name:'Рубин',       rarity:'epic' },
+      { kind:'frame', id:'sapphire', name:'Сапфир',      rarity:'epic' },
+      { kind:'frame', id:'hacker',   name:'Хакерская',   rarity:'legendary' }
+    ]
+  }
+};
 
 var WHEEL_SEGMENTS = [
   { color:'#22c55e', type:'green',  mult:3,   label:'x3'   },
@@ -2164,28 +1982,28 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
-    ver: 'BETA 0.19', cls: 'v2', title: 'Оптимизация, стабильность, предпросмотр, погода',
-    items: [
-      { tag: 'new', text: 'Таймеры загрузки: вход, сохранение настроек, применение тем/эмодзи/рамок, покупки, колесо.' },
-      { tag: 'new', text: 'Мини-кнопка предпросмотра темы в правом нижнем углу карточки.' },
-      { tag: 'new', text: 'Звуки нажатий в кликере, задержка уменьшена.' },
-      { tag: 'fix', text: 'Колесо Фортуны: убран баг бесконечной прокрутки.' },
-      { tag: 'fix', text: 'Колесо Фортуны: не переносит ставку между аккаунтами.' },
-      { tag: 'fix', text: 'Градиентовый баннер теперь сохраняется и меняет яркость.' },
-      { tag: 'fix', text: 'Bold/Italic/Strike в описании реально оборачивают текст.' },
-      { tag: 'fix', text: 'Божественная тема: прозрачные эмодзи погоды.' },
-      { tag: 'upd', text: 'Сайт стал быстрее и отзывчивее.' }
+    ver:'BETA 0.20', cls:'v2', title:'Магазин, кейсы, оптимизация',
+    items:[
+      { tag:'new', text:'Добавлена вкладка "Магазин" с кейсами, эмодзи, темами и рамками.' },
+      { tag:'new', text:'Кейсы: 3 вида (эмодзи, темы, рамки). Редкости: Common / Rare / Epic / Legendary.' },
+      { tag:'new', text:'Инвентарь: купленные кейсы стакаются, можно открывать по одному.' },
+      { tag:'new', text:'Эксклюзивный эмодзи 💥 (Взрыв) — только из кейсов.' },
+      { tag:'fix', text:'Колесо Фортуны: плавная анимация ease-in-out, подпрыгивание при старте.' },
+      { tag:'fix', text:'Колесо: убраны лаги и бесконечная прокрутка.' },
+      { tag:'fix', text:'Аватары теперь ровные круги везде (профиль, карточки, hover).' },
+      { tag:'fix', text:'Bold/Italic/Strike в описании теперь реально работают.' },
+      { tag:'upd', text:'В настройках покупка отключена — теперь только выбор. Покупать в Магазине.' }
     ]
   }
 ];
 
+/* ========== УТИЛИТЫ ========== */
 function $(id){ return document.getElementById(id); }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
 function nowMs(){ return Date.now(); }
 function rIC(fn){ (window.requestIdleCallback||function(f){setTimeout(f,1)})(fn); }
 function faviconUrl(host){ return 'https://www.google.com/s2/favicons?domain='+encodeURIComponent(host)+'&sz=64'; }
 
-/* ===== TimerUI ===== */
 var TimerUI = (function(){
   var timers = {};
   function fmt(sec){ return sec.toFixed(1)+'с'; }
@@ -2237,6 +2055,8 @@ var Sound = (function(){
     wheelWin:function(){tone(523,.1);setTimeout(function(){tone(659,.1);},100);setTimeout(function(){tone(784,.1);},200);setTimeout(function(){tone(1046,.25);},300);},
     wheelLose:function(){tone(400,.15,'sawtooth',.05);setTimeout(function(){tone(250,.25,'sawtooth',.05);},150);},
     wheelJackpot:function(){tone(523,.08);setTimeout(function(){tone(659,.08);},80);setTimeout(function(){tone(784,.08);},160);setTimeout(function(){tone(1046,.12);},240);setTimeout(function(){tone(1318,.3);},360);},
+    caseOpen:function(){tone(400,.05,'square',.03);},
+    caseWin:function(legendary){ if(legendary){ this.wheelJackpot(); } else { this.reward(); } },
     setEnabled:function(on){enabled=on;localStorage.setItem('zv_sound',on?'on':'off');},
     isEnabled:function(){return enabled;}
   };
@@ -2270,8 +2090,7 @@ var OnlineUsers = {
 var RequestQueue = (function(){
   var queue = [], running = false;
   function run(){
-    if(running) return;
-    if(!queue.length) return;
+    if(running || !queue.length) return;
     running = true;
     var item = queue.shift();
     var timeout = setTimeout(function(){
@@ -2310,9 +2129,7 @@ function _cacheGet(key,ttl){
   return null;
 }
 function _cacheSet(key,v){ _cache[key]={v:v,t:nowMs()}; }
-function _cacheDelPrefix(prefix){
-  for(var k in _cache){ if(k.indexOf(prefix)===0) delete _cache[k]; }
-}
+function _cacheDelPrefix(prefix){ for(var k in _cache){ if(k.indexOf(prefix)===0) delete _cache[k]; } }
 
 function _jsonpOnce(action, payload){
   return new Promise(function(resolve){
@@ -2350,12 +2167,9 @@ function _postOnce(action, payload){
     var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, POST_TIMEOUT);
     var body = JSON.stringify(Object.assign({action:action}, payload));
     fetch(API_URL, {
-      method: 'POST',
-      mode: 'cors',
-      redirect: 'follow',
+      method: 'POST', mode: 'cors', redirect: 'follow',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: body,
-      signal: ctrl ? ctrl.signal : undefined
+      body: body, signal: ctrl ? ctrl.signal : undefined
     }).then(function(r){ return r.text(); })
       .then(function(txt){
         clearTimeout(timer);
@@ -2378,7 +2192,6 @@ function api(action, payload, opts){
     if(hit!==null) return Promise.resolve(hit);
   }
   var attempts = opts.retry ? (opts.retry|0) : 1;
-
   function tryOnce(n){
     var pr = usePost ? _postOnce(action, payload) : _jsonpOnce(action, payload);
     return pr.then(function(res){
@@ -2388,14 +2201,12 @@ function api(action, payload, opts){
       return res;
     });
   }
-
   var promise;
   if(usePost){
     promise = RequestQueue.push(function(){ return tryOnce(1); });
   } else {
     promise = tryOnce(1);
   }
-
   return promise.then(function(res){
     if(key && res && res.ok) _cacheSet(key, res);
     return res;
@@ -2452,14 +2263,8 @@ var Session = (function(){
   };
 })();
 
-function getSessionToken(){
-  var s = Session.get();
-  return (s && s.token) ? s.token : '';
-}
-function getSessionUsername(){
-  var s = Session.get();
-  return (s && s.username) ? s.username : '';
-}
+function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.token : ''; }
+function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
 function silentSync(){
   var s = Session.get();
@@ -2481,10 +2286,7 @@ function silentSync(){
 
 function ensureValidToken(){
   return api('validateToken',{username:getSessionUsername(),token:getSessionToken()},{post:true}).then(function(res){
-    if(!res || !res.ok){
-      handleBadToken();
-      return false;
-    }
+    if(!res || !res.ok){ handleBadToken(); return false; }
     return true;
   });
 }
@@ -2650,9 +2452,7 @@ function refreshVisibleStatuses(){
     var st=cards[i].querySelector('.av-status');
     var lbl=cards[i].querySelector('.online-label');
     var on=OnlineUsers.isOnline(u);
-    if(st){
-      st.className='av-status '+(on?'online':'offline');
-    }
+    if(st){ st.className='av-status '+(on?'online':'offline'); }
     if(lbl){
       lbl.className='online-label '+(on?'online':'offline');
       lbl.textContent = on ? 'в сети' : 'не в сети';
@@ -2660,19 +2460,26 @@ function refreshVisibleStatuses(){
   }
 }
 
+/* ─── Bio formatting: реальные теги ─── */
 function renderBio(text){
   if(!text) return '';
   var safe=esc(text);
-  return safe.replace(/(https?:\/\/[^\s<]+)/g, function(m){
+  /* links */
+  safe = safe.replace(/(https?:\/\/[^\s<]+)/g, function(m){
     var host='';
     try{ host=new URL(m).hostname.replace(/^www\./,''); }catch(e){ host=m; }
     var fav=faviconUrl(host);
     var initial=host.charAt(0).toUpperCase();
     return '<a href="'+m+'" target="_blank" rel="noopener noreferrer">'+
-      '<img class="link-fav" src="'+fav+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'inline-flex\'">'+
-      '<span class="link-fav-fallback" style="display:none;width:14px;height:14px;border-radius:50%;background:#7c7f8a;color:#fff;font-size:9px;font-weight:800;align-items:center;justify-content:center;flex-shrink:0">'+esc(initial)+'</span>'+
+      '<img class="link-fav" src="'+fav+'" alt="" onerror="this.style.display=\'none\'">'+
       esc(host)+'</a>';
-  }).replace(/\n/g,'<br>');
+  });
+  /* bold / italic / strike */
+  safe = safe.replace(/\*\*([^*\n]+)\*\*/g, '<b class="bio-fmt-bold">$1</b>');
+  safe = safe.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<i class="bio-fmt-italic">$2</i>');
+  safe = safe.replace(/~~([^~\n]+)~~/g, '<s class="bio-fmt-strike">$1</s>');
+  safe = safe.replace(/\n/g,'<br>');
+  return safe;
 }
 
 function buildAbyssBolts(){
@@ -2681,9 +2488,7 @@ function buildAbyssBolts(){
   if(LowPerf.isOn()){ layer.innerHTML=''; return; }
   if(layer.childElementCount > 0) return;
   var html = '';
-  for(var i=1;i<=3;i++){
-    html += '<div class="abyss-bolt b'+i+'">'+buildOneBoltSvg(i)+'</div>';
-  }
+  for(var i=1;i<=3;i++){ html += '<div class="abyss-bolt b'+i+'">'+buildOneBoltSvg(i)+'</div>'; }
   layer.innerHTML = html;
 }
 function buildOneBoltSvg(seed){
@@ -2723,20 +2528,15 @@ function buildOneBoltSvg(seed){
   return svg;
 }
 function ensureAbyssBolts(){
-  if(document.body.classList.contains('theme-abyss')){
-    buildAbyssBolts();
-  } else {
-    var layer = document.querySelector('.abyss-bolt-layer');
-    if(layer) layer.innerHTML='';
-  }
+  if(document.body.classList.contains('theme-abyss')){ buildAbyssBolts(); }
+  else { var layer = document.querySelector('.abyss-bolt-layer'); if(layer) layer.innerHTML=''; }
 }
 
 function spawnMonkeyEmojis(){
   var layer=$('monkeyEmojiLayer');
   if(!layer) return;
   if(LowPerf.isOn()){ layer.innerHTML=''; return; }
-  var isMonkey = document.body.classList.contains('theme-monkey');
-  if(!isMonkey){ layer.innerHTML=''; return; }
+  if(!document.body.classList.contains('theme-monkey')){ layer.innerHTML=''; return; }
   if(layer.childElementCount > 0) return;
   var count = 14;
   var html = '';
@@ -2750,17 +2550,13 @@ function spawnMonkeyEmojis(){
   }
   layer.innerHTML = html;
 }
-function clearMonkeyEmojis(){
-  var layer=$('monkeyEmojiLayer');
-  if(layer) layer.innerHTML='';
-}
+function clearMonkeyEmojis(){ var layer=$('monkeyEmojiLayer'); if(layer) layer.innerHTML=''; }
 
 function spawnDivineWeather(){
   var layer=$('divineWeatherLayer');
   if(!layer) return;
   if(LowPerf.isOn()){ layer.innerHTML=''; return; }
-  var isDivine = document.body.classList.contains('theme-divine');
-  if(!isDivine){ layer.innerHTML=''; return; }
+  if(!document.body.classList.contains('theme-divine')){ layer.innerHTML=''; return; }
   if(layer.childElementCount > 0) return;
   var count = 18;
   var html = '';
@@ -2776,10 +2572,7 @@ function spawnDivineWeather(){
   }
   layer.innerHTML = html;
 }
-function clearDivineWeather(){
-  var layer=$('divineWeatherLayer');
-  if(layer) layer.innerHTML='';
-}
+function clearDivineWeather(){ var layer=$('divineWeatherLayer'); if(layer) layer.innerHTML=''; }
 
 var mode='login', captchaAnswer='', menuOpen=false;
 var allUsers=[], _usersCache={t:0,v:null}, usersSearchQuery='';
@@ -2789,16 +2582,13 @@ var wheelSpinning=false, wheelSpinLock=false, wheelTickInterval=null, wheelLastS
 var wheelBuilt=false;
 var hoverTimer=null;
 var _lastAuthRenderKey='';
-
 var earnMode=null;
 var mathState={active:false,correct:0,earned:0,timer:null,deadline:0,question:null,answer:0,total:0};
 var choiceState={active:false,busy:false,revealed:false};
 var clickerState={active:false,clicks:0,earned:0,lastClick:0,antibot:false,lastAntibot:0};
-
-var themePreviewTimer=null;
-var themePreviewCountdown=null;
-var themePreviewActive=false;
-var themePreviewOriginal='dark';
+var themePreviewTimer=null, themePreviewCountdown=null, themePreviewActive=false, themePreviewOriginal='dark';
+var shopView='market';
+var activeCase=null, caseQty=1, caseOpening=false;
 
 function applyTheme(theme){
   var cls=document.body.className.split(' ').filter(function(c){return c.indexOf('theme-')!==0 && c!=='low-perf';}).join(' ');
@@ -2817,8 +2607,7 @@ function frameClass(frameId){
 function avatarWithFrame(avatar, initial, frameId, cls){
   var f = frameId || 'none';
   var inner = avatar ? '<img src="'+avatar+'" alt="">' : esc(initial);
-  var hackerDigits = '';
-  return '<div class="'+(cls||'av-frame')+' '+frameClass(f)+'">'+hackerDigits+'<div class="av-inner">'+inner+'</div></div>';
+  return '<div class="'+(cls||'av-frame')+' '+frameClass(f)+'"><div class="av-inner">'+inner+'</div></div>';
 }
 
 var ICO = {
@@ -2851,10 +2640,12 @@ function renderAuthState(force){
     if(!s.profile){
       s.profile = {username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24',
         monkeys:0, respects:0, follows:0, wins:0, emoji:'', theme:'dark', posts:0, lastDaily:0,
-        ownedEmojis:[''], ownedThemes:['dark','light'], ownedFrames:['none'], isAdmin:false, isOwner:false, frame:'none'};
+        ownedEmojis:['','🐔'], ownedThemes:['dark','light'], ownedFrames:['none'], isAdmin:false, isOwner:false, frame:'none',
+        cases:{}};
       Session.save(s);
       p=s.profile;
     }
+    if(!p.cases || typeof p.cases!=='object') p.cases = {};
     applyTheme(p.theme||'dark');
 
     var visual=p.visualName||p.username;
@@ -2867,8 +2658,7 @@ function renderAuthState(force){
       '<div class="user-wrap" id="userWrap">'+
         '<button class="avatar-btn" id="avatarBtn">'+
           '<span class="av" id="topAv">'+esc(initial)+'</span>'+
-          '<span class="nick">'+ab+esc(visual)+'</span>'+emojiHtml+
-          ICO.chev+
+          '<span class="nick">'+ab+esc(visual)+'</span>'+emojiHtml+ICO.chev+
         '</button>'+
         '<div class="user-menu" id="userMenu">'+
           '<div class="user-menu-profile" id="menuProfile" title="Открыть профиль">'+
@@ -3057,7 +2847,6 @@ function openConfirmLogout(){
   $('confirmLogout').onclick=function(){
     Sound.close(); $('confirmOverlay').classList.remove('show');
     Online.stop(); Session.clear(); _lastAuthRenderKey=''; renderAuthState(true); switchView('home'); Online.start();
-    // сброс колеса при смене аккаунта
     wheelSpinning=false; wheelSpinLock=false; wheelLastSpinAt=0;
     if(wheelTickInterval){ clearInterval(wheelTickInterval); wheelTickInterval=null; }
     var r=$('wheelRotor'); if(r){ r.style.transition='none'; r.style.transform='rotate(0deg)'; void r.offsetWidth; }
@@ -3139,22 +2928,25 @@ $('delConfirm').onclick=function(){
 function switchView(name){
   var items=document.querySelectorAll('.sidebar-item');
   for(var i=0;i<items.length;i++) items[i].classList.remove('active');
-  var btn={home:'sbHome',friends:'sbFriends',wheel:'sbWheel',earn:'sbEarn'}[name];
+  var btn={home:'sbHome',friends:'sbFriends',wheel:'sbWheel',earn:'sbEarn',shop:'sbShop'}[name];
   if(btn && $(btn)) $(btn).classList.add('active');
-  var vHome=$('viewHome'), vFriends=$('viewFriends'), vWheel=$('viewWheel'), vEarn=$('viewEarn');
+  var vHome=$('viewHome'), vFriends=$('viewFriends'), vWheel=$('viewWheel'), vEarn=$('viewEarn'), vShop=$('viewShop');
   vHome.style.display = name==='home'?'block':'none';
   vFriends.classList.toggle('active', name==='friends');
   vWheel.classList.toggle('active', name==='wheel');
   vEarn.classList.toggle('active', name==='earn');
+  vShop.classList.toggle('active', name==='shop');
   var titles={
     home:{t:'Главная',s:'Добро пожаловать в ZV-CLUB'},
     friends:{t:'Найти друзей',s:'Все участники клуба'},
     wheel:{t:'Колесо Фортуны',s:'Испытай удачу и умножь своих обезьян'},
-    earn:{t:'Заработок обезьян',s:'Выбери режим и зарабатывай без риска'}
+    earn:{t:'Заработок обезьян',s:'Выбери режим и зарабатывай без риска'},
+    shop:{t:'Магазин',s:'Кейсы, эмодзи, темы, рамки'}
   };
   $('dashTitle').textContent=titles[name].t;
   $('dashSub').textContent=titles[name].s;
   if(name==='friends') loadUsers();
+  if(name==='shop') renderShop();
   if(name==='wheel'){ initWheelIfNeeded(); updateWheelBalance(); loadWheelHistory(); startWhTimer(); }
   else stopWhTimer();
   if(name!=='earn'){ closeEarnMode(); }
@@ -3163,6 +2955,7 @@ $('sbHome').onclick=function(){ Sound.click(); switchView('home'); };
 $('sbFriends').onclick=function(){ Sound.click(); switchView('friends'); };
 $('sbWheel').onclick=function(){ Sound.click(); switchView('wheel'); };
 $('sbEarn').onclick=function(){ Sound.click(); switchView('earn'); };
+$('sbShop').onclick=function(){ Sound.click(); switchView('shop'); };
 $('sbSiteSettings').onclick=function(){ Sound.click(); openSiteSettings(); };
 $('sbLogout').onclick=function(){ Sound.click(); openConfirmLogout(); };
 
@@ -3175,6 +2968,7 @@ document.addEventListener('click', function(e){
   else if(a==='settings') openAccountSettings();
   else if(a==='wheel') switchView('wheel');
   else if(a==='earn') switchView('earn');
+  else if(a==='shop') switchView('shop');
 });
 
 function renderLogs(){
@@ -3202,11 +2996,8 @@ $('logsBtn').onclick=function(){ Sound.open(); renderLogs(); $('logsOverlay').cl
 $('logsClose').onclick=function(){ $('logsOverlay').classList.remove('show'); Sound.close(); };
 $('logsOverlay').onclick=function(e){ if(e.target===$('logsOverlay')) $('logsOverlay').classList.remove('show'); };
 
-function initWheelIfNeeded(){
-  if(wheelBuilt) return;
-  buildWheel();
-  wheelBuilt=true;
-}
+/* ========== WHEEL ========== */
+function initWheelIfNeeded(){ if(wheelBuilt) return; buildWheel(); wheelBuilt=true; }
 function buildWheel(){
   var svg=$('wheelSvg'); if(!svg) return;
   svg.innerHTML='';
@@ -3277,6 +3068,7 @@ function resetWheelRotor(){
   r.style.transition='none'; r.style.transform='rotate(0deg)';
   void r.offsetWidth;
 }
+
 $('wheelSpinBtn').onclick=function(){
   if(wheelSpinning || wheelSpinLock) return;
   initWheelIfNeeded();
@@ -3299,6 +3091,14 @@ $('wheelSpinBtn').onclick=function(){
   $('wheelResult').innerHTML='<span>Подготовка...</span>';
   Sound.click();
   TimerUI.start('wheelSpinTimer','⏳');
+
+  // «подпрыгивание» колеса
+  var stage=document.querySelector('.wheel-stage');
+  if(stage && !LowPerf.isOn()){
+    stage.style.animation='none';
+    void stage.offsetWidth;
+    stage.style.animation='wheelHop 0.9s cubic-bezier(.2,.9,.3,1)';
+  }
 
   Session.patchProfile({monkeys: bal-bet});
   updateWheelBalance(); updateMonkeysWidget();
@@ -3323,9 +3123,10 @@ $('wheelSpinBtn').onclick=function(){
     var segIdx=res.segment, N=WHEEL_SEGMENTS.length, segAngle=360/N;
     var midOfSeg=segIdx*segAngle+segAngle/2;
     var jitter=(Math.random()*segAngle*0.6-segAngle*0.3);
-    var targetAngle=360*6-midOfSeg+jitter;
+    var fullTurns = 8;
+    var targetAngle=360*fullTurns-midOfSeg+jitter;
     var rotor=$('wheelRotor');
-    rotor.style.transition='transform '+(WHEEL_SPIN_MS/1000)+'s cubic-bezier(.15,.9,.2,1)';
+    rotor.style.transition='transform '+(WHEEL_SPIN_MS/1000)+'s cubic-bezier(.16,.84,.28,1)';
     void rotor.offsetWidth;
     rotor.style.transform='rotate('+targetAngle+'deg)';
     $('wheelResult').innerHTML='<span>Крутится...</span>';
@@ -3437,6 +3238,7 @@ function startWhTimer(){ stopWhTimer(); whTimer=setInterval(function(){ rIC(load
 function stopWhTimer(){ if(whTimer){ clearInterval(whTimer); whTimer=null; } }
 $('whRefresh').onclick=function(){ Sound.click(); _cacheDelPrefix('getWheelHistory|'); loadWheelHistory(); };
 
+/* ========== USERS ========== */
 function loadUsers(force){
   var grid=$('usersGrid');
   if(!force && _usersCache.v && nowMs()-_usersCache.t<USERS_CACHE_TTL){
@@ -3478,7 +3280,6 @@ function renderUsers(users){
     var u=users[i];
     var visual=u.visualName||u.username;
     var initial=visual.charAt(0).toUpperCase();
-    var avInner=u.avatar?'<img loading="lazy" src="'+u.avatar+'" alt="">':esc(initial);
     var emj=u.emoji?'<span class="emj">'+u.emoji+'</span>':'';
     var ab=u.isAdmin?adminBadge():'';
     var isOn=OnlineUsers.isOnline(u.username);
@@ -3663,9 +3464,7 @@ $('dailyBtn').onclick=function(){
         updateMonkeysWidget();
       }
     }
-  }).catch(function(){
-    _dailyBusy = false;
-  });
+  }).catch(function(){ _dailyBusy = false; });
 };
 function showReward(amount){
   $('rpAmount').textContent='+'+amount;
@@ -3673,6 +3472,7 @@ function showReward(amount){
   setTimeout(function(){ p.classList.remove('show'); }, 2000);
 }
 
+/* ========== PROFILE ========== */
 function openProfile(username){
   Sound.open();
   $('profileOverlay').classList.add('show');
@@ -3816,6 +3616,7 @@ function loadProfilePosts(){
   });
 }
 
+/* ========== SETTINGS ========== */
 var ACCOUNT_SECTIONS = { main: renderAccountMain, password: renderAccountPassword };
 function openAccountSettings(){
   var s=Session.get(); if(!s) return;
@@ -3869,7 +3670,7 @@ function renderAccountMain(){
         '<button class="bio-tool" data-tool="link"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>'+
       '</div>'+
       '<textarea class="bio-textarea" id="setBio" maxlength="500" placeholder="Расскажи о себе… ссылки станут кликабельными">'+esc(tempProfile.bio)+'</textarea>'+
-      '<div class="bio-hint"><span>Ссылки автоматически с иконкой</span><span id="bioCount">'+(tempProfile.bio||'').length+'/500</span></div></div></div>'+
+      '<div class="bio-hint"><span>B = **текст**, I = *текст*, S = ~~текст~~</span><span id="bioCount">'+(tempProfile.bio||'').length+'/500</span></div></div></div>'+
     '<div class="field"><label>Баннер профиля</label>'+
       '<div class="color-palette" id="colorPalette"></div>'+
       '<div class="color-custom"><input type="color" id="bannerColorPick" value="'+tempProfile.bannerColor+'">'+
@@ -3974,7 +3775,6 @@ function markProfileChanged(){ tempProfileChanged=true; }
 function getBannerStyle(){
   if(tempProfile.bannerGradient){
     var dir=tempProfile.bannerGradientDir||'135';
-    var bright=(tempProfile.bannerGradientBright||100)/100;
     var c1=tempProfile.bannerColor;
     var c2=tempProfile.bannerGradientColor;
     return 'linear-gradient('+dir+'deg, '+c1+', '+c2+')';
@@ -4115,6 +3915,7 @@ function renderAccountPassword(){
   };
 }
 
+/* ========== SITE SETTINGS (теперь только выбор, без покупки) ========== */
 var SITE_SECTIONS = { emoji: renderSiteEmoji, frames: renderSiteFrames, themes: renderSiteThemes, extra: renderSiteExtra };
 function openSiteSettings(){
   var s=Session.get(); if(!s) return;
@@ -4136,10 +3937,16 @@ function renderSiteSection(sec){
 }
 function getOwned(p){
   var e=p.ownedEmojis, t=p.ownedThemes, f=p.ownedFrames;
-  if(!Array.isArray(e)) e=[''];
+  if(!Array.isArray(e)) e=['','🐔'];
   if(!Array.isArray(t)) t=['dark','light'];
   if(!Array.isArray(f)) f=['none'];
   return { emojis:e, themes:t, frames:f };
+}
+function rarityBadge(r){
+  if(!r) return '';
+  var info = RARITY[r];
+  if(!info) return '';
+  return '<span class="rarity-badge '+info.cls+'">'+info.label+'</span>';
 }
 
 function renderSiteEmoji(){
@@ -4155,7 +3962,11 @@ function renderSiteEmoji(){
     '<div class="emoji-grid" id="emojiGrid"></div>';
 
   var all=[];
-  for(var i=0;i<EMOJI_LIST.length;i++) all.push(EMOJI_LIST[i]);
+  for(var i=0;i<EMOJI_LIST.length;i++){
+    var it=EMOJI_LIST[i];
+    if(it.caseOnly && owned.indexOf(it.emoji)===-1) continue;
+    all.push(it);
+  }
   for(var j=0;j<SECRET_EMOJI.length;j++){
     var sec=SECRET_EMOJI[j];
     if(owned.indexOf(sec)!==-1){
@@ -4170,14 +3981,17 @@ function renderSiteEmoji(){
     var has=owned.indexOf(item.emoji)!==-1;
     var selected=curEmoji===item.emoji;
     var lockClass=(!has && item.price>0)?'locked':'';
+    var r = item.rarity || (item.secret?'legendary':null);
+    var rCls = r ? ('rarity-'+RARITY[r].cls) : '';
     var tag;
     if(selected) tag='<div class="e-owned">✓ выбрано</div>';
     else if(has) tag='<div class="e-owned">✓ куплено</div>';
     else if(item.price>0) tag='<div class="e-price">🐵 '+item.price+'</div>';
     else if(item.price===-1) tag='<div class="e-price" style="color:#ff8fc4">секрет</div>';
     else tag='<div class="e-free">бесплатно</div>';
-    return '<div class="emoji-item '+(selected?'selected':'')+' '+lockClass+'" data-emoji="'+esc(item.emoji)+'" data-price="'+item.price+'" data-owned="'+has+'" data-label="'+esc(item.label)+'">'+
+    return '<div class="emoji-item '+(selected?'selected':'')+' '+lockClass+' '+rCls+'" data-emoji="'+esc(item.emoji)+'" data-price="'+item.price+'" data-owned="'+has+'" data-label="'+esc(item.label)+'">'+
       (item.secret?'<span class="e-secret">secret</span>':'')+
+      (r?rarityBadge(r):'')+
       '<div class="e-big">'+(item.emoji||'∅')+'</div>'+
       '<div class="e-label">'+esc(item.label)+'</div>'+
       tag+'</div>';
@@ -4186,14 +4000,25 @@ function renderSiteEmoji(){
   grid.querySelectorAll('.emoji-item').forEach(function(el){
     el.onclick=function(){
       var emoji=el.dataset.emoji;
-      var price=parseInt(el.dataset.price,10);
       var has=el.dataset.owned==='true';
-      var label=el.dataset.label || emoji;
+      var price=parseInt(el.dataset.price,10);
       if(price===-1 && !has){ Sound.error(); return; }
       var s2=Session.get();
       if(!s2 || !s2.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
-      if(has){
-        if(curEmoji===emoji) return;
+      if(!has && price>0){
+        // отправляем в магазин
+        Sound.click();
+        $('siteSettingsOverlay').classList.remove('show');
+        switchView('shop');
+        renderShop();
+        setTimeout(function(){
+          var el2=document.querySelector('.shop-item-card[data-kind="emoji"][data-id="'+emoji+'"]');
+          if(el2) el2.scrollIntoView({behavior:'smooth', block:'center'});
+        }, 300);
+        return;
+      }
+      if(!has && price===0){
+        // бесплатный
         TimerUI.start('siteSettingsTimer','⏳');
         Session.patchProfile({emoji:emoji});
         _lastAuthRenderKey=''; renderAuthState(true);
@@ -4205,31 +4030,16 @@ function renderSiteEmoji(){
         });
         return;
       }
-      if(price>0){
-        var bal = (Session.get().profile.monkeys)||0;
-        if(bal < price){
-          showNotEnough(price - bal, 'эмодзи', label);
-          Sound.error();
-          return;
-        }
-        openBuyConfirm(emoji, price, 'эмодзи', function(){
-          var s3=Session.get();
-          if(!s3 || !s3.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
-          TimerUI.start('siteSettingsTimer','⏳');
-          api('buyEmoji',{username:s3.username,token:s3.token,emoji:emoji},{post:true,retry:2}).then(function(r){
-            TimerUI.stop('siteSettingsTimer');
-            if(r.ok){
-              Session.patchProfile({monkeys:r.monkeys, emoji:emoji, ownedEmojis:r.ownedEmojis||[]});
-              _lastAuthRenderKey=''; renderAuthState(true); updateMonkeysWidget();
-              Sound.buy(); toastSite('Куплено ✓',false); renderSiteEmoji();
-            } else {
-              Sound.error(); toastSite(r.error||'Ошибка',true);
-              if(r.error==='Bad token') handleBadToken();
-              renderSiteEmoji();
-            }
-          });
-        });
-      }
+      if(curEmoji===emoji) return;
+      TimerUI.start('siteSettingsTimer','⏳');
+      Session.patchProfile({emoji:emoji});
+      _lastAuthRenderKey=''; renderAuthState(true);
+      Sound.success();
+      renderSiteEmoji();
+      api('setEmoji',{username:s2.username,token:s2.token,emoji:emoji},{post:true,retry:2}).then(function(r){
+        TimerUI.stop('siteSettingsTimer');
+        if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteEmoji(); }
+      });
     };
   });
 }
@@ -4262,6 +4072,8 @@ function renderSiteFrames(){
     var selected=curFrame===f.id;
     var has=owned.indexOf(f.id)!==-1;
     var lock=(!has && f.price>0)?'locked':'';
+    var r = f.rarity || (f.secret?'legendary':null);
+    var rCls = r ? ('rarity-'+RARITY[r].cls) : '';
     var tag;
     if(selected) tag='<div class="f-owned">✓ выбрано</div>';
     else if(has) tag='<div class="f-owned">✓ куплено</div>';
@@ -4269,8 +4081,9 @@ function renderSiteFrames(){
     else if(f.price>0) tag='<div class="f-price">🐵 '+f.price+'</div>';
     else tag='<div class="f-free">бесплатно</div>';
     var visual = '<div class="frame-preview av-frame '+(f.css||'')+'" style="width:54px;height:54px"><div class="av-inner">?</div></div>';
-    return '<div class="frame-item '+(selected?'selected':'')+' '+lock+'" data-frame="'+f.id+'" data-price="'+(f.price||0)+'" data-owned="'+has+'" data-name="'+esc(f.name)+'">'+
+    return '<div class="frame-item '+(selected?'selected':'')+' '+lock+' '+rCls+'" data-frame="'+f.id+'" data-price="'+(f.price||0)+'" data-owned="'+has+'" data-name="'+esc(f.name)+'">'+
       (f.secret?'<span class="f-secret">secret</span>':'')+
+      (r?rarityBadge(r):'')+
       visual+
       '<div class="f-name">'+esc(f.name)+'</div>'+
       tag+'</div>';
@@ -4281,12 +4094,21 @@ function renderSiteFrames(){
       var frame=el.dataset.frame;
       var price=parseInt(el.dataset.price,10);
       var has=el.dataset.owned==='true';
-      var name=el.dataset.name || frame;
       if(price===-1 && !has){ Sound.error(); return; }
       var s2=Session.get();
       if(!s2 || !s2.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
-      if(has){
-        if(curFrame===frame) return;
+      if(!has && price>0){
+        Sound.click();
+        $('siteSettingsOverlay').classList.remove('show');
+        switchView('shop');
+        renderShop();
+        setTimeout(function(){
+          var el2=document.querySelector('.shop-item-card[data-kind="frame"][data-id="'+frame+'"]');
+          if(el2) el2.scrollIntoView({behavior:'smooth', block:'center'});
+        }, 300);
+        return;
+      }
+      if(!has && price===0){
         TimerUI.start('siteSettingsTimer','⏳');
         Session.patchProfile({frame:frame});
         _lastAuthRenderKey=''; renderAuthState(true);
@@ -4298,31 +4120,16 @@ function renderSiteFrames(){
         });
         return;
       }
-      if(price>0){
-        var bal = (Session.get().profile.monkeys)||0;
-        if(bal < price){
-          showNotEnough(price - bal, 'рамку', name);
-          Sound.error();
-          return;
-        }
-        openBuyConfirm(name, price, 'рамку', function(){
-          var s3=Session.get();
-          if(!s3 || !s3.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
-          TimerUI.start('siteSettingsTimer','⏳');
-          api('buyFrame',{username:s3.username,token:s3.token,frame:frame},{post:true,retry:2}).then(function(r){
-            TimerUI.stop('siteSettingsTimer');
-            if(r.ok){
-              Session.patchProfile({monkeys:r.monkeys, frame:frame, ownedFrames:r.ownedFrames||[]});
-              _lastAuthRenderKey=''; renderAuthState(true); updateMonkeysWidget();
-              Sound.buy(); toastSite('Куплено ✓',false); renderSiteFrames();
-            } else {
-              Sound.error(); toastSite(r.error||'Ошибка',true);
-              if(r.error==='Bad token') handleBadToken();
-              renderSiteFrames();
-            }
-          });
-        });
-      }
+      if(curFrame===frame) return;
+      TimerUI.start('siteSettingsTimer','⏳');
+      Session.patchProfile({frame:frame});
+      _lastAuthRenderKey=''; renderAuthState(true);
+      Sound.success();
+      renderSiteFrames();
+      api('setFrame',{username:s2.username,token:s2.token,frame:frame},{post:true,retry:2}).then(function(r){
+        TimerUI.stop('siteSettingsTimer');
+        if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteFrames(); }
+      });
     };
   });
 }
@@ -4330,8 +4137,8 @@ function renderSiteFrames(){
 function startThemePreview(themeId, themeName){
   stopThemePreview();
   themePreviewActive=true;
-  themePreviewOriginal=document.body.className.match(/theme-(\w+)/);
-  themePreviewOriginal=themePreviewOriginal?themePreviewOriginal[1]:'dark';
+  var m = document.body.className.match(/theme-(\w+)/);
+  themePreviewOriginal = m ? m[1] : 'dark';
   applyTheme(themeId);
   var remaining=THEME_PREVIEW_DURATION;
   $('themePreviewTime').textContent=remaining;
@@ -4380,14 +4187,17 @@ function renderSiteThemes(){
     var selected=curTheme===t.id;
     var has=owned.indexOf(t.id)!==-1;
     var lock=(!has && t.price>0)?'locked':'';
+    var r = t.rarity || (t.secret?'legendary':null);
+    var rCls = r ? ('rarity-'+RARITY[r].cls) : '';
     var tag;
     if(selected) tag='<div class="theme-owned">✓ выбрано</div>';
     else if(has) tag='<div class="theme-owned">✓ куплено</div>';
     else if(t.secret) tag='<div class="theme-price" style="color:#ff8fc4">секрет</div>';
     else if(t.price>0) tag='<div class="theme-price">🐵 '+t.price+'</div>';
     else tag='<div class="theme-free">бесплатно</div>';
-    return '<div class="theme-item '+(selected?'selected':'')+' '+lock+'" data-theme="'+t.id+'" data-price="'+(t.price||0)+'" data-owned="'+has+'" data-name="'+esc(t.name)+'">'+
+    return '<div class="theme-item '+(selected?'selected':'')+' '+lock+' '+rCls+'" data-theme="'+t.id+'" data-price="'+(t.price||0)+'" data-owned="'+has+'" data-name="'+esc(t.name)+'">'+
       (t.secret?'<span class="theme-secret">secret</span>':'')+
+      (r?rarityBadge(r):'')+
       '<div class="theme-preview" style="background:'+t.preview+'"></div>'+
       '<div class="theme-name">'+(t.icon?t.icon+' ':'')+esc(t.name)+'</div>'+
       tag+
@@ -4401,12 +4211,21 @@ function renderSiteThemes(){
       var theme=el.dataset.theme;
       var price=parseInt(el.dataset.price,10);
       var has=el.dataset.owned==='true';
-      var name=el.dataset.name || theme;
       if(price===-1 && !has){ Sound.error(); return; }
       var s2=Session.get();
       if(!s2 || !s2.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
-      if(has){
-        if(curTheme===theme) return;
+      if(!has && price>0){
+        Sound.click();
+        $('siteSettingsOverlay').classList.remove('show');
+        switchView('shop');
+        renderShop();
+        setTimeout(function(){
+          var el2=document.querySelector('.shop-item-card[data-kind="theme"][data-id="'+theme+'"]');
+          if(el2) el2.scrollIntoView({behavior:'smooth', block:'center'});
+        }, 300);
+        return;
+      }
+      if(!has && price===0){
         TimerUI.start('siteSettingsTimer','⏳');
         Session.patchProfile({theme:theme});
         applyTheme(theme);
@@ -4419,39 +4238,25 @@ function renderSiteThemes(){
         });
         return;
       }
-      if(price>0){
-        var bal = (Session.get().profile.monkeys)||0;
-        if(bal < price){
-          showNotEnough(price - bal, 'тему', name);
-          Sound.error();
-          return;
-        }
-        openBuyConfirm(name, price, 'тему', function(){
-          var s3=Session.get();
-          if(!s3 || !s3.token){ Sound.error(); toastSite('Сессия истекла',true); return; }
-          TimerUI.start('siteSettingsTimer','⏳');
-          api('buyTheme',{username:s3.username,token:s3.token,theme:theme},{post:true,retry:2}).then(function(r){
-            TimerUI.stop('siteSettingsTimer');
-            if(r.ok){
-              Session.patchProfile({monkeys:r.monkeys, theme:theme, ownedThemes:r.ownedThemes||[]});
-              applyTheme(theme);
-              _lastAuthRenderKey=''; renderAuthState(true); updateMonkeysWidget();
-              Sound.buy(); toastSite('Куплено ✓',false); renderSiteThemes();
-            } else {
-              Sound.error(); toastSite(r.error||'Ошибка',true);
-              if(r.error==='Bad token') handleBadToken();
-              renderSiteThemes();
-            }
-          });
-        }, theme, name);
-      }
+      if(curTheme===theme) return;
+      TimerUI.start('siteSettingsTimer','⏳');
+      Session.patchProfile({theme:theme});
+      applyTheme(theme);
+      _lastAuthRenderKey=''; renderAuthState(true);
+      Sound.success();
+      renderSiteThemes();
+      api('setTheme',{username:s2.username,token:s2.token,theme:theme},{post:true,retry:2}).then(function(r){
+        TimerUI.stop('siteSettingsTimer');
+        if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteThemes(); }
+      });
     };
   });
   grid.querySelectorAll('.theme-preview-mini').forEach(function(btn){
     btn.onclick=function(e){
       e.stopPropagation();
       var id=btn.dataset.preview;
-      var name=(btn.closest('.theme-item')||{}).dataset && btn.closest('.theme-item').dataset.name;
+      var itemEl = btn.closest('.theme-item');
+      var name = itemEl ? itemEl.dataset.name : id;
       startThemePreview(id, name||id);
       Sound.click();
     };
@@ -4463,14 +4268,6 @@ function toastSite(text,isErr){
   setTimeout(function(){ t.classList.remove('show'); },2200);
 }
 
-function showNotEnough(need, kind, name){
-  $('notEnoughText').innerHTML = 'Вам не хватает <b style="color:#fbbf24">'+need+' 🐵</b> для покупки '+kind+' «<b>'+esc(name)+'</b>»';
-  $('notEnoughOverlay').classList.add('show');
-  Sound.error();
-}
-$('notEnoughOk').onclick=function(){ $('notEnoughOverlay').classList.remove('show'); Sound.close(); };
-$('notEnoughOverlay').onclick=function(e){ if(e.target===$('notEnoughOverlay')) $('notEnoughOverlay').classList.remove('show'); };
-
 function renderSiteExtra(){
   var soundOn=Sound.isEnabled();
   var lpOn=LowPerf.isOn();
@@ -4479,7 +4276,7 @@ function renderSiteExtra(){
     '<div class="section-sub">Прочие настройки</div>'+
     '<div class="toggle-row" style="margin-bottom:10px;"><div><div class="tr-title">Звуки на сайте</div><div class="tr-sub">Клики, успех, ошибки</div></div>'+
       '<button class="toggle '+(soundOn?'on':'')+'" id="toggleSound"></button></div>'+
-    '<div class="toggle-row" style="margin-bottom:10px;"><div><div class="tr-title">⚡ Режим для слабых устройств</div><div class="tr-sub">Отключает 90% анимаций, blur, шейдеры и фоновые эффекты. Сайт станет легче и быстрее — идеально для слабых телефонов.</div></div>'+
+    '<div class="toggle-row" style="margin-bottom:10px;"><div><div class="tr-title">⚡ Режим для слабых устройств</div><div class="tr-sub">Отключает 90% анимаций, blur, шейдеры и фоновые эффекты.</div></div>'+
       '<button class="toggle '+(lpOn?'on':'')+'" id="toggleLowPerf"></button></div>'+
     '<div class="toggle-row"><div><div class="tr-title">Сменить тему</div><div class="tr-sub">Открой вкладку «Темы»</div></div>'+
       '<button class="btn btn-ghost" id="openThemesBtn">Открыть</button></div>';
@@ -4502,28 +4299,468 @@ function renderSiteExtra(){
   };
   $('openThemesBtn').onclick=function(){ renderSiteSection('themes'); };
 }
-var buyCallback=null;
-var buyPreviewTheme=null;
-var buyPreviewName=null;
-function openBuyConfirm(item, price, kind, cb, themeId, themeName){
-  buyCallback=cb;
-  buyPreviewTheme=themeId||null;
-  buyPreviewName=themeName||null;
-  $('buyTitle').textContent='Покупка';
-  $('buyText').innerHTML='Купить '+kind+' <b>'+esc(item)+'</b> за <b style="color:#fbbf24">🐵 '+price+'</b>?<br><span style="color:var(--muted);font-size:12px">Покупается навсегда</span>';
-  if(themeId){
-    $('buyPreviewBtn').style.display='flex';
-    $('buyPreviewBtn').textContent='👁 Просмотреть тему ('+THEME_PREVIEW_DURATION+' сек)';
-  } else {
-    $('buyPreviewBtn').style.display='none';
-  }
-  $('buyOverlay').classList.add('show'); Sound.open();
-}
-$('buyCancel').onclick=function(){ $('buyOverlay').classList.remove('show'); stopThemePreview(); Sound.close(); };
-$('buyConfirm').onclick=function(){ $('buyOverlay').classList.remove('show'); stopThemePreview(); if(buyCallback) buyCallback(); };
-$('buyPreviewBtn').onclick=function(){ if(buyPreviewTheme){ startThemePreview(buyPreviewTheme, buyPreviewName); } };
-$('buyOverlay').onclick=function(e){ if(e.target===$('buyOverlay')){ $('buyOverlay').classList.remove('show'); stopThemePreview(); Sound.close(); } };
 
+/* ========== SHOP ========== */
+document.querySelectorAll('.shop-tab').forEach(function(tab){
+  tab.onclick=function(){
+    var v=tab.dataset.shopview;
+    shopView=v;
+    document.querySelectorAll('.shop-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.shopview===v); });
+    document.querySelectorAll('.shop-view').forEach(function(view){ view.classList.toggle('active', view.id==='shopView'+(v==='market'?'Market':'Inventory')); });
+    renderShop();
+    Sound.click();
+  };
+});
+
+function renderShop(){
+  if(shopView==='market') renderShopMarket();
+  else renderShopInventory();
+}
+function renderShopMarket(){
+  var s=Session.get(); if(!s||!s.profile) return;
+  var p=s.profile;
+  var owned=getOwned(p);
+  var monkeys=p.monkeys||0;
+
+  /* === CASES === */
+  var casesGrid=$('shopCasesGrid');
+  if(casesGrid){
+    casesGrid.innerHTML = Object.keys(CASES).map(function(k){
+      var c=CASES[k];
+      return '<div class="shop-case-card case-'+c.id+'" data-case="'+c.id+'">'+
+        '<div class="scc-glow"></div>'+
+        '<div class="scc-ico">'+c.icon+'</div>'+
+        '<div class="scc-title">'+esc(c.name)+'</div>'+
+        '<div class="scc-sub">'+esc(c.desc)+'</div>'+
+        '<div class="scc-price">🐵 '+c.price+'</div>'+
+      '</div>';
+    }).join('');
+    casesGrid.querySelectorAll('.shop-case-card').forEach(function(el){
+      el.onclick=function(){ Sound.click(); openCasePreview(el.dataset.case); };
+    });
+  }
+
+  /* === EMOJI === */
+  var emojiGrid=$('shopEmojiGrid');
+  if(emojiGrid){
+    emojiGrid.innerHTML = EMOJI_LIST.filter(function(e){ return e.price>0; }).map(function(e){
+      var has=owned.emojis.indexOf(e.emoji)!==-1;
+      var r = e.rarity || 'common';
+      return '<div class="shop-item-card '+(has?'owned':'')+' rarity-'+RARITY[r].cls+'" data-kind="emoji" data-id="'+esc(e.emoji)+'" data-rarity="'+r+'">'+
+        '<div class="sic-visual">'+e.emoji+'</div>'+
+        '<div class="sic-name">'+esc(e.label)+'</div>'+
+        (has?'<div class="sic-row"><span class="sic-owned">✓ куплено</span></div>':'<div class="sic-row"><span class="sic-price">🐵 '+e.price+'</span></div>')+
+      '</div>';
+    }).join('');
+    emojiGrid.querySelectorAll('.shop-item-card').forEach(function(el){
+      el.onclick=function(){ Sound.click(); openItemShopDetail('emoji', el.dataset.id); };
+    });
+  }
+
+  /* === THEMES === */
+  var themeGrid=$('shopThemeGrid');
+  if(themeGrid){
+    themeGrid.innerHTML = THEME_LIST.filter(function(t){ return t.price>0; }).map(function(t){
+      var has=owned.themes.indexOf(t.id)!==-1;
+      var r = t.rarity || 'common';
+      return '<div class="shop-item-card '+(has?'owned':'')+' rarity-'+RARITY[r].cls+'" data-kind="theme" data-id="'+t.id+'" data-rarity="'+r+'">'+
+        '<div class="sic-visual"><div class="theme-preview" style="background:'+t.preview+'"></div></div>'+
+        '<div class="sic-name">'+esc(t.name)+'</div>'+
+        (has?'<div class="sic-row"><span class="sic-owned">✓ куплено</span></div>':'<div class="sic-row"><span class="sic-price">🐵 '+t.price+'</span></div>')+
+      '</div>';
+    }).join('');
+    themeGrid.querySelectorAll('.shop-item-card').forEach(function(el){
+      el.onclick=function(){ Sound.click(); openItemShopDetail('theme', el.dataset.id); };
+    });
+  }
+
+  /* === FRAMES === */
+  var frameGrid=$('shopFrameGrid');
+  if(frameGrid){
+    frameGrid.innerHTML = FRAME_LIST.filter(function(f){ return f.price>0; }).map(function(f){
+      var has=owned.frames.indexOf(f.id)!==-1;
+      var r = f.rarity || 'common';
+      return '<div class="shop-item-card '+(has?'owned':'')+' rarity-'+RARITY[r].cls+'" data-kind="frame" data-id="'+f.id+'" data-rarity="'+r+'">'+
+        '<div class="sic-visual"><div class="frame-preview av-frame '+(f.css||'')+'" style="width:54px;height:54px"><div class="av-inner">?</div></div></div>'+
+        '<div class="sic-name">'+esc(f.name)+'</div>'+
+        (has?'<div class="sic-row"><span class="sic-owned">✓ куплено</span></div>':'<div class="sic-row"><span class="sic-price">🐵 '+f.price+'</span></div>')+
+      '</div>';
+    }).join('');
+    frameGrid.querySelectorAll('.shop-item-card').forEach(function(el){
+      el.onclick=function(){ Sound.click(); openItemShopDetail('frame', el.dataset.id); };
+    });
+  }
+}
+function renderShopInventory(){
+  var s=Session.get(); if(!s||!s.profile) return;
+  var p=s.profile;
+  var cases = p.cases || {};
+  var grid=$('invCasesGrid');
+  var cnt=$('invCasesCount');
+  if(!grid) return;
+  var ids = Object.keys(cases).filter(function(k){ return cases[k] > 0; });
+  var total = ids.reduce(function(sum,k){ return sum + cases[k]; }, 0);
+  if(cnt) cnt.textContent = total>0 ? ('всего: '+total+' шт.') : '';
+  if(!ids.length){
+    grid.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:20px;text-align:center;grid-column:1/-1">Пока нет купленных кейсов. Загляни в Магазин.</div>';
+    return;
+  }
+  grid.innerHTML = ids.map(function(k){
+    var c=CASES[k];
+    if(!c) return '';
+    var qty = cases[k];
+    return '<div class="shop-case-card case-'+c.id+'" data-case="'+c.id+'">'+
+      '<div class="scc-glow"></div>'+
+      '<div class="scc-ico">'+c.icon+'</div>'+
+      '<div class="scc-title">'+esc(c.name)+(qty>1?' <span style="font-size:12px;color:var(--muted)">'+qty+' шт.</span>':'')+'</div>'+
+      '<div class="scc-sub">Нажми, чтобы открыть</div>'+
+      '<div class="scc-price">🎒 x'+qty+'</div>'+
+    '</div>';
+  }).join('');
+  grid.querySelectorAll('.shop-case-card').forEach(function(el){
+    el.onclick=function(){ Sound.click(); openCasePreview(el.dataset.case, true); };
+  });
+}
+
+function openItemShopDetail(kind, id){
+  var s=Session.get(); if(!s||!s.profile) return;
+  var p=s.profile;
+  var owned=getOwned(p);
+  var monkeys=p.monkeys||0;
+  var item=null, price=0, name='', rarity='common', extraHtml='';
+
+  if(kind==='emoji'){
+    item = EMOJI_LIST.find(function(x){ return x.emoji===id; });
+    if(!item) return;
+    price=item.price; name=item.label; rarity=item.rarity||'common';
+    extraHtml = '<div style="font-size:72px;text-align:center;margin:20px 0">'+item.emoji+'</div>';
+  } else if(kind==='theme'){
+    item = THEME_LIST.find(function(x){ return x.id===id; });
+    if(!item) return;
+    price=item.price; name=item.name; rarity=item.rarity||'common';
+    extraHtml = '<div style="height:120px;border-radius:12px;border:1px solid var(--border);background:'+item.preview+';margin:20px 0"></div>';
+  } else if(kind==='frame'){
+    item = FRAME_LIST.find(function(x){ return x.id===id; });
+    if(!item) return;
+    price=item.price; name=item.name; rarity=item.rarity||'common';
+    extraHtml = '<div style="display:flex;justify-content:center;margin:20px 0"><div class="frame-preview av-frame '+(item.css||'')+'" style="width:90px;height:90px;font-size:32px"><div class="av-inner">?</div></div></div>';
+  }
+
+  var has = (kind==='emoji') ? owned.emojis.indexOf(id)!==-1 : (kind==='theme' ? owned.themes.indexOf(id)!==-1 : owned.frames.indexOf(id)!==-1);
+  var enough = monkeys >= price;
+
+  openBuyConfirm(name, price, kind==='emoji'?'эмодзи':(kind==='theme'?'тему':'рамку'), function(){
+    buyItem(kind, id, price);
+  }, kind==='theme'?id:null, kind==='theme'?name:null, {
+    has:has, rarity:rarity, extraHtml:extraHtml, enough:enough, monkeys:monkeys
+  });
+}
+
+function buyItem(kind, id, price){
+  var s=Session.get(); if(!s||!s.token) return;
+  TimerUI.start('siteSettingsTimer','⏳');
+  var action = kind==='emoji' ? 'buyEmoji' : (kind==='theme' ? 'buyTheme' : 'buyFrame');
+  var payload = {username:s.username,token:s.token};
+  if(kind==='emoji') payload.emoji=id;
+  else if(kind==='theme') payload.theme=id;
+  else payload.frame=id;
+  api(action, payload, {post:true,retry:2}).then(function(r){
+    TimerUI.stop('siteSettingsTimer');
+    if(r.ok){
+      var patch = {monkeys:r.monkeys};
+      if(kind==='emoji'){ patch.emoji=id; patch.ownedEmojis=r.ownedEmojis||[]; }
+      if(kind==='theme'){ patch.theme=id; patch.ownedThemes=r.ownedThemes||[]; applyTheme(id); }
+      if(kind==='frame'){ patch.frame=id; patch.ownedFrames=r.ownedFrames||[]; }
+      Session.patchProfile(patch);
+      _lastAuthRenderKey=''; renderAuthState(true); updateMonkeysWidget();
+      Sound.buy();
+      toastSite('Куплено ✓',false);
+      renderShop();
+    } else {
+      Sound.error();
+      if(r.error==='Bad token') handleBadToken();
+      else toastSite(r.error||'Ошибка',true);
+      renderShop();
+    }
+  });
+}
+
+/* ─── CASE PREVIEW / OPEN ─── */
+function openCasePreview(caseId, fromInventory){
+  var c = CASES[caseId];
+  if(!c) return;
+  activeCase = { id:caseId, fromInventory:!!fromInventory };
+  caseQty = 1;
+  caseOpening = false;
+
+  var s=Session.get();
+  var p = s && s.profile ? s.profile : {};
+  var cases = p.cases || {};
+  var have = cases[caseId] || 0;
+  var monkeys = p.monkeys || 0;
+
+  $('caseOpenTitle').textContent = c.icon+' '+c.name;
+  $('caseOpenSub').textContent = fromInventory ? ('В инвентаре: '+have+' шт.') : c.desc;
+
+  var bodyHtml = '';
+  bodyHtml += '<div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px">Возможные предметы</div>';
+  bodyHtml += '<div class="case-preview-grid">';
+  c.items.forEach(function(it){
+    bodyHtml += casePreviewCell(it, p);
+  });
+  bodyHtml += '</div>';
+  bodyHtml += '<div id="caseRouletteWrap" style="display:none"><div class="case-roulette"><div class="case-roulette-marker"></div><div class="case-roulette-strip" id="caseStrip"></div></div></div>';
+  bodyHtml += '<div id="caseResultWrap"></div>';
+  $('caseOpenBody').innerHTML = bodyHtml;
+
+  renderCaseFoot();
+
+  $('caseOpenOverlay').classList.add('show');
+  Sound.open();
+}
+function casePreviewCell(it, p){
+  var owned = getOwned(p);
+  var has = false;
+  if(it.kind==='emoji') has = owned.emojis.indexOf(it.id)!==-1;
+  if(it.kind==='theme') has = owned.themes.indexOf(it.id)!==-1;
+  if(it.kind==='frame') has = owned.frames.indexOf(it.id)!==-1;
+  var r = it.rarity;
+  var visual='';
+  if(it.kind==='emoji') visual='<div class="cp-visual">'+it.id+'</div>';
+  if(it.kind==='theme'){
+    var t = THEME_LIST.find(function(x){return x.id===it.id;});
+    visual='<div class="cp-visual theme-v" style="background:'+(t?t.preview:'#333')+'"></div>';
+  }
+  if(it.kind==='frame'){
+    var f = FRAME_LIST.find(function(x){return x.id===it.id;});
+    visual='<div class="cp-visual frame-v av-frame '+(f?f.css:'')+'"><div class="av-inner">?</div></div>';
+  }
+  return '<div class="case-preview-item rarity-'+RARITY[r].cls+'">'+
+    visual+
+    '<div class="cp-name">'+esc(it.name)+'</div>'+
+    rarityBadge(r)+
+    (has?'<div class="cp-owned">✓ уже есть</div>':'')+
+  '</div>';
+}
+function renderCaseFoot(){
+  var s=Session.get();
+  var p = s && s.profile ? s.profile : {};
+  var monkeys = p.monkeys || 0;
+  var cases = p.cases || {};
+  var have = cases[activeCase.id] || 0;
+  var foot = $('caseOpenFoot');
+  if(caseOpening){
+    foot.innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Открываем...</div>';
+    return;
+  }
+  if(activeCase.fromInventory){
+    foot.innerHTML =
+      '<div class="case-qty">'+
+        '<label>Кол-во</label>'+
+        '<button id="caseMinus">−</button>'+
+        '<input type="number" id="caseQtyInput" value="1" min="1" max="'+have+'" readonly>'+
+        '<button id="casePlus">+</button>'+
+      '</div>'+
+      '<div style="font-size:12px;color:var(--muted)">Всего: <b style="color:var(--fg)">'+have+' шт.</b></div>'+
+      '<div style="flex:1"></div>'+
+      '<button class="btn btn-primary btn-lg" id="caseOpenBtn" '+(have<1?'disabled':'')+'>🎁 Открыть ('+caseQty+' шт.)</button>';
+    var inp=$('caseQtyInput');
+    if(inp) inp.value = Math.min(caseQty, have);
+    if($('caseMinus')) $('caseMinus').onclick=function(){ if(caseQty>1) caseQty--; renderCaseFoot(); Sound.click(); };
+    if($('casePlus')) $('casePlus').onclick=function(){ if(caseQty<have) caseQty++; renderCaseFoot(); Sound.click(); };
+    if($('caseOpenBtn')) $('caseOpenBtn').onclick=function(){ openCaseFromInventory(); };
+  } else {
+    var total = CASE_PRICE * caseQty;
+    var enough = monkeys >= total;
+    foot.innerHTML =
+      '<div class="case-qty">'+
+        '<label>Кол-во</label>'+
+        '<button id="caseMinus">−</button>'+
+        '<input type="number" id="caseQtyInput" value="'+caseQty+'" min="1" max="99" readonly>'+
+        '<button id="casePlus">+</button>'+
+      '</div>'+
+      '<div class="case-total">🐵 '+total+'</div>'+
+      '<div style="flex:1"></div>'+
+      '<button class="btn btn-primary btn-lg" id="caseBuyBtn" '+(enough?'':'disabled')+'>🛒 Купить и открыть</button>';
+    if($('caseMinus')) $('caseMinus').onclick=function(){ if(caseQty>1) caseQty--; renderCaseFoot(); Sound.click(); };
+    if($('casePlus')) $('casePlus').onclick=function(){ if(caseQty<99) caseQty++; renderCaseFoot(); Sound.click(); };
+    if($('caseBuyBtn')) $('caseBuyBtn').onclick=function(){ buyCases(); };
+    if(!enough){
+      var btn=$('caseBuyBtn');
+      if(btn) btn.textContent = '🐵 Не хватает '+(total-monkeys);
+    }
+  }
+}
+$('caseOpenClose').onclick=function(){ if(caseOpening) return; $('caseOpenOverlay').classList.remove('show'); Sound.close(); };
+$('caseOpenOverlay').onclick=function(e){ if(e.target===$('caseOpenOverlay') && !caseOpening){ $('caseOpenOverlay').classList.remove('show'); Sound.close(); } };
+
+function buyCases(){
+  var s=Session.get(); if(!s||!s.token) return;
+  var total = CASE_PRICE * caseQty;
+  var p = s.profile;
+  if((p.monkeys||0) < total){ Sound.error(); return; }
+  TimerUI.start('siteSettingsTimer','⏳');
+  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:caseQty},{post:true,retry:2}).then(function(r){
+    TimerUI.stop('siteSettingsTimer');
+    if(r.ok){
+      Session.patchProfile({monkeys:r.monkeys, cases:r.cases||{}});
+      updateMonkeysWidget();
+      Sound.buy();
+      // теперь открываем из инвентаря
+      activeCase.fromInventory = true;
+      caseOpening = true;
+      renderCaseFoot();
+      setTimeout(function(){
+        openCasesFromInventory(caseQty);
+      }, 100);
+    } else {
+      Sound.error();
+      if(r.error==='Bad token') handleBadToken();
+      else toastSite(r.error||'Ошибка',true);
+    }
+  });
+}
+function openCaseFromInventory(){
+  var s=Session.get(); if(!s||!s.token) return;
+  var cases = (s.profile.cases)||{};
+  var have = cases[activeCase.id]||0;
+  var qty = Math.min(caseQty, have);
+  if(qty<1) return;
+  openCasesFromInventory(qty);
+}
+function openCasesFromInventory(qty){
+  var s=Session.get(); if(!s||!s.token) return;
+  caseOpening = true;
+  renderCaseFoot();
+  var wrap = $('caseRouletteWrap');
+  if(wrap) wrap.style.display='block';
+  var resWrap = $('caseResultWrap');
+  if(resWrap) resWrap.innerHTML='';
+  TimerUI.start('siteSettingsTimer','⏳');
+  api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:2}).then(function(r){
+    TimerUI.stop('siteSettingsTimer');
+    if(!r.ok){
+      Sound.error();
+      if(r.error==='Bad token') handleBadToken();
+      else toastSite(r.error||'Ошибка',true);
+      caseOpening=false;
+      renderCaseFoot();
+      return;
+    }
+    // r.results = [{rarity, item, isDuplicate, cashback}], r.cases, r.monkeys
+    animateCaseRoulette(r.results, function(){
+      // после анимации применяем
+      Session.patchProfile({monkeys:r.monkeys, cases:r.cases||{}});
+      updateMonkeysWidget();
+      showCaseResults(r.results);
+      caseOpening=false;
+      renderCaseFoot();
+      renderShop();
+    });
+  }).catch(function(){
+    TimerUI.stop('siteSettingsTimer');
+    Sound.error();
+    caseOpening=false;
+    renderCaseFoot();
+  });
+}
+
+function animateCaseRoulette(results, onDone){
+  var strip = $('caseStrip');
+  if(!strip){ onDone(); return; }
+  var c = CASES[activeCase.id];
+  // Составляем последовательность из 60 ячеек, победитель — в позиции 50
+  var WIN_POS = 50;
+  var TOTAL = 60;
+  var seq = [];
+  for(var i=0;i<TOTAL;i++){
+    if(i===WIN_POS){ seq.push(results[0]); }
+    else {
+      // случайный предмет из кейса, но с правильными редкостями
+      var r = weightedRandomRarity();
+      var pool = c.items.filter(function(x){ return x.rarity===r; });
+      if(!pool.length) pool = c.items;
+      var it = pool[Math.floor(Math.random()*pool.length)];
+      seq.push({ rarity:it.rarity, item:{ kind:it.kind, id:it.id, name:it.name } });
+    }
+  }
+  var cellW = 110 + 8;
+  strip.innerHTML = seq.map(function(r){
+    return rouletteCell(r);
+  }).join('');
+  var containerW = strip.parentElement.clientWidth || 600;
+  var targetX = -(WIN_POS * cellW) + (containerW/2) - (cellW/2);
+  var jitter = (Math.random()*60 - 30);
+  targetX += jitter;
+
+  strip.style.transition = 'none';
+  strip.style.transform = 'translateX(0px)';
+  void strip.offsetWidth;
+  strip.style.transition = 'transform 4.2s cubic-bezier(.14,.78,.25,1)';
+  strip.style.transform = 'translateX('+targetX+'px)';
+
+  var ticks = 0;
+  var tickTimer = setInterval(function(){
+    Sound.caseOpen();
+    ticks++;
+    if(ticks > 50){ clearInterval(tickTimer); }
+  }, 70);
+
+  setTimeout(function(){
+    clearInterval(tickTimer);
+    var winnerRarity = results[0].rarity;
+    Sound.caseWin(winnerRarity==='legendary' || winnerRarity==='epic');
+    onDone();
+  }, 4400);
+}
+function rouletteCell(r){
+  var visual='';
+  if(r.item.kind==='emoji') visual='<div class="crv">'+r.item.id+'</div>';
+  if(r.item.kind==='theme'){
+    var t = THEME_LIST.find(function(x){return x.id===r.item.id;});
+    visual='<div class="crv theme-v" style="background:'+(t?t.preview:'#333')+'"></div>';
+  }
+  if(r.item.kind==='frame'){
+    var f = FRAME_LIST.find(function(x){return x.id===r.item.id;});
+    visual='<div class="crv frame-v av-frame '+(f?f.css:'')+'"><div class="av-inner">?</div></div>';
+  }
+  return '<div class="case-roulette-cell '+RARITY[r.rarity].cls+'">'+visual+'<div class="crn">'+esc(r.item.name||'')+'</div></div>';
+}
+function weightedRandomRarity(){
+  var r = Math.random()*100;
+  if(r < 60) return 'common';
+  if(r < 90) return 'rare';
+  if(r < 99) return 'epic';
+  return 'legendary';
+}
+function showCaseResults(results){
+  var wrap = $('caseResultWrap');
+  if(!wrap) return;
+  var html = '';
+  results.forEach(function(res){
+    var info = RARITY[res.rarity];
+    var visual='';
+    if(res.item.kind==='emoji') visual='<div class="crc-big">'+res.item.id+'</div>';
+    if(res.item.kind==='theme'){
+      var t = THEME_LIST.find(function(x){return x.id===res.item.id;});
+      visual='<div class="crc-big" style="height:60px;width:120px;border-radius:10px;background:'+(t?t.preview:'#333')+';border:1px solid var(--border)"></div>';
+    }
+    if(res.item.kind==='frame'){
+      var f = FRAME_LIST.find(function(x){return x.id===res.item.id;});
+      visual='<div class="crc-big" style="display:flex;justify-content:center"><div class="frame-preview av-frame '+(f?f.css:'')+'" style="width:64px;height:64px;font-size:24px"><div class="av-inner">?</div></div></div>';
+    }
+    var cashbackHtml = res.cashback>0 ? '<div class="crc-cashback">💸 Кешбэк за дубликат: +'+res.cashback+' 🐵</div>' : '';
+    html += '<div class="case-result-card '+info.cls+'" style="margin-top:10px">'+
+      visual+
+      '<div class="crc-name">'+esc(res.item.name)+'</div>'+
+      rarityBadge(res.rarity)+
+      cashbackHtml+
+    '</div>';
+  });
+  wrap.innerHTML = html;
+}
+
+/* ========== EARN ========== */
 function closeEarnMode(){
   if(earnMode==='math') stopMath();
   if(earnMode==='choice') stopChoice();
@@ -4678,38 +4915,28 @@ document.querySelectorAll('.choice-card').forEach(function(card){
   card.onclick=function(){
     if(!choiceState.active || choiceState.busy || choiceState.revealed) return;
     choiceState.busy=true; choiceState.revealed=true;
-
     var pick=parseInt(card.dataset.choice,10);
     var winCard=Math.random()<0.5?1:2;
     var win=pick===winCard;
     var amount=win?100:-100;
-
     document.querySelectorAll('.choice-card').forEach(function(c){ c.classList.add('disabled'); });
     card.classList.add('picked');
     Sound.click();
-
     var s=Session.get();
     if(!s||!s.token){ Sound.error(); return; }
-
     var emj=card.querySelector('.cc-emoji');
     if(emj) emj.classList.add('flip');
     setTimeout(function(){
-      if(emj){
-        emj.textContent = win ? '🎉' : '💀';
-        emj.classList.remove('flip');
-      }
+      if(emj){ emj.textContent = win ? '🎉' : '💀'; emj.classList.remove('flip'); }
       if(win){ card.classList.add('win'); } else { card.classList.add('lose'); }
-
       $('choiceResult').textContent = win ? '✅ Ты угадал! +100 🐵' : '💀 Не повезло. −100 🐵';
       $('choiceResult').className='choice-result '+(win?'win':'lose');
-
       var cur=s.profile.monkeys||0;
       var newBal=Math.max(0, cur+amount);
       Session.patchProfile({monkeys:newBal});
       updateMonkeysWidget();
       if(win) bumpMonkeys();
       Sound[win?'success':'error']();
-
       api('choiceReward',{username:s.username,token:s.token,win:win,amount:amount},{post:true,retry:2}).then(function(r){
         if(r && r.ok && typeof r.monkeys === 'number'){
           Session.patchProfile({monkeys:r.monkeys});
@@ -4717,10 +4944,7 @@ document.querySelectorAll('.choice-card').forEach(function(card){
         }
         if(r && r.error==='Bad token') handleBadToken();
       });
-
-      setTimeout(function(){
-        resetChoiceRound();
-      }, 1200);
+      setTimeout(resetChoiceRound, 1200);
     }, 350);
   };
 });
@@ -4737,18 +4961,8 @@ function resetChoiceRound(){
     c.style.opacity='0.4';
     c.style.transform='translateY(8px) scale(0.96)';
     void c.offsetWidth;
-    setTimeout(function(){
-      c.style.transition='';
-      c.style.opacity='';
-      c.style.transform='';
-    }, 30);
+    setTimeout(function(){ c.style.transition=''; c.style.opacity=''; c.style.transform=''; }, 30);
   });
-  setTimeout(function(){
-    cards.forEach(function(c, idx){
-      var hint=c.querySelector('.cc-hint');
-      if(hint) hint.textContent = 'Карта '+(idx+1);
-    });
-  }, 30);
   $('choiceResult').textContent='Выбери карту';
   $('choiceResult').className='choice-result info';
   choiceState.busy=false; choiceState.revealed=false;
@@ -4763,7 +4977,6 @@ function startClicker(){
   $('clickerAntibot').style.top='';
 }
 function stopClicker(){ clickerState.active=false; $('clickerAntibot').classList.remove('show'); }
-
 function positionAntibotButton(){
   var el=$('clickerAntibot');
   if(!el) return;
@@ -4774,7 +4987,6 @@ function positionAntibotButton(){
   el.style.left = left + 'px';
   el.style.top = top + 'px';
 }
-
 $('clickerZone').onclick=function(){
   if(!clickerState.active || clickerState.antibot) return;
   var now=nowMs();
@@ -4804,6 +5016,7 @@ $('clickerAntibotBtn').onclick=function(){
   Sound.success();
 };
 
+/* ========== ADMIN ========== */
 $('sbAdmin').onclick=function(){ Sound.click(); openAdminPanel(); };
 $('adminClose').onclick=function(){ $('adminOverlay').classList.remove('show'); Sound.close(); };
 $('adminOverlay').onclick=function(e){ if(e.target===$('adminOverlay')) $('adminOverlay').classList.remove('show'); };
@@ -4830,11 +5043,11 @@ function openAdminPanel(){
 function renderAdminSetup(){
   var s=Session.get();
   $('adminWrap').innerHTML='<div class="admin-login"><h2>🔑 Настройка админ-пары</h2>'+
-    '<div class="al-sub">Задайте свой пароль и кодовое слово. Они будут использоваться при входе в админ-панель.</div>'+
+    '<div class="al-sub">Задайте свой пароль и кодовое слово.</div>'+
     '<div class="field"><label>Логин</label><input type="text" value="'+esc(s.username)+'" disabled style="opacity:.6;padding-left:13px"></div>'+
     '<div class="field"><label>Пароль</label><input type="password" id="setupPass" placeholder="минимум 8 символов" autocomplete="new-password" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
     '<div class="field"><label>Повторите пароль</label><input type="password" id="setupPass2" placeholder="повторите" autocomplete="new-password" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
-    '<div class="field"><label>Кодовое слово</label><input type="text" id="setupCode" placeholder="например, ваше секретное слово" autocomplete="off" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
+    '<div class="field"><label>Кодовое слово</label><input type="text" id="setupCode" placeholder="ваше секретное слово" autocomplete="off" style="padding-left:13px" autocapitalize="off" autocorrect="off" spellcheck="false"></div>'+
     '<button class="btn btn-primary btn-block" id="setupBtn" style="margin-top:10px">Создать пару</button>'+
     '<div class="modal-msg" id="setupMsg"></div></div>';
   $('setupBtn').onclick=function(){
@@ -4972,7 +5185,7 @@ function _applyAdminResult(uname, r){
     }
     var s=Session.get();
     if(s && s.username===uname){
-      var patch={emoji:r.user.emoji, theme:r.user.theme, frame:r.user.frame, visualName:r.user.visualName, monkeys:r.user.monkeys, respects:r.user.respects, wins:r.user.wins, avatar:r.user.avatar, isAdmin:r.user.isAdmin, ownedEmojis:r.user.ownedEmojis, ownedThemes:r.user.ownedThemes, ownedFrames:r.user.ownedFrames};
+      var patch={emoji:r.user.emoji, theme:r.user.theme, frame:r.user.frame, visualName:r.user.visualName, monkeys:r.user.monkeys, respects:r.user.respects, wins:r.user.wins, avatar:r.user.avatar, isAdmin:r.user.isAdmin, ownedEmojis:r.user.ownedEmojis, ownedThemes:r.user.ownedThemes, ownedFrames:r.user.ownedFrames, cases:r.user.cases};
       Session.patchProfile(patch);
       applyTheme(r.user.theme||'dark');
       _lastAuthRenderKey=''; renderAuthState(true);
@@ -5154,10 +5367,7 @@ function renderAdminGrid(){
               for(var j=0;j<_usersCache.v.length;j++){ if(_usersCache.v[j].username===uname){ _usersCache.v[j].isAdmin=r.isAdmin; break; } }
             }
             var s=Session.get();
-            if(s && s.username===uname){
-              Session.patchProfile({isAdmin:r.isAdmin});
-              _lastAuthRenderKey=''; renderAuthState(true);
-            }
+            if(s && s.username===uname){ Session.patchProfile({isAdmin:r.isAdmin}); _lastAuthRenderKey=''; renderAuthState(true); }
             if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsersFiltered();
             renderAdminGrid();
             _flashCard(uname);
@@ -5199,7 +5409,7 @@ function renderAdminGrid(){
       resetDailyBtn.addEventListener('click', function(e){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
-        if(!confirm('Откатить ежедневный подарок @'+uname+'? Он сможет забрать его снова.')) return;
+        if(!confirm('Откатить ежедневный подарок @'+uname+'?')) return;
         adminBusy=true;
         api('adminResetDaily',{adminToken:token(), username:uname},{post:true,retry:2}).then(function(r){
           if(r.ok){
@@ -5284,6 +5494,61 @@ document.addEventListener('pointerdown', function(e){
   btn.style.setProperty('--ry', ((e.clientY-r.top)/r.height*100)+'%');
 });
 
+/* ========== BUY CONFIRM (для магазина и настроек) ========== */
+var buyCallback=null;
+var buyPreviewTheme=null;
+var buyPreviewName=null;
+function openBuyConfirm(item, price, kind, cb, themeId, themeName, extra){
+  buyCallback=cb;
+  buyPreviewTheme=themeId||null;
+  buyPreviewName=themeName||null;
+  extra = extra||{};
+  $('buyTitle').textContent = extra.has ? 'Уже куплено' : 'Покупка';
+  var info = extra.rarity ? RARITY[extra.rarity] : null;
+  var html = '';
+  html += extra.extraHtml || '';
+  html += '<div style="margin-bottom:10px;font-size:15px;font-weight:800;color:var(--fg)">'+esc(item)+'</div>';
+  if(info) html += '<div style="margin-bottom:10px">'+rarityBadge(extra.rarity)+'</div>';
+  if(extra.has){
+    html += '<div style="color:#4ade80;font-size:13px;font-weight:700">✓ Уже куплено</div>';
+  } else {
+    html += '<div style="font-size:13px;color:var(--muted);margin-bottom:6px">Цена: <b style="color:#fbbf24">🐵 '+price+'</b></div>';
+    html += '<div style="font-size:13px;color:var(--muted)">У тебя: <b style="color:var(--fg)">🐵 '+(extra.monkeys||0)+'</b></div>';
+    if(!extra.enough){
+      html += '<div style="color:#f87171;font-size:12.5px;margin-top:8px">Не хватает <b>'+(price-(extra.monkeys||0))+' 🐵</b></div>';
+    }
+  }
+  $('buyText').innerHTML = html;
+  if(themeId){
+    $('buyPreviewBtn').style.display='flex';
+    $('buyPreviewBtn').textContent='👁 Просмотреть тему ('+THEME_PREVIEW_DURATION+' сек)';
+  } else {
+    $('buyPreviewBtn').style.display='none';
+  }
+  var buyBtn = $('buyConfirm');
+  if(extra.has){
+    buyBtn.style.display='none';
+  } else {
+    buyBtn.style.display='';
+    buyBtn.textContent = 'Купить за 🐵 '+price;
+    buyBtn.disabled = !extra.enough;
+  }
+  $('buyOverlay').classList.add('show'); Sound.open();
+}
+$('buyCancel').onclick=function(){ $('buyOverlay').classList.remove('show'); stopThemePreview(); Sound.close(); };
+$('buyConfirm').onclick=function(){ $('buyOverlay').classList.remove('show'); stopThemePreview(); if(buyCallback) buyCallback(); };
+$('buyPreviewBtn').onclick=function(){ if(buyPreviewTheme){ startThemePreview(buyPreviewTheme, buyPreviewName); } };
+$('buyOverlay').onclick=function(e){ if(e.target===$('buyOverlay')){ $('buyOverlay').classList.remove('show'); stopThemePreview(); Sound.close(); } };
+
+function showNotEnough(need, kind, name){
+  $('notEnoughText').innerHTML = 'Вам не хватает <b style="color:#fbbf24">'+need+' 🐵</b> для покупки '+kind+' «<b>'+esc(name)+'</b>»';
+  $('notEnoughOverlay').classList.add('show');
+  Sound.error();
+}
+$('notEnoughOk').onclick=function(){ $('notEnoughOverlay').classList.remove('show'); Sound.close(); };
+$('notEnoughOverlay').onclick=function(e){ if(e.target===$('notEnoughOverlay')) $('notEnoughOverlay').classList.remove('show'); };
+
+/* ========== INIT ========== */
 (function init(){
   LowPerf.apply();
   initWheelIfNeeded();
@@ -5301,5 +5566,15 @@ document.addEventListener('pointerdown', function(e){
   });
 })();
 </script>
+
+<style>
+@keyframes wheelHop {
+  0% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-22px) scale(1.04); }
+  55% { transform: translateY(0) scale(0.98); }
+  75% { transform: translateY(-8px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
+}
+</style>
 </body>
 </html>

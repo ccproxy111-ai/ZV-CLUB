@@ -1178,7 +1178,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .av-frame.frame-gold{box-shadow:0 0 0 4px #fbbf24}
 .av-frame.frame-blue{box-shadow:0 0 0 4px #3b82f6}
 .av-frame.frame-ruby{box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6);animation:frameRuby 2s ease-in-out infinite alternate;}
-@keyframes frameRuby{0%{box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 16px rgba(220,38,38,.6)}100%{box-shadow:0 0 0 4px #ffffff, 0 0 0 8px #dc2626, 0 0 16px rgba(220,38,38,.6)}}
+@keyframes frameRuby{0%{box-shadow:0 0 0 4px #dc2626, 0 0 0 8px #ffffff, 0 0 0 16px rgba(220,38,38,.6)}100%{box-shadow:0 0 0 4px #ffffff, 0 0 0 8px #dc2626, 0 0 16px rgba(220,38,38,.6)}}
 .av-frame.frame-sapphire{box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6);animation:frameSapphire 2s ease-in-out infinite alternate;}
 @keyframes frameSapphire{0%{box-shadow:0 0 0 4px #1d4ed8, 0 0 0 8px #ffffff, 0 0 16px rgba(29,78,216,.6)}100%{box-shadow:0 0 0 4px #ffffff, 0 0 0 8px #1d4ed8, 0 0 16px rgba(29,78,216,.6)}}
 .av-frame.frame-hacker{box-shadow:0 0 0 4px #000000, 0 0 0 8px #00ff41, 0 0 16px rgba(0,255,65,.7);animation:frameHacker 2s ease-in-out infinite alternate;overflow:visible;position:relative;}
@@ -2035,14 +2035,20 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
+    ver:'BETA 0.25', cls:'v2', title:'Исправлен вход и пароли',
+    items:[
+      { tag:'fix', text:'Логин теперь работает надёжно: пароль хешируется на сервере.' },
+      { tag:'fix', text:'Убрана зависимость от crypto.subtle — работает в любом браузере.' },
+      { tag:'fix', text:'Смена пароля и удаление аккаунта работают корректно.' },
+      { tag:'upd', text:'Скорость входа и регистрации увеличена.' }
+    ]
+  },
+  {
     ver:'BETA 0.24', cls:'v2', title:'Фикс логина и колеса',
     items:[
-      { tag:'fix', text:'Исправлен вход: пароль больше не отклоняется ошибочно.' },
       { tag:'fix', text:'Убрана блокировка после нескольких неудачных попыток входа.' },
       { tag:'fix', text:'Ежедневный подарок теперь не откатывается и не зависает.' },
-      { tag:'fix', text:'Колесо Фортуны работает без рассинхрона баланса.' },
-      { tag:'upd', text:'Скорость загрузки и ответов сервера значительно увеличена.' },
-      { tag:'upd', text:'В настройках сайта убрана кнопка «Сменить тему».' }
+      { tag:'fix', text:'Колесо Фортуны работает без рассинхрона баланса.' }
     ]
   }
 ];
@@ -2341,33 +2347,12 @@ function ensureValidToken(){
   });
 }
 
-var Rate = (function(){
-  var MAX=999, LOCK=0;
-  function get(){ try{ return JSON.parse(localStorage.getItem('zv_rl')||'{}'); }catch(e){ return {}; } }
-  function set(d){ try{ localStorage.setItem('zv_rl', JSON.stringify(d)); }catch(e){} }
-  return {
-    check:function(a){ return {ok:true}; },
-    record:function(a, s){}
-  };
-})();
-
-function buf2hex(buf){ var a=new Uint8Array(buf), s=''; for(var i=0;i<a.length;i++){ s+=('0'+a[i].toString(16)).slice(-2); } return s; }
-function sha256(text){
-  if(window.crypto && crypto.subtle && crypto.subtle.digest){
-    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(buf2hex);
-  }
-  return Promise.resolve(fallbackHash(text));
-}
-function fallbackHash(s){
-  var h=0; for(var i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i))|0; }
-  var out=''; for(var j=0;j<8;j++){ out += ('00000000'+(h>>>0).toString(16)).slice(-8); h=(h*1103515245+12345)|0; }
-  return out;
-}
 function randomSalt(len){
   len=len||16; var a=new Uint8Array(len);
   if(window.crypto && crypto.getRandomValues) crypto.getRandomValues(a);
   else for(var i=0;i<len;i++) a[i]=Math.floor(Math.random()*256);
-  return buf2hex(a);
+  var s=''; for(var j=0;j<a.length;j++){ s+=('0'+a[j].toString(16)).slice(-2); }
+  return s;
 }
 
 var _emojiRe=null;
@@ -2403,39 +2388,34 @@ function passwordStrength(p){
   return Math.min(s,5);
 }
 
+/* ========== AUTH (пароль хешируется на сервере) ========== */
 var Auth = {
   register:function(username,password,password2){
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
     var eP=validatePassword(password); if(eP) return Promise.resolve({ok:false,error:eP});
     if(password!==password2) return Promise.resolve({ok:false,error:'Пароли не совпадают'});
-    var salt=randomSalt();
-    return sha256(salt+password).then(function(hash){
-      return api('register',{username:username,salt:salt,hash:hash},{post:true,retry:3});
-    }).then(function(res){
-      if(!res.ok) return {ok:false,error:res.error||'Ошибка'};
-      Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
-      Session.flushNow();
-      return {ok:true};
-    }).catch(function(){
-      return {ok:false,error:'Нет связи с сервером'};
-    });
+    return api('register',{username:username,password:password},{post:true,retry:3})
+      .then(function(res){
+        if(!res.ok) return {ok:false,error:res.error||'Ошибка'};
+        Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
+        Session.flushNow();
+        return {ok:true};
+      }).catch(function(){
+        return {ok:false,error:'Нет связи с сервером'};
+      });
   },
   login:function(username,password){
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
     if(!password) return Promise.resolve({ok:false,error:'Введите пароль'});
-    return api('getSalt',{username:username},{cache:true,ttl:60000}).then(function(sr){
-      if(!sr.ok){ return {ok:false,error:'Неверное имя или пароль'}; }
-      return sha256(sr.salt+password).then(function(hash){
-        return api('login',{username:username,hash:hash},{post:true,retry:3});
-      }).then(function(res){
-        if(!res.ok) return {ok:false,error:'Неверное имя или пароль'};
+    return api('login',{username:username,password:password},{post:true,retry:3})
+      .then(function(res){
+        if(!res.ok) return {ok:false,error:res.error||'Неверное имя или пароль'};
         Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
         Session.flushNow();
         return {ok:true};
+      }).catch(function(){
+        return {ok:false,error:'Нет связи с сервером'};
       });
-    }).catch(function(){
-      return {ok:false,error:'Нет связи с сервером'};
-    });
   }
 };
 
@@ -2924,33 +2904,29 @@ $('delConfirm').onclick=function(){
   $('delConfirm').disabled=true;
   $('delMsg').textContent='⏳ Удаление...';
   $('delMsg').className='modal-msg';
-  api('getSalt',{username:s.username},{cache:true,ttl:30000}).then(function(sr){
-    if(!sr.ok) throw new Error('Ошибка сервера');
-    return sha256(sr.salt+p).then(function(hash){
-      return api('deleteAccount',{username:s.username, token:s.token, hash:hash},{post:true,retry:2});
-    });
-  }).then(function(r){
-    if(r.ok){
-      Sound.success();
-      $('delMsg').textContent='✓ Аккаунт удалён';
-      $('delMsg').className='modal-msg ok';
-      setTimeout(function(){
-        closeDeleteAccount();
-        $('settingsOverlay').classList.remove('show');
-        Online.stop(); Session.clear(); _lastAuthRenderKey=''; renderAuthState(true); switchView('home'); Online.start();
-      }, 800);
-    } else {
+  api('deleteAccount',{username:s.username, token:s.token, password:p},{post:true,retry:2})
+    .then(function(r){
+      if(r.ok){
+        Sound.success();
+        $('delMsg').textContent='✓ Аккаунт удалён';
+        $('delMsg').className='modal-msg ok';
+        setTimeout(function(){
+          closeDeleteAccount();
+          $('settingsOverlay').classList.remove('show');
+          Online.stop(); Session.clear(); _lastAuthRenderKey=''; renderAuthState(true); switchView('home'); Online.start();
+        }, 800);
+      } else {
+        Sound.error();
+        $('delMsg').textContent='✗ '+(r.error||'Ошибка удаления');
+        $('delMsg').className='modal-msg err';
+        $('delConfirm').disabled=false;
+      }
+    }).catch(function(){
       Sound.error();
-      $('delMsg').textContent='✗ '+(r.error||'Ошибка удаления');
+      $('delMsg').textContent='✗ Ошибка сети';
       $('delMsg').className='modal-msg err';
       $('delConfirm').disabled=false;
-    }
-  }).catch(function(){
-    Sound.error();
-    $('delMsg').textContent='✗ Ошибка сети';
-    $('delMsg').className='modal-msg err';
-    $('delConfirm').disabled=false;
-  });
+    });
 };
 
 function switchView(name){
@@ -3170,7 +3146,6 @@ $('wheelSpinBtn').onclick=function(){
       var winAmount=res.winAmount||0;
       var betVal=res.bet||bet;
 
-      // Финализация: сервер уже вернул monkeysFinal
       var finalMonkeys = (typeof res.monkeysFinal === 'number') ? res.monkeysFinal : (bal - betVal + winAmount);
       Session.patchProfile({monkeys: finalMonkeys});
       if(winAmount>0) Session.patchProfile({wins: (s.profile.wins||0)+1});
@@ -3898,23 +3873,16 @@ function renderAccountPassword(){
     if(!oldP){ toastAccount('Введите текущий пароль',true); Sound.error(); return; }
     var eP=validatePassword(newP); if(eP){ toastAccount(eP,true); Sound.error(); return; }
     if(newP!==newP2){ toastAccount('Пароли не совпадают',true); Sound.error(); return; }
-    api('getSalt',{username:s.username},{cache:true,ttl:30000}).then(function(sr){
-      if(!sr.ok){ toastAccount('Ошибка сервера',true); return; }
-      return sha256(sr.salt+oldP).then(function(oldHash){
-        var newSalt=randomSalt();
-        return sha256(newSalt+newP).then(function(newHash){
-          return api('changePassword',{username:s.username,token:s.token,oldHash:oldHash,salt:newSalt,newHash:newHash},{post:true,retry:3});
-        });
-      });
-    }).then(function(res){
-      if(res && res.ok){
-        Sound.success(); toastAccount('Пароль изменён ✓',false);
-        $('oldPass').value=''; $('newPass').value=''; $('newPass2').value='';
-      } else if(res){
-        Sound.error(); toastAccount(res.error||'Ошибка',true);
-        if(res.error==='Bad token') handleBadToken();
-      }
-    }).catch(function(){ toastAccount('Ошибка сети',true); Sound.error(); });
+    api('changePassword',{username:s.username,token:s.token,oldPassword:oldP,newPassword:newP},{post:true,retry:3})
+      .then(function(res){
+        if(res && res.ok){
+          Sound.success(); toastAccount('Пароль изменён ✓',false);
+          $('oldPass').value=''; $('newPass').value=''; $('newPass2').value='';
+        } else if(res){
+          Sound.error(); toastAccount(res.error||'Ошибка',true);
+          if(res.error==='Bad token') handleBadToken();
+        }
+      }).catch(function(){ toastAccount('Ошибка сети',true); Sound.error(); });
   };
 }
 
@@ -5096,10 +5064,7 @@ function renderAdminSetup(){
     if(p1.length<8){ $('setupMsg').textContent='Пароль минимум 8 символов'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
     if(p1!==p2){ $('setupMsg').textContent='Пароли не совпадают'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
     if(code.length<3){ $('setupMsg').textContent='Кодовое слово минимум 3 символа'; $('setupMsg').className='modal-msg err'; adminBusy=false; return; }
-    var salt=randomSalt();
-    sha256(salt+p1).then(function(hash){
-      return api('adminSetup',{username:s.username,salt:salt,hash:hash,code:code},{post:true,retry:2});
-    }).then(function(r){
+    api('adminSetup',{username:s.username,password:p1,code:code},{post:true,retry:2}).then(function(r){
       if(!r.ok){
         Sound.error();
         $('setupMsg').textContent=r.error||'Ошибка';
@@ -5128,18 +5093,7 @@ function renderAdminLogin(){
     adminBusy=true;
     var password=$('admPass').value, code=$('admCode').value;
     $('admMsg').textContent='';
-    var pr;
-    if(isOwner){
-      pr=api('adminLogin',{username:s.username,password:password,code:code},{post:true,retry:2});
-    } else {
-      pr=api('adminGetSalt',{username:s.username},{post:true,retry:2}).then(function(sr){
-        if(!sr.ok) throw new Error(sr.error||'Пара не найдена');
-        return sha256(sr.salt+password).then(function(hash){
-          return api('adminLogin',{username:s.username,hash:hash,code:code},{post:true,retry:2});
-        });
-      });
-    }
-    pr.then(function(r){
+    api('adminLogin',{username:s.username,password:password,code:code},{post:true,retry:2}).then(function(r){
       if(r.ok){
         sessionStorage.setItem('zv_admin_token', r.adminToken);
         Sound.success();
@@ -5151,7 +5105,7 @@ function renderAdminLogin(){
       }
     }).catch(function(err){
       Sound.error();
-      $('admMsg').textContent=err.message||'Ошибка сети';
+      $('admMsg').textContent=(err&&err.message)||'Ошибка сети';
       $('admMsg').className='modal-msg err';
     }).then(function(){ adminBusy=false; });
   }

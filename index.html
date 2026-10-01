@@ -1919,10 +1919,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 <script>
 /* ========== КОНСТАНТЫ ========== */
 var API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
-var HEARTBEAT_MS = 25000;
-var FETCH_TIMEOUT = 20000;
-var POST_TIMEOUT = 30000;
-var QUEUE_TIMEOUT = 45000;
+var HEARTBEAT_MS = 30000;
+var FETCH_TIMEOUT = 12000;
+var POST_TIMEOUT = 15000;
+var QUEUE_TIMEOUT = 20000;
 var WHEEL_SPIN_MS = 5200;
 var WHEEL_SPIN_COOLDOWN = 800;
 var USERS_CACHE_TTL = 30000;
@@ -2035,22 +2035,14 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
-    ver:'BETA 0.23', cls:'v2', title:'Фикс кейсов и колеса',
+    ver:'BETA 0.24', cls:'v2', title:'Фикс логина и колеса',
     items:[
-      { tag:'fix', text:'Предметы из кейсов теперь сразу выдаются и доступны в магазине и настройках.' },
-      { tag:'fix', text:'Колесо Фортуны больше не зависает при быстрых повторных нажатиях.' },
-      { tag:'upd', text:'Добавлена защита от зависания спина по таймауту.' }
-    ]
-  },
-  {
-    ver:'BETA 0.22', cls:'v2', title:'Кейсы, инвентарь, админка',
-    items:[
-      { tag:'fix', text:'Модальное окно описания предмета теперь открывается поверх кейса.' },
-      { tag:'new', text:'В инвентаре кнопка "Выйти" появляется после открытия кейса.' },
-      { tag:'upd', text:'В инвентаре у кнопки "Кастомизация" убрана левая шестерёнка.' },
-      { tag:'new', text:'Покупка кейсов: выбор количества, переброс в инвентарь.' },
-      { tag:'upd', text:'Иконки кейсов в инвентаре: сундук + маленькая иконка подвида.' },
-      { tag:'new', text:'Админ-панель: выдача кейсов любого количества в инвентарь.' }
+      { tag:'fix', text:'Исправлен вход: пароль больше не отклоняется ошибочно.' },
+      { tag:'fix', text:'Убрана блокировка после нескольких неудачных попыток входа.' },
+      { tag:'fix', text:'Ежедневный подарок теперь не откатывается и не зависает.' },
+      { tag:'fix', text:'Колесо Фортуны работает без рассинхрона баланса.' },
+      { tag:'upd', text:'Скорость загрузки и ответов сервера значительно увеличена.' },
+      { tag:'upd', text:'В настройках сайта убрана кнопка «Сменить тему».' }
     ]
   }
 ];
@@ -2350,25 +2342,12 @@ function ensureValidToken(){
 }
 
 var Rate = (function(){
-  var MAX=5, LOCK=60000;
+  var MAX=999, LOCK=0;
   function get(){ try{ return JSON.parse(localStorage.getItem('zv_rl')||'{}'); }catch(e){ return {}; } }
   function set(d){ try{ localStorage.setItem('zv_rl', JSON.stringify(d)); }catch(e){} }
   return {
-    check:function(a){
-      var ar=get(), n=nowMs();
-      var r=ar[a]||{count:0,last:0,lock:0};
-      if(r.lock>n) return {ok:false,msg:'Слишком много попыток. Жди '+Math.ceil((r.lock-n)/1000)+' сек.'};
-      if(n-r.last>LOCK) r.count=0;
-      return {ok:true};
-    },
-    record:function(a, s){
-      var ar=get(), n=nowMs();
-      var r=ar[a]||{count:0,last:0,lock:0};
-      r.last=n;
-      if(s){ r.count=0; r.lock=0; }
-      else { r.count=(r.count||0)+1; if(r.count>=MAX){ r.lock=n+LOCK; r.count=0; } }
-      ar[a]=r; set(ar);
-    }
+    check:function(a){ return {ok:true}; },
+    record:function(a, s){}
   };
 })();
 
@@ -2429,38 +2408,32 @@ var Auth = {
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
     var eP=validatePassword(password); if(eP) return Promise.resolve({ok:false,error:eP});
     if(password!==password2) return Promise.resolve({ok:false,error:'Пароли не совпадают'});
-    var rl=Rate.check('register'); if(!rl.ok) return Promise.resolve({ok:false,error:rl.msg});
     var salt=randomSalt();
     return sha256(salt+password).then(function(hash){
-      return api('register',{username:username,salt:salt,hash:hash},{post:true,retry:2});
+      return api('register',{username:username,salt:salt,hash:hash},{post:true,retry:3});
     }).then(function(res){
-      Rate.record('register', res.ok);
       if(!res.ok) return {ok:false,error:res.error||'Ошибка'};
       Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
       Session.flushNow();
       return {ok:true};
     }).catch(function(){
-      Rate.record('register',false);
       return {ok:false,error:'Нет связи с сервером'};
     });
   },
   login:function(username,password){
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
     if(!password) return Promise.resolve({ok:false,error:'Введите пароль'});
-    var rl=Rate.check('login'); if(!rl.ok) return Promise.resolve({ok:false,error:rl.msg});
-    return api('getSalt',{username:username},{cache:true,ttl:30000}).then(function(sr){
-      if(!sr.ok){ Rate.record('login',false); return {ok:false,error:'Неверное имя или пароль'}; }
+    return api('getSalt',{username:username},{cache:true,ttl:60000}).then(function(sr){
+      if(!sr.ok){ return {ok:false,error:'Неверное имя или пароль'}; }
       return sha256(sr.salt+password).then(function(hash){
-        return api('login',{username:username,hash:hash},{post:true,retry:2});
+        return api('login',{username:username,hash:hash},{post:true,retry:3});
       }).then(function(res){
-        Rate.record('login',res.ok);
         if(!res.ok) return {ok:false,error:'Неверное имя или пароль'};
         Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
         Session.flushNow();
         return {ok:true};
       });
     }).catch(function(){
-      Rate.record('login',false);
       return {ok:false,error:'Нет связи с сервером'};
     });
   }
@@ -2880,8 +2853,8 @@ $('authForm').addEventListener('submit', function(e){
       $('modalMsg').textContent='✓ Успех'; $('modalMsg').className='modal-msg ok';
       setTimeout(function(){
         closeModal(); _lastAuthRenderKey=''; renderAuthState(true); switchView('home'); Online.beat();
-        setTimeout(silentSync, 800);
-      }, 400);
+        setTimeout(silentSync, 500);
+      }, 300);
     } else {
       Sound.error();
       $('modalMsg').textContent='✗ '+res.error; $('modalMsg').className='modal-msg err';
@@ -3125,7 +3098,6 @@ function resetWheelRotor(){
 }
 
 $('wheelSpinBtn').onclick=function(){
-  // Жёсткая защита: если предыдущий спин завис дольше WHEEL_SPIN_MS + 3 сек — сбрасываем
   if(wheelSpinning && wheelLastSpinAt && (nowMs() - wheelLastSpinAt) > (WHEEL_SPIN_MS + 3000)){
     wheelSpinning=false; wheelSpinLock=false;
     if(wheelTickInterval){ clearInterval(wheelTickInterval); wheelTickInterval=null; }
@@ -3158,7 +3130,7 @@ $('wheelSpinBtn').onclick=function(){
   Session.patchProfile({monkeys: bal-bet});
   updateWheelBalance(); updateMonkeysWidget();
 
-  api('spinWheel',{username:s.username,token:s.token,bet:bet},{post:true,retry:2}).then(function(res){
+  api('spinWheel',{username:s.username,token:s.token,bet:bet},{post:true,retry:3}).then(function(res){
     if(!res.ok){
       wheelSpinning=false; wheelSpinLock=false;
       $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
@@ -3198,30 +3170,19 @@ $('wheelSpinBtn').onclick=function(){
       var winAmount=res.winAmount||0;
       var betVal=res.bet||bet;
 
-      api('finishWheel',{username:s.username,token:s.token,winAmount:winAmount,segType:seg.type,mult:seg.mult,bet:betVal},{post:true,retry:2}).then(function(fin){
-        if(fin.ok){
-          var cur=Session.get();
-          var patch={monkeys:fin.monkeysFinal};
-          if(winAmount>0) patch.wins=(cur.profile.wins||0)+1;
-          Session.patchProfile(patch);
-          updateWheelBalance(); updateMonkeysWidget();
-          _lastAuthRenderKey='';
-          rIC(function(){ renderAuthState(); });
-        } else {
-          silentSync();
-        }
-        // ГАРАНТИРОВАННЫЙ сброс флагов
-        wheelSpinning=false; wheelSpinLock=false;
-        $('wheelSpinBtn').disabled=false;
-        $('wheelSpinBtn').textContent='🎡 Крутить колесо';
-        TimerUI.stop('wheelSpinTimer');
-        loadWheelHistory();
-      }).catch(function(){
-        wheelSpinning=false; wheelSpinLock=false;
-        $('wheelSpinBtn').disabled=false;
-        $('wheelSpinBtn').textContent='🎡 Крутить колесо';
-        TimerUI.stop('wheelSpinTimer');
-      });
+      // Финализация: сервер уже вернул monkeysFinal
+      var finalMonkeys = (typeof res.monkeysFinal === 'number') ? res.monkeysFinal : (bal - betVal + winAmount);
+      Session.patchProfile({monkeys: finalMonkeys});
+      if(winAmount>0) Session.patchProfile({wins: (s.profile.wins||0)+1});
+      updateWheelBalance(); updateMonkeysWidget();
+      _lastAuthRenderKey='';
+      rIC(function(){ renderAuthState(); });
+
+      wheelSpinning=false; wheelSpinLock=false;
+      $('wheelSpinBtn').disabled=false;
+      $('wheelSpinBtn').textContent='🎡 Крутить колесо';
+      TimerUI.stop('wheelSpinTimer');
+      loadWheelHistory();
 
       var profit=winAmount-betVal;
       if(seg.type==='green'){
@@ -3490,42 +3451,23 @@ $('dailyBtn').onclick=function(){
   if(last && now - last < dayMs) return;
 
   _dailyBusy = true;
-  var r = Math.random()*100;
-  var reward;
-  if (r<50) reward = 50 + Math.floor(Math.random()*51);
-  else if (r<75) reward = 100 + Math.floor(Math.random()*401);
-  else if (r<80) reward = 500 + Math.floor(Math.random()*501);
-  else reward = 5000 + Math.floor(Math.random()*1001);
-
-  var oldMonkeys = p.monkeys||0;
-  var oldLast = last;
-  var newMonkeys = oldMonkeys + reward;
-
-  Session.patchProfile({monkeys: newMonkeys, lastDaily: now});
-  updateMonkeysWidget();
-  bumpMonkeys();
-  showReward(reward);
-  Sound.reward();
-
-  api('claimDaily',{username:s.username,token:s.token},{post:true,retry:2}).then(function(res){
+  api('claimDaily',{username:s.username,token:s.token},{post:true,retry:3}).then(function(res){
     _dailyBusy = false;
     if(res && res.ok){
       Session.patchProfile({monkeys:res.monkeys, lastDaily:res.nextAt-24*60*60*1000});
       updateMonkeysWidget();
+      bumpMonkeys();
+      showReward(res.reward);
+      Sound.reward();
     } else if(res && res.error==='Bad token'){
-      Session.patchProfile({monkeys: oldMonkeys, lastDaily: oldLast});
-      updateMonkeysWidget();
       handleBadToken();
-    } else if(res && res.error){
-      if(res.nextAt){
-        Session.patchProfile({lastDaily: res.nextAt-24*60*60*1000});
-        updateMonkeysWidget();
-      } else {
-        Session.patchProfile({monkeys: oldMonkeys, lastDaily: oldLast});
-        updateMonkeysWidget();
-      }
+    } else if(res && res.nextAt){
+      Session.patchProfile({lastDaily: res.nextAt-24*60*60*1000});
+      updateMonkeysWidget();
+    } else {
+      Sound.error();
     }
-  }).catch(function(){ _dailyBusy = false; });
+  }).catch(function(){ _dailyBusy = false; Sound.error(); });
 };
 function showReward(amount){
   $('rpAmount').textContent='+'+amount;
@@ -4335,10 +4277,8 @@ function renderSiteExtra(){
     '<div class="section-sub">Прочие настройки</div>'+
     '<div class="toggle-row" style="margin-bottom:10px;"><div><div class="tr-title">Звуки на сайте</div><div class="tr-sub">Клики, успех, ошибки</div></div>'+
       '<button class="toggle '+(soundOn?'on':'')+'" id="toggleSound"></button></div>'+
-    '<div class="toggle-row" style="margin-bottom:10px;"><div><div class="tr-title">⚡ Режим для слабых устройств</div><div class="tr-sub">Отключает 90% анимаций, blur, шейдеры и фоновые эффекты.</div></div>'+
-      '<button class="toggle '+(lpOn?'on':'')+'" id="toggleLowPerf"></button></div>'+
-    '<div class="toggle-row"><div><div class="tr-title">Сменить тему</div><div class="tr-sub">Открой вкладку «Темы»</div></div>'+
-      '<button class="btn btn-ghost" id="openThemesBtn">Открыть</button></div>';
+    '<div class="toggle-row"><div><div class="tr-title">⚡ Режим для слабых устройств</div><div class="tr-sub">Отключает 90% анимаций, blur, шейдеры и фоновые эффекты.</div></div>'+
+      '<button class="toggle '+(lpOn?'on':'')+'" id="toggleLowPerf"></button></div>';
   $('toggleSound').onclick=function(){
     var on=!$('toggleSound').classList.contains('on');
     $('toggleSound').classList.toggle('on',on);
@@ -4356,7 +4296,6 @@ function renderSiteExtra(){
     }
     Sound.click();
   };
-  $('openThemesBtn').onclick=function(){ renderSiteSection('themes'); };
 }
 
 /* ========== SHOP ========== */
@@ -4532,7 +4471,7 @@ function buyItem(kind, id, price){
   if(kind==='emoji') payload.emoji=id;
   else if(kind==='theme') payload.theme=id;
   else payload.frame=id;
-  api(action, payload, {post:true,retry:2}).then(function(r){
+  api(action, payload, {post:true,retry:3}).then(function(r){
     TimerUI.stop('siteSettingsTimer');
     if(r.ok){
       var patch = {monkeys:r.monkeys};
@@ -4693,7 +4632,7 @@ function buyCases(){
   if((p.monkeys||0) < total){ Sound.error(); return; }
   TimerUI.start('caseBuyTimer','⏳');
   $('caseOpenFoot').innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Покупка... <span id="caseBuyTimer" class="timer-inline"></span></div>';
-  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:2}).then(function(r){
+  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:3}).then(function(r){
     TimerUI.stop('caseBuyTimer');
     if(r.ok){
       Session.patchProfile({monkeys:r.monkeys, cases:r.cases||{}});
@@ -4729,7 +4668,7 @@ function openCasesFromInventory(qty){
   if(wrap) wrap.style.display='block';
   var resWrap = $('caseResultWrap');
   if(resWrap) resWrap.innerHTML='';
-  api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:2}).then(function(r){
+  api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:3}).then(function(r){
     TimerUI.stop('caseOpenTimer');
     if(!r.ok){
       Sound.error();
@@ -4740,7 +4679,6 @@ function openCasesFromInventory(qty){
       return;
     }
     animateCaseRoulette(r.results, function(){
-      // ИСПРАВЛЕНО: применяем owned-списки, чтобы предмет сразу стал доступен
       Session.patchProfile({
         monkeys: r.monkeys,
         cases: r.cases || {},
@@ -5699,7 +5637,7 @@ $('notEnoughOverlay').onclick=function(e){ if(e.target===$('notEnoughOverlay')) 
   switchView('home');
   ensureAbyssBolts();
   if(document.body.classList.contains('theme-divine')) spawnDivineWeather();
-  setTimeout(silentSync, 2000);
+  setTimeout(silentSync, 1500);
   setInterval(function(){ rIC(silentSync); }, 60000);
   window.addEventListener('pagehide', function(){ Session.flushNow(); Online.stop(); });
   setInterval(function(){ rIC(refreshVisibleStatuses); }, 30000);

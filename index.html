@@ -1221,7 +1221,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .inv-customize-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;margin-top:6px;border-radius:14px;border:1px dashed var(--border2);background:var(--bg2);color:var(--muted);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease)}
 .inv-customize-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg);transform:translateY(-2px)}
 .inv-customize-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-</style>
+img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}} </style>
 </head>
 <body class="theme-dark">
 
@@ -2144,40 +2144,37 @@ var OnlineUsers = {
 };
 
 var RequestQueue = (function(){
-  var queue = [], running = false;
+  var queue = [], active = 0, MAX = 4;
   function run(){
-    if(running || !queue.length) return;
-    running = true;
-    var item = queue.shift();
-    var timeout = setTimeout(function(){
-      running = false;
-      item.resolve({ok:false, error:'queue timeout'});
-      setTimeout(run, 0);
-    }, QUEUE_TIMEOUT);
-    item.fn().then(function(res){
-      clearTimeout(timeout);
-      running = false;
-      item.resolve(res);
-      setTimeout(run, 0);
-    }).catch(function(err){
-      clearTimeout(timeout);
-      running = false;
-      item.resolve({ok:false, error:(err && err.message) || 'queue error'});
-      setTimeout(run, 0);
-    });
-  }
-  return {
-    push:function(fn){
-      return new Promise(function(resolve){
-        queue.push({fn:fn, resolve:resolve});
-        run();
-      });
+    while(active < MAX && queue.length){
+      active++;
+      (function(item){
+        var settled=false;
+        function finish(res){
+          if(settled) return; settled=true;
+          active--; item.resolve(res); setTimeout(run,0);
+        }
+        var timeout=setTimeout(function(){
+          finish({ok:false,error:'queue timeout',retryable:true});
+        }, QUEUE_TIMEOUT);
+        item.fn().then(function(res){
+          clearTimeout(timeout); finish(res);
+        }).catch(function(err){
+          clearTimeout(timeout);
+          finish({ok:false,error:(err&&err.message)||'queue error'});
+        });
+      })(queue.shift());
     }
-  };
+  }
+  return { push:function(fn){
+    return new Promise(function(resolve){ queue.push({fn:fn,resolve:resolve}); run(); });
+  }};
 })();
 
 var _cbId = 0;
 var _cache = Object.create(null);
+var _inflight = Object.create(null);
+var _mutationEpoch = 0;
 function _cacheKey(action,payload){ return action+'|'+JSON.stringify(payload); }
 function _cacheGet(key,ttl){
   var hit=_cache[key];
@@ -2189,82 +2186,73 @@ function _cacheDelPrefix(prefix){ for(var k in _cache){ if(k.indexOf(prefix)===0
 
 function _jsonpOnce(action, payload){
   return new Promise(function(resolve){
-    var cb='zvc_'+(++_cbId)+'_'+(nowMs()%100000);
-    var done=false;
-    var timer=setTimeout(function(){ finish({ok:false,error:'timeout'}); }, FETCH_TIMEOUT);
+    var cb='zvc_'+(++_cbId)+'_'+(nowMs()%100000), done=false;
+    var timer=setTimeout(function(){ finish({ok:false,error:'timeout',retryable:true}); }, FETCH_TIMEOUT);
     function finish(data){
-      if(done) return; done=true;
-      clearTimeout(timer);
+      if(done) return; done=true; clearTimeout(timer);
       try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
-      var el=document.getElementById(cb+'_s');
-      if(el && el.parentNode) el.parentNode.removeChild(el);
+      var el=document.getElementById(cb+'_s'); if(el&&el.parentNode) el.parentNode.removeChild(el);
       resolve(data);
     }
     window[cb]=finish;
     var q=['action='+encodeURIComponent(action)];
     for(var k in payload){
-      var v=payload[k];
-      if(v===null||v===undefined) continue;
+      var v=payload[k]; if(v===null||v===undefined) continue;
       q.push(encodeURIComponent(k)+'='+encodeURIComponent(v));
     }
-    q.push('callback='+cb);
-    q.push('_t='+nowMs());
-    var s=document.createElement('script');
-    s.id=cb+'_s'; s.async=true;
-    s.src=API_URL+'?'+q.join('&');
-    s.onerror=function(){ finish({ok:false,error:'network'}); };
+    q.push('callback='+cb); q.push('_t='+nowMs());
+    var s=document.createElement('script'); s.id=cb+'_s'; s.async=true;
+    s.src=API_URL+'?'+q.join('&'); s.onerror=function(){ finish({ok:false,error:'network',retryable:true}); };
     (document.head||document.body).appendChild(s);
   });
 }
-
 function _postOnce(action, payload){
   return new Promise(function(resolve){
-    var ctrl = ('AbortController' in window) ? new AbortController() : null;
-    var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, POST_TIMEOUT);
-    var body = JSON.stringify(Object.assign({action:action}, payload));
-    fetch(API_URL, {
-      method: 'POST', mode: 'cors', redirect: 'follow',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: body, signal: ctrl ? ctrl.signal : undefined
-    }).then(function(r){ return r.text(); })
-      .then(function(txt){
-        clearTimeout(timer);
-        try { resolve(JSON.parse(txt)); }
-        catch(e){ resolve({ ok:false, error:'bad json' }); }
-      })
-      .catch(function(){
-        clearTimeout(timer);
-        resolve({ ok:false, error:'network' });
-      });
+    var ctrl=('AbortController' in window)?new AbortController():null, finished=false;
+    var timer=setTimeout(function(){
+      if(ctrl) try{ctrl.abort();}catch(e){}
+      if(!finished){ finished=true; resolve({ok:false,error:'timeout',retryable:true}); }
+    },POST_TIMEOUT);
+    var body=JSON.stringify(Object.assign({action:action},payload));
+    fetch(API_URL,{method:'POST',mode:'cors',redirect:'follow',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},body:body,
+      signal:ctrl?ctrl.signal:undefined})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+    .then(function(txt){
+      if(finished)return; finished=true; clearTimeout(timer);
+      try{resolve(JSON.parse(txt));}catch(e){resolve({ok:false,error:'bad json',retryable:true});}
+    }).catch(function(err){
+      if(finished)return; finished=true; clearTimeout(timer);
+      resolve({ok:false,error:(err&&err.name==='AbortError')?'timeout':'network',retryable:true});
+    });
   });
 }
-
-function api(action, payload, opts){
-  payload = payload||{}; opts = opts||{};
-  var usePost = !!opts.post;
-  var key = (!usePost && opts.cache) ? _cacheKey(action,payload) : null;
+function api(action,payload,opts){
+  payload=payload||{}; opts=opts||{};
+  var usePost=!!opts.post;
+  var key=(!usePost&&opts.cache)?_cacheKey(action,payload):null;
   if(key){
-    var hit=_cacheGet(key, opts.ttl);
-    if(hit!==null) return Promise.resolve(hit);
+    var hit=_cacheGet(key,opts.ttl); if(hit!==null) return Promise.resolve(hit);
+    if(_inflight[key]) return _inflight[key];
   }
-  var attempts = opts.retry ? (opts.retry|0) : 1;
+  var attempts=opts.retry?(opts.retry|0):1;
   function tryOnce(n){
-    var pr = usePost ? _postOnce(action, payload) : _jsonpOnce(action, payload);
+    var pr=usePost?_postOnce(action,payload):_jsonpOnce(action,payload);
     return pr.then(function(res){
-      if(res && res.ok === false && (res.error === 'network' || res.error === 'timeout' || res.error === 'bad json') && n < attempts){
-        return new Promise(function(r){ setTimeout(r, 300*n); }).then(function(){ return tryOnce(n+1); });
+      if(res&&res.ok===false&&res.retryable&&n<attempts){
+        return new Promise(function(r){setTimeout(r,Math.min(1500,250*n));}).then(function(){return tryOnce(n+1);});
       }
       return res;
     });
   }
-  var promise;
-  if(usePost){
-    promise = RequestQueue.push(function(){ return tryOnce(1); });
-  } else {
-    promise = tryOnce(1);
+  var promise=usePost?RequestQueue.push(function(){return tryOnce(1);}):tryOnce(1);
+  if(key){
+    _inflight[key]=promise;
+    promise=promise.then(function(res){delete _inflight[key];if(res&&res.ok)_cacheSet(key,res);return res;},
+                         function(err){delete _inflight[key];throw err;});
   }
   return promise.then(function(res){
-    if(key && res && res.ok) _cacheSet(key, res);
+    if(usePost&&action!=='getMyState'&&action!=='validateToken'&&res&&res.ok) _mutationEpoch++;
     return res;
   });
 }
@@ -2323,20 +2311,20 @@ function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.tok
 function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
 function silentSync(){
-  var s = Session.get();
-  if(!s || !s.token) return;
-  api('getMyState',{username:s.username,token:s.token},{post:true}).then(function(res){
-    if(res && res.ok && res.profile){
+  var s=Session.get();
+  if(!s||!s.token) return;
+  var epochAtStart=_mutationEpoch, usernameAtStart=s.username;
+  api('getMyState',{username:s.username,token:s.token},{post:true,retry:1}).then(function(res){
+    if(epochAtStart!==_mutationEpoch) return;
+    var current=Session.get();
+    if(!current||current.username!==usernameAtStart) return;
+    if(res&&res.ok&&res.profile){
       Session.patchProfile(res.profile);
       _lastAuthRenderKey='';
       rIC(function(){
-        renderAuthState();
-        updateMonkeysWidget();
-        applyTheme(res.profile.theme||'dark');
+        renderAuthState(); updateMonkeysWidget(); applyTheme(res.profile.theme||'dark');
       });
-    } else if(res && res.error === 'Bad token'){
-      handleBadToken();
-    }
+    } else if(res&&res.error==='Bad token') handleBadToken();
   }).catch(function(){});
 }
 
@@ -5585,7 +5573,6 @@ $('notEnoughOverlay').onclick=function(e){ if(e.target===$('notEnoughOverlay')) 
 /* ========== INIT ========== */
 (function init(){
   LowPerf.apply();
-  initWheelIfNeeded();
   renderAuthState(true);
   Online.start();
   switchView('home');

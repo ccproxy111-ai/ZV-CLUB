@@ -196,6 +196,9 @@ body.logged-in .sidebar{display:flex}
 .sidebar-item.shop{border-color:rgba(251,191,36,.35)}
 .sidebar-item.shop:hover{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.6);color:#fbbf24}
 .sidebar-item.shop.active{background:rgba(251,191,36,.18);border-color:rgba(251,191,36,.6);color:#fbbf24}
+.sidebar-item.shooter{border-color:rgba(239,68,68,.4)}
+.sidebar-item.shooter:hover{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.7);color:#ff6b6b}
+.sidebar-item.shooter.active{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.8);color:#ff6b6b}
 
 .user-wrap{position:relative}
 .avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:border-color .3s var(--ease),background .3s var(--ease);color:var(--fg)}
@@ -315,7 +318,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .modal-overlay{position:fixed;inset:0;background:rgba(8,8,10,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
 .modal-overlay.show{display:flex;animation:fadeIn .35s var(--ease)}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-#unsavedOverlay,#respectOverlay,#buyOverlay,#deleteOverlay,#earnMathExitOverlay,#earnChoiceExitOverlay,#earnClickerExitOverlay,#tokenExpiredOverlay,#logsOverlay,#notEnoughOverlay,#caseOpenOverlay{z-index:600}
+#unsavedOverlay,#respectOverlay,#buyOverlay,#deleteOverlay,#earnMathExitOverlay,#earnChoiceExitOverlay,#earnClickerExitOverlay,#tokenExpiredOverlay,#logsOverlay,#notEnoughOverlay,#caseOpenOverlay,#shooterExitOverlay,#shooterStartOverlay{z-index:600}
 #buyOverlay{z-index:700} 
 
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:30px 28px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative;animation:modalIn .5s var(--ease-out)}
@@ -336,6 +339,8 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .confirm-icon.blue svg{stroke:#7c5cff}
 .confirm-icon.warn{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)}
 .confirm-icon.warn svg{stroke:#fbbf24}
+.confirm-icon.green{background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.3)}
+.confirm-icon.green svg{stroke:#4ade80}
 .confirm-title{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--fg)}
 .confirm-text{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:22px}
 .confirm-actions{display:flex;gap:10px}
@@ -783,6 +788,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .earn-card.math{background:linear-gradient(135deg,rgba(34,211,238,.16),var(--bg2),var(--bg3))}
 .earn-card.choice{background:linear-gradient(135deg,rgba(251,191,36,.16),var(--bg2),var(--bg3))}
 .earn-card.clicker{background:linear-gradient(135deg,rgba(74,222,128,.16),var(--bg2),var(--bg3))}
+.earn-card.shooter{background:linear-gradient(135deg,rgba(239,68,68,.16),var(--bg2),var(--bg3))}
 
 .earn-play{display:none;flex-direction:column;gap:18px;width:100%;max-width:720px;margin:0 auto;animation:fadeUp .5s var(--ease)}
 .earn-play.active{display:flex}
@@ -958,6 +964,36 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .case-result-card .crc-big{font-size:44px;line-height:1}
 .case-result-card .crc-name{font-size:15px;font-weight:900;color:var(--fg)}
 .case-result-card .crc-cashback{font-size:12px;color:#fbbf24;font-weight:700}
+
+/* ===== SHOOTER ===== */
+#shooterOverlay{position:fixed;inset:0;background:#000;z-index:9999;display:none;overflow:hidden;cursor:none}
+#shooterOverlay.show{display:block}
+#shooterCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.shooter-crosshair{position:absolute;width:22px;height:22px;pointer-events:none;transform:translate(-50%,-50%);z-index:10}
+.shooter-crosshair::before,.shooter-crosshair::after{content:'';position:absolute;background:rgba(255,50,50,.85);box-shadow:0 0 6px rgba(255,0,0,.9)}
+.shooter-crosshair::before{left:50%;top:0;width:2px;height:100%;transform:translateX(-50%)}
+.shooter-crosshair::after{top:50%;left:0;height:2px;width:100%;transform:translateY(-50%)}
+.shooter-crosshair .dot{position:absolute;left:50%;top:50%;width:4px;height:4px;background:rgba(255,50,50,1);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 8px rgba(255,0,0,1)}
+.shooter-hud{position:absolute;top:0;left:0;right:0;padding:20px 30px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:20;font-family:'Courier New',monospace;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.9)}
+.shooter-hud-left{display:flex;flex-direction:column;gap:4px}
+.shooter-hud-right{text-align:right;display:flex;flex-direction:column;gap:4px}
+.shooter-hud .hud-label{font-size:11px;letter-spacing:2px;color:#ff6b6b;text-transform:uppercase;font-weight:700}
+.shooter-hud .hud-value{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}
+.shooter-timer{font-size:34px;font-weight:900;color:#fbbf24;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(251,191,36,.9)}
+.shooter-timer.danger{color:#ff3333;animation:shooterTimerPulse .5s ease infinite}
+@keyframes shooterTimerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.shooter-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:12px;letter-spacing:1px;z-index:20;pointer-events:none;font-family:'Courier New',monospace}
+.shooter-damage-flash{position:absolute;inset:0;background:radial-gradient(circle,transparent 40%,rgba(255,0,0,.4) 100%);opacity:0;pointer-events:none;z-index:5;transition:opacity .15s}
+.shooter-damage-flash.show{opacity:1}
+.shooter-muzzle{position:absolute;bottom:8%;right:12%;width:180px;height:120px;pointer-events:none;z-index:8;opacity:0;transition:opacity .04s}
+.shooter-muzzle.flash{opacity:1}
+.shooter-muzzle::before{content:'';position:absolute;right:20px;bottom:20px;width:100px;height:100px;background:radial-gradient(circle,rgba(255,220,100,1),rgba(255,120,0,.6),transparent 70%);border-radius:50%}
+.shooter-gun{position:absolute;bottom:0;right:3%;width:280px;height:200px;pointer-events:none;z-index:7;transform-origin:bottom right;transition:transform .06s;filter:drop-shadow(0 0 12px rgba(0,0,0,.9))}
+.shooter-gun.recoil{transform:translate(6px,-10px) rotate(-4deg)}
+.shooter-hits{position:absolute;top:80px;right:30px;display:flex;flex-direction:column;gap:4px;pointer-events:none;z-index:20;align-items:flex-end}
+.shooter-hit{font-family:'Courier New',monospace;font-size:16px;font-weight:900;color:#ffcc00;text-shadow:0 2px 6px rgba(0,0,0,.9);animation:hitPop .8s ease forwards;opacity:1}
+@keyframes hitPop{0%{transform:translateX(20px) scale(.6);opacity:0}20%{transform:translateX(0) scale(1.2);opacity:1}100%{transform:translateY(-40px);opacity:0}}
+@media(max-width:640px){.shooter-hud{padding:14px 16px}.shooter-hud .hud-value{font-size:20px}.shooter-timer{font-size:24px}.shooter-gun{width:180px;height:130px}}
 
 @media(max-width:1000px){
   .wheel-layout{grid-template-columns:1fr}
@@ -1333,7 +1369,7 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
         </div>
         <div class="dash-card" data-action="earn">
           <h3>💰 Заработок обезьян</h3>
-          <p>Три режима: математика, 1 или 2, кликер. Зарабатывай 🐵 без риска.</p>
+          <p>Четыре режима: математика, 1 или 2, кликер, стрельба. Зарабатывай 🐵 без риска.</p>
         </div>
         <div class="dash-card" data-action="wheel">
           <h3>🎡 Колесо Фортуны</h3>
@@ -1427,6 +1463,13 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
           <div class="ec-title">Кликер</div>
           <div class="ec-sub">Жми и зарабатывай</div>
           <div class="ec-desc">Каждый клик — +1 🐵. Есть микро-задержка и антибот-проверка каждые 80 нажатий.</div>
+        </div>
+        <div class="earn-card shooter" data-mode="shooter">
+          <div class="ec-badge">FPS</div>
+          <div class="ec-ico">🎯</div>
+          <div class="ec-title">Стрельба</div>
+          <div class="ec-sub">Тренируй аим</div>
+          <div class="ec-desc">6 динамичных манекенов. На убийство пачки — 5 секунд. За каждого: +1–3 🐵. Управление: мышь — камера, ЛКМ — выстрел, U — курсор, L — выход.</div>
         </div>
       </div>
 
@@ -1746,6 +1789,34 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
   </div>
 </div>
 
+<div class="modal-overlay" id="shooterStartOverlay">
+  <div class="modal" style="max-width:400px;">
+    <div class="confirm-body">
+      <div class="confirm-icon green"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="confirm-title">Начать стрельбу?</div>
+      <div class="confirm-text">Управление: мышь — камера, ЛКМ — выстрел, <b>U</b> — разблокировать курсор, <b>L</b> — выход.<br>6 манекенов, 5 секунд на пачку. За убийство: +1–3 🐵.</div>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="shooterStartNo">Отмена</button>
+        <button class="btn btn-primary" id="shooterStartYes">🎯 Начать</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="shooterExitOverlay">
+  <div class="modal" style="max-width:400px;">
+    <div class="confirm-body">
+      <div class="confirm-icon warn"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+      <div class="confirm-title">Выйти из стрельбы?</div>
+      <div class="confirm-text">Заработанные 🐵 останутся у тебя.</div>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="shooterExitNo">Продолжить</button>
+        <button class="btn btn-danger" id="shooterExitYes">Выйти</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="logsOverlay">
   <div class="modal logs-modal">
     <button class="modal-close" id="logsClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -1914,6 +1985,40 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
   </div>
 </div>
 
+<div id="shooterOverlay">
+  <canvas id="shooterCanvas"></canvas>
+  <div class="shooter-crosshair" id="shooterCrosshair" style="left:50%;top:50%"><span class="dot"></span></div>
+  <div class="shooter-damage-flash" id="shooterFlash"></div>
+  <div class="shooter-gun" id="shooterGun">
+    <svg viewBox="0 0 280 200">
+      <rect x="40" y="80" width="180" height="40" rx="8" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+      <rect x="200" y="88" width="60" height="24" rx="4" fill="#0d0d0d" stroke="#222" stroke-width="2"/>
+      <rect x="20" y="95" width="50" height="20" rx="4" fill="#222"/>
+      <rect x="60" y="120" width="60" height="70" rx="6" fill="#151515" stroke="#333" stroke-width="2"/>
+      <rect x="120" y="100" width="40" height="60" rx="6" fill="#111" stroke="#2a2a2a" stroke-width="2"/>
+      <circle cx="230" cy="100" r="8" fill="#333"/>
+      <rect x="225" y="90" width="6" height="20" fill="#444"/>
+    </svg>
+  </div>
+  <div class="shooter-muzzle" id="shooterMuzzle"></div>
+  <div class="shooter-hud">
+    <div class="shooter-hud-left">
+      <span class="hud-label">Score</span>
+      <span class="hud-value" id="shooterKills">0</span>
+      <span class="hud-label" style="margin-top:8px">Заработано</span>
+      <span class="hud-value" id="shooterEarned">0 🐵</span>
+    </div>
+    <div class="shooter-hud-right">
+      <span class="hud-label">Время</span>
+      <span class="shooter-timer" id="shooterTimer">5.0</span>
+      <span class="hud-label" style="margin-top:8px">Патроны</span>
+      <span class="hud-value" id="shooterAmmo">∞</span>
+    </div>
+  </div>
+  <div class="shooter-hits" id="shooterHits"></div>
+  <div class="shooter-hint">ЛКМ — выстрел · U — курсор · L — выход</div>
+</div>
+
 <input type="file" id="adminAvatarInput" accept="image/*" style="display:none">
 
 <script>
@@ -1930,6 +2035,8 @@ var THEME_PREVIEW_DURATION = 10;
 var CLICKER_ANTIBOT_MIN_DELAY = 80;
 var CLICKER_ANTIBOT_EVERY = 80;
 var CASE_PRICE = 750;
+var SHOOTER_PACK_TIME = 5000;
+var SHOOTER_DUMMIES = 6;
 
 var RARITY = {
   common:    { label:'Обычный',    cls:'common',    cashback:0.05 },
@@ -2035,20 +2142,22 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
+    ver:'BETA 0.26', cls:'v2', title:'Возврат анимаций + Стрельба',
+    items:[
+      { tag:'new', text:'Добавлен 4-й режим заработка — «Стрельба» (FPS).' },
+      { tag:'new', text:'6 динамичных манекенов, 5 секунд на пачку, +1–3 🐵 за убийство.' },
+      { tag:'fix', text:'Возвращены все анимации: прокрутка кейсов, колесо, кнопки, фоны.' },
+      { tag:'fix', text:'Восстановлены анимированные фоны (Бездна, Обезьяны, Божественная, RGB).' },
+      { tag:'upd', text:'Сайт стал быстрее: оптимизация рендера и запросов.' }
+    ]
+  },
+  {
     ver:'BETA 0.25', cls:'v2', title:'Исправлен вход и пароли',
     items:[
       { tag:'fix', text:'Логин теперь работает надёжно: пароль хешируется на сервере.' },
       { tag:'fix', text:'Убрана зависимость от crypto.subtle — работает в любом браузере.' },
       { tag:'fix', text:'Смена пароля и удаление аккаунта работают корректно.' },
       { tag:'upd', text:'Скорость входа и регистрации увеличена.' }
-    ]
-  },
-  {
-    ver:'BETA 0.24', cls:'v2', title:'Фикс логина и колеса',
-    items:[
-      { tag:'fix', text:'Убрана блокировка после нескольких неудачных попыток входа.' },
-      { tag:'fix', text:'Ежедневный подарок теперь не откатывается и не зависает.' },
-      { tag:'fix', text:'Колесо Фортуны работает без рассинхрона баланса.' }
     ]
   }
 ];
@@ -2113,6 +2222,9 @@ var Sound = (function(){
     wheelJackpot:function(){tone(523,.08);setTimeout(function(){tone(659,.08);},80);setTimeout(function(){tone(784,.08);},160);setTimeout(function(){tone(1046,.12);},240);setTimeout(function(){tone(1318,.3);},360);},
     caseOpen:function(){tone(400,.05,'square',.03);},
     caseWin:function(legendary){ if(legendary){ this.wheelJackpot(); } else { this.reward(); } },
+    shoot:function(){ tone(180,.06,'square',.08); setTimeout(function(){tone(80,.1,'sawtooth',.1);},20); },
+    hit:function(){ tone(900,.05,'square',.06); setTimeout(function(){tone(1400,.08,'sine',.05);},40); },
+    reload:function(){ tone(300,.08,'square',.05); setTimeout(function(){tone(500,.06,'square',.05);},80); },
     setEnabled:function(on){enabled=on;localStorage.setItem('zv_sound',on?'on':'off');},
     isEnabled:function(){return enabled;}
   };
@@ -2376,7 +2488,7 @@ function passwordStrength(p){
   return Math.min(s,5);
 }
 
-/* ========== AUTH (пароль хешируется на сервере) ========== */
+/* ========== AUTH ========== */
 var Auth = {
   register:function(username,password,password2){
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
@@ -4759,6 +4871,7 @@ function closeEarnMode(){
   if(earnMode==='math') stopMath();
   if(earnMode==='choice') stopChoice();
   if(earnMode==='clicker') stopClicker();
+  if(earnMode==='shooter') stopShooter();
   earnMode=null;
   ['earnPlayMath','earnPlayChoice','earnPlayClicker'].forEach(function(id){ var el=$(id); if(el) el.classList.remove('active'); });
   var grid=$('earnGrid'); if(grid) grid.style.display='';
@@ -4769,6 +4882,7 @@ function openEarnMode(mode){
   if(mode==='math'){ $('earnPlayMath').classList.add('active'); renderMathStart(); }
   if(mode==='choice'){ $('earnPlayChoice').classList.add('active'); startChoice(); }
   if(mode==='clicker'){ $('earnPlayClicker').classList.add('active'); startClicker(); }
+  if(mode==='shooter'){ $('shooterStartOverlay').classList.add('show'); }
 }
 document.querySelectorAll('#earnGrid .earn-card').forEach(function(card){
   card.onclick=function(){ Sound.click(); openEarnMode(card.dataset.mode); };
@@ -5009,6 +5123,522 @@ $('clickerAntibotBtn').onclick=function(){
   $('clickerAntibot').classList.remove('show');
   Sound.success();
 };
+
+/* ========== SHOOTER ========== */
+var shooterState = {
+  active: false,
+  canvas: null, ctx: null,
+  dummies: [],
+  kills: 0, earned: 0, totalEarned: 0,
+  packTimer: 0, packTime: SHOOTER_PACK_TIME,
+  mouseX: 0, mouseY: 0,
+  yaw: 0, pitch: 0,
+  locked: true,
+  lastShot: 0,
+  needsNewPack: false,
+  rafId: 0,
+  lastFrame: 0,
+  recoilT: 0,
+  particles: [],
+  skyGrad: null,
+  floorGrad: null,
+  dummyPool: [],
+  drawScale: 1, drawW: 0, drawH: 0
+};
+
+function openShooter(){
+  $('shooterStartOverlay').classList.remove('show');
+  Sound.click();
+  var s = Session.get();
+  if(!s || !s.token){ Sound.error(); return; }
+
+  shooterState.active = true;
+  shooterState.kills = 0;
+  shooterState.earned = 0;
+  shooterState.totalEarned = 0;
+  shooterState.packTimer = 0;
+  shooterState.packTime = SHOOTER_PACK_TIME;
+  shooterState.dummies = [];
+  shooterState.needsNewPack = true;
+  shooterState.yaw = 0;
+  shooterState.pitch = 0;
+  shooterState.locked = true;
+  shooterState.particles = [];
+  shooterState.recoilT = 0;
+
+  $('shooterOverlay').classList.add('show');
+  $('shooterKills').textContent = '0';
+  $('shooterEarned').textContent = '0 🐵';
+  $('shooterTimer').textContent = (SHOOTER_PACK_TIME/1000).toFixed(1);
+  $('shooterTimer').classList.remove('danger');
+  $('shooterHits').innerHTML = '';
+
+  var canvas = $('shooterCanvas');
+  shooterState.canvas = canvas;
+  shooterState.ctx = canvas.getContext('2d');
+  resizeShooterCanvas();
+  window.addEventListener('resize', resizeShooterCanvas);
+
+  buildShooterGradients();
+  spawnDummyPack();
+
+  if(canvas.requestPointerLock && shooterState.locked){
+    try { canvas.requestPointerLock(); } catch(e){}
+  }
+
+  document.addEventListener('mousemove', shooterMouseMove);
+  document.addEventListener('mousedown', shooterMouseDown);
+  document.addEventListener('keydown', shooterKeyDown);
+  document.addEventListener('pointerlockchange', shooterPointerLockChange);
+
+  shooterState.lastFrame = performance.now();
+  shooterState.rafId = requestAnimationFrame(shooterLoop);
+}
+
+function resizeShooterCanvas(){
+  var canvas = shooterState.canvas;
+  if(!canvas) return;
+  var dpr = Math.min(window.devicePixelRatio||1, 1.5);
+  var w = window.innerWidth, h = window.innerHeight;
+  canvas.width = Math.floor(w*dpr);
+  canvas.height = Math.floor(h*dpr);
+  canvas.style.width = w+'px';
+  canvas.style.height = h+'px';
+  var ctx = shooterState.ctx;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  shooterState.drawW = w;
+  shooterState.drawH = h;
+  shooterState.drawScale = Math.min(w,h) / 720;
+  buildShooterGradients();
+}
+
+function buildShooterGradients(){
+  var ctx = shooterState.ctx;
+  if(!ctx) return;
+  var w = shooterState.drawW, h = shooterState.drawH;
+  var sky = ctx.createLinearGradient(0,0,0,h*0.55);
+  sky.addColorStop(0, '#0a0d1a');
+  sky.addColorStop(0.6, '#1a2035');
+  sky.addColorStop(1, '#2a3348');
+  shooterState.skyGrad = sky;
+
+  var floor = ctx.createLinearGradient(0,h*0.55,0,h);
+  floor.addColorStop(0, '#1a1d24');
+  floor.addColorStop(1, '#0a0b0f');
+  shooterState.floorGrad = floor;
+}
+
+function spawnDummyPack(){
+  var arr = shooterState.dummies;
+  arr.length = 0;
+  var W = shooterState.drawW, H = shooterState.drawH;
+  var horizon = H*0.55;
+  for(var i=0;i<SHOOTER_DUMMIES;i++){
+    var d = shooterState.dummyPool.pop() || {};
+    d.x = (Math.random()*0.9 + 0.05) * W;
+    d.y = horizon + Math.random()*(H*0.32) + 20;
+    d.vx = (Math.random()<0.5?-1:1) * (90 + Math.random()*180) * shooterState.drawScale;
+    d.vy = (Math.random()*80 - 40) * shooterState.drawScale;
+    d.w = 42*shooterState.drawScale + Math.random()*18*shooterState.drawScale;
+    d.h = d.w * 1.7;
+    d.hit = false;
+    d.hue = Math.random()<0.5 ? 0 : (Math.random()<0.5? 20 : 200);
+    d.spin = (Math.random()*2-1) * 2;
+    d.angle = 0;
+    d.spawn = performance.now();
+    d.life = 0;
+    arr.push(d);
+  }
+  shooterState.packTimer = 0;
+  shooterState.packTime = SHOOTER_PACK_TIME;
+}
+function spawnDummyPackDeferred(){
+  if(shooterState.needsNewPack){ return; }
+  shooterState.needsNewPack = true;
+}
+
+function shooterPointerLockChange(){
+  shooterState.locked = (document.pointerLockElement === shooterState.canvas);
+}
+
+function shooterKeyDown(e){
+  if(!shooterState.active) return;
+  var k = e.key.toLowerCase();
+  if(k==='l'){
+    e.preventDefault();
+    $('shooterExitOverlay').classList.add('show');
+    Sound.open();
+  } else if(k==='u'){
+    if(shooterState.locked && document.exitPointerLock){ document.exitPointerLock(); }
+  } else if(e.key==='Escape'){
+    if(shooterState.locked && document.exitPointerLock){ document.exitPointerLock(); }
+  }
+}
+
+function shooterMouseMove(e){
+  if(!shooterState.active) return;
+  if(shooterState.locked){
+    var sens = 0.0022;
+    shooterState.yaw += e.movementX * sens;
+    shooterState.pitch += e.movementY * sens;
+    var maxPitch = 0.35;
+    if(shooterState.pitch > maxPitch) shooterState.pitch = maxPitch;
+    if(shooterState.pitch < -maxPitch) shooterState.pitch = -maxPitch;
+    if(shooterState.yaw > 0.4) shooterState.yaw = 0.4;
+    if(shooterState.yaw < -0.4) shooterState.yaw = -0.4;
+  }
+  updateCrosshairPos();
+}
+function updateCrosshairPos(){
+  var ch = $('shooterCrosshair');
+  if(!ch) return;
+  ch.style.left = '50%';
+  ch.style.top = '50%';
+}
+
+function shooterMouseDown(e){
+  if(!shooterState.active) return;
+  if(!shooterState.locked){
+    if(shooterState.canvas.requestPointerLock){ try{ shooterState.canvas.requestPointerLock(); }catch(err){} }
+    return;
+  }
+  if(e.button !== 0) return;
+  var now = performance.now();
+  if(now - shooterState.lastShot < 90) return;
+  shooterState.lastShot = now;
+  fireShot();
+}
+
+function fireShot(){
+  Sound.shoot();
+  var gun = $('shooterGun');
+  if(gun){
+    gun.classList.remove('recoil');
+    void gun.offsetWidth;
+    gun.classList.add('recoil');
+    setTimeout(function(){ gun.classList.remove('recoil'); }, 70);
+  }
+  var muzzle = $('shooterMuzzle');
+  if(muzzle){
+    muzzle.classList.add('flash');
+    setTimeout(function(){ muzzle.classList.remove('flash'); }, 45);
+  }
+  shooterState.recoilT = 1;
+
+  var W = shooterState.drawW, H = shooterState.drawH;
+  var cx = W/2, cy = H/2;
+  var aimRadius = 14 * shooterState.drawScale;
+
+  var best = null, bestDist = Infinity;
+  for(var i=0;i<shooterState.dummies.length;i++){
+    var d = shooterState.dummies[i];
+    if(d.hit) continue;
+    var dx = d.x - cx;
+    var dy = d.y - (cy + d.h*0.15);
+    var dist = Math.sqrt(dx*dx+dy*dy);
+    var r = (d.w*0.65);
+    if(dist < r + aimRadius && dist < bestDist){
+      bestDist = dist;
+      best = d;
+    }
+  }
+  if(best){
+    best.hit = true;
+    var reward = 1 + Math.floor(Math.random()*3);
+    shooterState.kills++;
+    shooterState.earned += reward;
+    shooterState.totalEarned += reward;
+    $('shooterKills').textContent = shooterState.kills;
+    $('shooterEarned').textContent = shooterState.totalEarned + ' 🐵';
+    Sound.hit();
+    addHitIndicator(reward, best.x, best.y);
+    spawnHitParticles(best.x, best.y, best.hue);
+
+    var s = Session.get();
+    if(s && s.token){
+      Session.patchProfile({monkeys:(s.profile.monkeys||0)+reward});
+      updateMonkeysWidget();
+      api('shooterReward',{username:s.username,token:s.token,amount:reward},{post:true,retry:2}).then(function(r){
+        if(r && r.error==='Bad token') handleBadToken();
+      });
+    }
+
+    var anyAlive = false;
+    for(var j=0;j<shooterState.dummies.length;j++){ if(!shooterState.dummies[j].hit){ anyAlive=true; break; } }
+    if(!anyAlive){
+      spawnDummyPack();
+    }
+  }
+}
+
+function addHitIndicator(reward, x, y){
+  var box = $('shooterHits');
+  if(!box) return;
+  var el = document.createElement('div');
+  el.className = 'shooter-hit';
+  el.textContent = '+'+reward+' 🐵';
+  box.appendChild(el);
+  setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 800);
+  while(box.childNodes.length > 8){ box.removeChild(box.firstChild); }
+}
+
+function spawnHitParticles(x,y,hue){
+  var arr = shooterState.particles;
+  for(var i=0;i<8;i++){
+    arr.push({
+      x:x, y:y,
+      vx:(Math.random()*2-1)*180*shooterState.drawScale,
+      vy:(Math.random()*2-1)*180*shooterState.drawScale - 40,
+      life:1,
+      size: 2 + Math.random()*3,
+      color: hue===200 ? '#66ccff' : (hue===20 ? '#ffaa44' : '#ff4444')
+    });
+  }
+  if(arr.length > 120) arr.splice(0, arr.length-120);
+}
+
+function shooterLoop(ts){
+  if(!shooterState.active) return;
+  var dt = (ts - shooterState.lastFrame)/1000;
+  if(dt > 0.05) dt = 0.05;
+  shooterState.lastFrame = ts;
+
+  updateShooter(dt);
+  renderShooter();
+
+  shooterState.rafId = requestAnimationFrame(shooterLoop);
+}
+
+function updateShooter(dt){
+  var W = shooterState.drawW, H = shooterState.drawH;
+  var horizon = H*0.55;
+  var arr = shooterState.dummies;
+
+  var aliveCount = 0;
+  for(var i=0;i<arr.length;i++){
+    var d = arr[i];
+    if(d.hit){ d.life += dt; continue; }
+    aliveCount++;
+    d.x += d.vx*dt;
+    d.y += d.vy*dt;
+    if(d.x < d.w*0.5){ d.x = d.w*0.5; d.vx = Math.abs(d.vx); }
+    if(d.x > W - d.w*0.5){ d.x = W - d.w*0.5; d.vx = -Math.abs(d.vx); }
+    if(d.y < horizon - 10){ d.y = horizon - 10; d.vy = Math.abs(d.vy); }
+    if(d.y > H - d.h*0.5 - 10){ d.y = H - d.h*0.5 - 10; d.vy = -Math.abs(d.vy); }
+    d.angle += d.spin*dt;
+    if(Math.random() < 0.005){ d.vx += (Math.random()*2-1)*60*shooterState.drawScale; d.vy += (Math.random()*2-1)*60*shooterState.drawScale; }
+    var maxV = 380*shooterState.drawScale;
+    if(d.vx > maxV) d.vx = maxV; if(d.vx < -maxV) d.vx = -maxV;
+    if(d.vy > maxV) d.vy = maxV; if(d.vy < -maxV) d.vy = -maxV;
+  }
+
+  // remove dead
+  for(var k=arr.length-1;k>=0;k--){
+    if(arr[k].hit && arr[k].life > 0.6){
+      shooterState.dummyPool.push(arr[k]);
+      arr.splice(k,1);
+    }
+  }
+
+  if(arr.length === 0){
+    if(shooterState.needsNewPack){
+      shooterState.needsNewPack = false;
+      spawnDummyPack();
+    } else {
+      spawnDummyPack();
+    }
+  }
+
+  // pack timer
+  var alive = 0;
+  for(var a=0;a<arr.length;a++) if(!arr[a].hit) alive++;
+  if(alive === 0){
+    shooterState.packTimer = 0;
+    $('shooterTimer').textContent = (SHOOTER_PACK_TIME/1000).toFixed(1);
+    $('shooterTimer').classList.remove('danger');
+  } else {
+    shooterState.packTimer += dt;
+    var left = Math.max(0, SHOOTER_PACK_TIME/1000 - shooterState.packTimer);
+    $('shooterTimer').textContent = left.toFixed(1);
+    if(left <= 2) $('shooterTimer').classList.add('danger');
+    else $('shooterTimer').classList.remove('danger');
+    if(left <= 0){
+      // time ran out — reset kills? No, just respawn pack. But user said "на убийство есть 5 секунд" — miss means no reward, new pack.
+      spawnDummyPack();
+    }
+  }
+
+  // particles
+  for(var p=shooterState.particles.length-1;p>=0;p--){
+    var pt = shooterState.particles[p];
+    pt.x += pt.vx*dt;
+    pt.y += pt.vy*dt;
+    pt.vy += 500*shooterState.drawScale*dt;
+    pt.life -= dt*1.8;
+    if(pt.life <= 0) shooterState.particles.splice(p,1);
+  }
+
+  if(shooterState.recoilT > 0){
+    shooterState.recoilT -= dt*5;
+    if(shooterState.recoilT < 0) shooterState.recoilT = 0;
+  }
+}
+
+function renderShooter(){
+  var ctx = shooterState.ctx;
+  if(!ctx) return;
+  var W = shooterState.drawW, H = shooterState.drawH;
+
+  // sky
+  ctx.fillStyle = shooterState.skyGrad;
+  ctx.fillRect(0,0,W,H*0.55);
+
+  // floor
+  ctx.fillStyle = shooterState.floorGrad;
+  ctx.fillRect(0,H*0.55,W,H*0.45);
+
+  // horizon line
+  ctx.strokeStyle = 'rgba(120,140,200,.3)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(0, H*0.55);
+  ctx.lineTo(W, H*0.55);
+  ctx.stroke();
+
+  // grid on floor (subtle)
+  ctx.strokeStyle = 'rgba(80,100,160,.12)';
+  ctx.lineWidth = 1;
+  var horizon = H*0.55;
+  for(var i=0;i<10;i++){
+    var y = horizon + (H-horizon) * (i/10) * (i/10);
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(W, y);
+    ctx.stroke();
+  }
+  for(var g=0;g<=12;g++){
+    var gx = W * (g/12);
+    ctx.beginPath();
+    ctx.moveTo(gx, horizon);
+    ctx.lineTo(W/2 + (gx-W/2)*4, H);
+    ctx.stroke();
+  }
+
+  // dummies
+  var arr = shooterState.dummies;
+  for(var d=0;d<arr.length;d++){
+    drawDummy(ctx, arr[d]);
+  }
+
+  // particles
+  for(var p=0;p<shooterState.particles.length;p++){
+    var pt = shooterState.particles[p];
+    ctx.globalAlpha = Math.max(0, pt.life);
+    ctx.fillStyle = pt.color;
+    ctx.fillRect(pt.x-pt.size/2, pt.y-pt.size/2, pt.size, pt.size);
+  }
+  ctx.globalAlpha = 1;
+
+  // crosshair (canvas-based, since pointer lock hides CSS one is fine)
+  // Draw slight vignette
+  var grad = ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.25,W/2,H/2,Math.max(W,H)*0.75);
+  grad.addColorStop(0,'rgba(0,0,0,0)');
+  grad.addColorStop(1,'rgba(0,0,0,.55)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,W,H);
+}
+
+function drawDummy(ctx, d){
+  var w = d.w, h = d.h;
+  var x = d.x, y = d.y;
+  var alpha = 1;
+  if(d.hit){
+    alpha = Math.max(0, 1 - d.life/0.6);
+  }
+  ctx.save();
+  ctx.globalAlpha = alpha;
+
+  // shadow
+  ctx.fillStyle = 'rgba(0,0,0,.4)';
+  ctx.beginPath();
+  ctx.ellipse(x, y + h*0.5, w*0.6, w*0.18, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.translate(x, y);
+  ctx.rotate(d.angle*0.15);
+
+  // body — head
+  var hue = d.hue;
+  var baseColor = hue===200 ? '#4a9fd8' : (hue===20 ? '#d89a4a' : '#d84a4a');
+  var darkColor = hue===200 ? '#2a6a98' : (hue===20 ? '#986a2a' : '#983a3a');
+
+  // head circle
+  ctx.fillStyle = baseColor;
+  ctx.beginPath();
+  ctx.arc(0, -h*0.32, w*0.42, 0, Math.PI*2);
+  ctx.fill();
+
+  // body torso
+  ctx.fillStyle = darkColor;
+  ctx.beginPath();
+  ctx.moveTo(-w*0.42, -h*0.05);
+  ctx.lineTo(w*0.42, -h*0.05);
+  ctx.lineTo(w*0.32, h*0.4);
+  ctx.lineTo(-w*0.32, h*0.4);
+  ctx.closePath();
+  ctx.fill();
+
+  // bullseye rings
+  var ringR = w*0.42;
+  ctx.strokeStyle = 'rgba(255,255,255,.9)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(0, -h*0.32, ringR*0.75, 0, Math.PI*2);
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,.6)';
+  ctx.beginPath();
+  ctx.arc(0, -h*0.32, ringR*0.45, 0, Math.PI*2);
+  ctx.stroke();
+  ctx.fillStyle = '#ffdd44';
+  ctx.beginPath();
+  ctx.arc(0, -h*0.32, ringR*0.15, 0, Math.PI*2);
+  ctx.fill();
+
+  // cross outline
+  ctx.strokeStyle = 'rgba(0,0,0,.5)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(0, -h*0.32 - ringR);
+  ctx.lineTo(0, -h*0.32 + ringR);
+  ctx.moveTo(-ringR, -h*0.32);
+  ctx.lineTo(ringR, -h*0.32);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+function stopShooter(){
+  shooterState.active = false;
+  $('shooterExitOverlay').classList.remove('show');
+  $('shooterOverlay').classList.remove('show');
+  if(shooterState.rafId){ cancelAnimationFrame(shooterState.rafId); shooterState.rafId = 0; }
+  window.removeEventListener('resize', resizeShooterCanvas);
+  document.removeEventListener('mousemove', shooterMouseMove);
+  document.removeEventListener('mousedown', shooterMouseDown);
+  document.removeEventListener('keydown', shooterKeyDown);
+  document.removeEventListener('pointerlockchange', shooterPointerLockChange);
+  if(document.pointerLockElement && document.exitPointerLock){ document.exitPointerLock(); }
+  var s = Session.get();
+  if(s && shooterState.totalEarned > 0){
+    showReward(shooterState.totalEarned);
+  }
+  shooterState.earned = 0;
+}
+
+$('shooterStartYes').onclick = function(){ openShooter(); };
+$('shooterStartNo').onclick = function(){ $('shooterStartOverlay').classList.remove('show'); Sound.close(); closeEarnMode(); };
+$('shooterExitNo').onclick = function(){ $('shooterExitOverlay').classList.remove('show'); Sound.close(); if(!shooterState.locked && shooterState.canvas && shooterState.canvas.requestPointerLock){ try{ shooterState.canvas.requestPointerLock(); }catch(e){} } };
+$('shooterExitYes').onclick = function(){ Sound.close(); stopShooter(); closeEarnMode(); };
 
 /* ========== ADMIN ========== */
 $('sbAdmin').onclick=function(){ Sound.click(); openAdminPanel(); };

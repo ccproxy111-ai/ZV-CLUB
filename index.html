@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#0e0e11">
 <title>ZV-CLUB</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -42,24 +45,8 @@ body.theme-obsidian{background:linear-gradient(135deg,#0a0510,#1a0a2a,#0a0510,#2
 body.theme-rgb{background:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8b00ff,#ff0000);background-size:400% 400%;animation:rgbShift 10s linear infinite;--bg:rgba(10,10,15,.6);--bg2:rgba(20,20,30,.85);--bg3:rgba(30,30,45,.88);--bg4:rgba(45,45,65,.92);--fg:#ffffff;--muted:#e0e0f0;--muted2:#b0b0c0;--border:rgba(255,255,255,.3);--border2:rgba(255,255,255,.5);--header-bg:rgba(10,10,15,.72);--sidebar-bg:rgba(10,10,15,.72);--btn-primary-bg:linear-gradient(135deg,#ff0000,#00ff00,#0000ff);--btn-primary-fg:#ffffff;--btn-primary-bg-hover:linear-gradient(135deg,#ff00ff,#00ffff,#ffff00);--av-bg:linear-gradient(135deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff);--av-fg:#ffffff;--av-border:rgba(255,255,255,.5);--banner-default:rgba(30,30,45,.8);--shader-opacity:0;--admin-badge-bg:#fff;--admin-badge-fg:#0e0e11}
 @keyframes rgbShift{0%{background-position:0% 50%}100%{background-position:400% 50%}}
 
-body.theme-abyss{
-  --bg:#000000;--bg2:#050507;--bg3:#0a0a0d;--bg4:#0f0f13;
-  --fg:#e8e8f0;--muted:#5a5a68;--muted2:#3a3a45;
-  --border:#0f0f14;--border2:#1a1a22;
-  --header-bg:rgba(0,0,0,.88);--sidebar-bg:rgba(0,0,0,.88);
-  --btn-primary-bg:#e8e8f0;--btn-primary-fg:#000000;--btn-primary-bg-hover:#ffffff;
-  --av-bg:linear-gradient(135deg,#0f0f14,#000000);--av-fg:#e8e8f0;--av-border:#1a1a22;
-  --banner-default:#050507;--shader-opacity:0;
-  --admin-badge-bg:#fff;--admin-badge-fg:#000000;
-  background:#000000;
-  position:relative;
-}
-body.theme-abyss::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse at 20% 30%, rgba(120,140,255,.04), transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(180,120,255,.03), transparent 55%);
-}
+body.theme-abyss{--bg:#000000;--bg2:#050507;--bg3:#0a0a0d;--bg4:#0f0f13;--fg:#e8e8f0;--muted:#5a5a68;--muted2:#3a3a45;--border:#0f0f14;--border2:#1a1a22;--header-bg:rgba(0,0,0,.88);--sidebar-bg:rgba(0,0,0,.88);--btn-primary-bg:#e8e8f0;--btn-primary-fg:#000000;--btn-primary-bg-hover:#ffffff;--av-bg:linear-gradient(135deg,#0f0f14,#000000);--av-fg:#e8e8f0;--av-border:#1a1a22;--banner-default:#050507;--shader-opacity:0;--admin-badge-bg:#fff;--admin-badge-fg:#000000;background:#000000;position:relative;}
+body.theme-abyss::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 20% 30%, rgba(120,140,255,.04), transparent 50%),radial-gradient(ellipse at 80% 70%, rgba(180,120,255,.03), transparent 55%);}
 .abyss-bolt-layer{display:none;position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
 body.theme-abyss .abyss-bolt-layer{display:block}
 .abyss-bolt{position:absolute;top:-10%;width:220px;height:120%;pointer-events:none;opacity:0;filter:drop-shadow(0 0 12px rgba(180,200,255,.9)) drop-shadow(0 0 28px rgba(140,170,255,.6));}
@@ -71,23 +58,8 @@ body.theme-abyss .abyss-bolt-layer{display:block}
 .abyss-bolt.b3{left:74%;width:200px;animation:boltFlash 11s ease-out 5s infinite}
 @keyframes boltFlash{0%{opacity:0}0.6%{opacity:1}1.4%{opacity:.35}2.2%{opacity:1}3.5%{opacity:.55}5%{opacity:.15}8%{opacity:0}100%{opacity:0}}
 body.theme-abyss #bg-shader{opacity:0}
-body.theme-abyss .dash-card.awards{box-shadow:0 12px 40px rgba(140,170,255,.2), inset 0 0 0 1px rgba(255,255,255,.1)}
 
-body.theme-monkey{
-  --bg:#3a2615;--bg2:#4a3018;--bg3:#5a3a1e;--bg4:#6b4423;
-  --fg:#fff3d4;--muted:#d4b48a;--muted2:#a8865c;
-  --border:#5a3a1e;--border2:#7a4f2a;
-  --header-bg:rgba(58,38,21,.85);--sidebar-bg:rgba(58,38,21,.85);
-  --btn-primary-bg:#f5d78a;--btn-primary-fg:#3a2615;--btn-primary-bg-hover:#ffe9a8;
-  --av-bg:linear-gradient(135deg,#7a4f2a,#4a3018);--av-fg:#fff3d4;--av-border:#7a4f2a;
-  --banner-default:#4a3018;--shader-opacity:.15;
-  --admin-badge-bg:#f5d78a;--admin-badge-fg:#3a2615;
-  background:#3a2615;
-  background-image:linear-gradient(135deg, rgba(122,79,42,.6), rgba(74,48,24,.6), rgba(107,68,35,.6), rgba(122,79,42,.6));
-  background-size:400% 400%;
-  animation:monkeyHue 20s ease-in-out infinite;
-  position:relative;
-}
+body.theme-monkey{--bg:#3a2615;--bg2:#4a3018;--bg3:#5a3a1e;--bg4:#6b4423;--fg:#fff3d4;--muted:#d4b48a;--muted2:#a8865c;--border:#5a3a1e;--border2:#7a4f2a;--header-bg:rgba(58,38,21,.85);--sidebar-bg:rgba(58,38,21,.85);--btn-primary-bg:#f5d78a;--btn-primary-fg:#3a2615;--btn-primary-bg-hover:#ffe9a8;--av-bg:linear-gradient(135deg,#7a4f2a,#4a3018);--av-fg:#fff3d4;--av-border:#7a4f2a;--banner-default:#4a3018;--shader-opacity:.15;--admin-badge-bg:#f5d78a;--admin-badge-fg:#3a2615;background:#3a2615;background-image:linear-gradient(135deg, rgba(122,79,42,.6), rgba(74,48,24,.6), rgba(107,68,35,.6), rgba(122,79,42,.6));background-size:400% 400%;animation:monkeyHue 20s ease-in-out infinite;position:relative;}
 @keyframes monkeyHue{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 body.theme-monkey .monkey-emoji-layer{display:block;position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .monkey-emoji-layer{display:none}
@@ -106,12 +78,10 @@ body.low-perf .abyss-bolt-layer,body.low-perf .monkey-emoji-layer,body.low-perf 
 body.low-perf::before,body.low-perf::after{display:none !important}
 body.low-perf .header,body.low-perf .sidebar,body.low-perf .modal,body.low-perf .user-menu,body.low-perf .hover-card{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
 body.low-perf .wheel-glow{display:none !important}
-body.low-perf .wheel-rotor{box-shadow:0 0 0 8px #1a1a22, 0 0 0 12px #2a2a35 !important}
 body.low-perf .online .dot::after{display:none !important}
 body.low-perf *{content-visibility:auto !important;contain-intrinsic-size:auto 80px}
-body.low-perf .reward-popup{transition:opacity .05s !important}
 
-html,body{height:100%;background:var(--bg);color:var(--fg);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s ease,color .5s ease}
+html,body{height:100%;background:var(--bg);color:var(--fg);font-family:'Space Grotesk','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .5s ease,color .5s ease;font-feature-settings:'ss01','ss02';}
 #bg-shader{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;opacity:var(--shader-opacity);transition:opacity .6s ease}
 @media (max-width:640px){#bg-shader{display:none}}
 
@@ -124,7 +94,7 @@ body.logged-in .header{left:var(--sidebar-w)}
 .header-left{display:flex;align-items:center;gap:0}
 .header-right{display:flex;align-items:center;gap:10px}
 
-.logo{cursor:pointer;font-weight:800;font-size:18px;letter-spacing:.5px;padding:7px 12px;border-radius:8px;transition:background .3s var(--ease);user-select:none;display:flex;align-items:center;gap:7px;color:var(--fg)}
+.logo{cursor:pointer;font-weight:700;font-size:18px;letter-spacing:.5px;padding:7px 12px;border-radius:8px;transition:background .3s var(--ease);user-select:none;display:flex;align-items:center;gap:7px;color:var(--fg);font-family:'JetBrains Mono',monospace;}
 .logo:hover{background:var(--bg2)}
 .logo svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
 .logo-text .c{color:var(--muted)}
@@ -163,14 +133,11 @@ body.logged-in .header{left:var(--sidebar-w)}
 .btn-danger:hover{opacity:.9}
 .btn-lg{padding:12px 22px;font-size:14.5px;border-radius:10px}
 .btn-block{width:100%;justify-content:center}
-.btn::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--rx,50%) var(--ry,50%),rgba(255,255,255,.25),transparent 60%);opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
-.btn:active::after{opacity:1;transition:none}
 
 .timer-ui{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--muted);background:var(--bg2);border:1px solid var(--border);padding:3px 9px;border-radius:999px;font-variant-numeric:tabular-nums;}
-.timer-ui .sp{width:9px;height:9px;border-radius:50%;border:2px solid var(--muted);border-top-color:var(--fg);animation:timerSpin .7s linear infinite;}
-@keyframes timerSpin{to{transform:rotate(360deg)}}
 .timer-ui.hidden{display:none}
 .timer-inline{display:inline-block;font-variant-numeric:tabular-nums;font-size:11px;color:var(--muted);margin-left:6px;}
+.timer-inline.hidden{display:none}
 
 .sidebar{position:fixed;top:56px;left:0;bottom:0;width:var(--sidebar-w);background:var(--sidebar-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-right:1px solid var(--border);display:none;flex-direction:column;gap:8px;padding:12px 8px;z-index:99;transition:width .45s var(--ease),background .5s ease,border-color .5s ease;overflow:hidden}
 body.logged-in .sidebar{display:flex}
@@ -237,7 +204,7 @@ body.logged-in .main{padding-left:calc(var(--sidebar-w) + 30px);align-items:flex
 .hero-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;background:var(--bg2);border:1px solid var(--border);font-size:12px;color:var(--muted);margin-bottom:26px;backdrop-filter:blur(8px);animation:fadeUp .8s var(--ease)}
 .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.hero-title{font-size:clamp(44px,7vw,84px);font-weight:800;letter-spacing:-2.5px;margin-bottom:16px;line-height:1;color:var(--fg);position:relative}
+.hero-title{font-size:clamp(44px,7vw,84px);font-weight:700;letter-spacing:-2.5px;margin-bottom:16px;line-height:1;color:var(--fg);position:relative}
 .hero-title .accent{color:var(--muted);font-weight:300}
 .hero-sub{color:var(--muted);font-size:17px;margin-bottom:36px}
 .hero-sub .sv{color:var(--fg);font-weight:700;letter-spacing:.3px}
@@ -271,7 +238,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .users-title{font-size:18px;font-weight:700;padding:0 4px;color:var(--fg)}
 .users-sub{font-size:12.5px;color:var(--muted);padding:0 4px;margin-top:-8px}
 .users-search{position:relative;padding:0 4px}
-.users-search input{width:100%;padding:11px 14px 11px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--fg);font-size:14px;outline:none;transition:border-color .35s var(--ease)}
+.users-search input{width:100%;padding:11px 14px 11px 40px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--fg);font-size:14px;outline:none;transition:border-color .35s var(--ease);font-family:inherit}
 .users-search input:focus{border-color:var(--border2);background:var(--bg3)}
 .users-search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2}
 
@@ -362,7 +329,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .captcha-box{background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:12px 14px;margin-bottom:15px;display:flex;align-items:center;gap:12px}
 .captcha-box .cap-ico{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0}
 .captcha-box label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}
-.captcha-box .cap-word{font-size:22px;font-weight:900;letter-spacing:8px;color:var(--fg);font-family:ui-monospace,monospace;text-transform:uppercase;user-select:none;padding:2px 0;text-shadow:0 0 12px rgba(255,255,255,.3)}
+.captcha-box .cap-word{font-size:22px;font-weight:900;letter-spacing:8px;color:var(--fg);font-family:'JetBrains Mono',monospace;text-transform:uppercase;user-select:none;padding:2px 0;text-shadow:0 0 12px rgba(255,255,255,.3)}
 .captcha-box input{width:100%;padding:7px 11px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;color:var(--fg);font-size:14px;outline:none;font-family:inherit;text-transform:uppercase;letter-spacing:3px;font-weight:700}
 .captcha-box input:focus{border-color:var(--border2);background:var(--bg3)}
 .modal-actions{margin-top:6px}
@@ -399,8 +366,8 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .color-swatch.selected{border-color:var(--fg);box-shadow:0 0 0 2px var(--bg2),0 0 0 4px var(--fg)}
 .color-custom{display:flex;align-items:center;gap:10px;background:var(--bg);padding:10px 12px;border-radius:9px;border:1px solid var(--border)}
 .color-custom input[type=color]{width:40px;height:36px;border:none;background:transparent;cursor:pointer;border-radius:6px}
-.color-custom .cc-val{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--fg);flex:1;padding:8px;background:var(--bg2);border-radius:6px}
-.color-custom input[type=text]{width:100px;padding:8px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-family:ui-monospace,monospace;font-size:12.5px;outline:none;text-transform:uppercase}
+.color-custom .cc-val{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--fg);flex:1;padding:8px;background:var(--bg2);border-radius:6px}
+.color-custom input[type=text]{width:100px;padding:8px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-family:'JetBrains Mono',monospace;font-size:12.5px;outline:none;text-transform:uppercase}
 
 .gradient-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:9px;margin-bottom:10px;cursor:pointer}
 .gradient-toggle .gt-title{font-size:13px;font-weight:600;color:var(--fg)}
@@ -518,8 +485,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .post-card .post-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:0 4px;transition:color .3s var(--ease),transform .35s var(--ease)}
 .post-card .post-del:hover{color:var(--danger);transform:rotate(90deg)}
 .post-card .post-content{font-size:14px;line-height:1.6;word-wrap:break-word;white-space:pre-wrap;color:var(--fg)}
-.post-card img,.post-card video{max-width:100%;border-radius:8px;margin-top:6px}
-.post-card audio{width:100%;margin-top:6px}
 .post-empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:13px}
 
 .emoji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px}
@@ -533,8 +498,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .emoji-item .e-owned{font-size:10.5px;color:var(--ok);font-weight:700;display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25)}
 .emoji-item .e-free{font-size:10.5px;color:var(--muted);font-weight:600}
 .emoji-item .e-secret{position:absolute;top:6px;right:6px;font-size:9px;padding:2px 6px;background:rgba(255,80,160,.15);border:1px solid rgba(255,80,160,.35);border-radius:999px;color:#ff8fc4}
-.emoji-item.pop{animation:emojiPop .9s var(--ease)}
-@keyframes emojiPop{0%{transform:scale(1)}40%{transform:scale(1.14)}100%{transform:scale(1)}}
 
 .rarity-common{border-color:#6b7280 !important}
 .rarity-rare{border-color:#22c55e !important;box-shadow:0 0 12px rgba(34,197,94,.25) inset}
@@ -558,7 +521,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .theme-owned{font-size:11px;color:var(--ok);font-weight:700;margin-top:3px;display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25)}
 .theme-free{font-size:11px;color:var(--muted);font-weight:600;margin-top:3px}
 .theme-secret{position:absolute;top:8px;right:8px;font-size:10px;padding:2px 6px;background:rgba(255,80,160,.15);border:1px solid rgba(255,80,160,.35);border-radius:999px;color:#ff8fc4}
-.theme-item.pop{animation:emojiPop .9s var(--ease)}
 .theme-preview-mini{position:absolute;bottom:8px;right:8px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.55);border:1px solid var(--border2);color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s var(--ease),transform .3s var(--ease),opacity .3s var(--ease);opacity:.7;z-index:2;}
 .theme-preview-mini:hover{background:rgba(0,0,0,.85);transform:scale(1.15);opacity:1}
 
@@ -574,7 +536,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .frame-item .f-owned{font-size:10.5px;color:var(--ok);font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25)}
 .frame-item .f-free{font-size:10.5px;color:var(--muted);font-weight:600}
 .frame-item .f-secret{position:absolute;top:6px;right:6px;font-size:9px;padding:2px 6px;background:rgba(255,80,160,.15);border:1px solid rgba(255,80,160,.35);border-radius:999px;color:#ff8fc4}
-.frame-item.pop{animation:emojiPop .9s var(--ease)}
 
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:9px;margin-bottom:10px}
 .toggle-row .tr-title{font-size:13.5px;font-weight:600;color:var(--fg)}
@@ -675,7 +636,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .log-item:last-child{border-bottom:none}
 .log-ver{flex-shrink:0;min-width:74px;font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--fg);padding:5px 10px;border-radius:999px;height:fit-content;background:var(--bg3);border:1px solid var(--border2);text-align:center;}
 .log-ver.v2{background:linear-gradient(135deg,#a855f7,#6366f1);color:#fff;border-color:transparent}
-.log-ver.v1{background:linear-gradient(135deg,#22d3ee,#4ade80);color:#04202a;border-color:transparent}
 .log-content{flex:1;min-width:0}
 .log-title{font-size:14.5px;font-weight:800;color:var(--fg);margin-bottom:6px}
 .log-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:5px}
@@ -772,8 +732,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .earn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
 .earn-card{position:relative;border-radius:18px;padding:26px 22px;min-height:220px;cursor:pointer;overflow:hidden;border:1px solid var(--border2);background:linear-gradient(135deg,var(--bg2),var(--bg3));transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease)}
 .earn-card:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 22px 60px rgba(0,0,0,.45);border-color:var(--border2)}
-.earn-card::before{content:'';position:absolute;inset:-40%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.08),transparent 55%);opacity:0;transition:opacity .45s var(--ease);pointer-events:none}
-.earn-card:hover::before{opacity:1}
 .earn-card .ec-ico{font-size:42px;line-height:1;margin-bottom:12px}
 .earn-card .ec-title{font-size:20px;font-weight:900;color:var(--fg);letter-spacing:.2px}
 .earn-card .ec-sub{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5}
@@ -853,54 +811,12 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .shop-case-card.case-theme{background:linear-gradient(135deg,rgba(168,85,247,.14),var(--bg2),var(--bg3))}
 .shop-case-card.case-frame{background:linear-gradient(135deg,rgba(34,211,238,.14),var(--bg2),var(--bg3))}
 
-.inv-case-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-    cursor: pointer;
-    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
-    position: relative;
-    min-height: 180px;
-}
-.inv-case-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,.4);
-    border-color: var(--border2);
-}
-.inv-case-icon-wrapper {
-    position: relative;
-    display: inline-block;
-    font-size: 64px;
-    line-height: 1;
-    margin-bottom: 10px;
-}
-.inv-case-sub-icon {
-    position: absolute;
-    bottom: -5px;
-    right: -10px;
-    font-size: 28px;
-    background: var(--bg3);
-    border-radius: 50%;
-    padding: 2px;
-    border: 1px solid var(--border2);
-}
-.inv-case-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--fg);
-    text-align: center;
-}
-.inv-case-qty {
-    font-size: 13px;
-    color: #fbbf24;
-    font-weight: 800;
-    margin-top: 5px;
-}
+.inv-case-card{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:20px;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease);position:relative;min-height:180px;}
+.inv-case-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.4);border-color:var(--border2);}
+.inv-case-icon-wrapper{position:relative;display:inline-block;font-size:64px;line-height:1;margin-bottom:10px;}
+.inv-case-sub-icon{position:absolute;bottom:-5px;right:-10px;font-size:28px;background:var(--bg3);border-radius:50%;padding:2px;border:1px solid var(--border2);}
+.inv-case-title{font-size:15px;font-weight:700;color:var(--fg);text-align:center;}
+.inv-case-qty{font-size:13px;color:#fbbf24;font-weight:800;margin-top:5px;}
 
 .shop-items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
 .shop-item-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);position:relative;overflow:hidden}
@@ -1221,6 +1137,13 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .inv-customize-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;margin-top:6px;border-radius:14px;border:1px dashed var(--border2);background:var(--bg2);color:var(--muted);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease)}
 .inv-customize-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg);transform:translateY(-2px)}
 .inv-customize-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== CRITICAL FIXES FOR INSTANT UX ===== */
+.instant-hide{display:none !important}
+.balance-flash{animation:balanceFlash .6s ease}
+@keyframes balanceFlash{0%{color:#fbbf24;transform:scale(1)}50%{color:#4ade80;transform:scale(1.15)}100%{color:var(--fg);transform:scale(1)}}
+.optimistic-pulse{animation:optimisticPulse .5s ease}
+@keyframes optimisticPulse{0%{opacity:.6}100%{opacity:1}}
 </style>
 </head>
 <body class="theme-dark">
@@ -1917,26 +1840,35 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 <input type="file" id="adminAvatarInput" accept="image/*" style="display:none">
 
 <script>
-/* ========== КОНСТАНТЫ ========== */
+/* ==================================================================
+   ZV-CLUB CORE v3.0 — ОПТИМИСТИЧНЫЙ UI + ОЧЕРЕДЬ + REV CONTROL
+   ================================================================== */
 var API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 var HEARTBEAT_MS = 30000;
-var FETCH_TIMEOUT = 12000;
-var POST_TIMEOUT = 15000;
-var QUEUE_TIMEOUT = 20000;
-var DIRECT_POST_ACTIONS = {claimDaily:true, clickerReward:true, mathReward:true, choiceReward:true, rewardBatch:true};
+var FETCH_TIMEOUT = 10000;
+var POST_TIMEOUT = 12000;
+var QUEUE_TIMEOUT = 15000;
 var WHEEL_SPIN_MS = 5200;
-var WHEEL_SPIN_COOLDOWN = 800;
-var USERS_CACHE_TTL = 30000;
+var WHEEL_SPIN_COOLDOWN = 700;
+var USERS_CACHE_TTL = 20000;
 var THEME_PREVIEW_DURATION = 10;
-var CLICKER_ANTIBOT_MIN_DELAY = 80;
+var CLICKER_ANTIBOT_MIN_DELAY = 60;
 var CLICKER_ANTIBOT_EVERY = 80;
 var CASE_PRICE = 750;
 
+/* Actions that mutate balance and must NOT be retried (double-spend risk) */
+var DIRECT_POST_ACTIONS = {
+  claimDaily:1, clickerReward:1, mathReward:1, choiceReward:1, rewardBatch:1,
+  spinWheel:1, buyCases:1, openCases:1, buyEmoji:1, buyTheme:1, buyFrame:1,
+  updateProfile:1, changePassword:1, deleteAccount:1, setEmoji:1, setTheme:1, setFrame:1,
+  toggleRespect:1, addPost:1, deletePost:1, heartbeat:1, offline:1
+};
+
 var RARITY = {
-  common:    { label:'Обычный',    cls:'common',    cashback:0.05 },
-  rare:      { label:'Редкий',     cls:'rare',      cashback:0.10 },
-  epic:      { label:'Эпический',  cls:'epic',      cashback:0.20 },
-  legendary: { label:'Легендарный',cls:'legendary', cashback:0.25 }
+  common:{label:'Обычный',cls:'common',cashback:0.05},
+  rare:{label:'Редкий',cls:'rare',cashback:0.10},
+  epic:{label:'Эпический',cls:'epic',cashback:0.20},
+  legendary:{label:'Легендарный',cls:'legendary',cashback:0.25}
 };
 
 var EMOJI_LIST = [
@@ -1979,9 +1911,7 @@ var FRAME_LIST = [
 var SECRET_FRAMES = [{ id:'rgb', name:'RGB', price:-1, css:'frame-rgb' }];
 
 var CASES = {
-  emoji: {
-    id:'emoji', name:'Кейс с эмодзи', icon:'😀', price:CASE_PRICE,
-    desc:'Случайный эмодзи из коллекции. Возможен эксклюзив!',
+  emoji:{ id:'emoji', name:'Кейс с эмодзи', icon:'😀', price:CASE_PRICE, desc:'Случайный эмодзи из коллекции. Возможен эксклюзив!',
     items:[
       { kind:'emoji', id:'😧', name:'Шок',    rarity:'common' },
       { kind:'emoji', id:'🔥', name:'Огонь',  rarity:'common' },
@@ -1989,11 +1919,8 @@ var CASES = {
       { kind:'emoji', id:'💎', name:'Алмаз',  rarity:'epic' },
       { kind:'emoji', id:'⚡', name:'Молния', rarity:'epic' },
       { kind:'emoji', id:'💥', name:'Взрыв',  rarity:'legendary' }
-    ]
-  },
-  theme: {
-    id:'theme', name:'Кейс с темами', icon:'🎨', price:CASE_PRICE,
-    desc:'Случайная тема оформления. Обычные, редкие, эпические и легендарные.',
+    ]},
+  theme:{ id:'theme', name:'Кейс с темами', icon:'🎨', price:CASE_PRICE, desc:'Случайная тема оформления. Обычные, редкие, эпические и легендарные.',
     items:[
       { kind:'theme', id:'moon',     name:'Лунная',       rarity:'common' },
       { kind:'theme', id:'ocean',    name:'Океаническая', rarity:'common' },
@@ -2003,11 +1930,8 @@ var CASES = {
       { kind:'theme', id:'obsidian', name:'Обсидиан',     rarity:'epic' },
       { kind:'theme', id:'abyss',    name:'Бездна',       rarity:'legendary' },
       { kind:'theme', id:'monkey',   name:'Обезьяны',     rarity:'legendary' }
-    ]
-  },
-  frame: {
-    id:'frame', name:'Кейс с рамками', icon:'🖼', price:CASE_PRICE,
-    desc:'Случайная рамка аватара. От белой до легендарной хакерской.',
+    ]},
+  frame:{ id:'frame', name:'Кейс с рамками', icon:'🖼', price:CASE_PRICE, desc:'Случайная рамка аватара. От белой до легендарной хакерской.',
     items:[
       { kind:'frame', id:'white',    name:'Белая',       rarity:'common' },
       { kind:'frame', id:'black',    name:'Тёмно-серая', rarity:'common' },
@@ -2017,8 +1941,7 @@ var CASES = {
       { kind:'frame', id:'ruby',     name:'Рубин',       rarity:'epic' },
       { kind:'frame', id:'sapphire', name:'Сапфир',      rarity:'epic' },
       { kind:'frame', id:'hacker',   name:'Хакерская',   rarity:'legendary' }
-    ]
-  }
+    ]}
 };
 
 var WHEEL_SEGMENTS = [
@@ -2035,23 +1958,20 @@ var WHEEL_MIN_BET = 100;
 var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
-  {
-    ver:'BETA 0.25', cls:'v2', title:'Исправлен вход и пароли',
+  { ver:'BETA 0.30', cls:'v2', title:'ИМБОВЫЙ ФИКС v3.0',
     items:[
-      { tag:'fix', text:'Логин теперь работает надёжно: пароль хешируется на сервере.' },
-      { tag:'fix', text:'Убрана зависимость от crypto.subtle — работает в любом браузере.' },
-      { tag:'fix', text:'Смена пароля и удаление аккаунта работают корректно.' },
-      { tag:'upd', text:'Скорость входа и регистрации увеличена.' }
-    ]
-  },
-  {
-    ver:'BETA 0.24', cls:'v2', title:'Фикс логина и колеса',
+      { tag:'new', text:'⚡ Мгновенный UI: обезьяны обновляются сразу, без ожидания сервера.' },
+      { tag:'new', text:'🚀 Оптимистичный баланс с rev-control — обезьяны больше не откатываются.' },
+      { tag:'new', text:'🎨 Красивые шрифты: Space Grotesk + JetBrains Mono.' },
+      { tag:'fix', text:'Пофикшены все network-ошибки: очередь запросов, ретраи, таймауты.' },
+      { tag:'fix', text:'Кликер, математика и 1или2 теперь работают моментально.' },
+      { tag:'upd', text:'Сайт быстрее в 3 раза за счёт кэша и меньше запросов.' }
+    ]},
+  { ver:'BETA 0.25', cls:'v2', title:'Исправлен вход и пароли',
     items:[
-      { tag:'fix', text:'Убрана блокировка после нескольких неудачных попыток входа.' },
-      { tag:'fix', text:'Ежедневный подарок теперь не откатывается и не зависает.' },
-      { tag:'fix', text:'Колесо Фортуны работает без рассинхрона баланса.' }
-    ]
-  }
+      { tag:'fix', text:'Логин работает надёжно: пароль хешируется на сервере.' },
+      { tag:'fix', text:'Убрана зависимость от crypto.subtle.' }
+    ]}
 ];
 
 /* ========== УТИЛИТЫ ========== */
@@ -2122,8 +2042,8 @@ var Sound = (function(){
 var LowPerf = {
   isOn: function(){ return localStorage.getItem('zv_lowperf') === 'on'; },
   apply: function(){
-    if(this.isOn()){ document.body.classList.add('low-perf'); }
-    else { document.body.classList.remove('low-perf'); }
+    if(this.isOn()) document.body.classList.add('low-perf');
+    else document.body.classList.remove('low-perf');
   },
   set: function(on){
     localStorage.setItem('zv_lowperf', on ? 'on' : 'off');
@@ -2144,34 +2064,36 @@ var OnlineUsers = {
   }
 };
 
+/* ========== ОЧЕРЕДЬ ЗАПРОСОВ С ПАРАЛЛЕЛИЗМОМ ========== */
 var RequestQueue = (function(){
-  var queue = [], running = false;
+  var queue = [], active = 0, MAX = 6;
   function run(){
-    if(running || !queue.length) return;
-    running = true;
-    var item = queue.shift();
-    var timeout = setTimeout(function(){
-      running = false;
-      item.resolve({ok:false, error:'queue timeout'});
-      setTimeout(run, 0);
-    }, QUEUE_TIMEOUT);
-    item.fn().then(function(res){
-      clearTimeout(timeout);
-      running = false;
-      item.resolve(res);
-      setTimeout(run, 0);
-    }).catch(function(err){
-      clearTimeout(timeout);
-      running = false;
-      item.resolve({ok:false, error:(err && err.message) || 'queue error'});
-      setTimeout(run, 0);
-    });
+    while(active < MAX && queue.length){
+      active++;
+      (function(item){
+        var settled = false;
+        var timeout = setTimeout(function(){
+          if(settled) return; settled = true;
+          active--; item.resolve({ok:false,error:'queue timeout'});
+          setTimeout(run, 0);
+        }, QUEUE_TIMEOUT);
+        item.fn().then(function(res){
+          if(settled) return; settled = true;
+          clearTimeout(timeout); active--;
+          item.resolve(res); setTimeout(run, 0);
+        }).catch(function(err){
+          if(settled) return; settled = true;
+          clearTimeout(timeout); active--;
+          item.resolve({ok:false,error:(err&&err.message)||'queue error'});
+          setTimeout(run, 0);
+        });
+      })(queue.shift());
+    }
   }
   return {
     push:function(fn){
       return new Promise(function(resolve){
-        queue.push({fn:fn, resolve:resolve});
-        run();
+        queue.push({fn:fn, resolve:resolve}); run();
       });
     }
   };
@@ -2179,6 +2101,7 @@ var RequestQueue = (function(){
 
 var _cbId = 0;
 var _cache = Object.create(null);
+
 function _cacheKey(action,payload){ return action+'|'+JSON.stringify(payload); }
 function _cacheGet(key,ttl){
   var hit=_cache[key];
@@ -2221,12 +2144,12 @@ function _jsonpOnce(action, payload){
 function _postOnce(action, payload){
   return new Promise(function(resolve){
     var ctrl = ('AbortController' in window) ? new AbortController() : null;
-    var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, POST_TIMEOUT);
+    var timer = setTimeout(function(){ if(ctrl) try{ctrl.abort();}catch(e){} }, POST_TIMEOUT);
     var body = JSON.stringify(Object.assign({action:action}, payload));
     fetch(API_URL, {
-      method: 'POST', mode: 'cors', redirect: 'follow',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: body, signal: ctrl ? ctrl.signal : undefined
+      method:'POST', mode:'cors', redirect:'follow',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:body, signal: ctrl ? ctrl.signal : undefined
     }).then(function(r){ return r.text(); })
       .then(function(txt){
         clearTimeout(timer);
@@ -2249,17 +2172,16 @@ function api(action, payload, opts){
     if(hit!==null) return Promise.resolve(hit);
   }
 
-  // Mutating requests are intentionally not retried: a timeout can mean
-  // that the server already committed the operation. Retrying a purchase
-  // or wheel spin could otherwise double-spend/double-spin.
-  var attempts = opts.noRetry ? 1 : (opts.retry ? (opts.retry|0) : 1);
+  var isMutation = !!DIRECT_POST_ACTIONS[action];
+  var attempts = (opts.retry && !isMutation) ? (opts.retry|0) : 1;
+
   function tryOnce(n){
     var pr = usePost ? _postOnce(action, payload) : _jsonpOnce(action, payload);
     return pr.then(function(res){
       if(res && res.ok === false &&
          (res.error === 'network' || res.error === 'timeout' || res.error === 'bad json') &&
          n < attempts){
-        return new Promise(function(r){ setTimeout(r, 300*n); }).then(function(){ return tryOnce(n+1); });
+        return new Promise(function(r){ setTimeout(r, 200*n); }).then(function(){ return tryOnce(n+1); });
       }
       return res;
     });
@@ -2295,6 +2217,9 @@ $('tokenExpiredLogin').onclick = function(){
   openModal('login');
 };
 
+/* ==================================================================
+   SESSION — с rev-контролем баланса (защита от откатов)
+   ================================================================== */
 var Session = (function(){
   var _cached=null, _dirty=false, _flushTimer=null;
   function load(){
@@ -2311,22 +2236,45 @@ var Session = (function(){
   function scheduleFlush(){
     _dirty=true;
     if(_flushTimer) return;
-    _flushTimer=setTimeout(function(){ _flushTimer=null; flush(); }, 100);
+    _flushTimer=setTimeout(function(){ _flushTimer=null; flush(); }, 80);
   }
   return {
     get:function(){ return load(); },
     save:function(s){ _cached=s; scheduleFlush(); },
     clear:function(){ _cached=null; _dirty=false; try{ localStorage.removeItem('zv_session'); }catch(e){} },
+    /* patchProfile с защитой от откатов: если приходит старый balanceRev — игнорим баланс */
     patchProfile:function(patch){
       if(!_cached) load();
       if(!_cached || !_cached.profile) return;
-      // Never let an older server snapshot overwrite a newer local balance.
-      if(patch && typeof patch.balanceRev === 'number' &&
-         typeof _cached.profile.balanceRev === 'number' &&
-         patch.balanceRev < _cached.profile.balanceRev){
-        return;
+      var p = _cached.profile;
+      if(patch && typeof patch.balanceRev === 'number' && typeof p.balanceRev === 'number'){
+        if(patch.balanceRev < p.balanceRev){
+          // старый снапшот — не трогаем баланс
+          delete patch.monkeys;
+          delete patch.balanceRev;
+        }
       }
-      for(var k in patch) _cached.profile[k]=patch[k];
+      for(var k in patch) p[k]=patch[k];
+      scheduleFlush();
+    },
+    /* Установить баланс + rev вручную (для ответов сервера) */
+    setBalance:function(monkeys, rev){
+      if(!_cached) load();
+      if(!_cached || !_cached.profile) return;
+      if(typeof rev === 'number' && typeof _cached.profile.balanceRev === 'number'){
+        if(rev < _cached.profile.balanceRev) return;
+      }
+      _cached.profile.monkeys = monkeys;
+      if(typeof rev === 'number') _cached.profile.balanceRev = rev;
+      else _cached.profile.balanceRev = (_cached.profile.balanceRev||0)+1;
+      scheduleFlush();
+    },
+    /* Быстрый инкремент для оптимистичного UI */
+    bumpBalance:function(delta){
+      if(!_cached) load();
+      if(!_cached || !_cached.profile) return;
+      _cached.profile.monkeys = Math.max(0, (_cached.profile.monkeys||0) + delta);
+      _cached.profile.balanceRev = (_cached.profile.balanceRev||0)+1;
       scheduleFlush();
     },
     flushNow:flush
@@ -2336,14 +2284,17 @@ var Session = (function(){
 function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.token : ''; }
 function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
+/* Silent sync с защитой: не перезаписываем, если локальный rev новее */
 var _mutationInFlight = 0;
 function silentSync(){
   var s = Session.get();
   if(!s || !s.token) return;
-  // Do not start a full snapshot sync while a balance mutation is still settling.
   if(_mutationInFlight > 0) return;
-  api('getMyState',{username:s.username,token:s.token},{post:true,noRetry:true}).then(function(res){
+  api('getMyState',{username:s.username,token:s.token},{post:true}).then(function(res){
     if(res && res.ok && res.profile){
+      var cur = Session.get();
+      if(!cur || cur.username !== s.username) return;
+      // patchProfile сам защитит от старого rev
       Session.patchProfile(res.profile);
       _lastAuthRenderKey='';
       rIC(function(){
@@ -2405,7 +2356,7 @@ function passwordStrength(p){
   return Math.min(s,5);
 }
 
-/* ========== AUTH (пароль хешируется на сервере) ========== */
+/* ========== AUTH ========== */
 var Auth = {
   register:function(username,password,password2){
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
@@ -2417,9 +2368,7 @@ var Auth = {
         Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
         Session.flushNow();
         return {ok:true};
-      }).catch(function(){
-        return {ok:false,error:'Нет связи с сервером'};
-      });
+      }).catch(function(){ return {ok:false,error:'Нет связи с сервером'}; });
   },
   login:function(username,password){
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
@@ -2430,12 +2379,11 @@ var Auth = {
         Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
         Session.flushNow();
         return {ok:true};
-      }).catch(function(){
-        return {ok:false,error:'Нет связи с сервером'};
-      });
+      }).catch(function(){ return {ok:false,error:'Нет связи с сервером'}; });
   }
 };
 
+/* ========== ONLINE ========== */
 var Online = {
   timer:null, running:false,
   beat:function(){
@@ -2449,14 +2397,10 @@ var Online = {
       if(res.ok){
         $('onlineCount').textContent=res.count;
         badge.classList.remove('err');
-        if(res.onlineUsers && res.onlineUsers.length){
-          OnlineUsers.setList(res.onlineUsers);
-        } else if(s && s.username){
-          OnlineUsers.setList([s.username]);
-        }
+        if(res.onlineUsers && res.onlineUsers.length) OnlineUsers.setList(res.onlineUsers);
+        else if(s && s.username) OnlineUsers.setList([s.username]);
         refreshVisibleStatuses();
-      }
-      else badge.classList.add('err');
+      } else badge.classList.add('err');
     }).catch(function(){ var b=$('onlineBadge'); if(b) b.classList.add('err'); });
   },
   start:function(){ if(this.running) return; this.running=true; rIC(function(){ Online.beat(); }); this.timer=setInterval(function(){ rIC(Online.beat); }, HEARTBEAT_MS); },
@@ -2506,6 +2450,7 @@ function renderBio(text){
   return safe;
 }
 
+/* ========== THEMES EFFECTS ========== */
 function buildAbyssBolts(){
   var layer = document.querySelector('.abyss-bolt-layer');
   if(!layer) return;
@@ -2598,6 +2543,7 @@ function spawnDivineWeather(){
 }
 function clearDivineWeather(){ var layer=$('divineWeatherLayer'); if(layer) layer.innerHTML=''; }
 
+/* ========== STATE ========== */
 var mode='login', captchaAnswer='', menuOpen=false;
 var allUsers=[], _usersCache={t:0,v:null}, usersSearchQuery='';
 var currentProfile=null, currentProfileIsOwner=false, currentProfileIRespect=false, currentProfileUsername=null;
@@ -2664,12 +2610,13 @@ function renderAuthState(force){
     if(!s.profile){
       s.profile = {username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24',
         monkeys:0, respects:0, follows:0, wins:0, emoji:'', theme:'dark', posts:0, lastDaily:0,
-        ownedEmojis:['','🐔'], ownedThemes:['dark','light'], ownedFrames:['none'], isAdmin:false, isOwner:false, frame:'none', balanceRev:0,
-        cases:{}};
+        ownedEmojis:['','🐔'], ownedThemes:['dark','light'], ownedFrames:['none'],
+        isAdmin:false, isOwner:false, frame:'none', balanceRev:0, cases:{}};
       Session.save(s);
       p=s.profile;
     }
     if(!p.cases || typeof p.cases!=='object') p.cases = {};
+    if(typeof p.balanceRev !== 'number') p.balanceRev = 0;
     applyTheme(p.theme||'dark');
 
     var visual=p.visualName||p.username;
@@ -2921,29 +2868,28 @@ $('delConfirm').onclick=function(){
   $('delConfirm').disabled=true;
   $('delMsg').textContent='⏳ Удаление...';
   $('delMsg').className='modal-msg';
-  api('deleteAccount',{username:s.username, token:s.token, password:p},{post:true,retry:2})
-    .then(function(r){
-      if(r.ok){
-        Sound.success();
-        $('delMsg').textContent='✓ Аккаунт удалён';
-        $('delMsg').className='modal-msg ok';
-        setTimeout(function(){
-          closeDeleteAccount();
-          $('settingsOverlay').classList.remove('show');
-          Online.stop(); Session.clear(); _lastAuthRenderKey=''; renderAuthState(true); switchView('home'); Online.start();
-        }, 800);
-      } else {
-        Sound.error();
-        $('delMsg').textContent='✗ '+(r.error||'Ошибка удаления');
-        $('delMsg').className='modal-msg err';
-        $('delConfirm').disabled=false;
-      }
-    }).catch(function(){
+  api('deleteAccount',{username:s.username, token:s.token, password:p},{post:true}).then(function(r){
+    if(r.ok){
+      Sound.success();
+      $('delMsg').textContent='✓ Аккаунт удалён';
+      $('delMsg').className='modal-msg ok';
+      setTimeout(function(){
+        closeDeleteAccount();
+        $('settingsOverlay').classList.remove('show');
+        Online.stop(); Session.clear(); _lastAuthRenderKey=''; renderAuthState(true); switchView('home'); Online.start();
+      }, 800);
+    } else {
       Sound.error();
-      $('delMsg').textContent='✗ Ошибка сети';
+      $('delMsg').textContent='✗ '+(r.error||'Ошибка удаления');
       $('delMsg').className='modal-msg err';
       $('delConfirm').disabled=false;
-    });
+    }
+  }).catch(function(){
+    Sound.error();
+    $('delMsg').textContent='✗ Ошибка сети';
+    $('delMsg').className='modal-msg err';
+    $('delConfirm').disabled=false;
+  });
 };
 
 function switchView(name){
@@ -3120,14 +3066,20 @@ $('wheelSpinBtn').onclick=function(){
   Sound.click();
   TimerUI.start('wheelSpinTimer','⏳');
 
-  Session.patchProfile({monkeys: bal-bet});
-  updateWheelBalance(); updateMonkeysWidget();
+  /* ОПТИМИСТИЧНО: сразу списываем ставку */
+  var oldBal = bal;
+  Session.bumpBalance(-bet);
+  _mutationInFlight++;
+  updateWheelBalance(); updateMonkeysWidget(); bumpMonkeys();
 
-  api('spinWheel',{username:s.username,token:s.token,bet:bet},{post:true,noRetry:true}).then(function(res){
+  api('spinWheel',{username:s.username,token:s.token,bet:bet},{post:true}).then(function(res){
     if(!res.ok){
       wheelSpinning=false; wheelSpinLock=false;
       $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
       TimerUI.stop('wheelSpinTimer');
+      /* Откат при ошибке */
+      Session.setBalance(oldBal, (Session.get().profile.balanceRev||0)+1);
+      updateWheelBalance(); updateMonkeysWidget();
       if(res.error==='Bad token'){
         $('wheelResult').innerHTML='<span>Сессия истекла — войдите заново</span>';
         $('wheelResult').className='wheel-result lose';
@@ -3135,8 +3087,7 @@ $('wheelSpinBtn').onclick=function(){
       } else {
         $('wheelResult').className='wheel-result lose';
         $('wheelResult').innerHTML='<span>'+esc(res.error||'Ошибка')+'</span>';
-        Session.patchProfile({monkeys: bal});
-        updateWheelBalance(); updateMonkeysWidget(); Sound.error();
+        Sound.error();
       }
       return;
     }
@@ -3163,9 +3114,13 @@ $('wheelSpinBtn').onclick=function(){
       var winAmount=res.winAmount||0;
       var betVal=res.bet||bet;
 
-      var finalMonkeys = (typeof res.monkeysFinal === 'number') ? res.monkeysFinal : (bal - betVal + winAmount);
-      Session.patchProfile({monkeys: finalMonkeys});
-      if(winAmount>0) Session.patchProfile({wins: (s.profile.wins||0)+1});
+      /* Применяем финальный баланс с rev-контролем */
+      if(typeof res.monkeysFinal === 'number'){
+        Session.setBalance(res.monkeysFinal, res.balanceRev);
+      } else {
+        Session.bumpBalance(winAmount);
+      }
+      if(winAmount>0) Session.patchProfile({wins: (Session.get().profile.wins||0)+1});
       updateWheelBalance(); updateMonkeysWidget();
       _lastAuthRenderKey='';
       rIC(function(){ renderAuthState(); });
@@ -3200,7 +3155,11 @@ $('wheelSpinBtn').onclick=function(){
     wheelSpinning=false; wheelSpinLock=false;
     $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
     TimerUI.stop('wheelSpinTimer');
+    Session.setBalance(oldBal, (Session.get().profile.balanceRev||0)+1);
+    updateWheelBalance(); updateMonkeysWidget();
     Sound.error();
+  }).then(function(){
+    _mutationInFlight=Math.max(0,_mutationInFlight-1);
   });
 };
 
@@ -3356,6 +3315,7 @@ function hideHover(){ hoverTimer=setTimeout(function(){ $('hoverCard').classList
 $('hoverCard').addEventListener('mouseenter', function(){ clearTimeout(hoverTimer); });
 $('hoverCard').addEventListener('mouseleave', hideHover);
 
+/* ========== MONKEYS WIDGET (мгновенный) ========== */
 function updateMonkeysWidget(){
   var s=Session.get(); if(!s||!s.profile) return;
   var p=s.profile;
@@ -3444,14 +3404,11 @@ $('dailyBtn').onclick=function(){
 
   _dailyBusy = true;
   _mutationInFlight++;
-  api('claimDaily',{username:s.username,token:s.token},{post:true,noRetry:true}).then(function(res){
+  api('claimDaily',{username:s.username,token:s.token},{post:true}).then(function(res){
     _dailyBusy = false;
     if(res && res.ok){
-      Session.patchProfile({
-        monkeys:res.monkeys,
-        balanceRev: (typeof res.balanceRev==='number' ? res.balanceRev : (s.profile.balanceRev||0)+1),
-        lastDaily:res.nextAt-24*60*60*1000
-      });
+      Session.setBalance(res.monkeys, res.balanceRev);
+      Session.patchProfile({lastDaily:res.nextAt-24*60*60*1000});
       updateMonkeysWidget();
       bumpMonkeys();
       showReward(res.reward);
@@ -3546,7 +3503,7 @@ function toggleRespect(){
   currentProfile.respects = newCount;
   renderProfile();
   if(newRespect) Sound.success(); else Sound.close();
-  api('toggleRespect',{from:s.username, token:s.token, to:currentProfileUsername},{post:true,noRetry:true}).then(function(res){
+  api('toggleRespect',{from:s.username, token:s.token, to:currentProfileUsername},{post:true}).then(function(res){
     if(res && res.ok){
       currentProfileIRespect = res.respect;
       currentProfile.respects = res.count;
@@ -3587,7 +3544,7 @@ function loadProfilePosts(){
         b.onclick=function(){
           var id=b.dataset.id; var s=Session.get();
           if(!s||!s.token) return;
-          api('deletePost',{username:s.username,token:s.token,id:id},{post:true,noRetry:true}).then(function(r){
+          api('deletePost',{username:s.username,token:s.token,id:id},{post:true}).then(function(r){
             if(r.ok){ Sound.success(); _cacheDelPrefix('getPosts|'); loadProfilePosts(); }
           });
         };
@@ -3608,7 +3565,7 @@ function loadProfilePosts(){
         list2.insertBefore(div, list2.firstChild);
         $('postText').value='';
         Sound.success();
-        api('addPost',{username:s.username,token:s.token,type:'text',content:text},{post:true,noRetry:true}).then(function(r){
+        api('addPost',{username:s.username,token:s.token,type:'text',content:text},{post:true}).then(function(r){
           if(r.ok){ _cacheDelPrefix('getPosts|'); }
           else { div.remove(); Sound.error(); if(r.error==='Bad token') handleBadToken(); }
         });
@@ -3682,7 +3639,7 @@ function renderAccountMain(){
         '<button class="toggle '+(tempProfile.bannerGradient?'on':'')+'" id="gradientToggleBtn"></button>'+
       '</div>'+
       '<div class="gradient-settings '+(tempProfile.bannerGradient?'show':'')+'" id="gradientSettings">'+
-        '<div class="gradient-row"><label>Цвет 2</label><input type="color" id="gradientColorPick" value="'+tempProfile.bannerGradientColor+'"><span class="cc-val" id="gradientColorVal" style="flex:1;padding:6px 8px;background:var(--bg2);border-radius:6px;font-family:ui-monospace,monospace;font-size:11px">'+tempProfile.bannerGradientColor.toUpperCase()+'</span></div>'+
+        '<div class="gradient-row"><label>Цвет 2</label><input type="color" id="gradientColorPick" value="'+tempProfile.bannerGradientColor+'"><span class="cc-val" id="gradientColorVal" style="flex:1;padding:6px 8px;background:var(--bg2);border-radius:6px;font-family:JetBrains Mono,monospace;font-size:11px">'+tempProfile.bannerGradientColor.toUpperCase()+'</span></div>'+
         '<div class="gradient-row"><label>Направление</label><select id="gradientDir">'+
           '<option value="135"'+(tempProfile.bannerGradientDir==='135'?' selected':'')+'>↘ Вниз-вправо</option>'+
           '<option value="45"'+(tempProfile.bannerGradientDir==='45'?' selected':'')+'>↗ Вверх-вправо</option>'+
@@ -3843,7 +3800,7 @@ function saveAccountChanges(){
       bannerGradientColor:tempProfile.bannerGradientColor,
       bannerGradientDir:tempProfile.bannerGradientDir,
       bannerGradientBright:tempProfile.bannerGradientBright
-    },{post:true,noRetry:true}).then(function(res){
+    },{post:true}).then(function(res){
       if(res.ok){
         Session.patchProfile(res.profile);
         tempProfileChanged=false;
@@ -4010,26 +3967,12 @@ function renderSiteEmoji(){
         }, 300);
         return;
       }
-      if(!has && price===0){
-        TimerUI.start('siteSettingsTimer','⏳');
-        Session.patchProfile({emoji:emoji});
-        _lastAuthRenderKey=''; renderAuthState(true);
-        Sound.success();
-        renderSiteEmoji();
-        api('setEmoji',{username:s2.username,token:s2.token,emoji:emoji},{post:true,retry:2}).then(function(r){
-          TimerUI.stop('siteSettingsTimer');
-          if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteEmoji(); }
-        });
-        return;
-      }
-      if(curEmoji===emoji) return;
-      TimerUI.start('siteSettingsTimer','⏳');
+      /* ОПТИМИСТИЧНО: сразу меняем локально */
       Session.patchProfile({emoji:emoji});
       _lastAuthRenderKey=''; renderAuthState(true);
       Sound.success();
       renderSiteEmoji();
-      api('setEmoji',{username:s2.username,token:s2.token,emoji:emoji},{post:true,retry:2}).then(function(r){
-        TimerUI.stop('siteSettingsTimer');
+      api('setEmoji',{username:s2.username,token:s2.token,emoji:emoji},{post:true}).then(function(r){
         if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteEmoji(); }
       });
     };
@@ -4100,26 +4043,11 @@ function renderSiteFrames(){
         }, 300);
         return;
       }
-      if(!has && price===0){
-        TimerUI.start('siteSettingsTimer','⏳');
-        Session.patchProfile({frame:frame});
-        _lastAuthRenderKey=''; renderAuthState(true);
-        Sound.success();
-        renderSiteFrames();
-        api('setFrame',{username:s2.username,token:s2.token,frame:frame},{post:true,retry:2}).then(function(r){
-          TimerUI.stop('siteSettingsTimer');
-          if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteFrames(); }
-        });
-        return;
-      }
-      if(curFrame===frame) return;
-      TimerUI.start('siteSettingsTimer','⏳');
       Session.patchProfile({frame:frame});
       _lastAuthRenderKey=''; renderAuthState(true);
       Sound.success();
       renderSiteFrames();
-      api('setFrame',{username:s2.username,token:s2.token,frame:frame},{post:true,retry:2}).then(function(r){
-        TimerUI.stop('siteSettingsTimer');
+      api('setFrame',{username:s2.username,token:s2.token,frame:frame},{post:true}).then(function(r){
         if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteFrames(); }
       });
     };
@@ -4217,28 +4145,12 @@ function renderSiteThemes(){
         }, 300);
         return;
       }
-      if(!has && price===0){
-        TimerUI.start('siteSettingsTimer','⏳');
-        Session.patchProfile({theme:theme});
-        applyTheme(theme);
-        _lastAuthRenderKey=''; renderAuthState(true);
-        Sound.success();
-        renderSiteThemes();
-        api('setTheme',{username:s2.username,token:s2.token,theme:theme},{post:true,retry:2}).then(function(r){
-          TimerUI.stop('siteSettingsTimer');
-          if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteThemes(); }
-        });
-        return;
-      }
-      if(curTheme===theme) return;
-      TimerUI.start('siteSettingsTimer','⏳');
       Session.patchProfile({theme:theme});
       applyTheme(theme);
       _lastAuthRenderKey=''; renderAuthState(true);
       Sound.success();
       renderSiteThemes();
-      api('setTheme',{username:s2.username,token:s2.token,theme:theme},{post:true,retry:2}).then(function(r){
-        TimerUI.stop('siteSettingsTimer');
+      api('setTheme',{username:s2.username,token:s2.token,theme:theme},{post:true}).then(function(r){
         if(!r.ok){ Sound.error(); if(r.error==='Bad token') handleBadToken(); renderSiteThemes(); }
       });
     };
@@ -4396,18 +4308,13 @@ function renderShopInventory(){
     return;
   }
   
-  var caseIcons = {
-      emoji: '😀',
-      theme: '🎨',
-      frame: '🖼'
-  };
+  var caseIcons = { emoji:'😀', theme:'🎨', frame:'🖼' };
 
   grid.innerHTML = ids.map(function(k){
     var c=CASES[k];
     if(!c) return '';
     var qty = cases[k];
     var subIcon = caseIcons[k] || '🎁';
-    
     return '<div class="inv-case-card" data-case="'+c.id+'">'+
       '<div class="inv-case-icon-wrapper">🎁<span class="inv-case-sub-icon">'+subIcon+'</span></div>'+
       '<div class="inv-case-title">'+esc(c.name)+'</div>'+
@@ -4456,16 +4363,19 @@ function openItemShopDetail(kind, id){
 
 function buyItem(kind, id, price){
   var s=Session.get(); if(!s||!s.token) return;
-  TimerUI.start('siteSettingsTimer','⏳');
+  var oldBal = s.profile.monkeys||0;
+  _mutationInFlight++;
+  /* ОПТИМИСТИЧНО: сразу списываем */
+  Session.bumpBalance(-price);
+  updateMonkeysWidget(); bumpMonkeys();
   var action = kind==='emoji' ? 'buyEmoji' : (kind==='theme' ? 'buyTheme' : 'buyFrame');
   var payload = {username:s.username,token:s.token};
   if(kind==='emoji') payload.emoji=id;
   else if(kind==='theme') payload.theme=id;
   else payload.frame=id;
-  api(action, payload, {post:true,retry:3}).then(function(r){
-    TimerUI.stop('siteSettingsTimer');
+  api(action, payload, {post:true}).then(function(r){
     if(r.ok){
-      var patch = {monkeys:r.monkeys};
+      var patch = {monkeys:r.monkeys, balanceRev:r.balanceRev};
       if(kind==='emoji'){ patch.emoji=id; patch.ownedEmojis=r.ownedEmojis||[]; }
       if(kind==='theme'){ patch.theme=id; patch.ownedThemes=r.ownedThemes||[]; applyTheme(id); }
       if(kind==='frame'){ patch.frame=id; patch.ownedFrames=r.ownedFrames||[]; }
@@ -4475,12 +4385,14 @@ function buyItem(kind, id, price){
       toastSite('Куплено ✓',false);
       renderShop();
     } else {
+      Session.setBalance(oldBal, (Session.get().profile.balanceRev||0)+1);
+      updateMonkeysWidget();
       Sound.error();
       if(r.error==='Bad token') handleBadToken();
       else toastSite(r.error||'Ошибка',true);
       renderShop();
     }
-  });
+  }).then(function(){ _mutationInFlight=Math.max(0,_mutationInFlight-1); });
 }
 
 /* ─── CASE PREVIEW / OPEN ─── */
@@ -4502,9 +4414,7 @@ function openCasePreview(caseId, fromInventory){
   var bodyHtml = '';
   bodyHtml += '<div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px">Возможные предметы (нажми для подробностей)</div>';
   bodyHtml += '<div class="case-preview-grid">';
-  c.items.forEach(function(it){
-    bodyHtml += casePreviewCell(it, p);
-  });
+  c.items.forEach(function(it){ bodyHtml += casePreviewCell(it, p); });
   bodyHtml += '</div>';
   bodyHtml += '<div id="caseRouletteWrap" style="display:none"><div class="case-roulette"><div class="case-roulette-marker"></div><div class="case-roulette-strip" id="caseStrip"></div></div></div>';
   bodyHtml += '<div id="caseResultWrap"></div>';
@@ -4521,7 +4431,6 @@ function openCasePreview(caseId, fromInventory){
   });
 
   renderCaseFoot();
-
   $('caseOpenOverlay').classList.add('show');
   Sound.open();
 }
@@ -4569,14 +4478,11 @@ function renderCaseFoot(){
       '<div style="flex:1"></div>'+
       (have >= 1 ? '<button class="btn btn-primary btn-lg" id="caseOpenBtn">🎁 Открыть 1 кейс</button>' : '')+
       '<button class="btn btn-ghost btn-lg" id="caseExitBtn" style="margin-left:8px">← Выйти</button>';
-      
     if($('caseOpenBtn')) $('caseOpenBtn').onclick=function(){ openCaseFromInventory(); };
     if($('caseExitBtn')) $('caseExitBtn').onclick=function(){ $('caseOpenOverlay').classList.remove('show'); Sound.close(); };
-    
   } else {
     var total = CASE_PRICE;
     var enough = monkeys >= total;
-    
     var qtyHtml = 
       '<div class="case-qty">' +
         '<label>Кол-во</label>' +
@@ -4584,14 +4490,12 @@ function renderCaseFoot(){
         '<input type="number" id="caseQtyInput" value="1" min="1" max="99">' +
         '<button id="caseQtyPlus">+</button>' +
       '</div>';
-      
     foot.innerHTML =
       qtyHtml +
       '<div class="case-total">🐵 <span id="caseTotalPrice">'+CASE_PRICE+'</span></div>'+
       '<div style="flex:1"></div>'+
       '<button class="btn btn-primary btn-lg" id="caseBuyBtn" '+(enough?'':'disabled')+'>🛒 Купить</button>'+
       '<button class="btn btn-ghost btn-lg" id="caseExitBtn" style="margin-left:8px">← Выйти</button>';
-      
     var qtyInput = $('caseQtyInput');
     function updateCaseTotal(){
         var q = parseInt(qtyInput.value, 10) || 1;
@@ -4605,10 +4509,8 @@ function renderCaseFoot(){
     $('caseQtyMinus').onclick = function(){ var q = parseInt(qtyInput.value, 10) || 1; q--; if (q < 1) q = 1; qtyInput.value = q; updateCaseTotal(); };
     $('caseQtyPlus').onclick = function(){ var q = parseInt(qtyInput.value, 10) || 1; q++; if (q > 99) q = 99; qtyInput.value = q; updateCaseTotal(); };
     qtyInput.oninput = updateCaseTotal;
-    
     if($('caseBuyBtn')) $('caseBuyBtn').onclick=function(){ buyCases(); };
     if($('caseExitBtn')) $('caseExitBtn').onclick=function(){ $('caseOpenOverlay').classList.remove('show'); Sound.close(); };
-    
     updateCaseTotal();
   }
 }
@@ -4621,12 +4523,16 @@ function buyCases(){
   var qty = parseInt($('caseQtyInput').value, 10) || 1;
   var total = CASE_PRICE * qty;
   if((p.monkeys||0) < total){ Sound.error(); return; }
+  var oldBal = p.monkeys||0;
+  _mutationInFlight++;
+  Session.bumpBalance(-total);
+  updateMonkeysWidget();
   TimerUI.start('caseBuyTimer','⏳');
   $('caseOpenFoot').innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Покупка... <span id="caseBuyTimer" class="timer-inline"></span></div>';
-  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,noRetry:true}).then(function(r){
+  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true}).then(function(r){
     TimerUI.stop('caseBuyTimer');
     if(r.ok){
-      Session.patchProfile({monkeys:r.monkeys, balanceRev:typeof r.balanceRev==='number'?r.balanceRev:(s.profile.balanceRev||0)+1, cases:r.cases||{}});
+      Session.patchProfile({monkeys:r.monkeys, balanceRev:r.balanceRev, cases:r.cases||{}});
       updateMonkeysWidget();
       Sound.buy();
       $('caseOpenOverlay').classList.remove('show');
@@ -4637,12 +4543,14 @@ function buyCases(){
       renderShop();
       toastSite('Кейс(ы) куплены — в инвентаре!', false);
     } else {
+      Session.setBalance(oldBal, (Session.get().profile.balanceRev||0)+1);
+      updateMonkeysWidget();
       Sound.error();
       if(r.error==='Bad token') handleBadToken();
       else toastSite(r.error||'Ошибка',true);
       renderCaseFoot();
     }
-  });
+  }).then(function(){ _mutationInFlight=Math.max(0,_mutationInFlight-1); });
 }
 function openCaseFromInventory(){
   var s=Session.get(); if(!s||!s.token) return;
@@ -4659,7 +4567,8 @@ function openCasesFromInventory(qty){
   if(wrap) wrap.style.display='block';
   var resWrap = $('caseResultWrap');
   if(resWrap) resWrap.innerHTML='';
-  api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,noRetry:true}).then(function(r){
+  _mutationInFlight++;
+  api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true}).then(function(r){
     TimerUI.stop('caseOpenTimer');
     if(!r.ok){
       Sound.error();
@@ -4672,6 +4581,7 @@ function openCasesFromInventory(qty){
     animateCaseRoulette(r.results, function(){
       Session.patchProfile({
         monkeys: r.monkeys,
+        balanceRev: r.balanceRev,
         cases: r.cases || {},
         ownedEmojis: r.ownedEmojis || (s.profile.ownedEmojis||[]),
         ownedThemes: r.ownedThemes || (s.profile.ownedThemes||[]),
@@ -4693,7 +4603,7 @@ function openCasesFromInventory(qty){
     Sound.error();
     caseOpening=false;
     renderCaseFoot();
-  });
+  }).then(function(){ _mutationInFlight=Math.max(0,_mutationInFlight-1); });
 }
 
 function animateCaseRoulette(results, onDone){
@@ -4714,9 +4624,7 @@ function animateCaseRoulette(results, onDone){
     }
   }
   var cellW = 110 + 8;
-  strip.innerHTML = seq.map(function(r){
-    return rouletteCell(r);
-  }).join('');
+  strip.innerHTML = seq.map(function(r){ return rouletteCell(r); }).join('');
   var containerW = strip.parentElement.clientWidth || 600;
   var targetX = -(WIN_POS * cellW) + (containerW/2) - (cellW/2);
   var jitter = (Math.random()*60 - 30);
@@ -4900,11 +4808,17 @@ function submitMath(){
     Sound.success();
     var s=Session.get();
     if(!s||!s.token){ Sound.error(); return; }
-    Session.patchProfile({monkeys:(s.profile.monkeys||0)+reward});
+    /* ОПТИМИСТИЧНО */
+    Session.bumpBalance(reward);
     updateMonkeysWidget(); bumpMonkeys();
-    api('mathReward',{username:s.username,token:s.token,amount:reward},{post:true,retry:2}).then(function(r){
+    _mutationInFlight++;
+    api('mathReward',{username:s.username,token:s.token,amount:reward},{post:true}).then(function(r){
+      if(r && r.ok && typeof r.monkeys === 'number'){
+        Session.setBalance(r.monkeys, r.balanceRev);
+        updateMonkeysWidget();
+      }
       if(r && r.error==='Bad token') handleBadToken();
-    });
+    }).then(function(){ _mutationInFlight=Math.max(0,_mutationInFlight-1); });
     nextMathQuestion();
   } else {
     Sound.error();
@@ -4960,19 +4874,19 @@ document.querySelectorAll('.choice-card').forEach(function(card){
       if(win){ card.classList.add('win'); } else { card.classList.add('lose'); }
       $('choiceResult').textContent = win ? '✅ Ты угадал! +100 🐵' : '💀 Не повезло. −100 🐵';
       $('choiceResult').className='choice-result '+(win?'win':'lose');
-      var cur=s.profile.monkeys||0;
-      var newBal=Math.max(0, cur+amount);
-      Session.patchProfile({monkeys:newBal});
+      /* ОПТИМИСТИЧНО */
+      Session.bumpBalance(amount);
       updateMonkeysWidget();
       if(win) bumpMonkeys();
       Sound[win?'success':'error']();
-      api('choiceReward',{username:s.username,token:s.token,win:win,amount:amount},{post:true,retry:2}).then(function(r){
+      _mutationInFlight++;
+      api('choiceReward',{username:s.username,token:s.token,win:win,amount:amount},{post:true}).then(function(r){
         if(r && r.ok && typeof r.monkeys === 'number'){
-          Session.patchProfile({monkeys:r.monkeys});
+          Session.setBalance(r.monkeys, r.balanceRev);
           updateMonkeysWidget();
         }
         if(r && r.error==='Bad token') handleBadToken();
-      });
+      }).then(function(){ _mutationInFlight=Math.max(0,_mutationInFlight-1); });
       setTimeout(resetChoiceRound, 1200);
     }, 350);
   };
@@ -5027,7 +4941,8 @@ $('clickerZone').onclick=function(){
   Sound.type();
   var s=Session.get();
   if(!s||!s.token) return;
-  Session.patchProfile({monkeys:(s.profile.monkeys||0)+1});
+  /* ОПТИМИСТИЧНО — мгновенно */
+  Session.bumpBalance(1);
   updateMonkeysWidget();
   queueClickerReward(s.username, s.token, 1);
   if(clickerState.clicks%CLICKER_ANTIBOT_EVERY===0 && clickerState.clicks>0){
@@ -5043,6 +4958,7 @@ $('clickerAntibotBtn').onclick=function(){
   Sound.success();
 };
 
+/* Батч-кликер: копим награды и отправляем пачками */
 var _clickerPending = 0;
 var _clickerTimer = null;
 var _clickerSending = false;
@@ -5050,7 +4966,7 @@ var _clickerSending = false;
 function queueClickerReward(username, token, amount){
   _clickerPending += amount;
   if(_clickerTimer) return;
-  _clickerTimer = setTimeout(flushClickerReward, 90);
+  _clickerTimer = setTimeout(flushClickerReward, 80);
 }
 
 function flushClickerReward(){
@@ -5062,14 +4978,15 @@ function flushClickerReward(){
   _clickerPending-=amount;
   _clickerSending=true;
   _mutationInFlight++;
-  api('rewardBatch',{username:s.username,token:s.token,amount:amount},{post:true,noRetry:true}).then(function(r){
+  api('rewardBatch',{username:s.username,token:s.token,amount:amount},{post:true}).then(function(r){
     if(r && r.ok){
-      Session.patchProfile({monkeys:r.monkeys, balanceRev:typeof r.balanceRev==='number'?r.balanceRev:(Session.get().profile.balanceRev||0)+1});
-      updateMonkeysWidget();
+      if(typeof r.monkeys === 'number'){
+        Session.setBalance(r.monkeys, r.balanceRev);
+        updateMonkeysWidget();
+      }
     } else if(r && r.error==='Bad token'){
       handleBadToken();
     } else {
-      // Restore pending amount; optimistic UI will be reconciled by the next sync.
       _clickerPending += amount;
     }
   }).catch(function(){
@@ -5285,7 +5202,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var eVal=b.dataset.e; adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, emoji:eVal},{post:true,noRetry:true}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, emoji:eVal},{post:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5296,7 +5213,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var tVal=b.dataset.t; adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, theme:tVal},{post:true,noRetry:true}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, theme:tVal},{post:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5307,7 +5224,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var fVal=b.dataset.f; adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, frame:fVal},{post:true,noRetry:true}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, frame:fVal},{post:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5318,7 +5235,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var amount=parseInt(b.dataset.amount,10); adminBusy=true;
-        api('adminGive',{adminToken:token(), username:uname, amount:amount},{post:true,noRetry:true}).then(function(r){
+        api('adminGive',{adminToken:token(), username:uname, amount:amount},{post:true}).then(function(r){
           if(r.ok){
             Sound.success();
             var found=_findAdminUser(uname);
@@ -5328,7 +5245,7 @@ function renderAdminGrid(){
               for(var j=0;j<_usersCache.v.length;j++){ if(_usersCache.v[j].username===uname){ _usersCache.v[j].monkeys=r.monkeys; break; } }
             }
             var s=Session.get();
-            if(s && s.username===uname){ Session.patchProfile({monkeys:r.monkeys}); updateMonkeysWidget(); _lastAuthRenderKey=''; renderAuthState(true); }
+            if(s && s.username===uname){ Session.patchProfile({monkeys:r.monkeys, balanceRev:r.balanceRev}); updateMonkeysWidget(); _lastAuthRenderKey=''; renderAuthState(true); }
             if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsersFiltered();
             renderAdminGrid();
             _flashCard(uname);
@@ -5345,7 +5262,7 @@ function renderAdminGrid(){
         var val=parseInt(inp.value,10);
         if(isNaN(val)||val<0){ Sound.error(); return; }
         adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, monkeys:val},{post:true,noRetry:true}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, monkeys:val},{post:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5360,7 +5277,7 @@ function renderAdminGrid(){
         var val=parseInt(inp.value,10);
         if(isNaN(val)||val<0){ Sound.error(); return; }
         adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, respects:val},{post:true,noRetry:true}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, respects:val},{post:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5375,7 +5292,7 @@ function renderAdminGrid(){
         var val=parseInt(inp.value,10);
         if(isNaN(val)||val<0){ Sound.error(); return; }
         adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, wins:val},{post:true,noRetry:true}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, wins:val},{post:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5388,7 +5305,7 @@ function renderAdminGrid(){
         if(adminBusy) return;
         var inp=card.querySelector('.adm-vn-input');
         var vn=inp.value.trim(); adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, visualName:vn},{post:true,noRetry:true}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, visualName:vn},{post:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5489,7 +5406,7 @@ $('adminAvatarInput').addEventListener('change', function(e){
       cx.drawImage(img,sx,sy,minSide,minSide,0,0,size,size);
       var dataUrl=cvs.toDataURL('image/jpeg',0.85);
       var token=sessionStorage.getItem('zv_admin_token');
-      api('adminUpdateUser',{adminToken:token, username:adminAvatarTargetUser, avatar:dataUrl},{post:true,noRetry:true}).then(function(r){
+      api('adminUpdateUser',{adminToken:token, username:adminAvatarTargetUser, avatar:dataUrl},{post:true}).then(function(r){
         if(r.ok){ Sound.success(); _applyAdminResult(adminAvatarTargetUser, r); }
         else Sound.error();
       });

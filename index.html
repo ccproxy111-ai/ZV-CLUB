@@ -196,9 +196,6 @@ body.logged-in .sidebar{display:flex}
 .sidebar-item.shop{border-color:rgba(251,191,36,.35)}
 .sidebar-item.shop:hover{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.6);color:#fbbf24}
 .sidebar-item.shop.active{background:rgba(251,191,36,.18);border-color:rgba(251,191,36,.6);color:#fbbf24}
-.sidebar-item.shooter{border-color:rgba(239,68,68,.4)}
-.sidebar-item.shooter:hover{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.7);color:#ff6b6b}
-.sidebar-item.shooter.active{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.8);color:#ff6b6b}
 
 .user-wrap{position:relative}
 .avatar-btn{display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:999px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:border-color .3s var(--ease),background .3s var(--ease);color:var(--fg)}
@@ -318,7 +315,7 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .modal-overlay{position:fixed;inset:0;background:rgba(8,8,10,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
 .modal-overlay.show{display:flex;animation:fadeIn .35s var(--ease)}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-#unsavedOverlay,#respectOverlay,#buyOverlay,#deleteOverlay,#earnMathExitOverlay,#earnChoiceExitOverlay,#earnClickerExitOverlay,#tokenExpiredOverlay,#logsOverlay,#notEnoughOverlay,#caseOpenOverlay,#shooterExitOverlay,#shooterStartOverlay{z-index:600}
+#unsavedOverlay,#respectOverlay,#buyOverlay,#deleteOverlay,#earnMathExitOverlay,#earnChoiceExitOverlay,#earnClickerExitOverlay,#tokenExpiredOverlay,#logsOverlay,#notEnoughOverlay,#caseOpenOverlay{z-index:600}
 #buyOverlay{z-index:700} 
 
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:30px 28px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative;animation:modalIn .5s var(--ease-out)}
@@ -339,8 +336,6 @@ body.logged-in .dashboard{display:flex;animation:fadeUp .7s var(--ease)}
 .confirm-icon.blue svg{stroke:#7c5cff}
 .confirm-icon.warn{background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)}
 .confirm-icon.warn svg{stroke:#fbbf24}
-.confirm-icon.green{background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.3)}
-.confirm-icon.green svg{stroke:#4ade80}
 .confirm-title{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--fg)}
 .confirm-text{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:22px}
 .confirm-actions{display:flex;gap:10px}
@@ -788,7 +783,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .earn-card.math{background:linear-gradient(135deg,rgba(34,211,238,.16),var(--bg2),var(--bg3))}
 .earn-card.choice{background:linear-gradient(135deg,rgba(251,191,36,.16),var(--bg2),var(--bg3))}
 .earn-card.clicker{background:linear-gradient(135deg,rgba(74,222,128,.16),var(--bg2),var(--bg3))}
-.earn-card.shooter{background:linear-gradient(135deg,rgba(239,68,68,.16),var(--bg2),var(--bg3))}
 
 .earn-play{display:none;flex-direction:column;gap:18px;width:100%;max-width:720px;margin:0 auto;animation:fadeUp .5s var(--ease)}
 .earn-play.active{display:flex}
@@ -964,36 +958,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .case-result-card .crc-big{font-size:44px;line-height:1}
 .case-result-card .crc-name{font-size:15px;font-weight:900;color:var(--fg)}
 .case-result-card .crc-cashback{font-size:12px;color:#fbbf24;font-weight:700}
-
-/* ===== SHOOTER ===== */
-#shooterOverlay{position:fixed;inset:0;background:#000;z-index:9999;display:none;overflow:hidden;cursor:none}
-#shooterOverlay.show{display:block}
-#shooterCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.shooter-crosshair{position:absolute;width:22px;height:22px;pointer-events:none;transform:translate(-50%,-50%);z-index:10}
-.shooter-crosshair::before,.shooter-crosshair::after{content:'';position:absolute;background:rgba(255,50,50,.85);box-shadow:0 0 6px rgba(255,0,0,.9)}
-.shooter-crosshair::before{left:50%;top:0;width:2px;height:100%;transform:translateX(-50%)}
-.shooter-crosshair::after{top:50%;left:0;height:2px;width:100%;transform:translateY(-50%)}
-.shooter-crosshair .dot{position:absolute;left:50%;top:50%;width:4px;height:4px;background:rgba(255,50,50,1);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 8px rgba(255,0,0,1)}
-.shooter-hud{position:absolute;top:0;left:0;right:0;padding:20px 30px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:20;font-family:'Courier New',monospace;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.9)}
-.shooter-hud-left{display:flex;flex-direction:column;gap:4px}
-.shooter-hud-right{text-align:right;display:flex;flex-direction:column;gap:4px}
-.shooter-hud .hud-label{font-size:11px;letter-spacing:2px;color:#ff6b6b;text-transform:uppercase;font-weight:700}
-.shooter-hud .hud-value{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}
-.shooter-timer{font-size:34px;font-weight:900;color:#fbbf24;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(251,191,36,.9)}
-.shooter-timer.danger{color:#ff3333;animation:shooterTimerPulse .5s ease infinite}
-@keyframes shooterTimerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
-.shooter-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:12px;letter-spacing:1px;z-index:20;pointer-events:none;font-family:'Courier New',monospace}
-.shooter-damage-flash{position:absolute;inset:0;background:radial-gradient(circle,transparent 40%,rgba(255,0,0,.4) 100%);opacity:0;pointer-events:none;z-index:5;transition:opacity .15s}
-.shooter-damage-flash.show{opacity:1}
-.shooter-muzzle{position:absolute;bottom:8%;right:12%;width:180px;height:120px;pointer-events:none;z-index:8;opacity:0;transition:opacity .04s}
-.shooter-muzzle.flash{opacity:1}
-.shooter-muzzle::before{content:'';position:absolute;right:20px;bottom:20px;width:100px;height:100px;background:radial-gradient(circle,rgba(255,220,100,1),rgba(255,120,0,.6),transparent 70%);border-radius:50%}
-.shooter-gun{position:absolute;bottom:0;right:3%;width:280px;height:200px;pointer-events:none;z-index:7;transform-origin:bottom right;transition:transform .06s;filter:drop-shadow(0 0 12px rgba(0,0,0,.9))}
-.shooter-gun.recoil{transform:translate(6px,-10px) rotate(-4deg)}
-.shooter-hits{position:absolute;top:80px;right:30px;display:flex;flex-direction:column;gap:4px;pointer-events:none;z-index:20;align-items:flex-end}
-.shooter-hit{font-family:'Courier New',monospace;font-size:16px;font-weight:900;color:#ffcc00;text-shadow:0 2px 6px rgba(0,0,0,.9);animation:hitPop .8s ease forwards;opacity:1}
-@keyframes hitPop{0%{transform:translateX(20px) scale(.6);opacity:0}20%{transform:translateX(0) scale(1.2);opacity:1}100%{transform:translateY(-40px);opacity:0}}
-@media(max-width:640px){.shooter-hud{padding:14px 16px}.shooter-hud .hud-value{font-size:20px}.shooter-timer{font-size:24px}.shooter-gun{width:180px;height:130px}}
 
 @media(max-width:1000px){
   .wheel-layout{grid-template-columns:1fr}
@@ -1257,14 +1221,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 .inv-customize-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;margin-top:6px;border-radius:14px;border:1px dashed var(--border2);background:var(--bg2);color:var(--muted);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease),transform .25s var(--ease)}
 .inv-customize-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--fg);transform:translateY(-2px)}
 .inv-customize-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}} </style>
-
-<style id="shooter-v2-css">
-#shooterOverlay{cursor:none;background:#020306}
-#shooterCanvas{image-rendering:auto}
-.shooter-settings-modal{max-width:460px}.shooter-setting-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:14px 0}.shooter-setting-row strong{font-size:20px;color:var(--gold)}#shooterSensRange{width:100%;accent-color:var(--gold)}.shooter-setting-hint{font-size:12px;color:var(--muted);padding:12px 0}
 </style>
-
 </head>
 <body class="theme-dark">
 
@@ -1376,7 +1333,7 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
         </div>
         <div class="dash-card" data-action="earn">
           <h3>💰 Заработок обезьян</h3>
-          <p>Четыре режима: математика, 1 или 2, кликер, стрельба. Зарабатывай 🐵 без риска.</p>
+          <p>Три режима: математика, 1 или 2, кликер. Зарабатывай 🐵 без риска.</p>
         </div>
         <div class="dash-card" data-action="wheel">
           <h3>🎡 Колесо Фортуны</h3>
@@ -1470,13 +1427,6 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
           <div class="ec-title">Кликер</div>
           <div class="ec-sub">Жми и зарабатывай</div>
           <div class="ec-desc">Каждый клик — +1 🐵. Есть микро-задержка и антибот-проверка каждые 80 нажатий.</div>
-        </div>
-        <div class="earn-card shooter" data-mode="shooter">
-          <div class="ec-badge">FPS</div>
-          <div class="ec-ico">🎯</div>
-          <div class="ec-title">Стрельба</div>
-          <div class="ec-sub">Тренируй аим</div>
-          <div class="ec-desc">6 динамичных манекенов. На убийство пачки — 5 секунд. За каждого: +1–3 🐵. Управление: мышь — камера, ЛКМ — выстрел, U — курсор, L — выход.</div>
         </div>
       </div>
 
@@ -1759,7 +1709,7 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
     <div class="confirm-body">
       <div class="confirm-icon blue"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
       <div class="confirm-title">Выйти из математики?</div>
-      <div class="confirm-text">Текущая сессия завершится. Заработанные 🐵 останутся у тебя. Количество будет показано перед выходом.</div>
+      <div class="confirm-text">Текущая сессия завершится. Заработанные 🐵 останутся у тебя.</div>
       <div class="confirm-actions">
         <button class="btn btn-ghost" id="earnMathExitNo">Продолжить</button>
         <button class="btn btn-danger" id="earnMathExitYes">Выйти</button>
@@ -1791,34 +1741,6 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
       <div class="confirm-actions">
         <button class="btn btn-ghost" id="earnClickerExitNo">Продолжить</button>
         <button class="btn btn-danger" id="earnClickerExitYes">Выйти</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="shooterStartOverlay">
-  <div class="modal" style="max-width:400px;">
-    <div class="confirm-body">
-      <div class="confirm-icon green"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
-      <div class="confirm-title">Начать стрельбу?</div>
-      <div class="confirm-text">Управление: мышь — камера, ЛКМ — выстрел, <b>U</b> — разблокировать курсор, <b>L</b> — выход.<br>6 манекенов, 5 секунд на пачку. За убийство: +1–3 🐵.</div>
-      <div class="confirm-actions">
-        <button class="btn btn-ghost" id="shooterStartNo">Отмена</button>
-        <button class="btn btn-primary" id="shooterStartYes">🎯 Начать</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="shooterExitOverlay">
-  <div class="modal" style="max-width:400px;">
-    <div class="confirm-body">
-      <div class="confirm-icon warn"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
-      <div class="confirm-title">Выйти из стрельбы?</div>
-      <div class="confirm-text">Заработанные 🐵 останутся у тебя.</div>
-      <div class="confirm-actions">
-        <button class="btn btn-ghost" id="shooterExitNo">Продолжить</button>
-        <button class="btn btn-danger" id="shooterExitYes">Выйти</button>
       </div>
     </div>
   </div>
@@ -1992,40 +1914,6 @@ img{content-visibility:auto;} @media (prefers-reduced-motion:reduce){*,*::before
   </div>
 </div>
 
-<div id="shooterOverlay">
-  <canvas id="shooterCanvas"></canvas>
-  <div class="shooter-crosshair" id="shooterCrosshair" style="left:50%;top:50%"><span class="dot"></span></div>
-  <div class="shooter-damage-flash" id="shooterFlash"></div>
-  <div class="shooter-gun" id="shooterGun">
-    <svg viewBox="0 0 280 200">
-      <rect x="40" y="80" width="180" height="40" rx="8" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
-      <rect x="200" y="88" width="60" height="24" rx="4" fill="#0d0d0d" stroke="#222" stroke-width="2"/>
-      <rect x="20" y="95" width="50" height="20" rx="4" fill="#222"/>
-      <rect x="60" y="120" width="60" height="70" rx="6" fill="#151515" stroke="#333" stroke-width="2"/>
-      <rect x="120" y="100" width="40" height="60" rx="6" fill="#111" stroke="#2a2a2a" stroke-width="2"/>
-      <circle cx="230" cy="100" r="8" fill="#333"/>
-      <rect x="225" y="90" width="6" height="20" fill="#444"/>
-    </svg>
-  </div>
-  <div class="shooter-muzzle" id="shooterMuzzle"></div>
-  <div class="shooter-hud">
-    <div class="shooter-hud-left">
-      <span class="hud-label">Score</span>
-      <span class="hud-value" id="shooterKills">0</span>
-      <span class="hud-label" style="margin-top:8px">Заработано</span>
-      <span class="hud-value" id="shooterEarned">0 🐵</span>
-    </div>
-    <div class="shooter-hud-right">
-      <span class="hud-label">Время</span>
-      <span class="shooter-timer" id="shooterTimer">5.0</span>
-      <span class="hud-label" style="margin-top:8px">Патроны</span>
-      <span class="hud-value" id="shooterAmmo">∞</span>
-    </div>
-  </div>
-  <div class="shooter-hits" id="shooterHits"></div>
-  <div class="shooter-hint">ЛКМ — выстрел · U — курсор · L — выход</div>
-</div>
-
 <input type="file" id="adminAvatarInput" accept="image/*" style="display:none">
 
 <script>
@@ -2035,6 +1923,7 @@ var HEARTBEAT_MS = 30000;
 var FETCH_TIMEOUT = 12000;
 var POST_TIMEOUT = 15000;
 var QUEUE_TIMEOUT = 20000;
+var DIRECT_POST_ACTIONS = {claimDaily:true, clickerReward:true, mathReward:true, choiceReward:true, rewardBatch:true};
 var WHEEL_SPIN_MS = 5200;
 var WHEEL_SPIN_COOLDOWN = 800;
 var USERS_CACHE_TTL = 30000;
@@ -2042,8 +1931,6 @@ var THEME_PREVIEW_DURATION = 10;
 var CLICKER_ANTIBOT_MIN_DELAY = 80;
 var CLICKER_ANTIBOT_EVERY = 80;
 var CASE_PRICE = 750;
-var SHOOTER_PACK_TIME = 5000;
-var SHOOTER_DUMMIES = 6;
 
 var RARITY = {
   common:    { label:'Обычный',    cls:'common',    cashback:0.05 },
@@ -2149,22 +2036,20 @@ var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
   {
-    ver:'BETA 0.26', cls:'v2', title:'Возврат анимаций + Стрельба',
-    items:[
-      { tag:'new', text:'Добавлен 4-й режим заработка — «Стрельба» (FPS).' },
-      { tag:'new', text:'6 динамичных манекенов, 5 секунд на пачку, +1–3 🐵 за убийство.' },
-      { tag:'fix', text:'Возвращены все анимации: прокрутка кейсов, колесо, кнопки, фоны.' },
-      { tag:'fix', text:'Восстановлены анимированные фоны (Бездна, Обезьяны, Божественная, RGB).' },
-      { tag:'upd', text:'Сайт стал быстрее: оптимизация рендера и запросов.' }
-    ]
-  },
-  {
     ver:'BETA 0.25', cls:'v2', title:'Исправлен вход и пароли',
     items:[
       { tag:'fix', text:'Логин теперь работает надёжно: пароль хешируется на сервере.' },
       { tag:'fix', text:'Убрана зависимость от crypto.subtle — работает в любом браузере.' },
       { tag:'fix', text:'Смена пароля и удаление аккаунта работают корректно.' },
       { tag:'upd', text:'Скорость входа и регистрации увеличена.' }
+    ]
+  },
+  {
+    ver:'BETA 0.24', cls:'v2', title:'Фикс логина и колеса',
+    items:[
+      { tag:'fix', text:'Убрана блокировка после нескольких неудачных попыток входа.' },
+      { tag:'fix', text:'Ежедневный подарок теперь не откатывается и не зависает.' },
+      { tag:'fix', text:'Колесо Фортуны работает без рассинхрона баланса.' }
     ]
   }
 ];
@@ -2229,9 +2114,6 @@ var Sound = (function(){
     wheelJackpot:function(){tone(523,.08);setTimeout(function(){tone(659,.08);},80);setTimeout(function(){tone(784,.08);},160);setTimeout(function(){tone(1046,.12);},240);setTimeout(function(){tone(1318,.3);},360);},
     caseOpen:function(){tone(400,.05,'square',.03);},
     caseWin:function(legendary){ if(legendary){ this.wheelJackpot(); } else { this.reward(); } },
-    shoot:function(){ tone(180,.06,'square',.08); setTimeout(function(){tone(80,.1,'sawtooth',.1);},20); },
-    hit:function(){ tone(900,.05,'square',.06); setTimeout(function(){tone(1400,.08,'sine',.05);},40); },
-    reload:function(){ tone(300,.08,'square',.05); setTimeout(function(){tone(500,.06,'square',.05);},80); },
     setEnabled:function(on){enabled=on;localStorage.setItem('zv_sound',on?'on':'off');},
     isEnabled:function(){return enabled;}
   };
@@ -2263,37 +2145,40 @@ var OnlineUsers = {
 };
 
 var RequestQueue = (function(){
-  var queue = [], active = 0, MAX = 4;
+  var queue = [], running = false;
   function run(){
-    while(active < MAX && queue.length){
-      active++;
-      (function(item){
-        var settled=false;
-        function finish(res){
-          if(settled) return; settled=true;
-          active--; item.resolve(res); setTimeout(run,0);
-        }
-        var timeout=setTimeout(function(){
-          finish({ok:false,error:'queue timeout',retryable:true});
-        }, QUEUE_TIMEOUT);
-        item.fn().then(function(res){
-          clearTimeout(timeout); finish(res);
-        }).catch(function(err){
-          clearTimeout(timeout);
-          finish({ok:false,error:(err&&err.message)||'queue error'});
-        });
-      })(queue.shift());
-    }
+    if(running || !queue.length) return;
+    running = true;
+    var item = queue.shift();
+    var timeout = setTimeout(function(){
+      running = false;
+      item.resolve({ok:false, error:'queue timeout'});
+      setTimeout(run, 0);
+    }, QUEUE_TIMEOUT);
+    item.fn().then(function(res){
+      clearTimeout(timeout);
+      running = false;
+      item.resolve(res);
+      setTimeout(run, 0);
+    }).catch(function(err){
+      clearTimeout(timeout);
+      running = false;
+      item.resolve({ok:false, error:(err && err.message) || 'queue error'});
+      setTimeout(run, 0);
+    });
   }
-  return { push:function(fn){
-    return new Promise(function(resolve){ queue.push({fn:fn,resolve:resolve}); run(); });
-  }};
+  return {
+    push:function(fn){
+      return new Promise(function(resolve){
+        queue.push({fn:fn, resolve:resolve});
+        run();
+      });
+    }
+  };
 })();
 
 var _cbId = 0;
 var _cache = Object.create(null);
-var _inflight = Object.create(null);
-var _mutationEpoch = 0;
 function _cacheKey(action,payload){ return action+'|'+JSON.stringify(payload); }
 function _cacheGet(key,ttl){
   var hit=_cache[key];
@@ -2305,73 +2190,89 @@ function _cacheDelPrefix(prefix){ for(var k in _cache){ if(k.indexOf(prefix)===0
 
 function _jsonpOnce(action, payload){
   return new Promise(function(resolve){
-    var cb='zvc_'+(++_cbId)+'_'+(nowMs()%100000), done=false;
-    var timer=setTimeout(function(){ finish({ok:false,error:'timeout',retryable:true}); }, FETCH_TIMEOUT);
+    var cb='zvc_'+(++_cbId)+'_'+(nowMs()%100000);
+    var done=false;
+    var timer=setTimeout(function(){ finish({ok:false,error:'timeout'}); }, FETCH_TIMEOUT);
     function finish(data){
-      if(done) return; done=true; clearTimeout(timer);
+      if(done) return; done=true;
+      clearTimeout(timer);
       try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
-      var el=document.getElementById(cb+'_s'); if(el&&el.parentNode) el.parentNode.removeChild(el);
+      var el=document.getElementById(cb+'_s');
+      if(el && el.parentNode) el.parentNode.removeChild(el);
       resolve(data);
     }
     window[cb]=finish;
     var q=['action='+encodeURIComponent(action)];
     for(var k in payload){
-      var v=payload[k]; if(v===null||v===undefined) continue;
+      var v=payload[k];
+      if(v===null||v===undefined) continue;
       q.push(encodeURIComponent(k)+'='+encodeURIComponent(v));
     }
-    q.push('callback='+cb); q.push('_t='+nowMs());
-    var s=document.createElement('script'); s.id=cb+'_s'; s.async=true;
-    s.src=API_URL+'?'+q.join('&'); s.onerror=function(){ finish({ok:false,error:'network',retryable:true}); };
+    q.push('callback='+cb);
+    q.push('_t='+nowMs());
+    var s=document.createElement('script');
+    s.id=cb+'_s'; s.async=true;
+    s.src=API_URL+'?'+q.join('&');
+    s.onerror=function(){ finish({ok:false,error:'network'}); };
     (document.head||document.body).appendChild(s);
   });
 }
+
 function _postOnce(action, payload){
   return new Promise(function(resolve){
-    var ctrl=('AbortController' in window)?new AbortController():null, finished=false;
-    var timer=setTimeout(function(){
-      if(ctrl) try{ctrl.abort();}catch(e){}
-      if(!finished){ finished=true; resolve({ok:false,error:'timeout',retryable:true}); }
-    },POST_TIMEOUT);
-    var body=JSON.stringify(Object.assign({action:action},payload));
-    fetch(API_URL,{method:'POST',mode:'cors',redirect:'follow',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},body:body,
-      signal:ctrl?ctrl.signal:undefined})
-    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
-    .then(function(txt){
-      if(finished)return; finished=true; clearTimeout(timer);
-      try{resolve(JSON.parse(txt));}catch(e){resolve({ok:false,error:'bad json',retryable:true});}
-    }).catch(function(err){
-      if(finished)return; finished=true; clearTimeout(timer);
-      resolve({ok:false,error:(err&&err.name==='AbortError')?'timeout':'network',retryable:true});
-    });
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, POST_TIMEOUT);
+    var body = JSON.stringify(Object.assign({action:action}, payload));
+    fetch(API_URL, {
+      method: 'POST', mode: 'cors', redirect: 'follow',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: body, signal: ctrl ? ctrl.signal : undefined
+    }).then(function(r){ return r.text(); })
+      .then(function(txt){
+        clearTimeout(timer);
+        try { resolve(JSON.parse(txt)); }
+        catch(e){ resolve({ ok:false, error:'bad json' }); }
+      })
+      .catch(function(){
+        clearTimeout(timer);
+        resolve({ ok:false, error:'network' });
+      });
   });
 }
-function api(action,payload,opts){
-  payload=payload||{}; opts=opts||{};
-  var usePost=!!opts.post;
-  var key=(!usePost&&opts.cache)?_cacheKey(action,payload):null;
+
+function api(action, payload, opts){
+  payload = payload||{}; opts = opts||{};
+  var usePost = !!opts.post;
+  var key = (!usePost && opts.cache) ? _cacheKey(action,payload) : null;
   if(key){
-    var hit=_cacheGet(key,opts.ttl); if(hit!==null) return Promise.resolve(hit);
-    if(_inflight[key]) return _inflight[key];
+    var hit=_cacheGet(key, opts.ttl);
+    if(hit!==null) return Promise.resolve(hit);
   }
-  var attempts=opts.retry?(opts.retry|0):1;
+
+  // Mutating requests are intentionally not retried: a timeout can mean
+  // that the server already committed the operation. Retrying a purchase
+  // or wheel spin could otherwise double-spend/double-spin.
+  var attempts = opts.noRetry ? 1 : (opts.retry ? (opts.retry|0) : 1);
   function tryOnce(n){
-    var pr=usePost?_postOnce(action,payload):_jsonpOnce(action,payload);
+    var pr = usePost ? _postOnce(action, payload) : _jsonpOnce(action, payload);
     return pr.then(function(res){
-      if(res&&res.ok===false&&res.retryable&&n<attempts){
-        return new Promise(function(r){setTimeout(r,Math.min(1500,250*n));}).then(function(){return tryOnce(n+1);});
+      if(res && res.ok === false &&
+         (res.error === 'network' || res.error === 'timeout' || res.error === 'bad json') &&
+         n < attempts){
+        return new Promise(function(r){ setTimeout(r, 300*n); }).then(function(){ return tryOnce(n+1); });
       }
       return res;
     });
   }
-  var promise=usePost?RequestQueue.push(function(){return tryOnce(1);}):tryOnce(1);
-  if(key){
-    _inflight[key]=promise;
-    promise=promise.then(function(res){delete _inflight[key];if(res&&res.ok)_cacheSet(key,res);return res;},
-                         function(err){delete _inflight[key];throw err;});
+
+  var promise;
+  if(usePost && !DIRECT_POST_ACTIONS[action]){
+    promise = RequestQueue.push(function(){ return tryOnce(1); });
+  } else {
+    promise = tryOnce(1);
   }
   return promise.then(function(res){
-    if(usePost&&action!=='getMyState'&&action!=='validateToken'&&res&&res.ok) _mutationEpoch++;
+    if(key && res && res.ok) _cacheSet(key, res);
     return res;
   });
 }
@@ -2419,6 +2320,12 @@ var Session = (function(){
     patchProfile:function(patch){
       if(!_cached) load();
       if(!_cached || !_cached.profile) return;
+      // Never let an older server snapshot overwrite a newer local balance.
+      if(patch && typeof patch.balanceRev === 'number' &&
+         typeof _cached.profile.balanceRev === 'number' &&
+         patch.balanceRev < _cached.profile.balanceRev){
+        return;
+      }
       for(var k in patch) _cached.profile[k]=patch[k];
       scheduleFlush();
     },
@@ -2429,21 +2336,24 @@ var Session = (function(){
 function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.token : ''; }
 function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
+var _mutationInFlight = 0;
 function silentSync(){
-  var s=Session.get();
-  if(!s||!s.token) return;
-  var epochAtStart=_mutationEpoch, usernameAtStart=s.username;
-  api('getMyState',{username:s.username,token:s.token},{post:true,retry:1}).then(function(res){
-    if(epochAtStart!==_mutationEpoch) return;
-    var current=Session.get();
-    if(!current||current.username!==usernameAtStart) return;
-    if(res&&res.ok&&res.profile){
+  var s = Session.get();
+  if(!s || !s.token) return;
+  // Do not start a full snapshot sync while a balance mutation is still settling.
+  if(_mutationInFlight > 0) return;
+  api('getMyState',{username:s.username,token:s.token},{post:true,noRetry:true}).then(function(res){
+    if(res && res.ok && res.profile){
       Session.patchProfile(res.profile);
       _lastAuthRenderKey='';
       rIC(function(){
-        renderAuthState(); updateMonkeysWidget(); applyTheme(res.profile.theme||'dark');
+        renderAuthState();
+        updateMonkeysWidget();
+        applyTheme(res.profile.theme||'dark');
       });
-    } else if(res&&res.error==='Bad token') handleBadToken();
+    } else if(res && res.error === 'Bad token'){
+      handleBadToken();
+    }
   }).catch(function(){});
 }
 
@@ -2495,7 +2405,7 @@ function passwordStrength(p){
   return Math.min(s,5);
 }
 
-/* ========== AUTH ========== */
+/* ========== AUTH (пароль хешируется на сервере) ========== */
 var Auth = {
   register:function(username,password,password2){
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
@@ -2754,7 +2664,7 @@ function renderAuthState(force){
     if(!s.profile){
       s.profile = {username:s.username, visualName:s.username, avatar:'', bio:'', bannerColor:'#1d1e24',
         monkeys:0, respects:0, follows:0, wins:0, emoji:'', theme:'dark', posts:0, lastDaily:0,
-        ownedEmojis:['','🐔'], ownedThemes:['dark','light'], ownedFrames:['none'], isAdmin:false, isOwner:false, frame:'none',
+        ownedEmojis:['','🐔'], ownedThemes:['dark','light'], ownedFrames:['none'], isAdmin:false, isOwner:false, frame:'none', balanceRev:0,
         cases:{}};
       Session.save(s);
       p=s.profile;
@@ -3213,7 +3123,7 @@ $('wheelSpinBtn').onclick=function(){
   Session.patchProfile({monkeys: bal-bet});
   updateWheelBalance(); updateMonkeysWidget();
 
-  api('spinWheel',{username:s.username,token:s.token,bet:bet},{post:true,retry:3}).then(function(res){
+  api('spinWheel',{username:s.username,token:s.token,bet:bet},{post:true,noRetry:true}).then(function(res){
     if(!res.ok){
       wheelSpinning=false; wheelSpinLock=false;
       $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
@@ -3533,10 +3443,15 @@ $('dailyBtn').onclick=function(){
   if(last && now - last < dayMs) return;
 
   _dailyBusy = true;
-  api('claimDaily',{username:s.username,token:s.token},{post:true,retry:3}).then(function(res){
+  _mutationInFlight++;
+  api('claimDaily',{username:s.username,token:s.token},{post:true,noRetry:true}).then(function(res){
     _dailyBusy = false;
     if(res && res.ok){
-      Session.patchProfile({monkeys:res.monkeys, lastDaily:res.nextAt-24*60*60*1000});
+      Session.patchProfile({
+        monkeys:res.monkeys,
+        balanceRev: (typeof res.balanceRev==='number' ? res.balanceRev : (s.profile.balanceRev||0)+1),
+        lastDaily:res.nextAt-24*60*60*1000
+      });
       updateMonkeysWidget();
       bumpMonkeys();
       showReward(res.reward);
@@ -3549,7 +3464,8 @@ $('dailyBtn').onclick=function(){
     } else {
       Sound.error();
     }
-  }).catch(function(){ _dailyBusy = false; Sound.error(); });
+  }).catch(function(){ _dailyBusy = false; Sound.error(); })
+    .then(function(){ _mutationInFlight=Math.max(0,_mutationInFlight-1); });
 };
 function showReward(amount){
   $('rpAmount').textContent='+'+amount;
@@ -3630,7 +3546,7 @@ function toggleRespect(){
   currentProfile.respects = newCount;
   renderProfile();
   if(newRespect) Sound.success(); else Sound.close();
-  api('toggleRespect',{from:s.username, token:s.token, to:currentProfileUsername},{post:true,retry:3}).then(function(res){
+  api('toggleRespect',{from:s.username, token:s.token, to:currentProfileUsername},{post:true,noRetry:true}).then(function(res){
     if(res && res.ok){
       currentProfileIRespect = res.respect;
       currentProfile.respects = res.count;
@@ -3671,7 +3587,7 @@ function loadProfilePosts(){
         b.onclick=function(){
           var id=b.dataset.id; var s=Session.get();
           if(!s||!s.token) return;
-          api('deletePost',{username:s.username,token:s.token,id:id},{post:true,retry:2}).then(function(r){
+          api('deletePost',{username:s.username,token:s.token,id:id},{post:true,noRetry:true}).then(function(r){
             if(r.ok){ Sound.success(); _cacheDelPrefix('getPosts|'); loadProfilePosts(); }
           });
         };
@@ -3692,7 +3608,7 @@ function loadProfilePosts(){
         list2.insertBefore(div, list2.firstChild);
         $('postText').value='';
         Sound.success();
-        api('addPost',{username:s.username,token:s.token,type:'text',content:text},{post:true,retry:2}).then(function(r){
+        api('addPost',{username:s.username,token:s.token,type:'text',content:text},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ _cacheDelPrefix('getPosts|'); }
           else { div.remove(); Sound.error(); if(r.error==='Bad token') handleBadToken(); }
         });
@@ -3927,7 +3843,7 @@ function saveAccountChanges(){
       bannerGradientColor:tempProfile.bannerGradientColor,
       bannerGradientDir:tempProfile.bannerGradientDir,
       bannerGradientBright:tempProfile.bannerGradientBright
-    },{post:true,retry:3}).then(function(res){
+    },{post:true,noRetry:true}).then(function(res){
       if(res.ok){
         Session.patchProfile(res.profile);
         tempProfileChanged=false;
@@ -4707,10 +4623,10 @@ function buyCases(){
   if((p.monkeys||0) < total){ Sound.error(); return; }
   TimerUI.start('caseBuyTimer','⏳');
   $('caseOpenFoot').innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Покупка... <span id="caseBuyTimer" class="timer-inline"></span></div>';
-  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:3}).then(function(r){
+  api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,noRetry:true}).then(function(r){
     TimerUI.stop('caseBuyTimer');
     if(r.ok){
-      Session.patchProfile({monkeys:r.monkeys, cases:r.cases||{}});
+      Session.patchProfile({monkeys:r.monkeys, balanceRev:typeof r.balanceRev==='number'?r.balanceRev:(s.profile.balanceRev||0)+1, cases:r.cases||{}});
       updateMonkeysWidget();
       Sound.buy();
       $('caseOpenOverlay').classList.remove('show');
@@ -4743,7 +4659,7 @@ function openCasesFromInventory(qty){
   if(wrap) wrap.style.display='block';
   var resWrap = $('caseResultWrap');
   if(resWrap) resWrap.innerHTML='';
-  api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,retry:3}).then(function(r){
+  api('openCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty},{post:true,noRetry:true}).then(function(r){
     TimerUI.stop('caseOpenTimer');
     if(!r.ok){
       Sound.error();
@@ -4878,7 +4794,6 @@ function closeEarnMode(){
   if(earnMode==='math') stopMath();
   if(earnMode==='choice') stopChoice();
   if(earnMode==='clicker') stopClicker();
-  if(earnMode==='shooter') stopShooter();
   earnMode=null;
   ['earnPlayMath','earnPlayChoice','earnPlayClicker'].forEach(function(id){ var el=$(id); if(el) el.classList.remove('active'); });
   var grid=$('earnGrid'); if(grid) grid.style.display='';
@@ -4889,7 +4804,6 @@ function openEarnMode(mode){
   if(mode==='math'){ $('earnPlayMath').classList.add('active'); renderMathStart(); }
   if(mode==='choice'){ $('earnPlayChoice').classList.add('active'); startChoice(); }
   if(mode==='clicker'){ $('earnPlayClicker').classList.add('active'); startClicker(); }
-  if(mode==='shooter'){ $('shooterStartOverlay').classList.add('show'); }
 }
 document.querySelectorAll('#earnGrid .earn-card').forEach(function(card){
   card.onclick=function(){ Sound.click(); openEarnMode(card.dataset.mode); };
@@ -5102,8 +5016,6 @@ function positionAntibotButton(){
   el.style.left = left + 'px';
   el.style.top = top + 'px';
 }
-function newRewardMutationId(prefix){return prefix+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,10);}
-
 $('clickerZone').onclick=function(){
   if(!clickerState.active || clickerState.antibot) return;
   var now=nowMs();
@@ -5115,10 +5027,9 @@ $('clickerZone').onclick=function(){
   Sound.type();
   var s=Session.get();
   if(!s||!s.token) return;
-  api('clickerReward',{username:s.username,token:s.token,amount:1,mutationId:newRewardMutationId('clk')},{post:true,retry:3}).then(function(r){
-    if(r && r.error==='Bad token'){ handleBadToken(); return; }
-    if(r && r.ok && typeof r.monkeys==='number'){ Session.patchProfile({monkeys:r.monkeys}); updateMonkeysWidget(); }
-  });
+  Session.patchProfile({monkeys:(s.profile.monkeys||0)+1});
+  updateMonkeysWidget();
+  queueClickerReward(s.username, s.token, 1);
   if(clickerState.clicks%CLICKER_ANTIBOT_EVERY===0 && clickerState.clicks>0){
     clickerState.antibot=true;
     positionAntibotButton();
@@ -5132,201 +5043,43 @@ $('clickerAntibotBtn').onclick=function(){
   Sound.success();
 };
 
-/* ========== SHOOTER 3D — TARGET RANGE ========== */
-var shooterState = {
-  active:false, canvas:null, gl:null, program:null,
-  targets:[], particles:[], rafId:0, lastFrame:0,
-  yaw:0, pitch:0, recoil:0, sensitivity:1.0,
-  locked:false, lastShot:0, packStarted:0, earned:0, kills:0,
-  serverEarned:0, roundId:0, exitRequested:false,
-  width:0,height:0,dpr:1, mats:null, meshes:null,
-  mouseDX:0,mouseDY:0
-};
+var _clickerPending = 0;
+var _clickerTimer = null;
+var _clickerSending = false;
 
-var SHOOTER_SENS_KEY='zv_shooter_sensitivity_v2';
-var SHOOTER_DEFAULT_SENS=1.0;
-var SHOOTER_MIN_SENS=0.15, SHOOTER_MAX_SENS=2.5;
-
-function shooterLoadSettings(){
-  var n=parseFloat(localStorage.getItem(SHOOTER_SENS_KEY));
-  return isFinite(n)?Math.max(SHOOTER_MIN_SENS,Math.min(SHOOTER_MAX_SENS,n)):SHOOTER_DEFAULT_SENS;
-}
-function shooterSaveSettings(n){
-  n=Math.max(SHOOTER_MIN_SENS,Math.min(SHOOTER_MAX_SENS,n));
-  shooterState.sensitivity=n;
-  localStorage.setItem(SHOOTER_SENS_KEY,String(n));
-  var v=$('shooterSensValue'); if(v)v.textContent=n.toFixed(2);
-  var r=$('shooterSensRange'); if(r)r.value=n;
-}
-function ensureShooterSettingsUI(){
-  if($('shooterSettingsOverlay')) return;
-  var d=document.createElement('div'); d.id='shooterSettingsOverlay'; d.className='modal-overlay';
-  d.innerHTML='<div class="modal shooter-settings-modal"><button class="modal-close" id="shooterSettingsClose">×</button><div class="confirm-body"><div class="confirm-icon blue">⚙</div><div class="confirm-title">Настройки игры</div><div class="shooter-setting-row"><div><b>Чувствительность</b><div class="section-sub">Скорость поворота камеры</div></div><strong id="shooterSensValue">1.00</strong></div><input id="shooterSensRange" type="range" min="0.15" max="2.5" step="0.05" value="1"><div class="shooter-setting-hint">U — освободить мышь · ЛКМ — выстрел · L — выход</div><div class="confirm-actions"><button class="btn btn-primary" id="shooterSettingsDone">Готово</button></div></div></div>';
-  document.body.appendChild(d);
-  $('shooterSettingsClose').onclick=closeShooterSettings;
-  $('shooterSettingsDone').onclick=closeShooterSettings;
-  $('shooterSettingsOverlay').onclick=function(e){if(e.target===this)closeShooterSettings();};
-  $('shooterSensRange').oninput=function(){shooterSaveSettings(parseFloat(this.value));};
-}
-function openShooterSettings(){
-  ensureShooterSettingsUI();
-  shooterSaveSettings(shooterState.sensitivity||shooterLoadSettings());
-  $('shooterSettingsOverlay').classList.add('show');
-  if(shooterState.locked && document.exitPointerLock)try{document.exitPointerLock();}catch(e){}
-}
-function closeShooterSettings(){
-  var e=$('shooterSettingsOverlay'); if(e)e.classList.remove('show');
-  if(shooterState.active && !shooterState.exitRequested) shooterLockPointer();
+function queueClickerReward(username, token, amount){
+  _clickerPending += amount;
+  if(_clickerTimer) return;
+  _clickerTimer = setTimeout(flushClickerReward, 90);
 }
 
-function shooterGLShader(type,src){var gl=shooterState.gl,s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;}
-function shooterGLProgram(vs,fs){var gl=shooterState.gl,p=gl.createProgram();gl.attachShader(p,shooterGLShader(gl.VERTEX_SHADER,vs));gl.attachShader(p,shooterGLShader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(p));return p;}
-
-function shooterMat4Identity(){return [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];}
-function shooterMat4Mul(a,b){var o=new Array(16);for(var c=0;c<4;c++)for(var r=0;r<4;r++)o[c*4+r]=a[r]*b[c*4]+a[4+r]*b[c*4+1]+a[8+r]*b[c*4+2]+a[12+r]*b[c*4+3];return o;}
-function shooterTranslate(x,y,z){var m=shooterMat4Identity();m[12]=x;m[13]=y;m[14]=z;return m;}
-function shooterScale(x,y,z){var m=shooterMat4Identity();m[0]=x;m[5]=y;m[10]=z;return m;}
-function shooterRotX(a){var c=Math.cos(a),s=Math.sin(a),m=shooterMat4Identity();m[5]=c;m[6]=s;m[9]=-s;m[10]=c;return m;}
-function shooterRotY(a){var c=Math.cos(a),s=Math.sin(a),m=shooterMat4Identity();m[0]=c;m[2]=-s;m[8]=s;m[10]=c;return m;}
-function shooterPerspective(fov,asp,n,f){var q=1/Math.tan(fov/2),nf=1/(n-f);return [q/asp,0,0,0,0,q,0,0,0,0,(f+n)*nf,-1,0,0,(2*f*n)*nf,0];}
-function shooterLook(yaw,pitch){
-  var ry=shooterRotY(yaw),rx=shooterRotX(pitch);return shooterMat4Mul(rx,ry);
+function flushClickerReward(){
+  _clickerTimer = null;
+  if(_clickerSending || _clickerPending <= 0) return;
+  var s=Session.get();
+  if(!s || !s.token || !s.username) { _clickerPending=0; return; }
+  var amount=Math.min(50,_clickerPending);
+  _clickerPending-=amount;
+  _clickerSending=true;
+  _mutationInFlight++;
+  api('rewardBatch',{username:s.username,token:s.token,amount:amount},{post:true,noRetry:true}).then(function(r){
+    if(r && r.ok){
+      Session.patchProfile({monkeys:r.monkeys, balanceRev:typeof r.balanceRev==='number'?r.balanceRev:(Session.get().profile.balanceRev||0)+1});
+      updateMonkeysWidget();
+    } else if(r && r.error==='Bad token'){
+      handleBadToken();
+    } else {
+      // Restore pending amount; optimistic UI will be reconciled by the next sync.
+      _clickerPending += amount;
+    }
+  }).catch(function(){
+    _clickerPending += amount;
+  }).then(function(){
+    _clickerSending=false;
+    _mutationInFlight=Math.max(0,_mutationInFlight-1);
+    if(_clickerPending>0) queueClickerReward(s.username,s.token,0);
+  });
 }
-function shooterVecMul(m,v){return [m[0]*v[0]+m[4]*v[1]+m[8]*v[2]+m[12]*v[3],m[1]*v[0]+m[5]*v[1]+m[9]*v[2]+m[13]*v[3],m[2]*v[0]+m[6]*v[1]+m[10]*v[2]+m[14]*v[3],m[3]*v[0]+m[7]*v[1]+m[11]*v[2]+m[15]*v[3]];}
-function shooterRay(){
-  var cy=Math.cos(shooterState.yaw),sy=Math.sin(shooterState.yaw),cp=Math.cos(shooterState.pitch),sp=Math.sin(shooterState.pitch);
-  return [sy*cp,-sp,-cy*cp];
-}
-function shooterMeshCube(gl){
-  var p=[-1,-1,-1,1,-1,-1,1,1,-1,-1,1,-1,-1,-1,1,1,-1,1,1,1,1,-1,1,1];
-  var n=[0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0,1,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0];
-  var idx=[0,1,2,0,2,3,4,6,5,4,7,6,0,4,5,0,5,1,3,2,6,3,6,7,1,5,6,1,6,2,0,3,7,0,7,4];
-  var pos=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,pos);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(p),gl.STATIC_DRAW);
-  var nor=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,nor);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(n),gl.STATIC_DRAW);
-  var ib=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx),gl.STATIC_DRAW);
-  return {pos:pos,nor:nor,ib:ib,count:idx.length};
-}
-function shooterInitGL(){
-  var c=shooterState.canvas,gl=c.getContext('webgl',{antialias:false,alpha:false,preserveDrawingBuffer:false});
-  if(!gl)throw new Error('WebGL unavailable');
-  shooterState.gl=gl;
-  var vs='attribute vec3 aPos;attribute vec3 aNor;uniform mat4 uMVP;uniform mat4 uModel;varying vec3 vNor;varying vec3 vPos;void main(){vNor=mat3(uModel)*aNor;vPos=(uModel*vec4(aPos,1.0)).xyz;gl_Position=uMVP*vec4(aPos,1.0);}';
-  var fs='precision mediump float;uniform vec3 uColor;uniform vec3 uLight;uniform float uMetal;varying vec3 vNor;varying vec3 vPos;void main(){vec3 n=normalize(vNor);float d=max(dot(n,normalize(uLight)),0.0);float rim=pow(1.0-max(dot(n,vec3(0,0,1)),0.0),2.0);vec3 col=uColor*(0.22+0.78*d)+vec3(rim*.035);gl_FragColor=vec4(col,1.0);}';
-  shooterState.program=shooterGLProgram(vs,fs);
-  shooterState.meshes={cube:shooterMeshCube(gl)};
-  var p=shooterState.program;shooterState.mats={aPos:gl.getAttribLocation(p,'aPos'),aNor:gl.getAttribLocation(p,'aNor'),uMVP:gl.getUniformLocation(p,'uMVP'),uModel:gl.getUniformLocation(p,'uModel'),uColor:gl.getUniformLocation(p,'uColor'),uLight:gl.getUniformLocation(p,'uLight'),uMetal:gl.getUniformLocation(p,'uMetal')};
-  gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);gl.cullFace(gl.BACK);gl.clearColor(.025,.035,.05,1);
-}
-function shooterResize(){
-  if(!shooterState.gl)return;var c=shooterState.canvas;shooterState.dpr=Math.min(devicePixelRatio||1,1.5);shooterState.width=innerWidth;shooterState.height=innerHeight;c.width=Math.floor(innerWidth*shooterState.dpr);c.height=Math.floor(innerHeight*shooterState.dpr);c.style.width='100%';c.style.height='100%';shooterState.gl.viewport(0,0,c.width,c.height);
-}
-function shooterDrawCube(model,color){
-  color=color||[.18,.20,.24];
-  var gl=shooterState.gl,m=shooterState.mats,mesh=shooterState.meshes.cube;
-  var proj=shooterPerspective(Math.PI/3,shooterState.width/shooterState.height,.05,120);
-  var view=shooterLook(shooterState.yaw,shooterState.pitch);
-  var vp=shooterMat4Mul(proj,view),mvp=shooterMat4Mul(vp,model);
-  gl.bindBuffer(gl.ARRAY_BUFFER,mesh.pos);gl.enableVertexAttribArray(m.aPos);gl.vertexAttribPointer(m.aPos,3,gl.FLOAT,false,0,0);
-  gl.bindBuffer(gl.ARRAY_BUFFER,mesh.nor);gl.enableVertexAttribArray(m.aNor);gl.vertexAttribPointer(m.aNor,3,gl.FLOAT,false,0,0);
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,mesh.ib);gl.uniformMatrix4fv(m.uMVP,false,new Float32Array(mvp));gl.uniformMatrix4fv(m.uModel,false,new Float32Array(model));gl.uniform3f(m.uColor,color[0],color[1],color[2]);gl.uniform3f(m.uLight,-.4,.9,.35);gl.uniform1f(m.uMetal,.2);gl.drawElements(gl.TRIANGLES,mesh.count,gl.UNSIGNED_SHORT,0);
-}
-function shooterSpawnPack(){
-  shooterState.targets.length=0;shooterState.roundId++;shooterState.packStarted=performance.now();
-  var spots=[[-5,1.45,-10],[0,1.45,-13],[5,1.45,-10],[-3.5,1.45,-17],[2,1.45,-19],[6,1.45,-16]];
-  for(var i=0;i<6;i++)shooterState.targets.push({id:i,x:spots[i][0],y:spots[i][1],z:spots[i][2],dead:false,hit:0,phase:Math.random()*6.28});
-  $('shooterTimer').textContent='5.0';$('shooterTimer').classList.remove('danger');
-}
-function shooterLockPointer(){
-  if(!shooterState.active||shooterState.exitRequested)return;
-  if(shooterState.canvas.requestPointerLock){try{shooterState.canvas.requestPointerLock();}catch(e){}}
-}
-function shooterPointerLockChange(){shooterState.locked=document.pointerLockElement===shooterState.canvas;}
-function shooterKeyDown(e){
-  if(!shooterState.active)return;
-  if(e.key==='u'||e.key==='U'){if(shooterState.locked&&document.exitPointerLock)document.exitPointerLock();else shooterLockPointer();e.preventDefault();}
-  else if(e.key==='l'||e.key==='L'){shooterAskExit();e.preventDefault();}
-  else if(e.key==='Escape'){if(shooterState.locked&&document.exitPointerLock)document.exitPointerLock();}
-}
-function shooterMouseMove(e){
-  if(!shooterState.active||!shooterState.locked)return;
-  var sens=.00165*shooterState.sensitivity;
-  shooterState.yaw-=e.movementX*sens;shooterState.pitch-=e.movementY*sens;
-  shooterState.pitch=Math.max(-.85,Math.min(.75,shooterState.pitch));
-}
-function shooterRayHit(t){
-  var r=shooterRay(),ox=0,oy=1.55,oz=2.5;
-  var best=null,bd=999;
-  for(var i=0;i<shooterState.targets.length;i++){
-    var d=shooterState.targets[i];if(d.dead)continue;
-    var cx=d.x,cy=d.y,cz=d.z;var vx=cx-ox,vy=cy-oy,vz=cz-oz;var along=vx*r[0]+vy*r[1]+vz*r[2];if(along<0)continue;
-    var px=ox+r[0]*along,py=oy+r[1]*along,pz=oz+r[2]*along;var dist=Math.sqrt((px-cx)*(px-cx)+(py-cy)*(py-cy)+(pz-cz)*(pz-cz));
-    if(dist<1.05&&along<bd){bd=along;best=d;}
-  }return best;
-}
-function shooterFire(){
-  if(!shooterState.active||!shooterState.locked)return;var n=performance.now();if(n-shooterState.lastShot<95)return;shooterState.lastShot=n;shooterState.recoil=1;Sound.shoot();
-  var muzzle=$('shooterMuzzle');if(muzzle){muzzle.classList.add('flash');setTimeout(function(){muzzle.classList.remove('flash');},55);}
-  var gun=$('shooterGun');if(gun){gun.classList.remove('recoil');void gun.offsetWidth;gun.classList.add('recoil');}
-  var hit=shooterRayHit(n);if(!hit)return;
-  hit.dead=true;shooterState.kills++;var reward=1+Math.floor(Math.random()*3);shooterState.earned+=reward;$('shooterKills').textContent=String(shooterState.kills);$('shooterEarned').textContent=shooterState.earned+' 🐵';Sound.hit();
-  addHitIndicator(reward,innerWidth/2,innerHeight/2);
-  if(shooterState.targets.every(function(x){return x.dead;}))setTimeout(function(){if(shooterState.active)shooterSpawnPack();},140);
-  /* IMPORTANT: no optimistic balance mutation. Server response is authoritative. */
-  var s=Session.get();if(s&&s.token){
-    api('shooterReward',{username:s.username,token:s.token,amount:reward,mutationId:newRewardMutationId('shot')},{post:true,retry:3}).then(function(r){
-      if(!r)return;if(r.error==='Bad token'){handleBadToken();return;}if(r.ok&&typeof r.monkeys==='number'){shooterState.serverEarned=r.monkeys;Session.patchProfile({monkeys:r.monkeys});updateMonkeysWidget();}
-    });
-  }
-}
-function shooterMouseDown(e){if(!shooterState.active)return;if(e.button===0){if(!shooterState.locked){shooterLockPointer();return;}shooterFire();}}
-function shooterAskExit(){
-  if(!shooterState.active)return;shooterState.exitRequested=true;if(document.exitPointerLock)try{document.exitPointerLock();}catch(e){}
-  var txt=$('shooterExitOverlay').querySelector('.confirm-text');if(txt)txt.innerHTML='За эту игру заработано: <b>'+shooterState.earned+' 🐵</b>.<br>После выхода серверный баланс останется сохранённым.';
-  $('shooterExitOverlay').classList.add('show');
-}
-function shooterUpdate(dt){
-  var elapsed=(performance.now()-shooterState.packStarted)/1000,left=Math.max(0,5-elapsed);$('shooterTimer').textContent=left.toFixed(1);if(left<=2)$('shooterTimer').classList.add('danger');
-  if(left<=0){shooterState.targets.forEach(function(t){t.dead=true;});setTimeout(function(){if(shooterState.active)shooterSpawnPack();},80);}
-  shooterState.recoil=Math.max(0,shooterState.recoil-dt*7);
-}
-function shooterRender(){
-  var gl=shooterState.gl,m=shooterState.mats;gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(shooterState.program);
-  /* arena floor, walls, ceiling lights */
-  shooterDrawCube(shooterScale(14,.15,25));
-  shooterDrawCube(shooterMat4Mul(shooterTranslate(0,5,-22),shooterScale(14,5,.15)),[.09,.11,.15]);
-  shooterDrawCube(shooterMat4Mul(shooterTranslate(-14,3,-10),shooterScale(.15,3,12)),[.08,.10,.14]);
-  shooterDrawCube(shooterMat4Mul(shooterTranslate(14,3,-10),shooterScale(.15,3,12)),[.08,.10,.14]);
-  /* floor strips */
-  for(var z=-3;z>-23;z-=4)shooterDrawCube(shooterMat4Mul(shooterTranslate(0,.18,z),shooterScale(13,.025,.035)),[.12,.17,.20]);
-  for(var x=-12;x<=12;x+=4)shooterDrawCube(shooterMat4Mul(shooterTranslate(x,.19,-13),shooterScale(.025,.025,10)),[.12,.17,.20]);
-  /* targets */
-  shooterState.targets.forEach(function(t){if(t.dead)return;var bob=Math.sin(performance.now()/260+t.phase)*.08;var base=shooterMat4Mul(shooterTranslate(t.x,t.y+bob,t.z),shooterScale(1,.06,1));shooterDrawCube(base,[.72,.72,.72]);shooterDrawCube(shooterMat4Mul(shooterTranslate(t.x,t.y+bob,t.z-.10),shooterScale(.55,.04,.05)),[.9,.12,.12]);shooterDrawCube(shooterMat4Mul(shooterTranslate(t.x,t.y+bob,t.z-.16),shooterScale(.27,.025,.025)),[1,.75,.08]);shooterDrawCube(shooterMat4Mul(shooterTranslate(t.x,t.y+bob,t.z-.19),shooterScale(.08,.012,.012)),[.1,.1,.1]);});
-  /* weapon in view: attached in world just in front/right, with recoil */
-  var r=.13*shooterState.recoil;
-  var f=shooterRay(), right=[Math.cos(shooterState.yaw),0,Math.sin(shooterState.yaw)];
-  var gunX=f[0]*1.15+right[0]*.62, gunY=1.05-r, gunZ=f[2]*1.15+right[2]*.62;
-  shooterDrawCube(shooterMat4Mul(shooterTranslate(gunX,gunY,gunZ),shooterScale(.55,.16,.95)),[.045,.05,.055]);
-  shooterDrawCube(shooterMat4Mul(shooterTranslate(gunX-.05,.75-r,gunZ),shooterScale(.16,.55,.22)),[.055,.06,.065]);
-  shooterDrawCube(shooterMat4Mul(shooterTranslate(gunX,1.15-r,gunZ-f[2]*.55),shooterScale(.12,.12,.35)),[.09,.10,.11]);
-}
-function shooterLoop(ts){
-  if(!shooterState.active)return;var dt=Math.min(.05,(ts-shooterState.lastFrame)/1000||.016);shooterState.lastFrame=ts;shooterUpdate(dt);shooterRender();shooterState.rafId=requestAnimationFrame(shooterLoop);
-}
-function openShooter(){
-  $('shooterStartOverlay').classList.remove('show');var s=Session.get();if(!s||!s.token){Sound.error();return;}ensureShooterSettingsUI();
-  shooterState.active=true;shooterState.exitRequested=false;shooterState.canvas=$('shooterCanvas');shooterState.targets=[];shooterState.kills=0;shooterState.earned=0;shooterState.serverEarned=(s.profile&&s.profile.monkeys)||0;shooterState.yaw=0;shooterState.pitch=0;shooterState.recoil=0;shooterState.sensitivity=shooterLoadSettings();shooterState.lastShot=0;
-  $('shooterKills').textContent='0';$('shooterEarned').textContent='0 🐵';$('shooterOverlay').classList.add('show');
-  try{shooterInitGL();shooterResize();}catch(err){console.error(err);Sound.error();toastSite('3D-режим не поддерживается этим браузером',true);stopShooter();return;}
-  window.addEventListener('resize',shooterResize);document.addEventListener('mousemove',shooterMouseMove);document.addEventListener('mousedown',shooterMouseDown);document.addEventListener('keydown',shooterKeyDown);document.addEventListener('pointerlockchange',shooterPointerLockChange);
-  shooterSpawnPack();shooterState.lastFrame=performance.now();shooterState.rafId=requestAnimationFrame(shooterLoop);shooterLockPointer();
-}
-function stopShooter(){
-  shooterState.active=false;shooterState.exitRequested=false;$('shooterExitOverlay').classList.remove('show');$('shooterOverlay').classList.remove('show');if(shooterState.rafId){cancelAnimationFrame(shooterState.rafId);shooterState.rafId=0;}window.removeEventListener('resize',shooterResize);document.removeEventListener('mousemove',shooterMouseMove);document.removeEventListener('mousedown',shooterMouseDown);document.removeEventListener('keydown',shooterKeyDown);document.removeEventListener('pointerlockchange',shooterPointerLockChange);if(document.exitPointerLock)try{document.exitPointerLock();}catch(e){}if(shooterState.earned>0)showReward(shooterState.earned);shooterState.targets=[];
-}
-$('shooterStartYes').onclick=function(){openShooter();};
-$('shooterStartNo').onclick=function(){$('shooterStartOverlay').classList.remove('show');Sound.close();closeEarnMode();};
-$('shooterExitNo').onclick=function(){$('shooterExitOverlay').classList.remove('show');shooterState.exitRequested=false;Sound.close();shooterLockPointer();};
-$('shooterExitYes').onclick=function(){Sound.close();stopShooter();closeEarnMode();};
 
 /* ========== ADMIN ========== */
 $('sbAdmin').onclick=function(){ Sound.click(); openAdminPanel(); };
@@ -5532,7 +5285,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var eVal=b.dataset.e; adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, emoji:eVal},{post:true,retry:2}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, emoji:eVal},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5543,7 +5296,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var tVal=b.dataset.t; adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, theme:tVal},{post:true,retry:2}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, theme:tVal},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5554,7 +5307,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var fVal=b.dataset.f; adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, frame:fVal},{post:true,retry:2}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, frame:fVal},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5565,7 +5318,7 @@ function renderAdminGrid(){
         e.preventDefault(); e.stopPropagation();
         if(adminBusy) return;
         var amount=parseInt(b.dataset.amount,10); adminBusy=true;
-        api('adminGive',{adminToken:token(), username:uname, amount:amount},{post:true,retry:2}).then(function(r){
+        api('adminGive',{adminToken:token(), username:uname, amount:amount},{post:true,noRetry:true}).then(function(r){
           if(r.ok){
             Sound.success();
             var found=_findAdminUser(uname);
@@ -5592,7 +5345,7 @@ function renderAdminGrid(){
         var val=parseInt(inp.value,10);
         if(isNaN(val)||val<0){ Sound.error(); return; }
         adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, monkeys:val},{post:true,retry:2}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, monkeys:val},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5607,7 +5360,7 @@ function renderAdminGrid(){
         var val=parseInt(inp.value,10);
         if(isNaN(val)||val<0){ Sound.error(); return; }
         adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, respects:val},{post:true,retry:2}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, respects:val},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5622,7 +5375,7 @@ function renderAdminGrid(){
         var val=parseInt(inp.value,10);
         if(isNaN(val)||val<0){ Sound.error(); return; }
         adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, wins:val},{post:true,retry:2}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, wins:val},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5635,7 +5388,7 @@ function renderAdminGrid(){
         if(adminBusy) return;
         var inp=card.querySelector('.adm-vn-input');
         var vn=inp.value.trim(); adminBusy=true;
-        api('adminUpdateUser',{adminToken:token(), username:uname, visualName:vn},{post:true,retry:2}).then(function(r){
+        api('adminUpdateUser',{adminToken:token(), username:uname, visualName:vn},{post:true,noRetry:true}).then(function(r){
           if(r.ok){ Sound.success(); _applyAdminResult(uname, r); }
           else Sound.error();
         }).then(function(){ adminBusy=false; });
@@ -5736,7 +5489,7 @@ $('adminAvatarInput').addEventListener('change', function(e){
       cx.drawImage(img,sx,sy,minSide,minSide,0,0,size,size);
       var dataUrl=cvs.toDataURL('image/jpeg',0.85);
       var token=sessionStorage.getItem('zv_admin_token');
-      api('adminUpdateUser',{adminToken:token, username:adminAvatarTargetUser, avatar:dataUrl},{post:true,retry:2}).then(function(r){
+      api('adminUpdateUser',{adminToken:token, username:adminAvatarTargetUser, avatar:dataUrl},{post:true,noRetry:true}).then(function(r){
         if(r.ok){ Sound.success(); _applyAdminResult(adminAvatarTargetUser, r); }
         else Sound.error();
       });
@@ -5891,6 +5644,7 @@ $('notEnoughOverlay').onclick=function(e){ if(e.target===$('notEnoughOverlay')) 
 /* ========== INIT ========== */
 (function init(){
   LowPerf.apply();
+  initWheelIfNeeded();
   renderAuthState(true);
   Online.start();
   switchView('home');

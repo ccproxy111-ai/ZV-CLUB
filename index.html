@@ -1728,7 +1728,7 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 /* ==================================================================
    ZV-CLUB CORE v5.0 — МОНОЛИТ, БЕЗ ОШИБОК, СТРОГАЯ СИНХРОНИЗАЦИЯ
    ================================================================== */
-var API_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec'; // ВСТАВЬТЕ СЮДА ВАШ URL
+var API_URL = 'https://zv-club-api.meduzakryt222.workers.dev'; // URL Worker из файла worker.js
 var HEARTBEAT_MS = 30000;
 var FETCH_TIMEOUT = 20000;
 var POST_TIMEOUT = 25000;
@@ -2632,6 +2632,7 @@ $('logsClose').onclick=function(){ $('logsOverlay').classList.remove('show'); So
 $('logsOverlay').onclick=function(e){ if(e.target===$('logsOverlay')) $('logsOverlay').classList.remove('show'); };
 
 /* ========== WHEEL ========== */
+var wheelBuilt = false;
 function initWheelIfNeeded(){ if(wheelBuilt) return; buildWheel(); wheelBuilt=true; }
 function buildWheel(){
   var svg=$('wheelSvg'); if(!svg) return;
@@ -4038,7 +4039,7 @@ function buyItem(kind, id, price){
   else payload.frame=id;
   api(action, payload).then(function(r){
     if(r.ok){
-      var patch = {monkeys:r.monkeys};
+      var patch = {monkeys:r.monkeys,balanceRev:r.balanceRev};
       if(kind==='emoji'){ patch.emoji=id; patch.ownedEmojis=r.ownedEmojis||[]; }
       if(kind==='theme'){ patch.theme=id; patch.ownedThemes=r.ownedThemes||[]; applyTheme(id); }
       if(kind==='frame'){ patch.frame=id; patch.ownedFrames=r.ownedFrames||[]; }
@@ -4468,7 +4469,7 @@ function submitMath(){
     updateMonkeysWidget(); bumpMonkeys();
     api('mathReward',{username:s.username,token:s.token,amount:reward}).then(function(r){
       if(r && r.ok && typeof r.monkeys === 'number'){
-        Session.patchProfile({monkeys:r.monkeys});
+        Session.patchProfile({monkeys:r.monkeys,balanceRev:r.balanceRev});
         updateMonkeysWidget();
       }
       if(r && r.error==='Bad token') handleBadToken();
@@ -4534,7 +4535,7 @@ document.querySelectorAll('.choice-card').forEach(function(card){
       Sound[win?'success':'error']();
       api('choiceReward',{username:s.username,token:s.token,win:win,amount:amount}).then(function(r){
         if(r && r.ok && typeof r.monkeys === 'number'){
-          Session.patchProfile({monkeys:r.monkeys});
+          Session.patchProfile({monkeys:r.monkeys,balanceRev:r.balanceRev});
           updateMonkeysWidget();
         }
         if(r && r.error==='Bad token') handleBadToken();
@@ -4631,7 +4632,7 @@ function flushClickerReward(){
   api('rewardBatch',{username:s.username,token:s.token,amount:amount}).then(function(r){
     if(r && r.ok){
       if(typeof r.monkeys === 'number'){
-        Session.patchProfile({monkeys:r.monkeys});
+        Session.patchProfile({monkeys:r.monkeys,balanceRev:r.balanceRev});
         updateMonkeysWidget();
       }
     } else if(r && r.error==='Bad token'){
@@ -4894,7 +4895,7 @@ function renderAdminGrid(){
               for(var j=0;j<_usersCache.v.length;j++){ if(_usersCache.v[j].username===uname){ _usersCache.v[j].monkeys=r.monkeys; break; } }
             }
             var s=Session.get();
-            if(s && s.username===uname){ Session.patchProfile({monkeys:r.monkeys}); updateMonkeysWidget(); _lastAuthRenderKey=''; renderAuthState(true); }
+            if(s && s.username===uname){ Session.patchProfile({monkeys:r.monkeys,balanceRev:r.balanceRev}); updateMonkeysWidget(); _lastAuthRenderKey=''; renderAuthState(true); }
             if($('viewFriends') && $('viewFriends').classList.contains('active')) renderUsersFiltered();
             renderAdminGrid();
             _flashCard(uname);

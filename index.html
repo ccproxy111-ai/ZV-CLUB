@@ -1995,7 +1995,7 @@ function api(action, payload, opts){
       .then(function(txt){
         clearTimeout(timer);
         try { resolve(JSON.parse(txt)); }
-        catch(e){ resolve({ok:false, error:'bad json'}); }
+        catch(e){ console.error('API response not JSON:', txt); resolve({ok:false, error:'bad json'}); }
       })
       .catch(function(){
         clearTimeout(timer);
@@ -2633,6 +2633,7 @@ $('logsOverlay').onclick=function(e){ if(e.target===$('logsOverlay')) $('logsOve
 
 /* ========== WHEEL ========== */
 var wheelBuilt = false;
+var whTimer = null; // Исправление: объявлена переменная для таймера истории
 function initWheelIfNeeded(){ if(wheelBuilt) return; buildWheel(); wheelBuilt=true; }
 function buildWheel(){
   var svg=$('wheelSvg'); if(!svg) return;

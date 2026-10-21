@@ -1730,7 +1730,8 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
    ================================================================== */
 var HEARTBEAT_MS = 30000;
 var FETCH_TIMEOUT = 20000;
-var POST_TIMEOUT = 25000;
+/* Apps Script cold starts can be slow; do not abandon a request before its backend lock timeout. */
+var POST_TIMEOUT = 60000;
 var WHEEL_SPIN_MS = 5200;
 var WHEEL_SPIN_COOLDOWN = 800;
 var USERS_CACHE_TTL = 30000;
@@ -2129,8 +2130,11 @@ var Auth = {
     var eU=validateUsername(username); if(eU) return Promise.resolve({ok:false,error:eU});
     var eP=validatePassword(password); if(eP) return Promise.resolve({ok:false,error:eP});
     if(password!==password2) return Promise.resolve({ok:false,error:'Пароли не совпадают'});
-    return api('register',{username:username,password:password}).then(function(res){
-      if(!res.ok) return {ok:false,error:res.error||'Ошибка'};
+    return api('register',{username:username,password:password},{timeout:60000}).then(function(res){
+      if(!res.ok){
+        if(res.error==='timeout') return {ok:false,error:'Сервер отвечает слишком долго. Если аккаунт уже создался, попробуйте войти. Иначе повторите попытку через минуту.'};
+        return {ok:false,error:res.error||'Ошибка'};
+      }
       Session.save({username:username, token:res.token, ts:nowMs(), profile:res.profile});
       Session.flushNow();
       return {ok:true};

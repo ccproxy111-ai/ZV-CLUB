@@ -1728,7 +1728,6 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 /* ==================================================================
    ZV-CLUB CORE v5.0 — МОНОЛИТ, БЕЗ ОШИБОК, СТРОГАЯ СИНХРОНИЗАЦИЯ
    ================================================================== */
-var API_URL = 'https://zv-club-api.meduzakryt222.workers.dev'; // URL Worker из файла worker.js
 var HEARTBEAT_MS = 30000;
 var FETCH_TIMEOUT = 20000;
 var POST_TIMEOUT = 25000;
@@ -1976,32 +1975,108 @@ var Session = (function(){
 function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.token : ''; }
 function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
-/* ========== API (ТОЛЬКО FETCH POST) ========== */
+/* ========== API: GOOGLE APPS SCRIPT BRIDGE (БЕЗ CLOUDFLARE WORKER) ========== */
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
+
+var ApiBridge = (function(){
+  var frame = null;
+  var bridgeWindow = null;
+  var started = false;
+  var ready = false;
+  var queue = [];
+  var pending = Object.create(null);
+  var nextId = 0;
+  var nonce = 'zv' + Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+
+  function start(){
+    if(started) return;
+    started = true;
+    window.addEventListener('message', onMessage, false);
+    frame = document.createElement('iframe');
+    frame.id = 'zv-club-api-bridge';
+    frame.title = 'ZV-CLUB connection';
+    frame.tabIndex = -1;
+    frame.setAttribute('aria-hidden', 'true');
+    frame.style.cssText = 'position:fixed;left:-10000px;top:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none;';
+    var separator = APPS_SCRIPT_URL.indexOf('?') === -1 ? '?' : '&';
+    frame.src = APPS_SCRIPT_URL + separator + 'bridge=1&channel=' + encodeURIComponent(nonce);
+    (document.body || document.documentElement).appendChild(frame);
+  }
+
+  function send(message){
+    if(!pending[message.id]) return;
+    if(!bridgeWindow){
+      finish(message.id, {ok:false, error:'bridge_unavailable'});
+      return;
+    }
+    try {
+      bridgeWindow.postMessage(message, '*');
+    } catch(err) {
+      finish(message.id, {ok:false, error:'bridge_send_failed'});
+    }
+  }
+
+  function finish(id, result){
+    var item = pending[id];
+    if(!item) return;
+    clearTimeout(item.timer);
+    delete pending[id];
+    item.resolve(result);
+  }
+
+  function onMessage(event){
+    var msg = event.data;
+    if(!msg || msg.channel !== 'zv-club-bridge' || msg.nonce !== nonce) return;
+    var origin = String(event.origin || '');
+    var trustedOrigin = origin === 'https://script.google.com' || origin.endsWith('.googleusercontent.com');
+    if(!trustedOrigin) return;
+
+    if(msg.type === 'ready'){
+      if(bridgeWindow && bridgeWindow !== event.source) return;
+      bridgeWindow = event.source;
+      ready = true;
+      var queued = queue;
+      queue = [];
+      for(var i=0;i<queued.length;i++) send(queued[i]);
+      return;
+    }
+
+    if(event.source !== bridgeWindow || msg.type !== 'response' || !msg.id || !pending[msg.id]) return;
+    var envelope = msg.payload;
+    if(envelope && envelope.ok === true && envelope.result && typeof envelope.result === 'object'){
+      finish(msg.id, envelope.result);
+    } else {
+      finish(msg.id, {ok:false, error:String(envelope && envelope.error || 'bridge_error')});
+    }
+  }
+
+  function request(action, payload, timeout){
+    start();
+    return new Promise(function(resolve){
+      var id = 'r' + Date.now().toString(36) + '_' + (++nextId).toString(36);
+      var timer = setTimeout(function(){
+        delete pending[id];
+        resolve({ok:false, error:'timeout'});
+      }, timeout || POST_TIMEOUT);
+      pending[id] = {resolve:resolve, timer:timer};
+      var message = {
+        channel:'zv-club-bridge',
+        nonce:nonce,
+        type:'request',
+        id:id,
+        payload:Object.assign({action:action}, payload || {})
+      };
+      if(ready) send(message);
+      else queue.push(message);
+    });
+  }
+
+  return {request:request};
+})();
+
 function api(action, payload, opts){
   opts = opts || {};
-  var timeout = opts.timeout || POST_TIMEOUT;
-  var body = JSON.stringify(Object.assign({action:action}, payload));
-  return new Promise(function(resolve){
-    var ctrl = ('AbortController' in window) ? new AbortController() : null;
-    var timer = setTimeout(function(){ if(ctrl) try{ctrl.abort();}catch(e){} resolve({ok:false, error:'timeout'}); }, timeout);
-    fetch(API_URL, {
-      method:'POST',
-      mode:'cors',
-      redirect:'follow',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:body,
-      signal: ctrl ? ctrl.signal : undefined
-    }).then(function(r){ return r.text(); })
-      .then(function(txt){
-        clearTimeout(timer);
-        try { resolve(JSON.parse(txt)); }
-        catch(e){ console.error('API response not JSON:', txt); resolve({ok:false, error:'bad json'}); }
-      })
-      .catch(function(){
-        clearTimeout(timer);
-        resolve({ok:false, error:'network'});
-      });
-  });
+  return ApiBridge.request(action, payload, opts.timeout || POST_TIMEOUT);
 }
 
 /* ========== ОБРАБОТКА ТОКЕНА ========== */
@@ -2633,7 +2708,6 @@ $('logsOverlay').onclick=function(e){ if(e.target===$('logsOverlay')) $('logsOve
 
 /* ========== WHEEL ========== */
 var wheelBuilt = false;
-var whTimer = null; // Исправление: объявлена переменная для таймера истории
 function initWheelIfNeeded(){ if(wheelBuilt) return; buildWheel(); wheelBuilt=true; }
 function buildWheel(){
   var svg=$('wheelSvg'); if(!svg) return;

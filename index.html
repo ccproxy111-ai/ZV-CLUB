@@ -1759,72 +1759,7 @@ body {
 
 <input type="file" id="adminAvatarInput" accept="image/*" style="display:none">
 
-<!-- ZV-CLUB frontend patch.
-     Вставь весь этот файл в index.html ПЕРЕД главным <script> (тем, что начинается с "ZV-CLUB CORE v5.2"). -->
-<style>
-/* Темы снова работают: стекло, фон, кнопки и сайдбар берут цвета активной темы */
-body{
-  --glass-bg:color-mix(in srgb,var(--bg2) 92%,transparent);
-  --glass-border:color-mix(in srgb,var(--fg) 10%,transparent);
-  background:radial-gradient(circle at top left,color-mix(in srgb,var(--bg3) 70%,var(--bg)),var(--bg) 70%) fixed;
-}
-.btn-primary{background:var(--btn-primary-bg);color:var(--btn-primary-fg);box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.btn-primary:hover{background:var(--btn-primary-bg-hover);box-shadow:0 6px 20px rgba(0,0,0,.32)}
-.sidebar{background:var(--sidebar-bg)}
-.user-card:hover,.dash-card:hover{background:var(--bg3);border-color:var(--border2)}
-/* размытие на каждой карточке сетки тормозит слабые устройства — оставляем только на окнах и меню */
-.user-card,.dash-card,.earn-card,.shop-case-card{backdrop-filter:none;-webkit-backdrop-filter:none}
-/* мелочи */
-html{scrollbar-color:var(--border2) transparent}
-::selection{background:color-mix(in srgb,var(--fg) 22%,transparent)}
-:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-@media(max-width:640px){.sidebar{padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.01s!important}}
-</style>
-
 <script>
-/* Глобальные переменные, которых не хватало в коде: без них падали «Найти друзей», Магазин, Колесо и Заработок.
-   Повторное объявление через var безвредно, если они у тебя где-то уже есть. */
-var allUsers=[],_usersCache={t:0,v:null},usersSearchQuery='',hoverTimer=null,
-currentProfile=null,currentProfileUsername='',currentProfileIsOwner=false,currentProfileIRespect=false,
-tempProfile=null,tempProfileChanged=false,
-themePreviewActive=false,themePreviewOriginal='dark',themePreviewCountdown=null,
-shopView='market',activeCase=null,caseOpening=false,earnMode=null,
-mathState={active:false,correct:0,earned:0,timer:null,deadline:0,total:0,answer:0,question:null},
-choiceState={active:false,busy:false,revealed:false},
-clickerState={active:false,clicks:0,earned:0,antibot:false,lastClick:0,lastAntibot:0},
-wheelSpinning=false,wheelSpinLock=false,wheelLastSpinAt=0,wheelTickInterval=null;
-
-/* «1 или 2»: результат теперь решает сервер (раньше клиент сам присылал win=true и мог печатать обезьян) */
-window.addEventListener('load',function(){
-  document.querySelectorAll('.choice-card').forEach(function(card){
-    card.onclick=function(){
-      if(!choiceState.active||choiceState.busy||choiceState.revealed) return;
-      var s=Session.get(); if(!s||!s.token){ Sound.error(); return; }
-      choiceState.busy=choiceState.revealed=true;
-      document.querySelectorAll('.choice-card').forEach(function(c){ c.classList.add('disabled'); });
-      card.classList.add('picked'); Sound.click();
-      api('choiceReward',{username:s.username,token:s.token,pick:card.dataset.choice}).then(function(r){
-        if(!r||!r.ok){
-          if(r&&r.error==='Bad token') handleBadToken();
-          $('choiceResult').textContent='✗ '+((r&&r.error)||'Нет связи с сервером');
-          $('choiceResult').className='choice-result lose'; Sound.error();
-          setTimeout(resetChoiceRound,1500); return;
-        }
-        var emj=card.querySelector('.cc-emoji');
-        if(emj) emj.textContent=r.win?'🎉':'💀';
-        card.classList.add(r.win?'win':'lose');
-        $('choiceResult').textContent=r.win?'✅ Ты угадал! +100 🐵':'💀 Не повезло. −100 🐵';
-        $('choiceResult').className='choice-result '+(r.win?'win':'lose');
-        Session.patchProfile({monkeys:r.monkeys,balanceRev:r.balanceRev});
-        updateMonkeysWidget(); if(r.win) bumpMonkeys();
-        Sound[r.win?'success':'error']();
-        setTimeout(resetChoiceRound,1200);
-      });
-    };
-  });
-});
-</script>
 /* ==================================================================
    ZV-CLUB CORE v5.2 — FETCH FIX (CORS + TIMEOUT)
    ================================================================== */

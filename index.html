@@ -1761,7 +1761,7 @@ body {
 
 <script>
 /* ==================================================================
-   ZV-CLUB CORE v5.2 — FETCH FIX (CORS + TIMEOUT)
+   ZV-CLUB CORE v5.3 — JSONP FIX
    ================================================================== */
 var HEARTBEAT_MS = 30000;
 var FETCH_TIMEOUT = 45000;
@@ -1870,9 +1870,9 @@ var WHEEL_MIN_BET = 100;
 var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
-  { ver:'BETA 0.32', cls:'v2', title:'СТАБИЛЬНОСТЬ v5.2',
+  { ver:'BETA 0.32', cls:'v2', title:'СТАБИЛЬНОСТЬ v5.3',
     items:[
-      { tag:'new', text:'⚡ Исправлена ошибка CORS: теперь все запросы идут через GET.' },
+      { tag:'new', text:'⚡ Исправлена ошибка CORS: теперь все запросы идут через JSONP.' },
       { tag:'new', text:'🚀 Увеличены таймауты — больше никаких обрывов соединения.' },
       { tag:'new', text:'🛡️ Убраны лишние блокировки LockService при чтении.' },
       { tag:'fix', text:'Исправлены все баги с логином, регистрацией и сохранением.' }
@@ -2011,36 +2011,45 @@ var Session = (function(){
 function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.token : ''; }
 function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
-/* ========== API: FETCH GET (CORS-SAFE) ========== */
+/* ========== API: JSONP (CORS-SAFE) ========== */
 function api(action, payload, opts){
   opts = opts || {};
-  var controller = new AbortController();
-  var timeoutId = setTimeout(function() { controller.abort(); }, opts.timeout || 45000);
+  return new Promise(function(resolve, reject){
+    var callbackName = 'zv_cb_' + Math.random().toString(36).substr(2, 9);
+    var timeout = setTimeout(function(){
+      cleanup();
+      resolve({ok:false, error:'timeout'});
+    }, opts.timeout || 45000);
 
-  var params = new URLSearchParams();
-  params.append('action', action);
-  if(payload){
-    for(var k in payload){
-      if(payload.hasOwnProperty(k)) params.append(k, payload[k]);
+    function cleanup(){
+      clearTimeout(timeout);
+      if(window[callbackName]) delete window[callbackName];
+      var script = document.getElementById(callbackName);
+      if(script) script.remove();
     }
-  }
 
-  var url = APPS_SCRIPT_URL + '?' + params.toString();
+    window[callbackName] = function(data){
+      cleanup();
+      resolve(data);
+    };
 
-  return fetch(url, {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'no-store',
-    signal: controller.signal
-  }).then(function(res){
-    clearTimeout(timeoutId);
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-    return res.json();
-  }).catch(function(err){
-    clearTimeout(timeoutId);
-    if(err.name === 'AbortError') return {ok:false, error:'timeout'};
-    console.error('API Error:', err);
-    return {ok:false, error:'network_error'};
+    var params = new URLSearchParams();
+    params.append('action', action);
+    params.append('callback', callbackName);
+    if(payload){
+      for(var k in payload){
+        if(payload.hasOwnProperty(k)) params.append(k, payload[k]);
+      }
+    }
+
+    var script = document.createElement('script');
+    script.id = callbackName;
+    script.src = APPS_SCRIPT_URL + '?' + params.toString();
+    script.onerror = function(){
+      cleanup();
+      resolve({ok:false, error:'network_error'});
+    };
+    document.body.appendChild(script);
   });
 }
 

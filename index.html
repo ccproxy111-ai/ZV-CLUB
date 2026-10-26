@@ -1761,10 +1761,10 @@ body {
 
 <script>
 /* ==================================================================
-   ZV-CLUB CORE v5.1 — МОНОЛИТ С FETCH, БЕЗ IFRAME
+   ZV-CLUB CORE v5.2 — FETCH FIX (CORS + TIMEOUT)
    ================================================================== */
 var HEARTBEAT_MS = 30000;
-var FETCH_TIMEOUT = 20000;
+var FETCH_TIMEOUT = 45000;
 var POST_TIMEOUT = 60000;
 var WHEEL_SPIN_MS = 5200;
 var WHEEL_SPIN_COOLDOWN = 800;
@@ -1774,7 +1774,6 @@ var CLICKER_ANTIBOT_MIN_DELAY = 60;
 var CLICKER_ANTIBOT_EVERY = 80;
 var CASE_PRICE = 750;
 
-/* ВАЖНО: Замени на свой URL после развертывания Apps Script */
 var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 
 var RARITY = {
@@ -1871,13 +1870,12 @@ var WHEEL_MIN_BET = 100;
 var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
-  { ver:'BETA 0.31', cls:'v2', title:'СТАБИЛЬНОСТЬ v5.1',
+  { ver:'BETA 0.32', cls:'v2', title:'СТАБИЛЬНОСТЬ v5.2',
     items:[
-      { tag:'new', text:'⚡ Полностью переписан движок: мгновенная синхронизация баланса.' },
-      { tag:'new', text:'🚀 Исправлена ошибка network: теперь запросы не конфликтуют.' },
-      { tag:'new', text:'🛡️ Защита от откатов: баланс обновляется только после ответа сервера.' },
-      { tag:'fix', text:'Исправлены все баги с задержками при выдаче наград.' },
-      { tag:'fix', text:'Админ-панель работает быстро и без ошибок.' }
+      { tag:'new', text:'⚡ Исправлена ошибка CORS: теперь все запросы идут через GET.' },
+      { tag:'new', text:'🚀 Увеличены таймауты — больше никаких обрывов соединения.' },
+      { tag:'new', text:'🛡️ Убраны лишние блокировки LockService при чтении.' },
+      { tag:'fix', text:'Исправлены все баги с логином, регистрацией и сохранением.' }
     ]}
 ];
 
@@ -2013,16 +2011,26 @@ var Session = (function(){
 function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.token : ''; }
 function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
-/* ========== API: FETCH (БЕЗ IFRAME, БЕЗ TIMEOUT) ========== */
+/* ========== API: FETCH GET (CORS-SAFE) ========== */
 function api(action, payload, opts){
   opts = opts || {};
   var controller = new AbortController();
   var timeoutId = setTimeout(function() { controller.abort(); }, opts.timeout || 45000);
 
-  return fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(Object.assign({ action: action }, payload || {})),
+  var params = new URLSearchParams();
+  params.append('action', action);
+  if(payload){
+    for(var k in payload){
+      if(payload.hasOwnProperty(k)) params.append(k, payload[k]);
+    }
+  }
+
+  var url = APPS_SCRIPT_URL + '?' + params.toString();
+
+  return fetch(url, {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-store',
     signal: controller.signal
   }).then(function(res){
     clearTimeout(timeoutId);
@@ -2031,6 +2039,7 @@ function api(action, payload, opts){
   }).catch(function(err){
     clearTimeout(timeoutId);
     if(err.name === 'AbortError') return {ok:false, error:'timeout'};
+    console.error('API Error:', err);
     return {ok:false, error:'network_error'};
   });
 }
@@ -2667,7 +2676,7 @@ $('logsOverlay').onclick=function(e){ if(e.target===$('logsOverlay')) $('logsOve
 
 /* ========== WHEEL ========== */
 var wheelBuilt = false;
-var whTimer = null; // ИСПРАВЛЕНИЕ: ReferenceError
+var whTimer = null;
 function initWheelIfNeeded(){ if(wheelBuilt) return; buildWheel(); wheelBuilt=true; }
 function buildWheel(){
   var svg=$('wheelSvg'); if(!svg) return;

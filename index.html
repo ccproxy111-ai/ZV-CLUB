@@ -30,6 +30,9 @@
   --ease-out:cubic-bezier(.16,1,.3,1);
   --admin-badge-bg:#fff;
   --admin-badge-fg:#0e0e11;
+  --glass-bg: rgba(22, 23, 27, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 body.theme-dark{--bg:#0e0e11;--bg2:#16171b;--bg3:#1d1e24;--bg4:#242630;--fg:#e8e9ec;--muted:#7c7f8a;--muted2:#5a5d68;--border:#26282f;--border2:#32353d;--header-bg:rgba(20,20,24,.72);--sidebar-bg:rgba(20,20,24,.72);--btn-primary-bg:#e8e9ec;--btn-primary-fg:#0e0e11;--btn-primary-bg-hover:#ffffff;--av-bg:linear-gradient(135deg,#3a3d47,#2a2d35);--av-fg:#e8e9ec;--av-border:#32353d;--banner-default:#1d1e24;--admin-badge-bg:#fff;--admin-badge-fg:#0e0e11}
 body.theme-light{--bg:#f4f5f7;--bg2:#ffffff;--bg3:#e9ebef;--bg4:#dde0e6;--fg:#0e0e11;--muted:#5f6471;--muted2:#8a90a0;--border:#d7dae0;--border2:#c2c6ce;--header-bg:rgba(255,255,255,.78);--sidebar-bg:rgba(255,255,255,.78);--btn-primary-bg:#0e0e11;--btn-primary-fg:#ffffff;--btn-primary-bg-hover:#1a1a22;--av-bg:linear-gradient(135deg,#e9ebef,#dde0e6);--av-fg:#0e0e11;--av-border:#c2c6ce;--banner-default:#e9ebef;--admin-badge-bg:#0e0e11;--admin-badge-fg:#fff}
@@ -1029,6 +1032,38 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 @keyframes balanceFlash{0%{color:#fbbf24;transform:scale(1)}50%{color:#4ade80;transform:scale(1.15)}100%{color:var(--fg);transform:scale(1)}}
 .optimistic-pulse{animation:optimisticPulse .5s ease}
 @keyframes optimisticPulse{0%{opacity:.6}100%{opacity:1}}
+
+/* ========== ОСВЕЖЕНИЕ ДИЗАЙНА ========== */
+body {
+  background: radial-gradient(circle at top left, #1a1c23, #0e0e11 70%);
+  background-attachment: fixed;
+}
+.modal, .user-menu, .hover-card, .wheel-panel, .earn-card, .shop-case-card, .user-card, .dash-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+}
+.btn-primary {
+  background: linear-gradient(135deg, #fff, #d4d4d4);
+  color: #000;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+}
+.btn-primary:hover {
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+}
+.sidebar {
+  background: rgba(14, 14, 17, 0.88);
+  border-right: 1px solid var(--glass-border);
+}
+.user-card:hover, .dash-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
 </style>
 </head>
 <body class="theme-dark">
@@ -1726,11 +1761,10 @@ body.logged-in .monkeys-widget{display:flex;animation:fadeUp .7s var(--ease)}
 
 <script>
 /* ==================================================================
-   ZV-CLUB CORE v5.0 — МОНОЛИТ, БЕЗ ОШИБОК, СТРОГАЯ СИНХРОНИЗАЦИЯ
+   ZV-CLUB CORE v5.1 — МОНОЛИТ С FETCH, БЕЗ IFRAME
    ================================================================== */
 var HEARTBEAT_MS = 30000;
 var FETCH_TIMEOUT = 20000;
-/* Apps Script cold starts can be slow; do not abandon a request before its backend lock timeout. */
 var POST_TIMEOUT = 60000;
 var WHEEL_SPIN_MS = 5200;
 var WHEEL_SPIN_COOLDOWN = 800;
@@ -1739,6 +1773,9 @@ var THEME_PREVIEW_DURATION = 10;
 var CLICKER_ANTIBOT_MIN_DELAY = 60;
 var CLICKER_ANTIBOT_EVERY = 80;
 var CASE_PRICE = 750;
+
+/* ВАЖНО: Замени на свой URL после развертывания Apps Script */
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
 
 var RARITY = {
   common:{label:'Обычный',cls:'common',cashback:0.05},
@@ -1834,7 +1871,7 @@ var WHEEL_MIN_BET = 100;
 var WHEEL_MAX_BET = 5000;
 
 var UPDATE_LOGS = [
-  { ver:'BETA 0.31', cls:'v2', title:'СТАБИЛЬНОСТЬ v5.0',
+  { ver:'BETA 0.31', cls:'v2', title:'СТАБИЛЬНОСТЬ v5.1',
     items:[
       { tag:'new', text:'⚡ Полностью переписан движок: мгновенная синхронизация баланса.' },
       { tag:'new', text:'🚀 Исправлена ошибка network: теперь запросы не конфликтуют.' },
@@ -1934,7 +1971,7 @@ var OnlineUsers = {
   }
 };
 
-/* ========== СЕССИЯ (УПРОЩЕННАЯ, БЕЗ REV) ========== */
+/* ========== СЕССИЯ ========== */
 var Session = (function(){
   var _cached=null, _dirty=false, _flushTimer=null;
   function load(){
@@ -1976,108 +2013,26 @@ var Session = (function(){
 function getSessionToken(){ var s = Session.get(); return (s && s.token) ? s.token : ''; }
 function getSessionUsername(){ var s = Session.get(); return (s && s.username) ? s.username : ''; }
 
-/* ========== API: GOOGLE APPS SCRIPT BRIDGE (БЕЗ CLOUDFLARE WORKER) ========== */
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvG1OlkBDaXSjvZM5vCTj6Qol5Xrr7EO3SBcrL08csoRj5dxJRLBs3ETV31xrl9KH3Kw/exec';
-
-var ApiBridge = (function(){
-  var frame = null;
-  var bridgeWindow = null;
-  var started = false;
-  var ready = false;
-  var queue = [];
-  var pending = Object.create(null);
-  var nextId = 0;
-  var nonce = 'zv' + Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
-
-  function start(){
-    if(started) return;
-    started = true;
-    window.addEventListener('message', onMessage, false);
-    frame = document.createElement('iframe');
-    frame.id = 'zv-club-api-bridge';
-    frame.title = 'ZV-CLUB connection';
-    frame.tabIndex = -1;
-    frame.setAttribute('aria-hidden', 'true');
-    frame.style.cssText = 'position:fixed;left:-10000px;top:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none;';
-    var separator = APPS_SCRIPT_URL.indexOf('?') === -1 ? '?' : '&';
-    frame.src = APPS_SCRIPT_URL + separator + 'bridge=1&channel=' + encodeURIComponent(nonce);
-    (document.body || document.documentElement).appendChild(frame);
-  }
-
-  function send(message){
-    if(!pending[message.id]) return;
-    if(!bridgeWindow){
-      finish(message.id, {ok:false, error:'bridge_unavailable'});
-      return;
-    }
-    try {
-      bridgeWindow.postMessage(message, '*');
-    } catch(err) {
-      finish(message.id, {ok:false, error:'bridge_send_failed'});
-    }
-  }
-
-  function finish(id, result){
-    var item = pending[id];
-    if(!item) return;
-    clearTimeout(item.timer);
-    delete pending[id];
-    item.resolve(result);
-  }
-
-  function onMessage(event){
-    var msg = event.data;
-    if(!msg || msg.channel !== 'zv-club-bridge' || msg.nonce !== nonce) return;
-    var origin = String(event.origin || '');
-    var trustedOrigin = origin === 'https://script.google.com' || origin.endsWith('.googleusercontent.com');
-    if(!trustedOrigin) return;
-
-    if(msg.type === 'ready'){
-      if(bridgeWindow && bridgeWindow !== event.source) return;
-      bridgeWindow = event.source;
-      ready = true;
-      var queued = queue;
-      queue = [];
-      for(var i=0;i<queued.length;i++) send(queued[i]);
-      return;
-    }
-
-    if(event.source !== bridgeWindow || msg.type !== 'response' || !msg.id || !pending[msg.id]) return;
-    var envelope = msg.payload;
-    if(envelope && envelope.ok === true && envelope.result && typeof envelope.result === 'object'){
-      finish(msg.id, envelope.result);
-    } else {
-      finish(msg.id, {ok:false, error:String(envelope && envelope.error || 'bridge_error')});
-    }
-  }
-
-  function request(action, payload, timeout){
-    start();
-    return new Promise(function(resolve){
-      var id = 'r' + Date.now().toString(36) + '_' + (++nextId).toString(36);
-      var timer = setTimeout(function(){
-        delete pending[id];
-        resolve({ok:false, error:'timeout'});
-      }, timeout || POST_TIMEOUT);
-      pending[id] = {resolve:resolve, timer:timer};
-      var message = {
-        channel:'zv-club-bridge',
-        nonce:nonce,
-        type:'request',
-        id:id,
-        payload:Object.assign({action:action}, payload || {})
-      };
-      if(ready) send(message);
-      else queue.push(message);
-    });
-  }
-
-  return {request:request};
-})();
-
+/* ========== API: FETCH (БЕЗ IFRAME, БЕЗ TIMEOUT) ========== */
 function api(action, payload, opts){
   opts = opts || {};
-  return ApiBridge.request(action, payload, opts.timeout || POST_TIMEOUT);
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function() { controller.abort(); }, opts.timeout || 45000);
+
+  return fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(Object.assign({ action: action }, payload || {})),
+    signal: controller.signal
+  }).then(function(res){
+    clearTimeout(timeoutId);
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  }).catch(function(err){
+    clearTimeout(timeoutId);
+    if(err.name === 'AbortError') return {ok:false, error:'timeout'};
+    return {ok:false, error:'network_error'};
+  });
 }
 
 /* ========== ОБРАБОТКА ТОКЕНА ========== */
@@ -2712,6 +2667,7 @@ $('logsOverlay').onclick=function(e){ if(e.target===$('logsOverlay')) $('logsOve
 
 /* ========== WHEEL ========== */
 var wheelBuilt = false;
+var whTimer = null; // ИСПРАВЛЕНИЕ: ReferenceError
 function initWheelIfNeeded(){ if(wheelBuilt) return; buildWheel(); wheelBuilt=true; }
 function buildWheel(){
   var svg=$('wheelSvg'); if(!svg) return;
@@ -2814,19 +2770,11 @@ $('wheelSpinBtn').onclick=function(){
   Sound.click();
   TimerUI.start('wheelSpinTimer','⏳');
 
-  /* ОПТИМИСТИЧНО: сразу списываем ставку */
-  var oldBal = bal;
-  Session.bumpBalance(-bet);
-  updateWheelBalance(); updateMonkeysWidget(); bumpMonkeys();
-
   api('spinWheel',{username:s.username,token:s.token,bet:bet}).then(function(res){
     if(!res.ok){
       wheelSpinning=false; wheelSpinLock=false;
       $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
       TimerUI.stop('wheelSpinTimer');
-      /* Откат при ошибке */
-      Session.bumpBalance(bet);
-      updateWheelBalance(); updateMonkeysWidget();
       if(res.error==='Bad token'){
         $('wheelResult').innerHTML='<span>Сессия истекла — войдите заново</span>';
         $('wheelResult').className='wheel-result lose';
@@ -2861,11 +2809,8 @@ $('wheelSpinBtn').onclick=function(){
       var winAmount=res.winAmount||0;
       var betVal=res.bet||bet;
 
-      /* Применяем финальный баланс с rev-контролем */
       if(typeof res.monkeysFinal === 'number'){
         Session.patchProfile({monkeys: res.monkeysFinal});
-      } else {
-        Session.bumpBalance(winAmount);
       }
       if(winAmount>0) Session.patchProfile({wins: (Session.get().profile.wins||0)+1});
       updateWheelBalance(); updateMonkeysWidget();
@@ -2902,8 +2847,6 @@ $('wheelSpinBtn').onclick=function(){
     wheelSpinning=false; wheelSpinLock=false;
     $('wheelSpinBtn').disabled=false; $('wheelSpinBtn').textContent='🎡 Крутить колесо';
     TimerUI.stop('wheelSpinTimer');
-    Session.bumpBalance(bet);
-    updateWheelBalance(); updateMonkeysWidget();
     Sound.error();
   });
 };
@@ -4107,10 +4050,6 @@ function openItemShopDetail(kind, id){
 
 function buyItem(kind, id, price){
   var s=Session.get(); if(!s||!s.token) return;
-  var oldBal = s.profile.monkeys||0;
-  /* ОПТИМИСТИЧНО: сразу списываем */
-  Session.bumpBalance(-price);
-  updateMonkeysWidget(); bumpMonkeys();
   var action = kind==='emoji' ? 'buyEmoji' : (kind==='theme' ? 'buyTheme' : 'buyFrame');
   var payload = {username:s.username,token:s.token};
   if(kind==='emoji') payload.emoji=id;
@@ -4128,8 +4067,6 @@ function buyItem(kind, id, price){
       toastSite('Куплено ✓',false);
       renderShop();
     } else {
-      Session.bumpBalance(price);
-      updateMonkeysWidget();
       Sound.error();
       if(r.error==='Bad token') handleBadToken();
       else toastSite(r.error||'Ошибка',true);
@@ -4264,9 +4201,6 @@ function buyCases(){
   var qty = parseInt($('caseQtyInput').value, 10) || 1;
   var total = CASE_PRICE * qty;
   if((p.monkeys||0) < total){ Sound.error(); return; }
-  var oldBal = p.monkeys||0;
-  Session.bumpBalance(-total);
-  updateMonkeysWidget();
   TimerUI.start('caseBuyTimer','⏳');
   $('caseOpenFoot').innerHTML = '<div style="flex:1;text-align:center;color:var(--muted);font-size:13px">Покупка... <span id="caseBuyTimer" class="timer-inline"></span></div>';
   api('buyCases',{username:s.username, token:s.token, caseId:activeCase.id, qty:qty}).then(function(r){
@@ -4283,8 +4217,6 @@ function buyCases(){
       renderShop();
       toastSite('Кейс(ы) куплены — в инвентаре!', false);
     } else {
-      Session.bumpBalance(total);
-      updateMonkeysWidget();
       Sound.error();
       if(r.error==='Bad token') handleBadToken();
       else toastSite(r.error||'Ошибка',true);
@@ -4689,7 +4621,6 @@ $('clickerAntibotBtn').onclick=function(){
   Sound.success();
 };
 
-/* Батч-кликер: копим награды и отправляем пачками */
 var _clickerPending = 0;
 var _clickerTimer = null;
 var _clickerSending = false;
